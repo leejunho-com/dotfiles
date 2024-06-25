@@ -12,16 +12,11 @@
       "AudioList" : [
         {
           "AudioBitrate" : 320,
-          "AudioCompressionLevel" : -1,
-          "AudioDitherMethod" : "auto",
           "AudioEncoder" : "ca_aac",
           "AudioMixdown" : "7point1",
-          "AudioNormalizeMixLevel" : false,
           "AudioSamplerate" : "auto",
           "AudioTrackDRCSlider" : 0,
-          "AudioTrackGainSlider" : 0,
-          "AudioTrackQuality" : -1,
-          "AudioTrackQualityEnable" : false
+          "AudioTrackGainSlider" : 0
         }
       ],
       "AudioSecondaryEncoderMode" : true,
@@ -30,14 +25,14 @@
       "ChildrenArray" : [
 
       ],
-      "Default" : true,
-      "FileFormat" : "av_mp4",
+      "Default" : false,
+      "FileFormat" : "av_mkv",
       "Folder" : false,
       "FolderOpen" : false,
       "InlineParameterSets" : false,
       "MetadataPassthrough" : true,
       "Mp4iPodCompatible" : false,
-      "Optimize" : false,
+      "Optimize" : true,
       "PictureAllowUpscaling" : false,
       "PictureAutoCrop" : true,
       "PictureBottomCrop" : 0,
@@ -87,9 +82,9 @@
       "PictureTopCrop" : 0,
       "PictureUseMaximumSize" : true,
       "PictureWidth" : 0,
-      "PresetDescription" : "24-06-25 update",
+      "PresetDescription" : "",
       "PresetDisabled" : false,
-      "PresetName" : "incoming",
+      "PresetName" : "hevc-mkv",
       "SubtitleAddCC" : false,
       "SubtitleAddForeignAudioSearch" : false,
       "SubtitleAddForeignAudioSubtitle" : false,
@@ -127,7 +122,7 @@
       "x264UseAdvancedOptions" : false
     }
   ],
-  "VersionMajor" : 53,
+  "VersionMajor" : 56,
   "VersionMicro" : 0,
   "VersionMinor" : 0
 }

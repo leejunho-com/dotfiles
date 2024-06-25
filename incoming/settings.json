@@ -1,7 +1,7 @@
 {
 "src_dir_path":"/Volumes/dock/incoming/-i", 
 "dst_dir_path":"/Volumes/dock/incoming/-o",
-"default_preset_path":"/Users/leejunho/.config/incoming/preset/preset.json",
+"default_preset_path":"/Users/leejunho/.config/incoming/preset/default.json",
 "open_dst_dir_when_done":false,
 
 "logging":{

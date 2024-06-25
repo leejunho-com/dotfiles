@@ -6,7 +6,7 @@
 "video_process":{
     "video_process_toggle":true,
     "deafult_encoder_is_HandBrake":null,
-    "HandBrake_presets_path": "/Users/leejunho/.config/incoming/handbrake_preset.json",
+    "HandBrake_presets_path": "/Users/leejunho/.config/incoming/hevc-mp4.json",
     "output_video_ext":".mp4",
     "ffmpeg":{
         "use_ffmpeg_toggle":false,
