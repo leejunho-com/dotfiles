@@ -30,7 +30,7 @@
       "ChildrenArray" : [
 
       ],
-      "Default" : false,
+      "Default" : true,
       "FileFormat" : "av_mp4",
       "Folder" : false,
       "FolderOpen" : false,
