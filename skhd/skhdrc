@@ -6,7 +6,7 @@ fn - k : yabai -m window --focus north
 fn - h : yabai -m window --focus west
 fn - l : yabai -m window --focus east
 
-#change focus between external displays (left and right)
+# change focus between external displays (left and right)
 fn - s: yabai -m display --focus west
 fn - g: yabai -m display --focus east
 
@@ -86,6 +86,6 @@ ctrl + fn - s : yabai --start-service
 ctrl + fn - r : yabai --restart-service
 
 # stop/start/restart yabai
-#ctrl + fn - q : brew services stop yabai
-#ctrl + fn - s : brew services start yabai
-#ctrl + fn - r : brew services restart yabai
+# ctrl + fn - q : brew services stop yabai
+# ctrl + fn - s : brew services start yabai
+# ctrl + fn - r : brew services restart yabai
