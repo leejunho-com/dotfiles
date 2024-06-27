@@ -12,8 +12,10 @@ plugins=(git)
 
 # ======================= ENV =======================
 
-#p10k
+# p10k
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # syntax highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -24,13 +26,19 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # thefuck
 eval $(thefuck --alias)
 
-# ---- Eza (better ls) -----
+# Zoxide (better cd)
+eval "$(zoxide init zsh)"
+#alias cd="z"
+
+# tmux unicode
+alias tmux='tmux -u'
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Eza (better ls)
 alias ls="eza --icons=always"
 
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-
-alias cd="z"
+# fzf
+source <(fzf --zsh)
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -40,30 +48,23 @@ eval "$(rbenv init - zsh)"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# fzf
-source <(fzf --zsh)
-
-# tmux unicode
-alias tmux='tmux -u'
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # yazi
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
+		cd "$cwd"
 	fi
 	rm -f -- "$tmp"
-}
+}	
 
-# ======================= CUSTOM =======================
+# === Custom ===
+
+# inode check
+alias zshrc="ls -lia ~/.zshrc ~/.config/home/.zshrc"
 
 # safari
 alias safari='open -a Safari'
 
 # (temp)incoming
-#alias ic='cd ~/git/incoming && python3 -m incoming.main'
+# alias ic='cd ~/git/incoming && python3 -m incoming.main'
