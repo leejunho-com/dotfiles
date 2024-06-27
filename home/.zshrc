@@ -60,10 +60,10 @@ function yy() {
 
 # === Custom ===
 
-# sync ~/dotfile
-alias dotsync="ln -f ~/.config/home/.zshrc ~/.zshrc && ln -f ~/.config/home/.p10k.zsh ~/.p10k.zsh"
 # check dotfile inode
-alias dotcheck="ls -lia ~/.zshrc ~/.config/home/.zshrc && ls -lia ~/.config/home/.p10k.zsh ~/.p10k.zsh"
+alias dotconfig-check="ls -lia ~/.zshrc ~/.config/home/.zshrc && ls -lia ~/.config/home/.p10k.zsh ~/.p10k.zsh"
+# sync ~/dotfile
+alias dotconfig-sync="ln -f ~/.config/home/.zshrc ~/.zshrc && ln -f ~/.config/home/.p10k.zsh ~/.p10k.zsh"
 
 # safari
 alias safari='open -a Safari'
