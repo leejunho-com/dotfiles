@@ -65,8 +65,5 @@ alias dotconfig-check="ls -lia ~/.zshrc ~/.config/home/.zshrc && ls -lia ~/.conf
 # sync ~/dotfile
 alias dotconfig-sync="ln -f ~/.config/home/.zshrc ~/.zshrc && ln -f ~/.config/home/.p10k.zsh ~/.p10k.zsh"
 
-# safari
-alias safari='open -a Safari'
-
 # (temp)incoming
 # alias ic='cd ~/git/incoming && python3 -m incoming.main'

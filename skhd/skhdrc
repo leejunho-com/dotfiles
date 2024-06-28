@@ -7,7 +7,7 @@ fn - h : yabai -m window --focus west
 fn - l : yabai -m window --focus east
 
 # change focus between external displays (left and right)
-fn - s: yabai -m display --focus west
+# fn - s: yabai -m display --focus west
 fn - g: yabai -m display --focus east
 
 
@@ -99,7 +99,7 @@ fn - r : open -a KakaoTalk
 fn - a : open -a Alacritty
 fn - s : open -a Safari
 fn - d : open -a Discord
-fn - f : open -a open -a Finder "./Desktop"
+fn - f : open ~/Desktop
 fn - z : open -a "Alfred 5"
 fn - x : open -a iTerm
 fn - c : open -a ChatGPT
