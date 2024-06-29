@@ -28,7 +28,7 @@ eval $(thefuck --alias)
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
-#alias cd="z"
+alias cd="z"
 
 # tmux unicode
 alias tmux='tmux -u'
