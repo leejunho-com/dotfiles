@@ -61,9 +61,9 @@ function yy() {
 # === Custom ===
 
 # check dotfile inode
-alias dotconfig-check="ls -lia ~/.config/.zshrc ~/.zshrc && ls -lia ~/.config/.p10k.zsh ~/.p10k.zsh && ls -lia ~/.config/.tmux.conf ~/.tmux.conf"
+alias dotconfig-check="ls -lia ~/.config/.zshrc ~/.zshrc && ls -lia ~/.config/.p10k.zsh ~/.p10k.zsh"
 # sync ~/dotfile
-alias dotconfig-sync="ln -f ~/.config/.zshrc ~/.zshrc && ln -f ~/.config/.p10k.zsh ~/.p10k.zsh && ln -f ~/.config/.tmux.conf ~/.tmux.conf"
+alias dotconfig-sync="ln -f ~/.config/.zshrc ~/.zshrc && ln -f ~/.config/.p10k.zsh ~/.p10k.zsh"
 
 # (temp)incoming
 # alias ic='cd ~/git/incoming && python3 -m incoming.main'
