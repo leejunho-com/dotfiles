@@ -1,4 +1,15 @@
+[manager]
+show_hidden = true
+
 [opener]
 edit = [
 	{ run = 'code "$@"', block = true },
+]
+view = [
+	{ run = 'open -a EdgeView "$@"', block = true, desc = "EdgeView" },
+]
+
+[open]
+append_rules = [
+	{ name = "*.zip", use = "view" }
 ]
