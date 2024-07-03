@@ -96,7 +96,7 @@ fn - w : open -a Firefox
 shift + fn - w : open -a "Parallels Desktop"
 fn - e : open -a Messages
 fn - r : open -a KakaoTalk
-fn - a : open -a anki
+shift + fn - a : open -a anki
 fn - s : open -a Safari
 fn - d : open -a Discord
 fn - f : open -a ForkLift
