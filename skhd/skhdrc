@@ -96,12 +96,13 @@ fn - w : open -a Firefox
 shift + fn - w : open -a "Parallels Desktop"
 fn - e : open -a Messages
 fn - r : open -a KakaoTalk
-fn - a : open -a kitty
+fn - a : open -a anki
 fn - s : open -a Safari
 fn - d : open -a Discord
 fn - f : open -a ForkLift
 shift + fn - f : open ~/Desktop
 fn - z : open -a iTerm
+shift + fn - z : open -a kitty
 fn - x : open -a "Alfred 5"
 fn - c : open -a ChatGPT
 fn - v : open -a "Visual Studio Code"
