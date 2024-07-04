@@ -49,8 +49,8 @@ ctrl + fn - h : yabai -m window --warp west
 ctrl + fn - l : yabai -m window --warp east
 
 # move window to display left and right
-shift + fn - s : yabai -m window --display west; yabai -m display --focus west;
-shift + fn - g : yabai -m window --display east; yabai -m display --focus east;
+ctrl + fn - s : yabai -m window --display west; yabai -m display --focus west;
+ctrl + fn - g : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to prev and next space
 shift + fn - p : yabai -m window --space prev;
@@ -91,18 +91,19 @@ ctrl + fn - r : yabai --restart-service
 # ctrl + fn - r : brew services restart yabai
 
 # app shortcut
-fn - q : open -a Obsidian
-fn - w : open -a Firefox
+fn - q :         open -a Obsidian
+fn - w :         open -a Firefox
 shift + fn - w : open -a "Parallels Desktop"
-fn - e : open -a Messages
-fn - r : open -a KakaoTalk
+fn - e :         open -a Messages
+fn - r :         open -a KakaoTalk
 shift + fn - a : open -a anki
-fn - s : open -a Safari
-fn - d : open -a Discord
-fn - f : open -a ForkLift
+fn - s :         open -a Safari
+shift + fn - s : open -a "Screen Sharing"
+fn - d :         open -a Discord
+fn - f :         open -a ForkLift
 shift + fn - f : open ~/Desktop
-fn - z : open -a iTerm
+fn - z :         open -a iTerm
 shift + fn - z : open -a kitty
-fn - x : open -a "Alfred 5"
-fn - c : open -a ChatGPT
-fn - v : open -a "Visual Studio Code"
+fn - x :         open -a "Alfred 5"
+fn - c :         open -a ChatGPT
+fn - v :         open -a "Visual Studio Code"
