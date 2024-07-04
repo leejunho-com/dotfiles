@@ -14,59 +14,59 @@ fn - g: yabai -m display --focus east
 # -- Modifying the Layout --
 
 # rotate layout clockwise
-shift + fn - r : yabai -m space --rotate 270
+fn + shift - r : yabai -m space --rotate 270
 
 # flip along y-axis
-shift + fn - y : yabai -m space --mirror y-axis
+fn + shift - y : yabai -m space --mirror y-axis
 
 # flip along x-axis
-shift + fn - x : yabai -m space --mirror x-axis
+fn + shift - x : yabai -m space --mirror x-axis
 
 # toggle window float
-shift + fn - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+fn + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 
 # -- Modifying Window Size --
 
 # maximize a window
-shift + fn - m : yabai -m window --toggle zoom-fullscreen
+fn + shift - m : yabai -m window --toggle zoom-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
-shift + fn - e : yabai -m space --balance
+fn + shift - e : yabai -m space --balance
 
 # -- Moving Windows Around --
 
 # swap windows
-shift + fn - j : yabai -m window --swap south
-shift + fn - k : yabai -m window --swap north
-shift + fn - h : yabai -m window --swap west
-shift + fn - l : yabai -m window --swap east
+fn + shift - j : yabai -m window --swap south
+fn + shift - k : yabai -m window --swap north
+fn + shift - h : yabai -m window --swap west
+fn + shift - l : yabai -m window --swap east
 
 # move window and split
-ctrl + fn - j : yabai -m window --warp south
-ctrl + fn - k : yabai -m window --warp north
-ctrl + fn - h : yabai -m window --warp west
-ctrl + fn - l : yabai -m window --warp east
+fn + ctrl - j : yabai -m window --warp south
+fn + ctrl - k : yabai -m window --warp north
+fn + ctrl - h : yabai -m window --warp west
+fn + ctrl - l : yabai -m window --warp east
 
 # move window to display left and right
-ctrl + fn - s : yabai -m window --display west; yabai -m display --focus west;
-ctrl + fn - g : yabai -m window --display east; yabai -m display --focus east;
+fn + ctrl - s : yabai -m window --display west; yabai -m display --focus west;
+fn + ctrl - g : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to prev and next space
-shift + fn - p : yabai -m window --space prev;
-shift + fn - n : yabai -m window --space next;
+fn + shift - p : yabai -m window --space prev;
+fn + shift - n : yabai -m window --space next;
 
 # move window to space
-shift + fn - 1 : yabai -m window --space 1;
-shift + fn - 2 : yabai -m window --space 2;
-shift + fn - 3 : yabai -m window --space 3;
-shift + fn - 4 : yabai -m window --space 4;
-shift + fn - 5 : yabai -m window --space 5;
-shift + fn - 6 : yabai -m window --space 6;
-shift + fn - 7 : yabai -m window --space 7;
-shift + fn - 8 : yabai -m window --space 8;
-shift + fn - 9 : yabai -m window --space 9;
-shift + fn - 0 : yabai -m window --space 10;
+fn + shift - 1 : yabai -m window --space 1;
+fn + shift - 2 : yabai -m window --space 2;
+fn + shift - 3 : yabai -m window --space 3;
+fn + shift - 4 : yabai -m window --space 4;
+fn + shift - 5 : yabai -m window --space 5;
+fn + shift - 6 : yabai -m window --space 6;
+fn + shift - 7 : yabai -m window --space 7;
+fn + shift - 8 : yabai -m window --space 8;
+fn + shift - 9 : yabai -m window --space 9;
+fn + shift - 0 : yabai -m window --space 10;
 
 # switch space
 fn - 1 : yabai -m space --focus 1
@@ -81,29 +81,29 @@ fn - 9 : yabai -m space --focus 9
 fn - 0 : yabai -m space --focus 10
 
 # -- Starting/Stopping/Restarting Yabai --
-ctrl + fn - q : yabai --stop-service
-ctrl + fn - s : yabai --start-service
-ctrl + fn - r : yabai --restart-service
+fn + ctrl - q : yabai --stop-service
+fn + ctrl - s : yabai --start-service
+fn + ctrl - r : yabai --restart-service
 
 # stop/start/restart yabai
-# ctrl + fn - q : brew services stop yabai
-# ctrl + fn - s : brew services start yabai
-# ctrl + fn - r : brew services restart yabai
+# fn + ctrl - q : brew services stop yabai
+# fn + ctrl - s : brew services start yabai
+# fn + ctrl - r : brew services restart yabai
 
 # app shortcut
-fn - q :         open -a Obsidian
-fn - w :         open -a Firefox
-shift + fn - w : open -a "Parallels Desktop"
-fn - e :         open -a Messages
-fn - r :         open -a KakaoTalk
-shift + fn - a : open -a anki
-fn - s :         open -a Safari
-shift + fn - s : open -a "Screen Sharing"
-fn - d :         open -a Discord
-fn - f :         open -a ForkLift
-shift + fn - f : open ~/Desktop
-fn - z :         open -a iTerm
-shift + fn - z : open -a kitty
-fn - x :         open -a "Alfred 5"
-fn - c :         open -a ChatGPT
-fn - v :         open -a "Visual Studio Code"
+fn - q         : open -a Obsidian
+fn - w         : open -a Firefox
+fn + shift - w : open -a "Parallels Desktop"
+fn - e         : open -a Messages
+fn - r         : open -a KakaoTalk
+fn + shift - a : open -a anki
+fn - s         : open -a Safari
+fn + shift - s : open -a "Screen Sharing"
+fn - d         : open -a Discord
+fn - f         : open -a ForkLift
+fn + shift - f : open ~/Desktop
+fn - z         : open -a iTerm
+fn + shift - z : open -a kitty
+fn - x         : open -a "Alfred 5"
+fn - c         : open -a ChatGPT
+fn - v         : open -a "Visual Studio Code"
