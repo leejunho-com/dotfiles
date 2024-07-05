@@ -59,7 +59,8 @@ function yy() {
 }	
 
 # === Custom ===
-
+# nvim
+alias vim="nvim"
 # check dotfile inode
 alias dotconfig-check="ls -lia ~/.config/.zshrc ~/.zshrc && ls -lia ~/.config/.p10k.zsh ~/.p10k.zsh"
 # sync ~/dotfile
