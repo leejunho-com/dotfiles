@@ -3,13 +3,14 @@ show_hidden = true
 
 [opener]
 edit = [
+	{ run = 'nvim "$@"', block = true },
 	{ run = 'code "$@"', block = true },
 ]
 view = [
-	{ run = 'open -a EdgeView "$@"', block = true, desc = "EdgeView" },
+	{ run = 'open -a EdgeView "$@"', block = true, desc = "View with EdgeView" },
 ]
 
 [open]
-append_rules = [
-	{ name = "*.zip", use = "view" }
+rules = [
+	{ name = "*.zip", use = ["view", "open"] },
 ]
