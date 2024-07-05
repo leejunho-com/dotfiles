@@ -6,11 +6,10 @@ edit = [
 	{ run = 'nvim "$@"', block = true },
 	{ run = 'code "$@"', block = true },
 ]
-view = [
-	{ run = 'open -a EdgeView "$@"', block = true, desc = "View with EdgeView" },
-]
-
-[open]
-rules = [
-	{ name = "*.zip", use = ["view", "open"] },
-]
+# view = [
+# 	{ run = 'open -a EdgeView "$@"', block = true, desc = "View with EdgeView" },
+# ]
+# [open]
+# rules = [
+# 	{ name = "*.zip", use = ["view", "open"] },
+# ]
