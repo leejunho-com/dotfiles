@@ -87,7 +87,7 @@ skin=dark
 
 [Layout]
 output_lines=0
-left_panel_size=83
+left_panel_size=84
 top_panel_size=0
 message_visible=true
 keybar_visible=true

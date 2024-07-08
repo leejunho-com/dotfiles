@@ -3,6 +3,7 @@ show_hidden = true
 
 [opener]
 edit = [
+	{ run = 'bat "$@"', block = true },
 	{ run = 'nvim "$@"', block = true },
 	{ run = 'code "$@"', block = true },
 ]
