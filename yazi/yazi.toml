@@ -3,8 +3,8 @@ show_hidden = true
 
 [opener]
 edit = [
-	{ run = 'bat "$@"', block = true },
 	{ run = 'nvim "$@"', block = true },
+	{ run = 'bat "$@"', block = true },
 	{ run = 'code "$@"', block = true },
 ]
 # view = [
