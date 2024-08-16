@@ -8,10 +8,10 @@ edit = [
 	{ run = 'bat "$@"', block = true },
 	{ run = 'code "$@"', block = true },
 ]
-# view = [
-# 	{ run = 'open -a EdgeView "$@"', block = true, desc = "View with EdgeView" },
-# ]
-# [open]
-# rules = [
-# 	{ name = "*.zip", use = ["view", "open"] },
-# ]
+photoshop = [
+	{ run = 'open -a "Adobe Photoshop 2024" "$@"', desc = "Adobe Photoshop"},
+]
+[open]
+prepend_rules = [
+	{ name = "*.ARW", use = ["photoshop", "reveal"] },
+]
