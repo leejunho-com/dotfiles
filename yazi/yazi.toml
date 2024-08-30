@@ -11,7 +11,13 @@ edit = [
 photoshop = [
 	{ run = 'open -a "Adobe Photoshop 2024" "$@"', desc = "Adobe Photoshop"},
 ]
+extract_here = [
+  { run = 'open -a "Bandizip" "$@"', desc = "Extract with Bandizip"}
+]
 [open]
 prepend_rules = [
 	{ name = "*.ARW", use = ["photoshop", "reveal"] },
+    { name = "*.zip", use = ["extract_here", "reveal"]}
+    { name = "*.rar", use = ["extract_here", "reveal"]}
+    { name = "*.7z", use = ["extract_here", "reveal"]}
 ]
