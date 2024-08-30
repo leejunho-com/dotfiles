@@ -17,7 +17,7 @@ extract_here = [
 [open]
 prepend_rules = [
 	{ name = "*.ARW", use = ["photoshop", "reveal"] },
-    { name = "*.zip", use = ["extract_here", "reveal"]}
-    { name = "*.rar", use = ["extract_here", "reveal"]}
-    { name = "*.7z", use = ["extract_here", "reveal"]}
+  { name = "*.zip", use = ["extract_here", "reveal"]},
+  { name = "*.rar", use = ["extract_here", "reveal"]},
+  { name = "*.7z", use = ["extract_here", "reveal"]}
 ]
