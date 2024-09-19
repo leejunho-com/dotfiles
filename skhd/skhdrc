@@ -100,11 +100,11 @@ fn + shift - a : open -a anki
 fn - s         : open -a Safari
 fn + shift - s : open -a "Screen Sharing"
 fn - d         : open -a Discord
+fn + shift - d : open -a "iPhone Mirroring"
 fn - f         : open -a ForkLift
 fn + shift - f : open ~/Desktop
 fn - z         : open -a iTerm
 fn + shift - z : open -a kitty
 fn - x         : open -a "Alfred 5"
-fn + shift - x : open -a "iPhone Mirroring"
 fn - c         : open -a ChatGPT
 fn - v         : open -a "Visual Studio Code"
