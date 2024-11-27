@@ -98,7 +98,7 @@ fn - e         : open -a Messages
 fn - r         : open -a KakaoTalk
 fn + shift - a : open -a anki
 fn - s         : open -a Safari
-fn + shift - s : open -a "Screen Sharing"
+fn + shift - s : open -a Stickies
 fn - d         : open -a Discord
 fn + shift - d : open -a "iPhone Mirroring"
 fn - f         : open -a ForkLift
@@ -108,3 +108,4 @@ fn + shift - z : open -a kitty
 fn - x         : open -a "Alfred 5"
 fn - c         : open -a ChatGPT
 fn - v         : open -a "Visual Studio Code"
+fn + shift - v : open -a "Screen Sharing"
