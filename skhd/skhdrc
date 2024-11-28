@@ -81,9 +81,9 @@ fn - 9 : yabai -m space --focus 9
 fn - 0 : yabai -m space --focus 10
 
 # -- Starting/Stopping/Restarting Yabai --
-fn + ctrl - q : yabai --stop-service
-fn + ctrl - s : yabai --start-service
-fn + ctrl - r : yabai --restart-service
+fn + shift + ctrl - q : yabai --stop-service
+fn + shift + ctrl - s : yabai --start-service
+fn + shift + ctrl - r : yabai --restart-service
 
 # stop/start/restart yabai
 # fn + ctrl - q : brew services stop yabai
