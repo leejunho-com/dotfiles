@@ -106,6 +106,7 @@ fn + shift - f : open ~/Desktop
 fn - z         : open -a iTerm
 fn + shift - z : open -a kitty
 fn - x         : open -a "Alfred 5"
-fn - c         : open -a ChatGPT
-fn - v         : open -a "Visual Studio Code"
+fn - c         : open -a "Visual Studio Code"
+fn + shift - c : open -a ChatGPT
+#fn - v         : open -a 
 fn + shift - v : open -a "Screen Sharing"
