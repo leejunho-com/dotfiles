@@ -69,7 +69,7 @@ alias dotconfig-check="ls -lia ~/.config/.zshrc ~/.zshrc && ls -lia ~/.config/.p
 # sync ~/dotfile
 alias dotconfig-sync="ln -f ~/.config/.zshrc ~/.zshrc && ln -f ~/.config/.p10k.zsh ~/.p10k.zsh"
 # cut fanart.jpg to poster.jpg
-ffmpeg -i fanart.jpg -vf crop=iw*0.4725:ih:iw*0.5275:0 -update 1 poster.jpg
+alias poster='ffmpeg -i "fanart.jpg" -vf "crop=iw*0.4725:ih:iw*0.5275:0" -update 1 "poster.jpg"'
 
 # (temp)incoming
 # alias ic='cd ~/git/incoming && python3 -m incoming.main'
