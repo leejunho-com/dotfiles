@@ -7,7 +7,7 @@ fn - h : yabai -m window --focus west
 fn - l : yabai -m window --focus east
 
 # change focus between external displays (left and right)
-fn - g : yabai -m display --focus recent
+fn - 0x32 : yabai -m display --focus recent # "backtick"
 # fn + ctrl - s : yabai -m display --focus recent
 
 
@@ -91,7 +91,6 @@ fn + shift + ctrl - r : yabai --restart-service
 # fn + ctrl - r : brew services restart yabai
 
 # app shortcut
-fn - 0x32      : open -a Discord # "backtick"
 fn - q         : open -a Obsidian
 fn - w         : open -a Firefox
 fn + shift - w : open -a "Parallels Desktop"
@@ -104,6 +103,7 @@ fn - d         : open -a Discord
 fn + shift - d : open -a "iPhone Mirroring"
 fn - f         : open -a ForkLift
 fn + shift - f : open ~/Desktop
+fn - g         : open -a "GitHub Desktop"
 fn - z         : open -a iTerm
 fn + shift - z : open -a kitty
 #fn - x         : open -a 
