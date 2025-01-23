@@ -70,6 +70,8 @@ alias dotconfig-check="ls -lia ~/.config/.zshrc ~/.zshrc && ls -lia ~/.config/.p
 alias dotconfig-sync="ln -f ~/.config/.zshrc ~/.zshrc && ln -f ~/.config/.p10k.zsh ~/.p10k.zsh"
 # cut fanart.jpg to poster.jpg
 alias poster='ffmpeg -i "fanart.jpg" -vf "crop=iw*0.4725:ih:iw*0.5275:0" -update 1 "poster.jpg"'
+# poster.jpg from extrafanart 
+alias eposter="cp ./extrafanart/fanart1.jpg ./poster.jpg"
 # find dir no trailer
 alias trailer='find . -maxdepth 1 -type d ! -exec sh -c '\''find "{}" -maxdepth 1 -type f -name "*-trailer*" | grep -q .'\'' \; -print'
 
