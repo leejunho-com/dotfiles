@@ -60,7 +60,7 @@ yabai -m config active_window_opacity 1.0
 yabai -m config normal_window_opacity 0.7
 
 # disable specific apps
-yabai -m rule --add app!="^(Finder|iTerm2|Visual Studio Code|Obsidian|Safari|Firefox|ChatGPT|ForkLift)$" manage=off
+yabai -m rule --add app!="^(Finder|iTerm2|Code|Obsidian|Safari|Firefox|ChatGPT|ForkLift)$" manage=off
 
 # Status bar
 # add 32 padding to the top and 0 padding to the bottom of every space located on the main display
