@@ -5,3 +5,4 @@ thefuck/
 /mc
 nvim/lazy-lock.json
 nvim/lazyvim.json
+btop/btop.conf
