@@ -101,7 +101,7 @@ ctrl + shift - 0 : yabai -m window --space 10;
 # fn - 8         :
 # fn - 9         :
 # fn - 0         :
-fn - q         : open -a Obsidian
+# fn - q         : open -a 
 fn + shift - q : open -a Preview
 fn - w         : open -a Firefox
 fn + shift - w : open -a Safari
@@ -111,7 +111,7 @@ fn - r         : open -a KakaoTalk
 # fn + shift - r #already taken
 # fn - t         #already taken
 # fn + shift - t #already taken
-fn - o         : open -a Obsidian
+fn - a         : #already taken
 fn + shift - a : open -a anki
 fn - s         : open -a "Adobe Photoshop 2025"
 fn + shift - s : open -a "Adobe Lightroom"
