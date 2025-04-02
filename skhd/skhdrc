@@ -104,7 +104,7 @@ ctrl + shift - 0 : yabai -m window --space 10;
 fn - q         : open -a Obsidian
 fn + shift - q : open -a Preview
 fn - w         : open -a Firefox
-fn + shift - w : open -a "Parallels Desktop"
+fn + shift - w : open -a Safari
 fn - e         : open -a Messages
 # fn + shift - e #already taken
 fn - r         : open -a KakaoTalk
@@ -113,8 +113,8 @@ fn - r         : open -a KakaoTalk
 # fn + shift - t #already taken
 fn - o         : open -a Obsidian
 fn + shift - a : open -a anki
-fn - s         : open -a Safari
-fn + shift - s : open -a Stickies
+fn - s         : open -a "Adobe Photoshop 2025"
+fn + shift - s : open -a "Adobe Lightroom"
 fn - d         : open -a Discord
 fn + shift - d : open -a "iPhone Mirroring"
 fn - f         : open -a ForkLift
@@ -124,12 +124,15 @@ fn - g         : open -a "GitHub Desktop"
 fn - z         : open -a iTerm
 fn + shift - z : open -a kitty
 fn - x         : open -a ChatGPT
-fn + shift - x : open -a "Screen Sharing"
+# fn + shift - x #already taken
 fn - c         : open -a "Visual Studio Code"
 fn + shift - c : open -a Calendar
-fn - v         : open -a "Adobe Photoshop 2025"
-fn + shift - v : open -a "Adobe Lightroom"
+fn - v         : open -a "Screen Sharing"
+fn + shift - v : open -a "Parallels Desktop"
 fn - b         : open -a Blender
-# fn + shift - b : open -a
+# fn + shift - b : open -a 
+# fn - n         : open -a 
+# fn + shift - n #already taken
+fn - m         : open -a "iPhone Mirroring"
 fn - space     : open -a "Alfred 5"
-fn + shift - space : open -a Obisdian
+fn + shift - space : open -a Obsidian
