@@ -106,17 +106,19 @@ fn + shift - q : open -a Preview
 fn - w         : open -a Firefox
 fn + shift - w : open -a Safari
 fn - e         : open -a Messages
-# fn + shift - e #already taken
+# fn + shift - e # already taken
 fn - r         : open -a KakaoTalk
-# fn + shift - r #already taken
-# fn - t         #already taken
-# fn + shift - t #already taken
-fn - a         : #already taken
+# fn + shift - r # already taken
+# fn - t         # already taken
+# fn + shift - t # already taken
+fn - p         : open -a Passwords
+fn - 0x2A      : open -a Passwords # "backslash"
+# fn - a         # already taken
 fn + shift - a : open -a anki
 fn - s         : open -a "Adobe Photoshop 2025"
 fn + shift - s : open -a "Adobe Lightroom"
 fn - d         : open -a Discord
-fn + shift - d : open -a "iPhone Mirroring"
+# fn + shift - d : open -a 
 fn - f         : open -a ForkLift
 fn + shift - f : open ~/Desktop
 fn - g         : open -a "GitHub Desktop"
@@ -124,15 +126,16 @@ fn - g         : open -a "GitHub Desktop"
 fn - z         : open -a iTerm
 fn + shift - z : open -a kitty
 fn - x         : open -a ChatGPT
-# fn + shift - x #already taken
+# fn + shift - x # already taken
 fn - c         : open -a "Visual Studio Code"
 fn + shift - c : open -a Calendar
 fn - v         : open -a "Screen Sharing"
 fn + shift - v : open -a "Parallels Desktop"
 fn - b         : open -a Blender
 # fn + shift - b : open -a 
-# fn - n         : open -a 
-# fn + shift - n #already taken
+# fn - n         # already taken
+# fn + shift - n # already taken
 fn - m         : open -a "iPhone Mirroring"
+# fn + shift - m # already taken
 fn - space     : open -a "Alfred 5"
 fn + shift - space : open -a Obsidian
