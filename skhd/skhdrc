@@ -85,16 +85,16 @@ ctrl + shift - 7 : yabai -m window --space 7;
 ctrl + shift - 8 : yabai -m window --space 8;
 ctrl + shift - 9 : yabai -m window --space 9;
 ctrl + shift - 0 : yabai -m window --space 10;
-fn + ctrl - 1 : yabai -m window --space 11;
-fn + ctrl - 2 : yabai -m window --space 12;
-fn + ctrl - 3 : yabai -m window --space 13;
-fn + ctrl - 4 : yabai -m window --space 14;
-fn + ctrl - 5 : yabai -m window --space 15;
-fn + ctrl - 6 : yabai -m window --space 16;
-fn + ctrl - 7 : yabai -m window --space 17;
-fn + ctrl - 8 : yabai -m window --space 18;
-fn + ctrl - 9 : yabai -m window --space 19;
-fn + ctrl - 0 : yabai -m window --space 20;
+fn + shift - 1 : yabai -m window --space 11;
+fn + shift - 2 : yabai -m window --space 12;
+fn + shift - 3 : yabai -m window --space 13;
+fn + shift - 4 : yabai -m window --space 14;
+fn + shift - 5 : yabai -m window --space 15;
+fn + shift - 6 : yabai -m window --space 16;
+fn + shift - 7 : yabai -m window --space 17;
+fn + shift - 8 : yabai -m window --space 18;
+fn + shift - 9 : yabai -m window --space 19;
+fn + shift - 0 : yabai -m window --space 20;
 
 # -- Starting/Stopping/Restarting Yabai --
 # fn + shift + ctrl - q : yabai --stop-service
