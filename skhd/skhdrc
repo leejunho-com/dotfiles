@@ -6,10 +6,9 @@ fn - k : yabai -m window --focus north
 fn - h : yabai -m window --focus west
 fn - l : yabai -m window --focus east
 
-# change focus between external displays (left and right)
+# change focus between external displays
 fn - 0x32 : yabai -m display --focus recent # "backtick"
-# fn + ctrl - s : yabai -m display --focus recent
-
+fn - 0x2A : yabai -m display --focus recent # "backslash"
 
 # -- Modifying the Layout --
 
@@ -50,7 +49,8 @@ fn + ctrl - l : yabai -m window --warp east
 
 # move window to display left and right
 fn + shift - 0x32 : yabai -m window --display recent; yabai -m display --focus recent; # "backtick"
-# fn + ctrl - g : yabai -m window --display east; yabai -m display --focus east;
+fn + shift - 0x2A : yabai -m window --display recent; yabai -m display --focus recent; # "backslash"
+fn + ctrl - g : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to prev and next space
 fn + shift - p : yabai -m window --space prev;
@@ -112,7 +112,6 @@ fn - r         : open -a KakaoTalk
 # fn - t         # already taken
 # fn + shift - t # already taken
 fn - p         : open -a Passwords
-fn - 0x2A      : open -a Passwords # "backslash"
 # fn - a         # already taken
 fn + shift - a : open -a anki
 # fn - s         : open -a 
