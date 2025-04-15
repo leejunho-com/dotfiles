@@ -49,7 +49,7 @@ fn + ctrl - h : yabai -m window --warp west
 fn + ctrl - l : yabai -m window --warp east
 
 # move window to display left and right
-fn - t : yabai -m window --display recent; yabai -m display --focus recent;
+fn + shift - 0x32 : yabai -m window --display recent; yabai -m display --focus recent; # "backtick"
 # fn + ctrl - g : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to prev and next space
