@@ -114,7 +114,7 @@ fn + shift - w : open -a Safari
 fn - e         : open -a Messages
 fn + shift - e : open -a KakaoTalk
 fn - r         : open -a "Adobe Photoshop 2025"
-fn + shift - r : opan -a "Adobe Lightroom"
+fn + shift - r : open -a "Adobe Lightroom"
 # fn - t         : open -a
 # fn + shift - t : open -a
 fn - p         : open -a Passwords
@@ -130,7 +130,7 @@ fn - g         : open -a "GitHub Desktop"
 fn - z         : open -a iTerm
 fn + shift - z : open -a kitty
 # fn - x         : open -a 
-fn + shift - x : "iPhone Mirroring"
+fn + shift - x : open -a "iPhone Mirroring"
 fn - c         : open -a "Visual Studio Code"
 fn + shift - c : open -a Calendar
 fn - v         : open -a "Screen Sharing"

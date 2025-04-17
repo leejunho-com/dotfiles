@@ -80,7 +80,7 @@ function icon_map() {
   "Caprine")
     icon_result=":caprine:"
     ;;
-  "카카오톡")
+  "KakaoTalk")
     icon_result=":kakaotalk:"
     ;;
   "Dropbox")
@@ -162,7 +162,7 @@ function icon_map() {
     icon_result=":git_hub:"
     ;;
   "Firefox")
-    icon_result=":firefox:"
+    icon_result=":firefox_developer_edition:"
     ;;
   "Slack")
     icon_result=":slack:"
@@ -424,6 +424,30 @@ function icon_map() {
     ;;
   "WhatsApp")
     icon_result=":whats_app:"
+    ;;
+  "Adobe Photoshop 2025")
+    icon_result=":photoshop:"
+    ;;
+  "Adobe Lightroom")
+    icon_result=":lightroom:"
+    ;;
+  "iPhone Mirroring")
+    icon_result=":iphone_mirroring:"
+    ;;
+  "Screen Sharing")
+    icon_result=":desktop:"
+    ;;
+  "ForkLift")
+    icon_result=":moonlight:"
+    ;;
+  "ChatGPT")
+    icon_result=":openai:"
+    ;;
+  "Passwords")
+    icon_result=":passwords:"
+    ;;
+  "SF Symbols")
+    icon_result=":sf_symbols:"
     ;;
   *)
     icon_result=":default:"
