@@ -61,10 +61,6 @@ function yy() {
 # === Custom ===
 # nvim
 alias vi="nvim"
-# check dotfile inode
-alias dotconfig-check="ls -lia ~/.config/.zshrc ~/.zshrc && ls -lia ~/.config/.p10k.zsh ~/.p10k.zsh"
-# sync ~/dotfile
-alias dotconfig-sync="ln -f ~/.config/.zshrc ~/.zshrc && ln -f ~/.config/.p10k.zsh ~/.p10k.zsh"
 # cut fanart.jpg to poster.jpg
 alias poster='ffmpeg -i "fanart.jpg" -vf "crop=iw*0.4725:ih:iw*0.5275:0" -update 1 "poster.jpg"'
 # poster.jpg from extrafanart 
