@@ -119,7 +119,6 @@ fn + shift - r : open -a "Adobe Lightroom"
 # fn + shift - t : open -a
 fn - p         : open -a Passwords
 fn + shift - a : open -a anki
-# fn - s         : open -a 
 # fn + shift - s : open -a
 fn - d         : open -a Discord
 # fn + shift - d : open -a 
