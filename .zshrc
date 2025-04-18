@@ -68,5 +68,5 @@ alias eposter="cp ./extrafanart/fanart1.jpg ./poster.jpg"
 # find dir no trailer
 alias trailer='find . -maxdepth 1 -type d ! -exec sh -c '\''find "{}" -maxdepth 1 -type f -name "*-trailer*" | grep -q .'\'' \; -print'
 
-# (temp)incoming
+ (temp)incoming
 # alias ic='cd ~/git/incoming && python3 -m incoming.main'
