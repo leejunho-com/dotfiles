@@ -26,9 +26,6 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# thefuck
-eval $(thefuck --alias)
-
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
 alias cd="z"
