@@ -10,3 +10,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.fn.setreg("+", vim.fn.getreg('"'))
   end,
 })
+vim.opt.clipboard = "unnamedplus"
