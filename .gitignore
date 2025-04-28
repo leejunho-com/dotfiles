@@ -2,6 +2,7 @@
 *.log
 /incoming/log
 /btop
+/htop
 /gh-copilot
 /github-copilot
 nvim/lazy-lock.json
