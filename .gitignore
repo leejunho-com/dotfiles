@@ -1,7 +1,8 @@
 .DS_Store
 *.log
-thefuck/
 /incoming/log
+/gh-copilot
+/github-copilot
 /mc
 nvim/lazy-lock.json
 nvim/lazyvim.json
