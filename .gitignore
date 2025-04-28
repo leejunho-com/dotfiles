@@ -1,9 +1,9 @@
 .DS_Store
 *.log
 /incoming/log
+/btop
 /gh-copilot
 /github-copilot
 nvim/lazy-lock.json
 nvim/lazyvim.json
-btop/btop.conf
 github-copilot/apps.json
