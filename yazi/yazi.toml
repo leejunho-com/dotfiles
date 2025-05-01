@@ -17,7 +17,7 @@ Bandizip = [
 [open]
 prepend_rules = [
 	{ name = "*.ARW", use = ["photoshop", "reveal"]},
-    { name = "*.zip", use = ["extract", "Bandizip", "reveal"]},
-    { name = "*.rar", use = ["extract", "Bandizip", "reveal"]},
-    { name = "*.7z", use = ["extract", "Bandizip", "reveal"]}
+	{ name = "*.zip", use = ["extract", "Bandizip", "reveal"]},
+	{ name = "*.rar", use = ["extract", "Bandizip", "reveal"]},
+	{ name = "*.7z", use = ["extract", "Bandizip", "reveal"]}
 ]
