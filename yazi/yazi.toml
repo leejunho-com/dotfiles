@@ -2,6 +2,11 @@
 show_hidden = false
 sort_by = "natural"
 linemode = "size"
+
+[preview]
+max_width       = 1200
+max_height      = 1800
+
 [opener]
 edit = [
 	{ run = 'nvim "$@"', block = true },
@@ -14,6 +19,7 @@ photoshop = [
 Bandizip = [
   { run = 'open -a Bandizip "$@"', desc = "Extract with Bandizip"}
 ]
+
 [open]
 prepend_rules = [
 	{ name = "*.ARW", use = ["photoshop", "reveal"]},
