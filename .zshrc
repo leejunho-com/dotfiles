@@ -14,6 +14,9 @@ plugins=(git)
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# editor
+export EDITOR=nvim
+
 # Ctrl + d disale
 setopt ignoreeof
 
@@ -28,7 +31,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Zoxide (better cd)
+# zoxide
 eval "$(zoxide init zsh)"
 alias cd="z"
 
@@ -36,11 +39,31 @@ alias cd="z"
 alias tmux='tmux -u'
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Eza (better ls)
+# eza
 alias ls="eza --icons=always"
 
 # fzf
 source <(fzf --zsh)
+source ~/.config/fzf/fzf-git.sh/fzf-git.sh
+
+# fd
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1" }
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+# bat
+export BAT_THEME="Visual Studio Dark+"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -58,7 +81,7 @@ function yy() {
 		cd "$cwd"
 	fi
 	rm -f -- "$tmp"
-}	
+}
 
 # === Custom ===
 # nvim
@@ -69,6 +92,3 @@ alias poster='ffmpeg -i "fanart.jpg" -vf "crop=iw*0.4725:ih:iw*0.5275:0" -update
 alias eposter="cp ./extrafanart/fanart1.jpg ./poster.jpg"
 # find dir no trailer
 alias trailer='find . -maxdepth 1 -type d ! -exec sh -c '\''find "{}" -maxdepth 1 -type f -name "*-trailer*" | grep -q .'\'' \; -print'
-
-# (temp)incoming
-# alias ic='cd ~/git/incoming && python3 -m incoming.main'

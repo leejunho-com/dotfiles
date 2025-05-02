@@ -7,7 +7,7 @@ return {
       red = "#ca1243",
       grey = "#a0a1a7",
       black = "#383a42",
-      white = "#f3f3f3",
+      white = "#e1e1e1",
       light_green = "#83a598",
       orange = "#fe8019",
       green = "#8ec07c",
@@ -75,7 +75,7 @@ return {
 
     require("lualine").setup({
       options = {
-        theme = theme,
+        theme = "vscode",
         component_separators = "",
         section_separators = { left = "", right = "" },
       },
