@@ -41,7 +41,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # eza
 alias ls="eza --icons=always"
 
-# fzf
+# fzf ################################################
 source <(fzf --zsh)
 source ~/.config/fzf/fzf-git.sh/fzf-git.sh
 
@@ -62,6 +62,16 @@ _fzf_comprun() {
     *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
   esac
 }
+
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:-1,fg+:#ffffff,bg:-1,bg+:#f37021
+  --color=hl:#5f87af,hl+:#5fd7ff,info:#749fe7,marker:#ffffff
+  --color=prompt:#a9e15d,spinner:#d7005f,pointer:#af5fff,header:#87afaf
+  --color=border:#e1e1e1,label:#aeaeae,query:#d9d9d9
+  --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="❯ "
+  --marker="❯" --pointer="" --separator="─" --scrollbar="│"
+  --layout="reverse"'
+######################################################
 
 # fd
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
