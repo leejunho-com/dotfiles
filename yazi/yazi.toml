@@ -4,8 +4,8 @@ sort_by = "natural"
 linemode = "size"
 
 [preview]
-max_width       = 1200
-max_height      = 1800
+max_width       = 2000
+max_height      = 3000
 
 [opener]
 edit = [
