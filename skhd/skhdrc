@@ -119,9 +119,9 @@ fn + shift - r : open -a "Adobe Lightroom"
 # fn + shift - t : open -a
 fn - p         : open -a Passwords
 fn + shift - a : open -a anki
-# fn + shift - s : open -a
+fn + shift - s : open -a "System Settings"
 fn - d         : open -a Discord
-# fn + shift - d : open -a 
+fn + shift - d : open -a Discord
 fn - f         : open -a ForkLift
 fn + shift - f : open ~/Desktop
 fn - g         : open -a "GitHub Desktop"
