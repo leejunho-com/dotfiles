@@ -14,16 +14,26 @@ edit = [
 	{ run = 'code "$@"', block = true },
 ]
 photoshop = [
-	{ run = 'open -a "Adobe Photoshop 2024" "$@"', desc = "Adobe Photoshop"},
+	{ run = 'open -a "Adobe Photoshop 2025" "$@"', desc = "Adobe Photoshop"},
 ]
-Bandizip = [
-  { run = 'open -a Bandizip "$@"', desc = "Extract with Bandizip"}
+bandizip = [
+  { run = 'open -a Bandizip "$@"', desc = "Bandizip"}
 ]
 
 [open]
 prepend_rules = [
-	{ name = "*.ARW", use = ["photoshop", "reveal"]},
-	{ name = "*.zip", use = ["extract", "Bandizip", "reveal"]},
-	{ name = "*.rar", use = ["extract", "Bandizip", "reveal"]},
-	{ name = "*.7z", use = ["extract", "Bandizip", "reveal"]}
+	{ name = "*.zip", use = ["extract", "bandizip", "reveal"]},
+	{ name = "*.rar", use = ["extract", "bandizip", "reveal"]},
+	{ name = "*.7z", use = ["extract", "bandizip", "reveal"]},
+	{ name = "*.jpg", use = ["photoshop", "reveal"]},
+	{ name = "*.jpeg", use = ["photoshop", "reveal"]},
+	{ name = "*.png", use = ["photoshop", "reveal"]},
+	{ name = "*.bmp", use = ["photoshop", "reveal"]},
+	{ name = "*.tiff", use = ["photoshop", "reveal"]},
+	{ name = "*.tif", use = ["photoshop", "reveal"]},
+	{ name = "*.psd", use = ["photoshop", "reveal"]},
+	{ name = "*.ARW", use = ["photoshop", "reveal"]}
 ]
+
+[tasks]
+image_bound = [0, 0]
