@@ -32,6 +32,7 @@ prepend_rules = [
 	{ name = "*.tiff", use = ["photoshop", "reveal"]},
 	{ name = "*.tif", use = ["photoshop", "reveal"]},
 	{ name = "*.psd", use = ["photoshop", "reveal"]},
+	{ name = "*.webp", use = ["photoshop", "reveal"]},
 	{ name = "*.ARW", use = ["photoshop", "reveal"]}
 ]
 
