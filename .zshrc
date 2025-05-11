@@ -115,7 +115,9 @@ function yy() {
 alias vi="nvim"
 # cut fanart.jpg to poster.jpg
 alias poster='ffmpeg -i "fanart.jpg" -vf "crop=iw*0.4725:ih:iw*0.5275:0" -update 1 "poster.jpg"'
-# poster.jpg from extrafanart 
+# poster.jpg from extrafanart
 alias eposter="cp ./extrafanart/fanart1.jpg ./poster.jpg"
-# find dir no trailer
+# find dir has no trailer
 alias trailer='find . -maxdepth 1 -type d ! -exec sh -c '\''find "{}" -maxdepth 1 -type f -name "*-trailer*" | grep -q .'\'' \; -print'
+# plex rename
+alias rename="bash ~/.config/env/script/plex-rename.sh"
