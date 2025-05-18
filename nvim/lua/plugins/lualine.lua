@@ -1,134 +1,128 @@
 return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function()
-    local lualine = require("lualine")
+  'nvim-lualine/lualine.nvim', config = function()
+
+    local mode = {
+      'mode', fmt = function(str) 
+        return ' ' .. str
+        -- return ' ' .. str:sub(1, 1) -- displays only the first character of the mode
+      end,
+      separator = { left = ' ', right = '' },
+    }
+
+    local filename = {
+      'filename',
+      file_status = true, -- displays file status (readonly status, modified status)
+      path = 2, -- 0 = just filename, 1 = relative path, 2 = absolute path
+    }
+
+    local hide_in_width = function()
+      return vim.fn.winwidth(0) > 100 end
+
+    local diagnostics = {
+      'diagnostics',
+      sources = { 'nvim_diagnostic' },
+      sections = { 'error', 'warn' },
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      colored = false, update_in_insert = false, always_visible = false,
+      cond = hide_in_width,
+    }
+
+    local diff = {
+      'diff',
+      colored = false,
+      symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
+      cond = hide_in_width,
+    }
+    
     local colors = {
-      red = "#ca1243",
-      grey = "#a0a1a7",
-      black = "#383a42",
-      white = "#e1e1e1",
-      light_green = "#83a598",
-      orange = "#fe8019",
-      green = "#8ec07c",
+      black   = '#000000',
+      maroon  = '#800000',
+      green   = '#008000',
+      olive   = '#808000',
+      navy    = '#000080',
+      purple  = '#800080',
+      teal    = '#008080',
+      silver  = '#c0c0c0',
+      gray    = '#808080',
+      red     = '#ff0000',
+      lime    = '#00ff00',
+      yellow  = '#ffff00',
+      blue    = '#0000ff',
+      fuchsia = '#ff00ff',
+      aqua    = '#00ffff',
+      white   = '#ffffff',
     }
 
-    local theme = {
+    local lualine_theme = {
       normal = {
-        a = { fg = colors.white, bg = "NONE" },
-        b = { fg = colors.white, bg = "NONE" },
-        c = { fg = colors.white, bg = "NONE" },
-        z = { fg = colors.white, bg = "NONE" },
+        a = { fg = colors.white, bg = '#F37021', gui = 'bold' },
+        b = { fg = colors.white, bg = 'NONE' },
+        c = { fg = colors.silver, bg = 'NONE' },
+        x = { fg = colors.silver, bg = 'NONE' },
+        y = { fg = colors.silver, bg = 'NONE' },
+        z = { fg = colors.white, bg = 'NONE' },
       },
-      insert = { a = { fg = colors.white, bg = colors.light_green } },
-      visual = { a = { fg = colors.white, bg = colors.orange } },
-      replace = { a = { fg = colors.white, bg = colors.green } },
+      insert = { 
+        a = { fg = colors.white, bg = colors.green, gui = 'bold' },
+        b = { fg = colors.white, bg = 'NONE' },
+        c = { fg = colors.silver, bg = 'NONE' },
+        x = { fg = colors.silver, bg = 'NONE' },
+        y = { fg = colors.silver, bg = 'NONE' },
+        z = { fg = colors.white, bg = 'NONE' },
+      },
+      visual = { 
+        a = { fg = colors.white, bg = colors.purple, gui = 'bold' },
+        b = { fg = colors.white, bg = 'NONE' },
+        c = { fg = colors.silver, bg = 'NONE' },
+        x = { fg = colors.silver, bg = 'NONE' },
+        y = { fg = colors.silver, bg = 'NONE' },
+        z = { fg = colors.white, bg = 'NONE' },
+      },
+      replace = { 
+        a = { fg = colors.white, bg = colors.red, gui = 'bold' },
+        b = { fg = colors.white, bg = 'NONE' },
+        c = { fg = colors.silver, bg = 'NONE' },
+        x = { fg = colors.silver, bg = 'NONE' },
+        y = { fg = colors.silver, bg = 'NONE' },
+        z = { fg = colors.white, bg = 'NONE' },
+      },
+      inactive = {
+        a = { fg = colors.silver, bg = colors.gray, gui = 'bold' },
+        b = { fg = colors.gray, bg = colors.black },
+        c = { fg = colors.silver, bg = colors.black },
+      },
     }
 
-    local empty = require("lualine.component"):extend()
-    function empty:draw(default_highlight)
-      self.status = ""
-      self.applied_separator = ""
-      self:apply_highlights(default_highlight)
-      self:apply_section_separators()
-      return self.status
-    end
-
-    -- Put proper separators and gaps between components in sections
-    local function process_sections(sections)
-      for name, section in pairs(sections) do
-        local left = name:sub(9, 10) < "x"
-        for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
-          table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
-        end
-        for id, comp in ipairs(section) do
-          if type(comp) ~= "table" then
-            comp = { comp }
-            section[id] = comp
-          end
-          comp.separator = left and { right = "" } or { left = "" }
-        end
-      end
-      return sections
-    end
-
-    local function search_result()
-      if vim.v.hlsearch == 0 then
-        return ""
-      end
-      local last_search = vim.fn.getreg("/")
-      if not last_search or last_search == "" then
-        return ""
-      end
-      local searchcount = vim.fn.searchcount({ maxcount = 9999 })
-      return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
-    end
-
-    local function modified()
-      if vim.bo.modified then
-        return "+"
-      elseif vim.bo.modifiable == false or vim.bo.readonly == true then
-        return "-"
-      end
-      return ""
-    end
-
-    require("lualine").setup({
+    require('lualine').setup {
       options = {
-        theme = "vscode",
-        component_separators = "",
-        section_separators = { left = "", right = "" },
+        icons_enabled = true,
+        theme = lualine_theme, -- Set theme based on environment variable
+        -- Some useful glyphs:
+        -- https://www.nerdfonts.com/cheat-sheet
+        --        
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+        disabled_filetypes = { 'alpha', 'neo-tree' },
+        always_divide_middle = true,
       },
-      sections = process_sections({
-        lualine_a = { "mode" },
-        lualine_b = {
-          "branch",
-          "diff",
-          {
-            "diagnostics",
-            source = { "nvim" },
-            sections = { "error" },
-            diagnostics_color = { error = { bg = colors.red, fg = colors.white } },
-          },
-          {
-            "diagnostics",
-            source = { "nvim" },
-            sections = { "warn" },
-            diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } },
-          },
-          { "filename", file_status = false, path = 1 },
-          { modified, color = { bg = colors.red } },
-          {
-            "%w",
-            cond = function()
-              return vim.wo.previewwindow
-            end,
-          },
-          {
-            "%r",
-            cond = function()
-              return vim.bo.readonly
-            end,
-          },
-          {
-            "%q",
-            cond = function()
-              return vim.bo.buftype == "quickfix"
-            end,
-          },
-        },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = { search_result, "filetype" },
-        lualine_z = { "%p%%/%L", "%l:%c" },
-      }),
+      sections = {
+        lualine_a = { mode },
+        lualine_b = { {'branch', padding = 2 } },
+        lualine_c = { filename },
+        lualine_x = { diagnostics, diff, { 'encoding', cond = hide_in_width }, { 'filetype', cond = hide_in_width } },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+      },
       inactive_sections = {
-        lualine_c = { "%f %y %m" },
-        lualine_x = {},
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { { 'filename', path = 1 } },
+        lualine_x = { { 'location', padding = 0 } },
+        lualine_y = {},
+        lualine_z = {},
       },
-    })
-    lualine.setup(config)
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", fg = "#ffffff" })
-    vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE", fg = "#888888" })
+      tabline = {},
+      extensions = { 'fugitive' },
+    }
   end,
 }
