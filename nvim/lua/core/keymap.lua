@@ -7,17 +7,17 @@ vim.o.timeoutlen = 3000
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Emacs style keymap for INSERT mode
-vim.keymap.set("i", "<C-a>", "<Home>", opts) -- line start
-vim.keymap.set("i", "<C-e>", "<End>", opts) -- line end
-vim.keymap.set("i", "<C-b>", "<Left>", opts) -- backward char
-vim.keymap.set("i", "<C-f>", "<Right>", opts) -- forward charchar
-vim.keymap.set("i", "<M-b>", "<Esc>bi", opts) -- move back by word
-vim.keymap.set("i", "<M-f>", "<Esc>ea", opts) -- move forward by word
-vim.keymap.set("i", "<C-p>", "<Up>", opts) -- previous line
-vim.keymap.set("i", "<C-n>", "<Down>", opts) -- next line
-vim.keymap.set("i", "<C-d>", "<Del>", opts) -- delete char under cursor
-vim.keymap.set("i", "<C-h>", "<BS>", opts) -- backspace
-vim.keymap.set("i", "<C-k>", "<C-o>D", opts) -- kill to EOL
+vim.keymap.set("i", "<C-a>", "<Home>", opts)      -- line start
+vim.keymap.set("i", "<C-e>", "<End>", opts)       -- line end
+vim.keymap.set("i", "<C-b>", "<Left>", opts)      -- backward char
+vim.keymap.set("i", "<C-f>", "<Right>", opts)     -- forward charchar
+vim.keymap.set("i", "<M-b>", "<Esc>bi", opts)     -- move back by word
+vim.keymap.set("i", "<M-f>", "<Esc>ea", opts)     -- move forward by word
+vim.keymap.set("i", "<C-p>", "<Up>", opts)        -- previous line
+vim.keymap.set("i", "<C-n>", "<Down>", opts)      -- next line
+vim.keymap.set("i", "<C-d>", "<Del>", opts)       -- delete char under cursor
+vim.keymap.set("i", "<C-h>", "<BS>", opts)        -- backspace
+vim.keymap.set("i", "<C-k>", "<C-o>D", opts)      -- kill to EOL
 vim.keymap.set("i", "<C-w>", "<C-g>u<C-w>", opts) -- delete previous word
 vim.keymap.set("i", "<C-u>", "<C-g>u<C-u>", opts) -- delete to BOL
 
@@ -51,15 +51,15 @@ vim.keymap.set("n", "<C-M-k>", ":resize -2<CR>", opts)
 vim.keymap.set("n", "<C-M-l>", ":vertical resize +2<CR>", opts)
 
 -- Buffers
-vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
-vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", opts) -- close buffer
+vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
+vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
+vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", opts)   -- close buffer
 vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts) -- new buffer
 
 -- Window management
-vim.keymap.set("n", "<leader>%", "<C-w>v", opts) -- split window vertically
-vim.keymap.set("n", '<leader>"', "<C-w>s", opts) -- split window horizontally
-vim.keymap.set("n", "<leader>se", "<C-w>=", opts) -- make split windows equal width & height
+vim.keymap.set("n", "<leader>%", "<C-w>v", opts)     -- split window vertically
+vim.keymap.set("n", '<leader>"', "<C-w>s", opts)     -- split window horizontally
+vim.keymap.set("n", "<leader>se", "<C-w>=", opts)    -- make split windows equal width & height
 vim.keymap.set("n", "<leader>x", ":close<CR>", opts) -- close current split window
 
 -- Navigate between splits
@@ -69,10 +69,10 @@ vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", opts)
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", opts)
 
 -- Tabs
-vim.keymap.set("n", "<leader>to", ":tabnew<CR>", opts) -- open new tab
+vim.keymap.set("n", "<leader>to", ":tabnew<CR>", opts)   -- open new tab
 vim.keymap.set("n", "<leader>tx", ":tabclose<CR>", opts) -- close current tab
-vim.keymap.set("n", "<leader>tn", ":tabn<CR>", opts) --  go to next tab
-vim.keymap.set("n", "<leader>tp", ":tabp<CR>", opts) --  go to previous tab
+vim.keymap.set("n", "<leader>tn", ":tabn<CR>", opts)     --  go to next tab
+vim.keymap.set("n", "<leader>tp", ":tabp<CR>", opts)     --  go to previous tab
 -- Toggle line wrapping
 vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
 
