@@ -6,4 +6,4 @@
 	url = https://github.com/tmux-plugins/tmux-sensible
 [submodule "tmux/plugins/tmux-network-bandwidth"]
 	path = tmux/plugins/tmux-network-bandwidth
-	url = https://github.com/thewtex/tmux-network-bandwidth
+	url = https://github.com/ilya-manin/tmux-network-bandwidth
