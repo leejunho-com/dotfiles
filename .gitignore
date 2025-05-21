@@ -8,4 +8,5 @@
 /github-copilot
 nvim/lazy-lock.json
 nvim/lazyvim.json
+nvim/.neoconf.json
 github-copilot/apps.json
