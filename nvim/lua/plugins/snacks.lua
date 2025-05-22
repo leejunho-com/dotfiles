@@ -14,6 +14,14 @@ return {
   end,
   keys = {
     {
+      "<leader>h",
+      function()
+        Snacks.dashboard.open()
+      end,
+      desc = "Open Snacks Dashboard",
+      mode = "n",
+    },
+    {
       "<leader>bd",
       function()
         Snacks.bufdelete()
@@ -127,7 +135,7 @@ return {
         },
       },
     },
-    explorer = { enabled = false },
+    explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = false },
     picker = { enabled = false },

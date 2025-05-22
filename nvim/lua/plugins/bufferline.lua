@@ -13,8 +13,8 @@ return {
       modified_icon = "●",
       offsets = {
         {
-          filetype = "neo-tree",
-          text = "neo-tree",
+          filetype = "snacks_layout_box",
+          -- text = " ",
           text_align = "center",
         },
       },
@@ -40,7 +40,7 @@ return {
         fg = { attribute = "fg", highlight = "Normal" },
         bg = { attribute = "bg", highlight = "Normal" },
         underline = true,
-        sp = '#F37021',
+        sp = "#F37021",
       },
       separator = {
         fg = { attribute = "bg", highlight = "Normal" },
@@ -62,7 +62,7 @@ return {
         fg = { attribute = "fg", highlight = "Normal" },
         bg = { attribute = "bg", highlight = "Normal" },
         underline = true,
-        sp = '#F37021',
+        sp = "#F37021",
       },
       close_button_visible = {
         fg = { attribute = "fg", highlight = "Normal" },
