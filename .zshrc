@@ -17,6 +17,14 @@ export LC_ALL=en_US.UTF-8
 # Ctrl + d disale
 setopt ignoreeof
 
+# Hitstory setopt
+setopt hist_verify
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
 # p10k
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
