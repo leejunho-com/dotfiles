@@ -22,7 +22,6 @@ return {
     "blink.cmp",
     opts = function(_, opts)
       opts.keymap = {
-        preset = "enter",
         ["<Tab>"] = { "select_and_accept" },
       }
     end,
