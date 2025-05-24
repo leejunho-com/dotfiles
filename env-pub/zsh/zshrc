@@ -128,4 +128,4 @@ function yy() {
 alias vi="nvim"
 
 # load custom env
-source ~/env/zsh.env
+source ~/.config/env/zsh.env
