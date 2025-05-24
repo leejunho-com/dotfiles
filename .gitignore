@@ -1,5 +1,6 @@
 .DS_Store
 *.log
+*.bak
 /tmux/plugins
 /incoming/log
 /btop
