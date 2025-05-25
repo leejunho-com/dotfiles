@@ -1,18 +1,17 @@
 {
-"src_dir_path":"/Volumes/dock/incoming/-i", 
-"dst_dir_path":"/Volumes/dock/incoming/-o",
-"default_preset_path":"/Users/leejunho/.config/incoming/preset/default.json",
-"open_dst_dir_when_done":false,
-
-"logging":{
-    "create_log_dst_dir_toggle":true,
-    "log_filename":"incoming.log",
-    "custom_log_file_path":""
-},
-"output_filename_appending":{
-    "prefix_toggle":false,
-    "prefix":"",
-    "suffix_toggle":false,
-    "suffix":""
-}
+  "src_dir_path": "/Volumes/dock/incoming/in",
+  "dst_dir_path": "/Volumes/dock/incoming/out",
+  "default_preset_path": "/Users/leejunho/.config/incoming/preset/default.json",
+  "open_dst_dir_when_done": false,
+  "logging": {
+    "create_log_dst_dir_toggle": true,
+    "log_filename": "incoming.log",
+    "custom_log_file_path": ""
+  },
+  "output_filename_appending": {
+    "prefix_toggle": false,
+    "prefix": "",
+    "suffix_toggle": false,
+    "suffix": ""
+  }
 }
