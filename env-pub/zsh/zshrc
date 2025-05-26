@@ -133,7 +133,7 @@ alias vi="nvim"
 source ~/.config/env/zsh.env
 
 # discord webhook
-ntfy() {
+discord() {
   local msg="# ⚡️Job Finished"
   if [ $# -gt 0 ]; then
     msg="${msg}\n**$***"
