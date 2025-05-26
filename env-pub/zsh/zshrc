@@ -145,8 +145,8 @@ ntfy() {
 
   msg="${msg}\n> 📍 $(hostname)$session\n> 🕒 $(date '+%Y-%m-%d %H:%M:%S')"
 
-  curl -s -H "Content-Type: application/json" \
-    -X POST \
-    -d "{\"content\": \"$msg\"}" \
-    "$DISCORD_WEBHOOK" > /dev/null
+  echo -e "$msg" | jq -R -s '{content: .}' | \
+    curl -s -H "Content-Type: application/json" \
+         -X POST \
+         -d @- "$DISCORD_WEBHOOK" > /dev/null
 }
