@@ -11,9 +11,9 @@ fi
 plugins=(git)
 
 # Homebrew
-# intel
-# /opt/homebrew/share/
 # apple sillicon
+# /opt/homebrew/share/
+# intel
 # /usr/local/share/
 
 # === ENV ===
