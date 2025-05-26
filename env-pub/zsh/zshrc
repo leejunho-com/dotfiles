@@ -24,10 +24,12 @@ export LC_ALL=en_US.UTF-8
 setopt ignoreeof
 
 # Hitstory setopt
-setopt hist_verify
+setopt HIST_VERIFY
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
@@ -129,3 +131,22 @@ alias vi="nvim"
 
 # load custom env
 source ~/.config/env/zsh.env
+
+# discord webhook
+ntfy() {
+  local msg="# ⚡️Job Finished"
+  if [ $# -gt 0 ]; then
+    msg="${msg}\n**$***"
+  fi
+
+  if [ -n "$TMUX" ]; then
+    session=" (tmux: $(tmux display-message -p '#S'))"
+  fi
+
+  msg="${msg}\n> 📍 $(hostname)$session\n> 🕒 $(date '+%Y-%m-%d %H:%M:%S')"
+
+  curl -s -H "Content-Type: application/json" \
+    -X POST \
+    -d "{\"content\": \"$msg\"}" \
+    "$DISCORD_WEBHOOK" > /dev/null
+}
