@@ -1,0 +1,6 @@
+@-moz-document url-prefix() {
+  :root {
+    --in-content-page-background: transparent !important;
+    --in-content-box-background: transparent !important;
+  }
+}
