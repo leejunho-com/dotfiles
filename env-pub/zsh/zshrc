@@ -134,18 +134,18 @@ source ~/.config/env/zsh.env
 
 # discord webhook
 discord() {
-  local msg="# ⚡️Job Finished"
+  local msg
   if [ $# -gt 0 ]; then
-    msg="${msg}\n**$***"
+    msg="# $*"
+  else
+    msg=""
   fi
 
-  if [ -n "$TMUX" ]; then
-    session=" (tmux: $(tmux display-message -p '#S'))"
-  fi
+  [ -n "$TMUX" ] && session=" (tmux: $(tmux display-message -p '#S'))"
 
-  msg="${msg}\n> 📍 $(hostname)$session\n> 🕒 $(date '+%Y-%m-%d %H:%M:%S')"
+  msg="${msg}\n⚡️Job Finished\n> 📍 $(hostname)${session:-}\n> 🕒 $(date '+%Y-%m-%d %H:%M:%S')\n"
 
-  echo -e "$msg" | jq -R -s '{content: .}' | \
+  printf "%b" "$msg" | jq -R -s '{content: .}' | \
     curl -s -H "Content-Type: application/json" \
          -X POST \
          -d @- "$DISCORD_WEBHOOK" > /dev/null
