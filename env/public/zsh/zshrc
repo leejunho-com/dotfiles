@@ -130,7 +130,7 @@ function yy() {
 alias vi="nvim"
 
 # load custom env
-source ~/.config/env/zsh.env
+source ~/.config/env/private/zsh.env
 
 # discord webhook
 discord() {
