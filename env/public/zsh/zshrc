@@ -19,9 +19,15 @@ plugins=(git)
 # env
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export EDITOR=nvim
+
+# C-x C-e to multiline command
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
 
 # set o
-setopt ignoreeof # C + d disale
+setopt ignoreeof # C-d disale
 ## Hitstory setopt
 setopt HIST_VERIFY
 setopt HIST_IGNORE_DUPS
