@@ -39,6 +39,8 @@ setopt HIST_SAVE_NO_DUPS
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt interactivecomments # allow commnent
+HISTSIZE=10000     # session
+SAVEHIST=10000     # disk
 
 # p10k
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
