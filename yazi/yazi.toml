@@ -1,39 +1,75 @@
-[manager]
+[mgr]
 show_hidden = false
 sort_by = "natural"
 linemode = "size"
 
 [preview]
-max_width       = 2000
-max_height      = 3000
+max_width = 2000
+max_height = 3000
 
 [opener]
 edit = [
-	{ run = 'nvim "$@"', block = true },
-	{ run = 'bat "$@"', block = true },
-	{ run = 'code "$@"', block = true },
+  { run = 'nvim "$@"', block = true },
+  { run = 'bat "$@"', block = true },
+  { run = 'code "$@"', block = true },
 ]
 photoshop = [
-	{ run = 'open -a "Adobe Photoshop 2025" "$@"', desc = "Adobe Photoshop"},
+  { run = 'open -a "Adobe Photoshop 2025" "$@"', desc = "Adobe Photoshop" },
 ]
-bandizip = [
-  { run = 'open -a Bandizip "$@"', desc = "Bandizip"}
+unar = [
+  { run = 'for rar in "$@"; do unar "$rar"; done', desc = "Extract with unar" },
 ]
 
 [open]
 prepend_rules = [
-	{ name = "*.zip", use = ["extract", "bandizip", "reveal"]},
-	{ name = "*.rar", use = ["extract", "bandizip", "reveal"]},
-	{ name = "*.7z", use = ["extract", "bandizip", "reveal"]},
-	{ name = "*.jpg", use = ["photoshop", "reveal"]},
-	{ name = "*.jpeg", use = ["photoshop", "reveal"]},
-	{ name = "*.png", use = ["photoshop", "reveal"]},
-	{ name = "*.bmp", use = ["photoshop", "reveal"]},
-	{ name = "*.tiff", use = ["photoshop", "reveal"]},
-	{ name = "*.tif", use = ["photoshop", "reveal"]},
-	{ name = "*.psd", use = ["photoshop", "reveal"]},
-	{ name = "*.webp", use = ["photoshop", "reveal"]},
-	{ name = "*.ARW", use = ["photoshop", "reveal"]}
+  { name = "*.zip", use = [
+    "extract",
+    "reveal",
+  ] },
+  { name = "*.rar", use = [
+    "unar",
+    "reveal",
+  ] },
+  { name = "*.7z", use = [
+    "extract",
+    "reveal",
+  ] },
+  { name = "*.jpg", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.jpeg", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.png", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.bmp", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.tiff", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.tif", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.psd", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.webp", use = [
+    "photoshop",
+    "reveal",
+  ] },
+  { name = "*.ARW", use = [
+    "photoshop",
+    "reveal",
+  ] },
 ]
 
 [tasks]
