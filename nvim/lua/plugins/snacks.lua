@@ -103,9 +103,9 @@ return {
       sections = {
         {
           section = "terminal",
-          cmd = "ascii-image-converter /Users/leejunho/.config/nvim/lua/plugins/snacks.webp -Cb --threshold 180 -d 55,24",
-          height = 25,
-          indent = 5,
+          cmd = "ascii-image-converter /Users/leejunho/.config/nvim/lua/plugins/snacks.webp -Cb --threshold 180 -d 60,24",
+          height = 24,
+          indent = 0,
         },
         -- {
         --   section = "terminal",
