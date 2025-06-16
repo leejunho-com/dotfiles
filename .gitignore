@@ -9,6 +9,7 @@
 /NuGet
 /gh-copilot
 /github-copilot
-nvim/lazy-lock.json
-nvim/lazyvim.json
-nvim/.neoconf.json
+/nvim/lazy-lock.json
+/nvim/lazyvim.json
+/nvim/.neoconf.json
+/asciinema/install-id
