@@ -122,7 +122,7 @@ fn + shift - a : open -a anki
 fn + shift - s : open -a "System Settings"
 fn - d         : open -a Discord
 fn + shift - d : open -a Discord
-fn - f         : open -a ForkLift
+# fn - f         : open -a Finder
 fn + shift - f : open ~/Desktop
 fn - g         : open -a "GitHub Desktop"
 # fn + shift - g : open -a 
