@@ -105,7 +105,6 @@ alt + shift - 0 : yabai -m window --space 20;
 # alt + ctrl - r : brew services restart yabai
 
 # app shortcut
-cmd - return   : open -a iTerm
 cmd + shift - return : open -na kitty
 # alt - q         : open -a ChatGPT
 alt + shift - q : open -a Preview
