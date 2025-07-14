@@ -5,8 +5,9 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
-
-# change focus between external displays alt - escape : yabai -m display --focus recent # "backtick"
+# change focus between external displays
+alt - escape : yabai -m display --focus recent
+alt - x      : yabai -m display --focus recent
 
 # -- Modifying the Layout --
 
@@ -18,9 +19,6 @@ alt + ctrl - y : yabai -m space --mirror y-axis
 
 # flip along x-axis
 alt + ctrl - x : yabai -m space --mirror x-axis
-
-# toggle window float
-alt + ctrl - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # -- Modifying Window Size --
 
@@ -51,9 +49,9 @@ alt + shift + ctrl - h : yabai -m window --warp west
 alt + shift + ctrl - l : yabai -m window --warp east
 
 # move window to display left and right
-alt + shift - 0x32 : yabai -m window --display recent; yabai -m display --focus recent; # "backtick"
-alt + shift - 0x2A : yabai -m window --display recent; yabai -m display --focus recent; # "backslash"
-alt + ctrl - g : yabai -m window --display east; yabai -m display --focus east;
+alt + shift - escape : yabai -m window --display recent; yabai -m display --focus recent;
+alt + shift - x      : yabai -m window --display recent; yabai -m display --focus recent;
+alt + ctrl - g       : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to prev and next space
 alt + ctrl - p : yabai -m window --space prev;
@@ -105,38 +103,39 @@ alt + shift - 0 : yabai -m window --space 20;
 # alt + ctrl - r : brew services restart yabai
 
 # app shortcut
-cmd + shift - return : open -na kitty
-# alt - q         : open -a ChatGPT
-alt + shift - q : open -a Preview
-alt - w         : open -a Firefox
-alt + shift - w : open -a Safari
-alt - e         : open -a Messages
-alt + shift - e : open -a KakaoTalk
-alt - r         : open -a "Adobe Photoshop 2025"
-alt + shift - r : open -a "Adobe Lightroom"
-# alt - t         : open -a
-# alt + shift - t : open -a
-alt - p         : open -a Passwords
-alt - a         : open -a ChatGPT
-alt + shift - a : open -a anki
-alt - s         : open -a iTerm
-alt + shift - s : open -a "System Settings"
-alt - d         : open -a Discord
-alt + shift - d : open -a Discord
-alt - f         : open ~/Desktop
-alt + shift - f : open ~/Desktop
-alt - g         : open -a ChatGPT
-# alt + shift - g : open -a 
-alt - z         : open -a iTerm
-alt + shift - z : open -na kitty
-# alt - x         : open -a 
-alt + shift - x : open -a "iPhone Mirroring"
-alt - c         : open -a "Visual Studio Code"
-alt + shift - c : open -a Calendar
-alt - v         : open -a "Screen Sharing"
-alt + shift - v : open -a "Parallels Desktop"
-alt - b         : open -a Firefox
-alt + shift - b : open -a Blender
-# alt + shift - b : open -a 
-# alt + shift - n : open -a 
-alt - space : open -na Kitty
+alt - q             : open -na kitty --args nvim "$HOME/tmp/note_$(date +%Y-%m-%d_%H-%M-%S).md"
+alt - w             : open -a Firefox
+alt + shift - w     : open -a "Parallels Desktop"
+alt - e             : open -a Messages
+alt + shift - e     : open -a KakaoTalk
+alt - r             : open -a "Adobe Photoshop 2025"
+alt + shift - t     : open -a Terminal
+alt - y             : yabai -m window --toggle float --grid 4:4:1:1:2:2 # toggle window float
+# u
+# i
+alt - o             : open -a Obsidian
+alt - p             : open -a Passwords
+
+alt - a             : open -a ChatGPT
+alt + shift - a     : open -a anki
+alt - s             : open -a Safari
+alt + shift - s     : open -a "System Settings"
+alt - d             : open -a Discord
+# f emacs word forward
+alt + shift - f     : yabai -m space --focus 2 ; open ~/Desktop
+alt - g             : open -a "Adobe Lightroom"
+alt - 0x029         : open -a iTerm # semicolon
+alt + shift - 0x029 : open -na kitty # semicolon
+ctrl - 0x027        : open -na kitty # colon
+
+alt - z             : open -a iTerm
+alt + shift - z     : open -na kitty
+# x is display switching
+alt - c             : open -a "Visual Studio Code"
+alt + shift - c     : open -a Calendar
+alt - v             : open -a "Screen Sharing"
+alt + shift - v     : open -a Preview
+# b emacs word back
+alt + shift - b     : open -a Blender
+# n
+# m
