@@ -1979,7 +1979,7 @@ The script should do this: \(ai.prompt)</string>
 	<key>PromptOnQuitEvenIfThereAreNoWindows</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
-	<false/>
+	<true/>
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>ShowNewOutputIndicator</key>
