@@ -270,6 +270,17 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 22,
+                        "vendor_id": 1278
+                    },
+                    "ignore": false
+                }
+            ],
             "name": "kb-by-lee",
             "selected": true,
             "simple_modifications": [
