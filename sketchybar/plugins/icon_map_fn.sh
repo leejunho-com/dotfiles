@@ -297,7 +297,7 @@ function icon_map() {
     icon_result=":drafts:"
     ;;
   "Preview" | "预览" | "Skim" | "zathura")
-    icon_result=":pdf:"
+    icon_result=":spotlight:"
     ;;
   "PyCharm")
     icon_result=":pycharm:"
