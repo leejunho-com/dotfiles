@@ -108,7 +108,7 @@ alt - w             : open -a Firefox
 alt + shift - w     : open -a "Parallels Desktop"
 alt - e             : open -a Messages
 alt + shift - e     : open -a KakaoTalk
-alt - r             : open -a "Adobe Photoshop 2025"
+alt - r             : open -a "Adobe Photoshop 2026"
 alt + shift - t     : open -a Terminal
 alt - y             : yabai -m window --toggle float --grid 4:4:1:1:2:2 # toggle window float
 # u
