@@ -14,7 +14,7 @@ edit = [
   { run = 'code "$@"', block = true },
 ]
 photoshop = [
-  { run = 'open -a "Adobe Photoshop 2025" "$@"', desc = "Adobe Photoshop" },
+  { run = 'open -a "Adobe Photoshop 2026" "$@"', desc = "Adobe Photoshop" },
 ]
 unar = [
   { run = 'for rar in "$@"; do unar "$rar"; done', desc = "Extract with unar" },
