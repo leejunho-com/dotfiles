@@ -1,28 +1,53 @@
- {
-"filterd_all_ext_dict":{
-"filtered_video_ext_dict":[".asf", ".avi", ".flv", ".mkv", ".mov", ".mp4", ".mpeg", ".ts", ".webm", ".wmv", ".m4v", ".mpg", ".ts", ".mts", ".m2ts", ".vob", ".evo"], 
-"filtered_image_ext_dict":[".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif"]
-},
-"video_process":{
-    "video_process_toggle":true,
-    "deafult_encoder_is_HandBrake":null,
+{
+  "filterd_all_ext_dict": {
+    "filtered_video_ext_dict": [
+      ".asf",
+      ".avi",
+      ".flv",
+      ".mkv",
+      ".mov",
+      ".mp4",
+      ".mpeg",
+      ".ts",
+      ".webm",
+      ".wmv",
+      ".m4v",
+      ".mpg",
+      ".ts",
+      ".mts",
+      ".m2ts",
+      ".vob",
+      ".evo"
+    ],
+    "filtered_image_ext_dict": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".bmp",
+      ".tiff",
+      ".tif"
+    ]
+  },
+  "video_process": {
+    "video_process_toggle": true,
+    "deafult_encoder_is_HandBrake": null,
     "HandBrake_presets_path": "/Users/leejunho/.config/incoming/hevc-mp4.json",
-    "output_video_ext":".mp4",
-    "ffmpeg":{
-        "use_ffmpeg_toggle":false,
-        "custom_batch_command_input_toggle":false
+    "output_video_ext": ".mp4",
+    "ffmpeg": {
+      "use_ffmpeg_toggle": false,
+      "custom_batch_command_input_toggle": false
     }
-},
-"image_process":{
-    "image_process_toggle":true,
-    "output_ext":".jpg",
-    "output_quality":50,
-    "remove_all_exif_data":false,
-    "remove_only_gps_exif_data":false
-},
-"archive_process":{
-    "archive_process_toggle":true,
-    "minimum_image_files_for_processing":4,
-    "compress_after_process":false
-}
+  },
+  "image_process": {
+    "image_process_toggle": true,
+    "output_ext": ".jpg",
+    "output_quality": 50,
+    "remove_all_exif_data": false,
+    "remove_only_gps_exif_data": false
+  },
+  "archive_process": {
+    "archive_process_toggle": false,
+    "minimum_image_files_for_processing": 4,
+    "compress_after_process": false
+  }
 }
