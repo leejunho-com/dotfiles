@@ -425,11 +425,14 @@ function icon_map() {
   "WhatsApp")
     icon_result=":whats_app:"
     ;;
-  "Adobe Photoshop 2025")
+  "Adobe Photoshop 2026")
     icon_result=":photoshop:"
     ;;
   "Adobe Lightroom")
     icon_result=":lightroom:"
+    ;;
+  "Adobe Lightroom Classic")
+    icon_result=":lightroomclassic:"
     ;;
   "iPhone Mirroring")
     icon_result=":iphone_mirroring:"
@@ -438,7 +441,7 @@ function icon_map() {
     icon_result=":desktop:"
     ;;
   "ForkLift")
-    icon_result=":moonlight:"
+    icon_result=":forklift:"
     ;;
   "ChatGPT")
     icon_result=":openai:"
