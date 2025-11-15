@@ -2,6 +2,7 @@
   "PresetList" : [
     {
       "AlignAVStart" : true,
+      "AudioAutomaticNamingBehavior" : "unnamed",
       "AudioCopyMask" : [
         "copy:aac"
       ],
@@ -12,14 +13,20 @@
       "AudioList" : [
         {
           "AudioBitrate" : 320,
+          "AudioCompressionLevel" : -1,
+          "AudioDitherMethod" : "auto",
           "AudioEncoder" : "ca_aac",
           "AudioMixdown" : "7point1",
+          "AudioNormalizeMixLevel" : false,
           "AudioSamplerate" : "auto",
           "AudioTrackDRCSlider" : 0,
-          "AudioTrackGainSlider" : 0
+          "AudioTrackGainSlider" : 0,
+          "AudioTrackQuality" : -1,
+          "AudioTrackQualityEnable" : false
         }
       ],
       "AudioSecondaryEncoderMode" : true,
+      "AudioTrackNamePassthru" : true,
       "AudioTrackSelectionBehavior" : "all",
       "ChapterMarkers" : true,
       "ChildrenArray" : [
@@ -30,7 +37,7 @@
       "Folder" : false,
       "FolderOpen" : false,
       "InlineParameterSets" : false,
-      "MetadataPassthrough" : true,
+      "MetadataPassthru" : true,
       "Mp4iPodCompatible" : false,
       "Optimize" : true,
       "PictureAllowUpscaling" : false,
@@ -97,11 +104,13 @@
         "jpn",
         "und"
       ],
+      "SubtitleTrackNamePassthru" : true,
       "SubtitleTrackSelectionBehavior" : "all",
       "Type" : 1,
       "UsesPictureFilters" : true,
       "VideoAvgBitrate" : 6000,
       "VideoColorMatrixCodeOverride" : 0,
+      "VideoColorRange" : "auto",
       "VideoEncoder" : "vt_h265",
       "VideoFramerate" : "auto",
       "VideoFramerateMode" : "vfr",
@@ -110,10 +119,10 @@
       "VideoLevel" : "auto",
       "VideoMultiPass" : false,
       "VideoOptionExtra" : "",
+      "VideoPasshtruHDRDynamicMetadata" : "all",
       "VideoPreset" : "default",
       "VideoProfile" : "auto",
-      "VideoQSVDecode" : false,
-      "VideoQualitySlider" : 50,
+      "VideoQualitySlider" : 65,
       "VideoQualityType" : 2,
       "VideoScaler" : "swscale",
       "VideoTune" : "",
@@ -122,7 +131,7 @@
       "x264UseAdvancedOptions" : false
     }
   ],
-  "VersionMajor" : 56,
+  "VersionMajor" : 67,
   "VersionMicro" : 0,
   "VersionMinor" : 0
 }
