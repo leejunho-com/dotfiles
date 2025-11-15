@@ -62,7 +62,7 @@ yabai -m config window_opacity off
 # yabai -m config normal_window_opacity 0.7
 
 # disable specific apps
-yabai -m rule --add app!="^(iTerm2|Finder|Code|ChatGPT|Firefox|Discord|Obsidian|Safari|Adobe Lightroom|Adobe Photoshop 2025)$" manage=off
+yabai -m rule --add app!="^(iTerm2|Finder|Code|ChatGPT|Firefox|Discord|Obsidian|Safari|Adobe Lightroom|Adobe Photoshop 2026)$" manage=off
 
 # space rule at satart yabai
 # yabai -m rule --add app="^iTerm2$" space=1
