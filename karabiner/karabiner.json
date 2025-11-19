@@ -105,9 +105,6 @@
                       "^com\\.googlecode\\.iterm2$",
                       "^com\\.microsoft\\.VSCode$"
                     ],
-                    "file_paths": [
-                      "^/opt/homebrew/bin/mpv$"
-                    ],
                     "type": "frontmost_application_unless"
                   }
                 ],
@@ -192,9 +189,6 @@
               {
                 "conditions": [
                   {
-                    "file_paths": [
-                      "^/opt/homebrew/bin/mpv$"
-                    ],
                     "type": "frontmost_application_unless"
                   }
                 ],
