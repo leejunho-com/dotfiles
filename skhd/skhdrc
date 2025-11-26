@@ -125,8 +125,8 @@ alt - d             : open -a Discord
 alt + shift - f     : yabai -m space --focus 2 ; open ~/Desktop
 alt - g             : open -a "Adobe Lightroom"
 alt - 0x029         : open -a iTerm # semicolon
-alt + shift - 0x029 : open -na kitty # semicolon
-ctrl - 0x027        : open -na kitty # colon
+alt + shift - 0x029 : open -na kitty # colon
+ctrl - 0x027        : open -na kitty # single quote
 
 alt - z             : open -a iTerm
 alt + shift - z     : open -na kitty
