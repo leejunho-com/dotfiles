@@ -26,25 +26,6 @@ return {
 
       vim.cmd.colorscheme("vscode")
 
-      -- csv-column-color
-      local csv_colors = {
-        "#FFFFFF", -- Col0
-        "#569CD6", -- Col1
-        "#DCDCAA", -- Col2
-        "#6A9955", -- Col3
-        "#CE9178", -- Col4
-        "#9CDCFE", -- Col5
-        "#4EC9B0", -- Col7
-        "#C586C0", -- Col8
-        "#808080", -- Col9
-        "#F44747", -- Col9
-      }
-
-      for i, col in ipairs(csv_colors) do
-        local group = "CsvViewCol" .. (i - 1)
-        vim.api.nvim_set_hl(0, group, { fg = col })
-      end
-
       vim.cmd([[
           "highlight Normal guibg=NONE ctermbg=NONE
           "highlight NormalNC guibg=NONE ctermbg=NONE

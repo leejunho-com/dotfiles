@@ -25,6 +25,13 @@ return {
         jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
       },
     },
+
+    -- SPACE-t(table) to toggle
+    keys = {
+      { "<leader>t", "<cmd>CsvViewToggle<cr>", desc = "Toggle CSV View" },
+    },
+
+    -- auto toggle
     cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
@@ -33,6 +40,27 @@ return {
           vim.cmd("CsvViewToggle")
         end,
       })
+    end,
+
+    -- column color from vscode dark
+    config = function()
+      local csv_colors = {
+        "#CCCCCC", -- Col0
+        "#569CD6", -- Col1
+        "#DCDCAA", -- Col2
+        "#6A9955", -- Col3
+        "#CE9178", -- Col4
+        "#9CDCFE", -- Col5
+        "#B5CEA8", -- Col6
+        "#4EC9B0", -- Col7
+        -- "#569CD6",
+        "#F44747", -- Col8
+      }
+
+      for i, col in ipairs(csv_colors) do
+        local group = "CsvViewCol" .. (i - 1)
+        vim.api.nvim_set_hl(0, group, { fg = col })
+      end
     end,
   },
 }
