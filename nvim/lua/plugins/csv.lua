@@ -31,19 +31,21 @@ return {
       { "<leader>t", "<cmd>CsvViewToggle<cr>", desc = "Toggle CSV View" },
     },
 
-    -- auto toggle
     cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+
+    -- auto toggle
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "csv" },
+        pattern = "csv",
         callback = function()
-          vim.cmd("CsvViewToggle")
+          vim.cmd("CsvViewEnable")
         end,
       })
     end,
 
-    -- column color from vscode dark
-    config = function()
+    config = function(_, opts)
+      require("csvview").setup(opts)
+      -- column color from vscode dark
       local csv_colors = {
         "#CCCCCC", -- Col0
         "#569CD6", -- Col1
