@@ -1892,7 +1892,7 @@ The script should do this: \(ai.prompt)</string>
 			<key>Title Components</key>
 			<integer>896</integer>
 			<key>Transparency</key>
-			<real>0.50052637411347523</real>
+			<real>0.5</real>
 			<key>Unicode Normalization</key>
 			<integer>1</integer>
 			<key>Unicode Version</key>
