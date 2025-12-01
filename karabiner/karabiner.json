@@ -75,7 +75,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -103,7 +104,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -135,7 +137,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -163,7 +166,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -212,7 +216,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -275,7 +280,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -304,7 +310,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -333,7 +340,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -362,7 +370,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.microsoft\\.VSCode$",
+                      "^net\\.kovidgoyal\\.kitty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
