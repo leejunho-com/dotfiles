@@ -110,8 +110,8 @@ alt - e             : open -a Messages
 alt + shift - e     : open -a KakaoTalk
 alt - r             : open -a "Adobe Photoshop 2026"
 alt + shift - t     : open -a Terminal
-alt - y             : yabai -m window --toggle float --grid 4:4:1:1:2:2 # toggle window float
-# u
+alt - y             : yabai -m window --toggle float --grid 10:10:1:1:8:8 # toggle window float
+alt - u             : skhd -k "cmd - tab"
 alt - i             : open -a Firefox
 alt - o             : open -a Obsidian
 alt - p             : open -a Passwords
@@ -122,14 +122,14 @@ alt - s             : open -a Safari
 alt + shift - s     : open -a "System Settings"
 alt - d             : open -a Discord
 # f emacs word forward
-alt + shift - f     : yabai -m space --focus 2 ; open ~/Desktop
+alt + shift - f     : yabai -m space --focus 1 ; open ~/Desktop
 alt - g             : open -a "Adobe Lightroom"
 alt - 0x029         : open -a iTerm # semicolon
-alt + shift - 0x029 : open -na kitty # colon
-ctrl - 0x027        : open -na kitty # single quote
+alt + shift - 0x029 : open -a kitty # colon
+ctrl - 0x027        : open -a kitty # single quote
 
 alt - z             : open -a iTerm
-alt + shift - z     : open -na kitty
+alt + shift - z     : open -a kitty
 # x is display switching
 alt - c             : open -a "Visual Studio Code"
 alt + shift - c     : open -a Calendar
@@ -137,5 +137,5 @@ alt - v             : open -a "Screen Sharing"
 alt + shift - v     : open -a Preview
 # b emacs word back
 alt + shift - b     : open -a Blender
-# n
+alt - n             : open -na kitty
 # m
