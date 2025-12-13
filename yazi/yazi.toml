@@ -19,57 +19,19 @@ photoshop = [
 unar = [
   { run = 'for rar in "$@"; do unar "$rar"; done', desc = "Extract with unar" },
 ]
+stolendata-mpv = [
+  { run = 'open -a mpv "$@"', desc = "stolendata-mpv"},
+]
 
 [open]
 prepend_rules = [
-  { name = "*.zip", use = [
-    "extract",
-    "reveal",
-  ] },
-  { name = "*.rar", use = [
-    "unar",
-    "reveal",
-  ] },
-  { name = "*.7z", use = [
-    "extract",
-    "reveal",
-  ] },
-  { name = "*.jpg", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.jpeg", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.png", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.bmp", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.tiff", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.tif", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.psd", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.webp", use = [
-    "photoshop",
-    "reveal",
-  ] },
-  { name = "*.ARW", use = [
-    "photoshop",
-    "reveal",
-  ] },
+  # archive
+  { name = "*.{zip,7z}", use = [ "extract", "stolendata-mpv", "reveal" ] },
+  { name = "*.rar",     use = [ "unar", "stolendata-mpv", "reveal" ] },
+  # image (photoshop)
+  { name = "*.{jpg,jpeg,png,bmp,tif,tiff,psd,webp,arw}", use = [ "photoshop", "stolendata-mpv", "reveal" ] },
+  # video
+  { name = "*.{3gp,avi,mkv,mp4,webm,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = "stolendata-mpv" },
 ]
 
 [tasks]
