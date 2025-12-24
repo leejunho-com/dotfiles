@@ -141,7 +141,7 @@ function __icon_map() {
   "BluOS Controller")
     icon_result=":bluos_controller:"
     ;;
-  "Books" | "Calibre" | "Bücher")
+  "Books" | "Calibre" | "Bücher" | "Font Book")
     icon_result=":book:"
     ;;
   "Brain.fm")
@@ -361,7 +361,7 @@ function __icon_map() {
     icon_result=":finder:"
     ;;
   "Firefox")
-    icon_result=":firefox:"
+    icon_result=":firefox_developer_edition:"
     ;;
   "Firefox Developer Edition" | "Firefox Nightly")
     icon_result=":firefox_developer_edition:"
@@ -506,9 +506,6 @@ function __icon_map() {
     ;;
   "Iris")
     icon_result=":iris:"
-    ;;
-  "iTerm" | "iTerm2")
-    icon_result=":iterm:"
     ;;
   "Product Portal" | "iZotope RX 9" | "iZotope RX 10" | "iZotope RX 11" | "iZotope RX 12" | "iZotope Ozone 9" | "iZotope Ozone 10" | "iZotope Ozone 11" | "iZotope Ozone 12")
     icon_result=":izotope:"
@@ -1062,7 +1059,7 @@ function __icon_map() {
   "Telegram")
     icon_result=":telegram:"
     ;;
-  "Terminal" | "终端" | "ターミナル")
+  "iTerm" | "iTerm2" | "Terminal" | "终端" | "ターミナル")
     icon_result=":terminal:"
     ;;
   "Termius")
