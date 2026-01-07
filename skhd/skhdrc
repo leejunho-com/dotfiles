@@ -103,7 +103,7 @@ alt + shift - 0 : yabai -m window --space 20;
 # alt + ctrl - r : brew services restart yabai
 
 # app shortcut
-alt - q             : open -na kitty --args nvim "$HOME/tmp/note_$(date +%Y-%m-%d_%H-%M-%S).md"
+alt - q             : open -na kitty --args nvim "$HOME/Documents/quick-note/note_$(date +%Y-%m-%d_%H-%M-%S).md"
 alt - w             : open -a Firefox
 alt + shift - w     : open -a "Parallels Desktop"
 alt - e             : open -a Messages
@@ -126,7 +126,7 @@ alt + shift - f     : yabai -m space --focus 1 ; open ~/Desktop
 alt - g             : open -a "Adobe Lightroom"
 alt - 0x029         : open -a iTerm # semicolon
 alt + shift - 0x029 : open -a kitty # colon
-ctrl - 0x027        : open -a kitty # single quote
+# ctrl - 0x027        : open -a kitty # single quote
 
 alt - z             : open -a iTerm
 alt + shift - z     : open -a kitty
