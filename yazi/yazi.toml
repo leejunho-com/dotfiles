@@ -26,12 +26,14 @@ stolendata-mpv = [
 [open]
 prepend_rules = [
   # archive
-  { name = "*.{zip,7z}", use = [ "extract", "stolendata-mpv", "reveal" ] },
-  { name = "*.rar",      use = [ "unar", "stolendata-mpv", "reveal" ] },
+  { url = "*.{zip,7z}", use = [ "extract", "stolendata-mpv", "reveal" ] },
+  { url = "*.rar",      use = [ "unar", "stolendata-mpv", "reveal" ] },
   # image
-  { name = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw}", use = [ "stolendata-mpv", "photoshop", "reveal" ] },
+  { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw}", use = [ "stolendata-mpv", "photoshop", "reveal" ] },
   # video
-  { name = "*.{3gp,avi,mkv,mp4,webm,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "stolendata-mpv", "reveal" ] },
+  { url = "*.{3gp,avi,mkv,mp4,webm,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "stolendata-mpv", "reveal" ] },
+  # other
+  { url = "*.smi", use = [ "edit" ] }
 ]
 
 [tasks]
