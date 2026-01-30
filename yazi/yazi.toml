@@ -31,7 +31,7 @@ prepend_rules = [
   # image
   { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw}", use = [ "stolendata-mpv", "photoshop", "reveal" ] },
   # video
-  { url = "*.{3gp,avi,mkv,mp4,webm,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "stolendata-mpv", "reveal" ] },
+  { url = "*.{3gp,avi,mkv,mp4,webm,mov,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "stolendata-mpv", "reveal" ] },
   # other
   { url = "*.smi", use = [ "edit" ] }
 ]
