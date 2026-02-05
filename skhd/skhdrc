@@ -114,7 +114,8 @@ alt - y             : yabai -m window --toggle float --grid 10:10:1:1:8:8 # togg
 alt - u             : skhd -k "cmd - tab"
 alt - i             : open -a Firefox
 alt - o             : open -a Obsidian
-alt - p             : open -a Passwords
+alt - p             : open -a "Proton Pass"
+alt +shift - p      : open -a Passwords
 
 alt - a             : open -a ChatGPT
 alt + shift - a     : open -a anki
