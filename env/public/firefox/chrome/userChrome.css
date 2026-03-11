@@ -1,7 +1,7 @@
-/* Remove close button*/ 
-.titlebar-buttonbox-container{
-  display:none
-} 
+/* Remove close button*/
+.titlebar-buttonbox-container {
+  display: none
+}
 
 /* Hide Tab Close buttons */
 .tabbrowser-tab .tab-close-button {
@@ -12,20 +12,14 @@
 :root {
   --tab-toolbar-navbar-overlap: 0px !important;
   --tab-min-height: 25px !important;
- }
-
- :root #tabbrowser-tabs {
-  --tab-min-height: 25px !important;
- }
- #TabsToolbar {height: var(--tab-min-height) !important;}
-
-/* url bar height */
-#nav-bar {
-min-height: 30px !important;
 }
 
-#urlbar, #searchbar {    
-min-height: 25px !important;
+:root #tabbrowser-tabs {
+  --tab-min-height: 25px !important;
+}
+
+#TabsToolbar {
+  height: var(--tab-min-height) !important;
 }
 
 /* no space besides tabbar */
