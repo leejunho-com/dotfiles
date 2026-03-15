@@ -13,6 +13,7 @@ plugins=(git)
 # Homebrew
 # apple sillicon
 # /opt/homebrew/share/
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 # intel
 # /usr/local/share/
 
