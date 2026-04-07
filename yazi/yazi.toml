@@ -29,7 +29,7 @@ prepend_rules = [
   { url = "*.{zip,7z}", use = [ "extract", "stolendata-mpv", "reveal" ] },
   { url = "*.rar",      use = [ "unar", "stolendata-mpv", "reveal" ] },
   # image
-  { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw}", use = [ "stolendata-mpv", "photoshop", "reveal" ] },
+  { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw,dng}", use = [ "stolendata-mpv", "photoshop", "open", "reveal" ] },
   # video
   { url = "*.{3gp,avi,mkv,mp4,webm,mov,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "stolendata-mpv", "reveal" ] },
   # other
