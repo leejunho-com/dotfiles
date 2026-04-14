@@ -117,7 +117,7 @@ alt - o             : open -a Obsidian
 alt - p             : open -a "Proton Pass"
 alt +shift - p      : open -a Passwords
 
-alt - a             : open -a ChatGPT
+alt - a             : open -a Claude
 alt + shift - a     : open -a anki
 alt - s             : open -a Safari
 alt + shift - s     : open -a "System Settings"
