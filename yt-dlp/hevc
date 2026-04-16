@@ -1,0 +1,6 @@
+-f bestvideo+bestaudio/best
+--merge-output-format mp4
+# ffmpeg로 H.265 변환
+# -crf: 품질 (18=고품질/파일큼, 28=적당, 35=저품질/파일작음)
+# -preset: 인코딩 속도 (slow=고압축, medium=균형, fast=빠름)
+--postprocessor-args "ffmpeg:-vcodec libx265 -crf 24 -preset medium -acodec aac -b:a 192k"
