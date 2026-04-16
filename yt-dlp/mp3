@@ -1,0 +1,6 @@
+--extract-audio
+--audio-format mp3
+# 0 = best
+--audio-quality 0
+--embed-thumbnail
+--embed-metadata
