@@ -1,0 +1,59 @@
+# ============================================================
+# Ghostty Config
+# Converted from kitty.conf + iTerm2 profile
+# ============================================================
+
+# ── Font ────────────────────────────────────────────────────
+font-family = D2CodingLigature Nerd Font
+font-size = 25
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = Bold Italic
+
+# ── Cursor ──────────────────────────────────────────────────
+cursor-style = block
+cursor-style-blink = true
+cursor-color = #a9e15d
+cursor-text = #000000
+cursor-invert-fg-bg = false
+
+# ── Window ──────────────────────────────────────────────────
+background-opacity = 0.5
+background-blur-radius = 10
+# window-decoration = none
+macos-titlebar-style = hidden
+# macos-titlebar-style = transparent
+window-padding-x = 5
+window-padding-y = 5
+quit-after-last-window-closed = true
+confirm-close-surface = true
+
+# ── Scrollback ──────────────────────────────────────────────
+scrollback-limit = 2000
+
+# ── Colors ──────────────────────────────────────────────────
+background             = #000000
+foreground             = #feffff
+selection-background   = #d58f3d
+selection-foreground   = #000000
+
+# Normal (0-7)
+palette = 0=#000000
+palette = 1=#c6341b
+palette = 2=#a9e15d
+palette = 3=#c9ae38
+palette = 4=#749fe7
+palette = 5=#83668b
+palette = 6=#46a4a8
+palette = 7=#cccccc
+
+# Bright (8-15)
+palette = 8=#808080
+palette = 9=#e15140
+palette = 10=#ccfd7e
+palette = 11=#f9eb77
+palette = 12=#588df6
+palette = 13=#b595b4
+palette = 14=#73e2e6
+palette = 15=#e1e1e1
