@@ -1,3 +1,4 @@
+# $ skhd -o : to view keycode
 # -- Changing Window Focus --
 
 # change window focus within space
@@ -125,7 +126,7 @@ alt - d             : open -a Discord
 # f emacs word forward
 alt + shift - f     : yabai -m space --focus 1 ; open ~/Desktop
 alt - g             : open -a "Adobe Lightroom"
-alt - 0x029         : open -a iTerm # semicolon
+alt - 0x029         : open -a ghostty # semicolon
 alt + shift - 0x029 : open -a kitty # colon
 # ctrl - 0x027        : open -a kitty # single quote
 
