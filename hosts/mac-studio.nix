@@ -1,6 +1,11 @@
 { user, pkgs, ... }:
 
 {
+  services.yabai = {
+    enable = true;
+    enableScriptingAddition = true;
+  };
+
   home-manager.users.${user}.home.packages = with pkgs; [
     transmission_4
   ];
