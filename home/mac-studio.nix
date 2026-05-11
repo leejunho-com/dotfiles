@@ -1,9 +1,5 @@
 { config, pkgs, user, ... }:
 
-let
-  dotfiles = "${config.home.homeDirectory}/code/dotfiles";
-  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
-in
 {
-  home.file.".config/transmission-daemon".source = link "transmission-daemon";
+  # transmission-daemon config managed separately (needs sops encryption)
 }
