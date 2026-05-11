@@ -189,15 +189,47 @@ darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
 
 ---
 
-## Applying Changes
+## Day-to-day Workflow
+
+### Editing dotfiles (zshrc, ghostty, nvim, etc.)
+
+Just edit the file directly in the repo — no rebuild needed.
+Config files are symlinked into `~/.config/`, so changes reflect immediately.
 
 ```bash
-# Full system rebuild (nix-darwin)
-darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
-
-# User packages / dotfiles only (faster)
-home-manager switch --flake ~/code/dotfiles#<hostname>
+nvim ~/code/dotfiles/zsh/zshrc       # edit and save — done
+nvim ~/code/dotfiles/ghostty/config  # same
 ```
+
+### Adding / removing packages
+
+Edit `home/common.nix` or a host-specific file, then rebuild:
+
+```bash
+git add .
+darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
+```
+
+### Changing system settings
+
+Edit `hosts/common.nix` or `hosts/<hostname>.nix`, then rebuild:
+
+```bash
+git add .
+darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
+```
+
+> `git add` is required before every rebuild — Nix flakes only read tracked files.
+> `git commit` is optional but recommended to keep history clean.
+
+### Summary
+
+| Change | Rebuild needed? |
+|--------|----------------|
+| Edit zshrc, ghostty, nvim, etc. | No |
+| Add / remove packages | Yes |
+| Change system settings | Yes |
+| Add a new symlink | Yes |
 
 ---
 
