@@ -16,6 +16,8 @@
     NSGlobalDomain.AppleInterfaceStyle = "Dark";
   };
 
+  system.primaryUser = user;
+
   # Used for backwards compatibility — do not change
   system.stateVersion = 5;
 
