@@ -31,8 +31,11 @@ in
     neovim delta lazygit gh
   ];
 
-  # dotfiles → ~/.config/ symlinks
+  # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
+    ".zshrc".source         = link "zsh/zshrc";
+    ".p10k.zsh".source      = link "zsh/p10k.zsh";
+    ".vimrc".source         = link "vim/vimrc";
     ".config/nvim".source   = link "nvim";
     ".config/yazi".source   = link "yazi";
     ".config/mpv".source    = link "mpv";
