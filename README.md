@@ -35,9 +35,10 @@ Manages launchd services, system fonts, sudo rules, etc. The macOS equivalent of
 
 ```
 home/common.nix       ← packages + dotfile symlinks for every machine
-home/darwin.nix       ← macOS-only additions (ghostty, yabai, sketchybar…)
-hosts/common.nix      ← macOS system config shared by all Macs
-hosts/mac-studio.nix  ← Mac Studio only (transmission, launchd service)
+home/darwin.nix       ← macOS-only symlinks (ghostty, yabai, sketchybar…)
+home/<hostname>.nix   ← machine-specific home config (optional)
+hosts/common.nix      ← macOS system config + skhd service (all Macs)
+hosts/mac-studio.nix  ← Mac Studio only (yabai scripting addition, transmission)
 ```
 
 `flake.nix` wires up which modules each hostname gets. Adding a new machine = one new entry in `flake.nix`.
@@ -67,9 +68,11 @@ dotfiles/
 │   └── private.yaml
 │
 ├── env/
-│   ├── public/                  # zshrc, p10k, vimrc, firefox
 │   └── private/                 # private nested repo (gitignored)
 │
+├── zsh/                         # → ~/.zshrc, ~/.p10k.zsh
+├── vim/                         # → ~/.vimrc
+├── firefox/                     # userChrome.css, userContent.css
 ├── ghostty/                     # → ~/.config/ghostty
 ├── nvim/                        # → ~/.config/nvim
 ├── tmux/                        # → ~/.config/tmux
@@ -132,12 +135,20 @@ uname -m
 # x86_64 → x86_64-darwin   (Intel)
 ```
 
+**Before bootstrapping** — rename any conflicting files if they exist:
+
+```bash
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+sudo mv /etc/sudoers.d/yabai /etc/sudoers.d/yabai.before-nix-darwin  # if exists
+```
+
 **First-time bootstrap** (installs nix-darwin):
 
 ```bash
 cd ~/code/dotfiles
 git add -A && git commit -m "init"   # flake requires committed files
-nix run nix-darwin -- switch --flake ~/code/dotfiles#<hostname>
+sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#<hostname>
 ```
 
 Replace `<hostname>` with the value from `scutil --get LocalHostName`.
@@ -145,10 +156,11 @@ Replace `<hostname>` with the value from `scutil --get LocalHostName`.
 **After that, apply changes with:**
 
 ```bash
+git add .
 darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
 ```
 
-> Nix flakes only read files tracked by git. Always commit (or at least `git add`) before rebuilding.
+> Nix flakes only read files tracked by git. Always `git add` before rebuilding.
 
 **Verify it worked:**
 
