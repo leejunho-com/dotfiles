@@ -29,6 +29,7 @@
         {
           system,
           extraModules ? [ ],
+          homeModules ? [ ],
         }:
         nix-darwin.lib.darwinSystem {
           inherit system;
@@ -44,7 +45,7 @@
                 imports = [
                   ./home/common.nix
                   ./home/darwin.nix
-                ];
+                ] ++ homeModules;
                 home.stateVersion = "25.11";
               };
             }
@@ -58,6 +59,7 @@
         "mac-studio" = mkDarwin {
           system = "aarch64-darwin";
           extraModules = [ ./hosts/mac-studio.nix ];
+          homeModules = [ ./home/mac-studio.nix ];
         };
 
         # MacBook example (no extraModules = common only)
