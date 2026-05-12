@@ -57,29 +57,16 @@
       mkLinux =
         {
           system,
-          extraModules ? [ ],
           homeModules ? [ ],
         }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit user; };
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = { inherit user; };
           modules = [
-            ./hosts/common.nix
-            ./hosts/linux
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit user; };
-              home-manager.users.${user} = {
-                imports = [
-                  ./home/common.nix
-                  ./home/linux
-                ] ++ homeModules;
-                home.stateVersion = "25.11";
-              };
-            }
-          ] ++ extraModules;
+            ./home/common.nix
+            ./home/linux
+            { home.stateVersion = "25.11"; }
+          ] ++ homeModules;
         };
     in
     {
@@ -103,11 +90,10 @@
         # };
       };
 
-      nixosConfigurations = {
-        # Linux/WSL example
-        # "my-linux" = mkLinux {
-        #   system = "x86_64-linux";
-        # };
+      # Standalone home-manager for non-NixOS Linux (Rocky, Fedora, WSL Ubuntu, etc.)
+      # Apply with: home-manager switch --flake ~/code/dotfiles#<hostname>
+      homeConfigurations = {
+        # "my-hostname" = mkLinux { system = "x86_64-linux"; };
       };
     };
 }

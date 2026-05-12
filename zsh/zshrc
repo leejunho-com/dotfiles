@@ -128,6 +128,9 @@ function yy() {
 # nvim
 alias vi="nvim"
 
+# dotfiles
+alias load="bash ~/code/dotfiles/load.sh"
+
 # load custom env
 _PRIVATE=~/.config/private
 _HOSTNAME=${HOST%%.*}

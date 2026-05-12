@@ -6,7 +6,7 @@ let
 in
 {
   home.username = user;
-  home.homeDirectory = "/Users/${user}";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 
   home.packages = with pkgs; [
     # essential
