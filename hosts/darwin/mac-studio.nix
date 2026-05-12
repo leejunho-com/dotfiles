@@ -1,6 +1,9 @@
 { user, pkgs, ... }:
 
 {
+  services.sketchybar.enable = true;
+  services.jankyborders.enable = true;
+
   services.yabai = {
     enable = true;
     enableScriptingAddition = true;

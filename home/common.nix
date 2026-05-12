@@ -23,17 +23,35 @@ in
 
     # ricing
     fastfetch figlet lolcat cmatrix
-    zsh-autosuggestions zsh-syntax-highlighting
-    zsh-powerlevel10k asciinema asciinema-agg
+    asciinema asciinema-agg ascii-image-converter
 
     # dev
     nodejs
     neovim delta lazygit gh
   ];
 
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      styles = { comment = "fg=#F37021"; };
+    };
+    plugins = [{
+      name = "powerlevel10k";
+      src  = pkgs.zsh-powerlevel10k;
+      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    }];
+    initContent = ''
+      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      fi
+      source ${dotfiles}/zsh/zshrc
+    '';
+  };
+
   # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
-    ".zshrc".source         = link "zsh/zshrc";
     ".p10k.zsh".source      = link "zsh/p10k.zsh";
     ".vimrc".source         = link "vim/vimrc";
     ".config/nvim".source   = link "nvim";

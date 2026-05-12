@@ -7,43 +7,100 @@ Supports macOS (Apple Silicon & Intel) with Linux/WSL planned.
 
 ---
 
-## Why Nix?
+## Quick Start
 
-| | Homebrew | Nix |
-|---|---|---|
-| Reproducibility | Partial | Exact — same hash = same binary |
-| Rollback | Manual | Built-in generations |
-| Multi-machine | Brewfile sync | Declarative, version-locked |
-| dotfile management | Manual symlinks | Home Manager |
+### 1. Install Nix
 
-Every package is installed into `/nix/store/<hash>-<name>/` — isolated, no conflicts, fully reproducible across machines.
+```bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+Restart your terminal, then verify:
+
+```bash
+nix --version
+```
+
+### 2. Clone
+
+```bash
+git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+```
+
+### 3. Bootstrap (first time only)
+
+Rename conflicting files if they exist:
+
+```bash
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+sudo mv /etc/sudoers.d/yabai /etc/sudoers.d/yabai.before-nix-darwin  # if exists
+```
+
+Check your hostname — this is the key used in `flake.nix`:
+
+```bash
+scutil --get LocalHostName
+```
+
+Run the bootstrap (installs nix-darwin):
+
+```bash
+cd ~/code/dotfiles
+git add -A && git commit -m "init"
+sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#<hostname>
+```
+
+### 4. Apply changes (day-to-day)
+
+```bash
+git add .
+darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
+```
+
+> Nix flakes only read git-tracked files. Always `git add` before rebuilding.
 
 ---
 
-## Core Concepts
+## Day-to-day Workflow
 
-**Flakes** — `flake.nix` + `flake.lock`. Think `package.json` + `package-lock.json`.
-Pins every dependency to an exact version. Guarantees identical output on any machine.
+| Change | Command |
+|--------|---------|
+| Edit zshrc, ghostty, nvim, etc. | Just save — symlinked, no rebuild needed |
+| Add / remove packages | Edit `home/common.nix` → rebuild |
+| Change system settings | Edit `hosts/darwin/default.nix` → rebuild |
+| Machine-specific changes | Edit `hosts/darwin/<hostname>.nix` → rebuild |
 
-**Home Manager** — Declarative user-level package and dotfile management.
-Declare what you want in `home/common.nix`, run one command, done. Adding/removing packages is just editing a list.
+---
 
-**nix-darwin** — macOS system-level config as code.
-Manages launchd services, system fonts, sudo rules, etc. The macOS equivalent of NixOS.
+## Adding a New Machine
 
-**Per-machine layering** — machines share a common base and add only what they need:
+1. Get the hostname:
 
+```bash
+scutil --get LocalHostName   # macOS
+hostname                     # Linux
 ```
-home/common.nix       ← packages + dotfile symlinks for every machine
-home/darwin.nix       ← macOS-only symlinks (ghostty, yabai, sketchybar…)
-home/<hostname>.nix   ← machine-specific home config (optional)
-hosts/common.nix      ← macOS system config + skhd service (all Macs)
-hosts/mac-studio.nix  ← Mac Studio only (yabai scripting addition, transmission)
+
+2. Add an entry to `flake.nix`:
+
+```nix
+"your-hostname" = mkDarwin {
+  system = "aarch64-darwin";  # or x86_64-darwin for Intel
+  # extraModules = [ ./hosts/darwin/your-hostname.nix ];  # optional
+  # homeModules  = [ ./home/darwin/your-hostname.nix ];   # optional
+};
 ```
 
-`flake.nix` wires up which modules each hostname gets. Adding a new machine = one new entry in `flake.nix`.
+3. Bootstrap or rebuild:
 
-**Dotfile management** — config files live directly in this repo and are symlinked into `~/.config/` via `mkOutOfStoreSymlink`. Edit files in the repo directly; changes reflect immediately without rebuilding.
+```bash
+# First time on this machine:
+sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#your-hostname
+
+# After that:
+darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
+```
 
 ---
 
@@ -55,22 +112,25 @@ dotfiles/
 ├── flake.lock                   # Pinned dependency versions (commit this)
 │
 ├── home/                        # Home Manager — user-level
-│   ├── common.nix               # Packages + symlinks for every machine
-│   ├── darwin.nix               # macOS-only symlinks (ghostty, yabai…)
-│   └── linux.nix                # Linux user config (planned)
+│   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
+│   ├── darwin/
+│   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
+│   │   └── mac-studio.nix       # Mac Studio specific home config
+│   └── linux/
+│       └── default.nix          # Linux user config (planned)
 │
-├── hosts/                       # nix-darwin — system-level
-│   ├── common.nix               # macOS system config shared by all Macs
-│   ├── mac-studio.nix           # Mac Studio specific (transmission, launchd)
-│   └── <hostname>.nix           # Add per-machine overrides here
+├── hosts/                       # nix-darwin / NixOS — system-level
+│   ├── common.nix               # Platform-agnostic: nix.settings, nixpkgs.config
+│   ├── darwin/
+│   │   ├── default.nix          # All Macs: system.defaults, skhd, users
+│   │   └── mac-studio.nix       # Mac Studio: yabai, sketchybar, jankyborders, transmission
+│   └── linux/
+│       └── default.nix          # Linux: stateVersion, users (planned)
 │
-├── secrets/                     # sops-encrypted secrets — safe to commit
-│   └── private.yaml
+├── secrets/                     # sops-encrypted secrets (safe to commit)
+├── env/private/                 # Private nested repo (gitignored)
 │
-├── env/
-│   └── private/                 # private nested repo (gitignored)
-│
-├── zsh/                         # → ~/.zshrc, ~/.p10k.zsh
+├── zsh/                         # sourced via programs.zsh.initContent
 ├── vim/                         # → ~/.vimrc
 ├── firefox/                     # userChrome.css, userContent.css
 ├── ghostty/                     # → ~/.config/ghostty
@@ -86,171 +146,50 @@ dotfiles/
 
 ---
 
-## Installation
-
-### 1. Install Nix
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-```
-
-> Uses the [Determinate Systems installer](https://github.com/DeterminateSystems/nix-installer) — enables flakes by default and supports clean uninstall.
-
-Restart your terminal, or source the daemon manually:
-
-```bash
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-```
-
-Verify:
-
-```bash
-nix --version
-```
-
----
-
-### 2. Clone this repo
-
-```bash
-git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
-cd ~/code/dotfiles
-```
-
----
-
-### 3. macOS
-
-**Check your hostname** — this is the key used in `flake.nix`:
-
-```bash
-scutil --get LocalHostName
-```
-
-**Check your architecture** — needed when adding a new machine entry:
-
-```bash
-uname -m
-# arm64  → aarch64-darwin  (Apple Silicon)
-# x86_64 → x86_64-darwin   (Intel)
-```
-
-**Before bootstrapping** — rename any conflicting files if they exist:
-
-```bash
-sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
-sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
-sudo mv /etc/sudoers.d/yabai /etc/sudoers.d/yabai.before-nix-darwin  # if exists
-```
-
-**First-time bootstrap** (installs nix-darwin):
-
-```bash
-cd ~/code/dotfiles
-git add -A && git commit -m "init"   # flake requires committed files
-sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#<hostname>
-```
-
-Replace `<hostname>` with the value from `scutil --get LocalHostName`.
-
-**After that, apply changes with:**
-
-```bash
-git add .
-darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
-```
-
-> Nix flakes only read files tracked by git. Always `git add` before rebuilding.
-
-**Verify it worked:**
-
-```bash
-which bat
-# Expected: /run/current-system/sw/bin/bat
-```
-
----
-
-### 4. Linux / WSL
-
-> Work in progress. Home Manager standalone will be used.
-
-```bash
-nix run home-manager/master -- switch --flake ~/code/dotfiles#<hostname>
-```
-
----
-
-## Adding a New Machine
-
-1. Get the hostname: `scutil --get LocalHostName` (macOS) or `hostname` (Linux)
-2. Add an entry to `flake.nix`:
-
-```nix
-"your-hostname" = mkDarwin {
-  system = "aarch64-darwin";  # or x86_64-darwin for Intel
-  # extraModules = [ ./hosts/your-hostname.nix ];  # optional, if machine-specific config needed
-};
-```
-
-3. Run:
-
-```bash
-darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
-```
-
----
-
-## Day-to-day Workflow
-
-### Editing dotfiles (zshrc, ghostty, nvim, etc.)
-
-Just edit the file directly in the repo — no rebuild needed.
-Config files are symlinked into `~/.config/`, so changes reflect immediately.
-
-```bash
-nvim ~/code/dotfiles/zsh/zshrc       # edit and save — done
-nvim ~/code/dotfiles/ghostty/config  # same
-```
-
-### Adding / removing packages
-
-Edit `home/common.nix` or a host-specific file, then rebuild:
-
-```bash
-git add .
-darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
-```
-
-### Changing system settings
-
-Edit `hosts/common.nix` or `hosts/<hostname>.nix`, then rebuild:
-
-```bash
-git add .
-darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
-```
-
-> `git add` is required before every rebuild — Nix flakes only read tracked files.
-> `git commit` is optional but recommended to keep history clean.
-
-### Summary
-
-| Change | Rebuild needed? |
-|--------|----------------|
-| Edit zshrc, ghostty, nvim, etc. | No |
-| Add / remove packages | Yes |
-| Change system settings | Yes |
-| Add a new symlink | Yes |
-
----
-
 ## Firefox
 
-### about:config
+Enable custom CSS in `about:config`:
 
 | Key | Value |
-|---|---|
+|-----|-------|
 | `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` |
 | `widget.macos.titlebar-blend-mode.behind-window` | `true` |
 | `browser.theme.native-theme` | `true` |
+
+---
+
+## Why Nix?
+
+| | Homebrew | Nix |
+|--|----------|-----|
+| Reproducibility | Partial | Exact — same hash = same binary |
+| Rollback | Manual | Built-in generations |
+| Multi-machine | Brewfile sync | Declarative, version-locked |
+| dotfile management | Manual symlinks | Home Manager |
+
+Every package is installed into `/nix/store/<hash>-<name>/` — isolated, no conflicts, fully reproducible across machines.
+
+---
+
+## Core Concepts
+
+**Flakes** — `flake.nix` + `flake.lock`. Think `package.json` + `package-lock.json`. Pins every dependency to an exact version.
+
+**Home Manager** — Declarative user-level package and dotfile management. Declare what you want in `home/common.nix`, rebuild once, done.
+
+**nix-darwin** — macOS system-level config as code. Manages launchd services, system defaults, etc. The macOS equivalent of NixOS.
+
+**Per-machine layering** — machines share a common base and add only what they need:
+
+```
+hosts/common.nix           ← nix settings (all platforms)
+hosts/darwin/default.nix   ← system defaults, skhd (all Macs)
+hosts/darwin/<hostname>.nix ← machine-specific services
+home/common.nix            ← packages + zsh + symlinks (all machines)
+home/darwin/default.nix    ← macOS-only packages + symlinks
+home/darwin/<hostname>.nix ← machine-specific home config
+```
+
+**Dotfile management** — config files live in this repo and are symlinked into `~/.config/` via `mkOutOfStoreSymlink`. Edit files directly; changes reflect immediately without rebuilding.
+
+**zsh plugins** — managed via `programs.zsh` in Home Manager (powerlevel10k, autosuggestions, syntaxHighlighting). The `zsh/zshrc` file is sourced via `initContent` — edit it directly, no rebuild needed.

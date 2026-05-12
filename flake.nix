@@ -36,6 +36,7 @@
           specialArgs = { inherit user; };
           modules = [
             ./hosts/common.nix
+            ./hosts/darwin
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -44,7 +45,35 @@
               home-manager.users.${user} = {
                 imports = [
                   ./home/common.nix
-                  ./home/darwin.nix
+                  ./home/darwin
+                ] ++ homeModules;
+                home.stateVersion = "25.11";
+              };
+            }
+          ] ++ extraModules;
+        };
+
+      mkLinux =
+        {
+          system,
+          extraModules ? [ ],
+          homeModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit user; };
+          modules = [
+            ./hosts/common.nix
+            ./hosts/linux
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit user; };
+              home-manager.users.${user} = {
+                imports = [
+                  ./home/common.nix
+                  ./home/linux
                 ] ++ homeModules;
                 home.stateVersion = "25.11";
               };
@@ -58,8 +87,8 @@
 
         "mac-studio" = mkDarwin {
           system = "aarch64-darwin";
-          extraModules = [ ./hosts/mac-studio.nix ];
-          homeModules = [ ./home/mac-studio.nix ];
+          extraModules = [ ./hosts/darwin/mac-studio.nix ];
+          homeModules = [ ./home/darwin/mac-studio.nix ];
         };
 
         # MacBook example (no extraModules = common only)
@@ -70,6 +99,13 @@
         # Intel Mac example
         # "Juns-MacBook-Intel" = mkDarwin {
         #   system = "x86_64-darwin";
+        # };
+      };
+
+      nixosConfigurations = {
+        # Linux/WSL example
+        # "my-linux" = mkLinux {
+        #   system = "x86_64-linux";
         # };
       };
     };

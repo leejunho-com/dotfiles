@@ -5,7 +5,7 @@ let
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in
 {
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [ darwin.trash ];
 
   # macOS-only dotfiles → ~/.config/ symlinks
   home.file = {
