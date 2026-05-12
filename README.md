@@ -127,12 +127,12 @@ dotfiles/
 │   └── linux/
 │       └── default.nix          # Linux: stateVersion, users (planned)
 │
-├── secrets/                     # sops-encrypted secrets (safe to commit)
-├── private/darwin/              # Private nested repo (gitignored)
+├── private/                     # Private nested repo (gitignored) → ~/.config/private
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
 ├── vim/                         # → ~/.vimrc
 ├── firefox/                     # userChrome.css, userContent.css
+├── fzf/                         # → ~/.config/fzf
 ├── ghostty/                     # → ~/.config/ghostty
 ├── nvim/                        # → ~/.config/nvim
 ├── tmux/                        # → ~/.config/tmux
@@ -141,7 +141,9 @@ dotfiles/
 ├── sketchybar/                  # → ~/.config/sketchybar
 ├── karabiner/                   # → ~/.config/karabiner
 ├── yazi/                        # → ~/.config/yazi
-└── mpv/                         # → ~/.config/mpv
+├── mpv/                         # → ~/.config/mpv
+├── pip/                         # → ~/.config/pip
+└── yt-dlp/                      # → ~/.config/yt-dlp
 ```
 
 ---
