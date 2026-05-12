@@ -4,12 +4,7 @@
 /private
 /tmux/plugins
 /incoming/log
-/btop
-/htop
-/NuGet
 /karabiner/automatic_backups
 /nvim/lazy-lock.json
 /nvim/lazyvim.json
 /nvim/.neoconf.json
-/asciinema/install-id
-/gh

@@ -15,5 +15,6 @@ in
     ".config/yabai".source      = link "yabai";
     ".config/karabiner".source  = link "karabiner";
     ".config/borders".source    = link "borders";
+    ".config/private".source   = link "private";
   };
 }
