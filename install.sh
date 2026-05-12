@@ -30,6 +30,11 @@ if [[ ! -d "$DOTFILES" ]]; then
   git clone https://github.com/leejunho-com/dotfiles.git "$DOTFILES"
 fi
 
+# ── nix.conf ─────────────────────────────────────────────────────────
+mkdir -p "$HOME/.config/nix"
+ln -sf "$DOTFILES/nix/nix.conf" "$HOME/.config/nix/nix.conf"
+info "Linked nix.conf"
+
 # ── Darwin ───────────────────────────────────────────────────────────
 if [[ "$PLATFORM" == "Darwin" ]]; then
   for f in /etc/bashrc /etc/zshrc; do
