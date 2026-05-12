@@ -17,10 +17,6 @@
   };
 
 
-  home-manager.users.${user}.home.packages = with pkgs; [
-    transmission_4
-  ];
-
   # transmission-daemon via launchd
   # nix-darwin has no services.transmission (NixOS/systemd only)
   # --foreground required: launchd detects daemon fork as crash-loop

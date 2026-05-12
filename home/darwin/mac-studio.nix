@@ -1,3 +1,7 @@
+{ pkgs, ... }:
+
 {
-  # transmission-daemon config managed separately (needs sops encryption)
+  home.packages = with pkgs; [
+    transmission_4
+  ];
 }
