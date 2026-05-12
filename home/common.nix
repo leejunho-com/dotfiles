@@ -59,6 +59,7 @@ in
     ".config/mpv".source    = link "mpv";
     ".config/tmux".source   = link "tmux";
     ".config/pip".source    = link "pip";
+    ".config/fzf".source    = link "fzf";
     ".config/yt-dlp".source = link "yt-dlp";
   };
 }
