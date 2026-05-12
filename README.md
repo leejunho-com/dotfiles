@@ -9,56 +9,28 @@ Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager �
 
 ## Quick Start
 
-### 1. Install Nix
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-```
-
-Restart your terminal, then verify:
-
-```bash
-nix --version
-```
-
-### 2. Clone
+### Bootstrap (first time)
 
 ```bash
 git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+bash ~/code/dotfiles/install.sh
 ```
 
-### 3. Bootstrap (first time only)
+`install.sh` handles everything automatically:
+- Installs Nix (if not present)
+- Clones the private config repo
+- Renames conflicting system files (macOS)
+- Bootstraps nix-darwin (macOS) or runs home-manager switch (Linux)
+- Installs TPM (tmux plugin manager)
 
-Rename conflicting files if they exist:
+Platform and hostname are auto-detected — no manual editing required.
 
-```bash
-sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
-sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
-sudo mv /etc/sudoers.d/yabai /etc/sudoers.d/yabai.before-nix-darwin  # if exists
-```
-
-Check your hostname — this is the key used in `flake.nix`:
-
-```bash
-scutil --get LocalHostName
-```
-
-Run the bootstrap (installs nix-darwin):
-
-```bash
-cd ~/code/dotfiles
-git add -A && git commit -m "init"
-sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#<hostname>
-```
-
-### 4. Apply changes (day-to-day)
+### Apply changes (day-to-day)
 
 ```bash
 git add .
-load   # alias for load.sh — auto-detects platform
+load   # alias for load.sh — auto-detects platform and hostname
 ```
-
-`load.sh` runs `sudo darwin-rebuild switch` on macOS or `home-manager switch` on Linux, with hostname auto-detected.
 
 > Nix flakes only read git-tracked files. Always `git add` before rebuilding.
 
@@ -77,16 +49,9 @@ load   # alias for load.sh — auto-detects platform
 
 ## Adding a New Machine
 
-### macOS
+1. Add an entry to `flake.nix`:
 
-1. Get the hostname:
-
-```bash
-scutil --get LocalHostName
-```
-
-2. Add an entry to `flake.nix` under `darwinConfigurations`:
-
+**macOS** — under `darwinConfigurations`:
 ```nix
 "your-hostname" = mkDarwin {
   system = "aarch64-darwin";  # or x86_64-darwin for Intel
@@ -95,40 +60,18 @@ scutil --get LocalHostName
 };
 ```
 
-3. Bootstrap or rebuild:
-
-```bash
-# First time on this machine:
-sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#your-hostname
-
-# After that:
-load   # or: sudo darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
-```
-
-### Linux (standalone Home Manager)
-
-No nix-darwin involved. Install Nix, then use Home Manager standalone.
-
-1. Install Nix (single-user or multi-user):
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-```
-
-2. Add an entry to `flake.nix` under `homeConfigurations`:
-
+**Linux** — under `homeConfigurations`:
 ```nix
-"your-username" = mkLinux {
+"your-hostname" = mkLinux {
   system = "x86_64-linux";
 };
 ```
 
-3. Apply:
+2. Run `install.sh` on the new machine — hostname is auto-detected:
 
 ```bash
-nix run home-manager -- switch --flake ~/code/dotfiles#your-username
-# After that:
-load   # or: home-manager switch --flake ~/code/dotfiles#your-username
+git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+bash ~/code/dotfiles/install.sh
 ```
 
 ---
@@ -139,7 +82,8 @@ load   # or: home-manager switch --flake ~/code/dotfiles#your-username
 dotfiles/
 ├── flake.nix                    # Entry point — defines all machines
 ├── flake.lock                   # Pinned dependency versions (commit this)
-├── load.sh                      # Rebuild script — auto-detects darwin/linux
+├── install.sh                   # Bootstrap script — first-time setup (auto-detects platform/hostname)
+├── load.sh                      # Rebuild script — day-to-day (auto-detects platform/hostname)
 │
 ├── home/                        # Home Manager — user-level
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
