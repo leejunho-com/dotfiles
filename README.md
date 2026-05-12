@@ -115,7 +115,12 @@ dotfiles/
 ├── yazi/                        # → ~/.config/yazi
 ├── mpv/                         # → ~/.config/mpv
 ├── pip/                         # → ~/.config/pip
-└── yt-dlp/                      # → ~/.config/yt-dlp
+├── yt-dlp/                      # → ~/.config/yt-dlp
+├── btop/                        # → ~/.config/btop
+├── git/                         # → ~/.config/git
+├── htop/                        # → ~/.config/htop
+├── incoming/                    # → ~/.config/incoming (HandBrake presets)
+└── PureRef/                     # → ~/.config/PureRef
 ```
 
 ---
