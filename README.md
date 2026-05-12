@@ -128,7 +128,7 @@ dotfiles/
 │       └── default.nix          # Linux: stateVersion, users (planned)
 │
 ├── secrets/                     # sops-encrypted secrets (safe to commit)
-├── env/private/                 # Private nested repo (gitignored)
+├── private/darwin/              # Private nested repo (gitignored)
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
 ├── vim/                         # → ~/.vimrc

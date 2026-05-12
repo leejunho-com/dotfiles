@@ -1,7 +1,7 @@
 .DS_Store
 *.log
 *.bak
-/env/private
+/private/darwin
 /tmux/plugins
 /incoming/log
 /btop
