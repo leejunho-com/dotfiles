@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
+DOTFILES="$HOME/code/dotfiles"
+
 if [[ "$(uname)" == "Darwin" ]]; then
-  sudo darwin-rebuild switch --flake ~/code/dotfiles#"$(scutil --get LocalHostName)"
+  sudo darwin-rebuild switch --flake "$DOTFILES#$(scutil --get LocalHostName)"
 else
-  home-manager switch --flake ~/code/dotfiles#"$(hostname -s)"
+  home-manager switch --flake "$DOTFILES#$(hostname -s)"
 fi
