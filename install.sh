@@ -30,16 +30,8 @@ if [[ ! -d "$DOTFILES" ]]; then
   git clone https://github.com/leejunho-com/dotfiles.git "$DOTFILES"
 fi
 
-# ── Private repo ──────────────────────────────────────────────────────
-if [[ ! -d "$DOTFILES/private" ]]; then
-  info "Cloning private repo..."
-  git clone git@github.com:leejunho-com/private.git "$DOTFILES/private" 2>/dev/null \
-    || git clone https://github.com/leejunho-com/private.git "$DOTFILES/private"
-fi
-
 # ── Darwin ───────────────────────────────────────────────────────────
 if [[ "$PLATFORM" == "Darwin" ]]; then
-  # Rename conflicting system files
   for f in /etc/bashrc /etc/zshrc; do
     [[ -f "$f" && ! -f "${f}.before-nix-darwin" ]] && sudo mv "$f" "${f}.before-nix-darwin" && warn "Renamed $f"
   done
@@ -62,6 +54,16 @@ else
   cd "$DOTFILES" && git add -A
   info "Running home-manager switch for $HOSTNAME..."
   nix --extra-experimental-features 'nix-command flakes' run home-manager -- switch --flake "$DOTFILES#$HOSTNAME"
+fi
+
+# ── Private repo (gh installed via nix above) ────────────────────────
+if [[ ! -d "$DOTFILES/private" ]]; then
+  if ! gh auth status &>/dev/null; then
+    info "GitHub authentication required for private repo..."
+    gh auth login
+  fi
+  info "Cloning private repo..."
+  gh repo clone leejunho-com/private "$DOTFILES/private"
 fi
 
 # ── TPM ──────────────────────────────────────────────────────────────
