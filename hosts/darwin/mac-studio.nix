@@ -37,6 +37,8 @@
       KeepAlive = true;
       StandardOutPath = "/Users/${user}/Library/Logs/transmission.log";
       StandardErrorPath = "/Users/${user}/Library/Logs/transmission.err";
+      SoftResourceLimits = { NumberOfFiles = 10240; };
+      HardResourceLimits = { NumberOfFiles = 10240; };
     };
   };
 }
