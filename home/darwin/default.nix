@@ -9,7 +9,6 @@ in
 
   # macOS-only dotfiles → ~/.config/ symlinks
   home.file = {
-    ".config/ghostty".source    = link "ghostty";
     ".config/sketchybar".source = link "sketchybar";
     ".config/skhd".source       = link "skhd";
     ".config/yabai".source      = link "yabai";

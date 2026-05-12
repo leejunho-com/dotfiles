@@ -18,9 +18,11 @@ bash ~/code/dotfiles/install.sh
 
 `install.sh` handles everything automatically:
 - Installs Nix (if not present)
-- Clones the private config repo
+- Clones the dotfiles repo
+- Links `nix/nix.conf` → `~/.config/nix/nix.conf` (required before rebuild)
 - Renames conflicting system files (macOS)
 - Bootstraps nix-darwin (macOS) or runs home-manager switch (Linux)
+- Clones the private config repo
 - Installs TPM (tmux plugin manager)
 
 Platform and hostname are auto-detected — no manual editing required.
@@ -100,12 +102,13 @@ dotfiles/
 │       └── mac-studio.nix       # Mac Studio: yabai, sketchybar, jankyborders, transmission launchd
 │
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
+├── nix/                         # nix.conf → ~/.config/nix/nix.conf (linked by install.sh)
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
 ├── vim/                         # → ~/.vimrc
 ├── firefox/                     # userChrome.css, userContent.css
 ├── fzf/                         # → ~/.config/fzf
-├── ghostty/                     # → ~/.config/ghostty
+├── ghostty/                     # → ~/.config/ghostty (all platforms)
 ├── nvim/                        # → ~/.config/nvim
 ├── tmux/                        # → ~/.config/tmux
 ├── yabai/                       # → ~/.config/yabai

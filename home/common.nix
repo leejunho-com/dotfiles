@@ -54,6 +54,7 @@ in
   home.file = {
     ".p10k.zsh".source      = link "zsh/p10k.zsh";
     ".vimrc".source         = link "vim/vimrc";
+    ".config/ghostty".source = link "ghostty";
     ".config/nvim".source   = link "nvim";
     ".config/yazi".source   = link "yazi";
     ".config/mpv".source    = link "mpv";
