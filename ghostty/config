@@ -2,7 +2,10 @@
 # Ghostty Config
 # Converted from kitty.conf + iTerm2 profile
 # ============================================================
-# Font
+# darwin
+macos-option-as-alt = true
+
+# font
 font-family = D2CodingLigature Nerd Font
 font-size = 25
 font-style = Regular
@@ -10,14 +13,14 @@ font-style-bold = Bold
 font-style-italic = Italic
 font-style-bold-italic = Bold Italic
 
-# Cursor
+# cursor
 cursor-style = block
 cursor-style-blink = true
 cursor-color = #a9e15d
 cursor-text = #000000
 cursor-invert-fg-bg = false
 
-# Window
+# window
 background-opacity = 0.5
 background-blur-radius = 10
 macos-titlebar-style = hidden
@@ -26,16 +29,16 @@ window-padding-y = 5
 quit-after-last-window-closed = true
 confirm-close-surface= always
 
-# Scrollback
+# scrollback
 scrollback-limit = 9999
 
-# Colors
+# colours
 background             = #000000
 foreground             = #feffff
 selection-background   = #d58f3d
 selection-foreground   = #000000
 
-# Normal (0-7)
+# normal (0-7)
 palette = 0=#000000
 palette = 1=#c6341b
 palette = 2=#a9e15d
@@ -45,7 +48,7 @@ palette = 5=#83668b
 palette = 6=#46a4a8
 palette = 7=#cccccc
 
-# Bright (8-15)
+# bright (8-15)
 palette = 8=#808080
 palette = 9=#e15140
 palette = 10=#ccfd7e
