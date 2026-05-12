@@ -3,7 +3,7 @@
 # dotfiles
 
 Cross-platform dotfiles managed with **Nix** + **Home Manager** + **nix-darwin**.
-Supports macOS (Apple Silicon & Intel) with Linux/WSL planned.
+Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager — Rocky, Fedora, Ubuntu, WSL).
 
 ---
 
@@ -55,8 +55,10 @@ sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- sw
 
 ```bash
 git add .
-darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
+load   # alias for load.sh — auto-detects platform
 ```
+
+`load.sh` runs `sudo darwin-rebuild switch` on macOS or `home-manager switch` on Linux, with hostname auto-detected.
 
 > Nix flakes only read git-tracked files. Always `git add` before rebuilding.
 
@@ -75,14 +77,15 @@ darwin-rebuild switch --flake ~/code/dotfiles#<hostname>
 
 ## Adding a New Machine
 
+### macOS
+
 1. Get the hostname:
 
 ```bash
-scutil --get LocalHostName   # macOS
-hostname                     # Linux
+scutil --get LocalHostName
 ```
 
-2. Add an entry to `flake.nix`:
+2. Add an entry to `flake.nix` under `darwinConfigurations`:
 
 ```nix
 "your-hostname" = mkDarwin {
@@ -99,7 +102,33 @@ hostname                     # Linux
 sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#your-hostname
 
 # After that:
-darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
+load   # or: sudo darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
+```
+
+### Linux (standalone Home Manager)
+
+No nix-darwin involved. Install Nix, then use Home Manager standalone.
+
+1. Install Nix (single-user or multi-user):
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+2. Add an entry to `flake.nix` under `homeConfigurations`:
+
+```nix
+"your-username" = mkLinux {
+  system = "x86_64-linux";
+};
+```
+
+3. Apply:
+
+```bash
+nix run home-manager -- switch --flake ~/code/dotfiles#your-username
+# After that:
+load   # or: home-manager switch --flake ~/code/dotfiles#your-username
 ```
 
 ---
@@ -110,6 +139,7 @@ darwin-rebuild switch --flake ~/code/dotfiles#your-hostname
 dotfiles/
 ├── flake.nix                    # Entry point — defines all machines
 ├── flake.lock                   # Pinned dependency versions (commit this)
+├── load.sh                      # Rebuild script — auto-detects darwin/linux
 │
 ├── home/                        # Home Manager — user-level
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
@@ -117,15 +147,15 @@ dotfiles/
 │   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
 │   │   └── mac-studio.nix       # Mac Studio specific home config
 │   └── linux/
-│       └── default.nix          # Linux user config (planned)
+│       └── default.nix          # Linux standalone HM (Rocky, Fedora, WSL Ubuntu, etc.)
 │
-├── hosts/                       # nix-darwin / NixOS — system-level
+├── hosts/                       # nix-darwin — system-level (darwin only)
 │   ├── common.nix               # Platform-agnostic: nix.settings, nixpkgs.config
 │   ├── darwin/
 │   │   ├── default.nix          # All Macs: system.defaults, skhd, users
 │   │   └── mac-studio.nix       # Mac Studio: yabai, sketchybar, jankyborders, transmission
 │   └── linux/
-│       └── default.nix          # Linux: stateVersion, users (planned)
+│       └── default.nix          # Not used — Linux uses standalone HM (no nix-darwin equivalent)
 │
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
 │
