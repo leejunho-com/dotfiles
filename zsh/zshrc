@@ -61,6 +61,8 @@ export FZF_DEFAULT_OPTS='
 
 source <(fzf --zsh)
 source ~/.config/fzf/fzf-git.sh/fzf-git.sh
+bindkey -r '\ec'
+bindkey '\ez' fzf-cd-widget
 
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"

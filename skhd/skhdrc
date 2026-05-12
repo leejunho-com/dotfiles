@@ -116,7 +116,7 @@ alt - u             : skhd -k "cmd - tab"
 alt - i             : open -a Firefox
 alt - o             : open -a Obsidian
 alt - p             : open -a "Proton Pass"
-alt +shift - p      : open -a Passwords
+alt + shift - p     : open -a Passwords
 
 alt - a             : open -a Claude
 alt + shift - a     : open -a anki
@@ -130,8 +130,11 @@ alt - 0x029         : open -a ghostty # semicolon
 alt + shift - 0x029 : open -na ghostty # colon
 # ctrl - 0x027        : open -a ghostty # single quote
 
-alt - z             : open -a ghostty
-alt + shift - z     : open -a iterm
+alt - z [
+ *                  : open -a ghostty
+ "ghostty"            ~      # fzf cd
+]
+# alt + shift - z     : open -a iterm
 # x is display switching
 alt - c             : open -a "Visual Studio Code"
 alt + shift - c     : open -a Calendar
