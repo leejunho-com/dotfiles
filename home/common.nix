@@ -60,6 +60,11 @@ in
     ".config/tmux".source   = link "tmux";
     ".config/pip".source    = link "pip";
     ".config/fzf".source    = link "fzf";
-    ".config/yt-dlp".source = link "yt-dlp";
+    ".config/yt-dlp".source  = link "yt-dlp";
+    ".config/btop".source    = link "btop";
+    ".config/git".source     = link "git";
+    ".config/htop".source    = link "htop";
+    ".config/incoming".source = link "incoming";
+    ".config/PureRef".source  = link "PureRef";
   };
 }
