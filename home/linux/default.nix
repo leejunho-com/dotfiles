@@ -6,4 +6,8 @@ let
 in
 {
   home.packages = with pkgs; [ ];
+
+  home.file = {
+    ".config/private".source = link "private";
+  };
 }
