@@ -125,6 +125,19 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+# clipboard (OSC 52 — works over SSH and tmux)
+function copy() {
+  if [[ -t 0 ]]; then
+    # argument mode: copy $*
+    printf "\033]52;c;$(printf "%s" "$*" | base64)\007"
+  else
+    # pipe mode: echo foo | copy
+    local data
+    data=$(cat)
+    printf "\033]52;c;$(printf "%s" "$data" | base64)\007"
+  fi
+}
+
 # nvim
 alias vi="nvim"
 
