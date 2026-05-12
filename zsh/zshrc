@@ -1,14 +1,11 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-plugins=(git)
-
-# Homebrew
-# apple sillicon
-# /opt/homebrew/share/
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-# intel
-# /usr/local/share/
+# Homebrew (darwin)
+if [[ "$OSTYPE" == darwin* ]]; then
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+  else
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  fi
+fi
 
 # env
 export LANG=en_US.UTF-8
@@ -22,7 +19,7 @@ zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
 # set -o
-setopt ignoreeof # C-d disale
+setopt ignoreeof # C-d disable
 setopt inc_append_history
 setopt share_history
 setopt hist_verify
@@ -31,7 +28,7 @@ setopt hist_find_no_dups
 setopt hist_reduce_blanks
 setopt hist_ignore_space
 setopt hist_save_no_dups
-setopt interactivecomments # allow commnent
+setopt interactivecomments # allow comment
 HISTSIZE=1000000 # session
 SAVEHIST=1000000 # disk
 
@@ -48,7 +45,6 @@ alias cd="z"
 
 # tmux unicode
 alias tmux='tmux -u'
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # eza
 alias ls="eza --icons=always"
@@ -93,7 +89,8 @@ export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1" }
+  fd --hidden --exclude .git . "$1"
+}
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
@@ -103,13 +100,18 @@ _fzf_compgen_dir() {
 # bat
 export BAT_THEME="Visual Studio Dark+"
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
+# rbenv (lazy)
+if [[ -d "$HOME/.rbenv" ]]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  rbenv() { unfunction rbenv; eval "$(command rbenv init - zsh)"; rbenv "$@"; }
+fi
 
-# pyenv setting
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+# pyenv (lazy)
+if [[ -d "$HOME/.pyenv" ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  path=("$PYENV_ROOT/bin" $path)
+  pyenv() { unfunction pyenv; eval "$(command pyenv init --path)"; eval "$(command pyenv init -)"; pyenv "$@"; }
+fi
 
 # yazi
 function yy() {
@@ -125,7 +127,18 @@ function yy() {
 alias vi="nvim"
 
 # load custom env
-source ~/.config/private/darwin/zsh.env
+_PRIVATE=~/.config/private
+_HOSTNAME=${HOST%%.*}
+
+[[ -d "$_PRIVATE/common/script" ]]        && path+=("$_PRIVATE/common/script")
+[[ -d "$_PRIVATE/darwin/script" ]]       && path+=("$_PRIVATE/darwin/script")
+[[ -d "$_PRIVATE/linux/script" ]]        && path+=("$_PRIVATE/linux/script")
+[[ -d "$_PRIVATE/$_HOSTNAME/script" ]]   && path+=("$_PRIVATE/$_HOSTNAME/script")
+
+source "$_PRIVATE/common/zsh.env"
+[[ -f "$_PRIVATE/darwin/zsh.env" ]]  && source "$_PRIVATE/darwin/zsh.env"
+[[ -f "$_PRIVATE/linux/zsh.env" ]]   && source "$_PRIVATE/linux/zsh.env"
+[[ -f "$_PRIVATE/$_HOSTNAME/zsh.env" ]] && source "$_PRIVATE/$_HOSTNAME/zsh.env"
 
 # discord webhook
 discord() {
