@@ -89,17 +89,15 @@ dotfiles/
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
 │   ├── darwin/
 │   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
-│   │   └── mac-studio.nix       # Mac Studio specific home config
+│   │   └── mac-studio.nix       # Mac Studio: transmission_4
 │   └── linux/
 │       └── default.nix          # Linux standalone HM (Rocky, Fedora, WSL Ubuntu, etc.)
 │
 ├── hosts/                       # nix-darwin — system-level (darwin only)
 │   ├── common.nix               # Platform-agnostic: nix.settings, nixpkgs.config
-│   ├── darwin/
-│   │   ├── default.nix          # All Macs: system.defaults, skhd, users
-│   │   └── mac-studio.nix       # Mac Studio: yabai, sketchybar, jankyborders, transmission
-│   └── linux/
-│       └── default.nix          # Not used — Linux uses standalone HM (no nix-darwin equivalent)
+│   └── darwin/
+│       ├── default.nix          # All Macs: system.defaults, skhd, users
+│       └── mac-studio.nix       # Mac Studio: yabai, sketchybar, jankyborders, transmission launchd
 │
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
 │
