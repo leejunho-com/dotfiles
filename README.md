@@ -139,15 +139,113 @@ dotfiles/
 
 ---
 
-## Firefox
+## Manual Setup
+
+Steps that cannot be automated by Nix — run once after bootstrapping.
+
+### Common
+
+#### Firefox
 
 Enable custom CSS in `about:config`:
 
 | Key | Value |
 |-----|-------|
 | `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` |
+| `browser.download.alwaysOpenPanel` | `false` |
+
+---
+
+### macOS
+
+#### System Integrity Protection
+
+Boot into Recovery Mode, then:
+
+```bash
+csrutil disable
+```
+
+#### Defaults
+
+```bash
+# Enable key repeat (disable press-and-hold accent popup)
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
+#### SSH
+
+`/etc/ssh/sshd_config`:
+
+```
+PubkeyAuthentication yes
+PasswordAuthentication no
+PermitEmptyPasswords no
+```
+
+#### System Preferences
+
+**Appearance**
+- Accent Color: Orange
+- Sidebar icon size: Large
+
+**Desktop & Dock**
+- Size: Small
+- Magnification: off
+- Automatically hide and show the Dock: on
+- Show Items on Desktop: none
+- Click wallpaper to reveal desktop: Only in Stage Manager
+- Mission Control → Automatically rearrange Spaces based on most recent use: off
+
+**Keyboard**
+- Key repeat rate: Fast
+- Delay until repeat: Short
+- Keyboard navigation: on
+- Mission Control → Switch to Desktop {1–n}: `ctrl + {1–n}`
+- Modifier Keys → Caps Lock: Control
+- Dictation → Shortcut: Press mic
+
+#### Firefox
+
+macOS-specific `about:config` keys (in addition to Common above):
+
+| Key | Value |
+|-----|-------|
 | `widget.macos.titlebar-blend-mode.behind-window` | `true` |
 | `browser.theme.native-theme` | `true` |
+
+#### Homebrew
+
+Nix manages CLI tools. Homebrew is kept for GUI apps only:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### Photoshop
+
+Restore settings:
+
+```bash
+# backup
+cp -r ~/Library/Preferences/"Adobe Photoshop 2025 Settings" /path/to/backup
+# restore
+sudo mv ./Adobe\ Photoshop\ 2025\ Settings ~/Library/Preferences/
+```
+
+#### Fonts
+
+Restore fonts:
+
+```bash
+rsync -avh /path/to/backup/Fonts/ ~/Library/Fonts/
+```
+
+---
+
+### Linux
+
+> TBD
 
 ---
 
