@@ -178,22 +178,10 @@ PermitEmptyPasswords no
 
 #### System Preferences
 
-**Appearance**
-- Accent Color: Orange
-- Sidebar icon size: Large
-
-**Desktop & Dock**
-- Size: Small
-- Magnification: off
-- Automatically hide and show the Dock: on
-- Show Items on Desktop: none
-- Click wallpaper to reveal desktop: Only in Stage Manager
-- Mission Control → Automatically rearrange Spaces based on most recent use: off
+> Most settings are managed via `system.defaults` in `hosts/darwin/default.nix`.
+> The following require manual configuration:
 
 **Keyboard**
-- Key repeat rate: Fast
-- Delay until repeat: Short
-- Keyboard navigation: on
 - Mission Control → Switch to Desktop {1–n}: `ctrl + {1–n}`
 - Modifier Keys → Caps Lock: Control
 - Dictation → Shortcut: Press mic
