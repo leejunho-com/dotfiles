@@ -15,7 +15,7 @@ Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager â€
 git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
 ```
 
-Edit `flake.nix` if your username differs from `leejunho`:
+Obviously the username is `leejunho` â€” update `flake.nix` if yours somehow differs:
 
 ```nix
 user = "your-username";
