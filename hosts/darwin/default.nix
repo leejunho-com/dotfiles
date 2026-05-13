@@ -4,13 +4,31 @@
   services.skhd.enable = true;
 
   system.defaults = {
-    dock.autohide = true;                               # hide dock automatically
-    finder.AppleShowAllExtensions = true;               # show all file extensions
-    # finder.QuitMenuItem = true;                       # allow quitting Finder via Cmd+Q
-    NSGlobalDomain.AppleInterfaceStyle = "Dark";        # dark mode
-    NSGlobalDomain.ApplePressAndHoldEnabled = false;    # enable key repeat (disable accent popup)
+    # Appearance
+    NSGlobalDomain.AppleInterfaceStyle = "Dark";                     # Appearance > Appearance: Dark
+    NSGlobalDomain.NSTableViewDefaultSizeMode = 3;                   # Appearance > Sidebar icon size: Large
+
+    # Desktop & Dock
+    dock.tilesize = 16;                                              # Desktop & Dock > Size: Small
+    dock.magnification = false;                                      # Desktop & Dock > Magnification: off
+    dock.autohide = true;                                            # Desktop & Dock > Automatically hide and show the Dock: on
+    dock.mru-spaces = false;                                         # Desktop & Dock > Mission Control > Automatically rearrange Spaces based on most recent use: off
+    finder.CreateDesktop = false;                                    # Desktop & Dock > Show Items on Desktop: none
+    WindowManager.EnableStandardClickToShowDesktop = false;          # Desktop & Dock > Click wallpaper to reveal desktop: Only in Stage Manager
+
+    # Finder
+    finder.AppleShowAllExtensions = true;                            # Finder > Show all filename extensions: on
+    # finder.QuitMenuItem = true;                                    # Finder > Quit Menu Item: on
+
+    # Keyboard
+    NSGlobalDomain.KeyRepeat = 2;                                    # Keyboard > Key repeat rate: Fast
+    NSGlobalDomain.InitialKeyRepeat = 15;                            # Keyboard > Delay until repeat: Short
+    NSGlobalDomain.AppleKeyboardUIMode = 3;                          # Keyboard > Keyboard navigation: on
+    NSGlobalDomain.ApplePressAndHoldEnabled = false;                 # Keyboard > Press & Hold: off (enables key repeat)
+
     CustomUserPreferences = {
-      "com.apple.desktopservices".DSDontWriteNetworkStores = true;  # no .DS_Store on network drives
+      "NSGlobalDomain".AppleAccentColor = 1;                         # Appearance > Accent Color: Orange
+      "com.apple.desktopservices".DSDontWriteNetworkStores = true;   # no .DS_Store on network drives
     };
   };
 
