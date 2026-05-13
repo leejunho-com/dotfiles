@@ -75,8 +75,13 @@
 
         "mac-studio" = mkDarwin {
           system = "aarch64-darwin";
-          extraModules = [ ./hosts/darwin/mac-studio.nix ];
-          homeModules = [ ./home/darwin/mac-studio.nix ];
+          extraModules = [ ./hosts/darwin/workstation.nix ];
+          homeModules = [ ./home/darwin/workstation.nix ];
+        };
+
+        "macbook-pro" = mkDarwin {
+          system = "aarch64-darwin";
+          extraModules = [ ./hosts/darwin/labtop.nix ];
         };
 
         # Generic aarch64 darwin — used as fallback by install.sh
