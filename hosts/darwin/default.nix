@@ -6,6 +6,7 @@
   system.defaults = {
     dock.autohide = true;                               # hide dock automatically
     finder.AppleShowAllExtensions = true;               # show all file extensions
+    # finder.QuitMenuItem = true;                       # allow quitting Finder via Cmd+Q
     NSGlobalDomain.AppleInterfaceStyle = "Dark";        # dark mode
     NSGlobalDomain.ApplePressAndHoldEnabled = false;    # enable key repeat (disable accent popup)
     CustomUserPreferences = {
