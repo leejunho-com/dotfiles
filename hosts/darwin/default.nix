@@ -8,6 +8,9 @@
     finder.AppleShowAllExtensions = true;               # show all file extensions
     NSGlobalDomain.AppleInterfaceStyle = "Dark";        # dark mode
     NSGlobalDomain.ApplePressAndHoldEnabled = false;    # enable key repeat (disable accent popup)
+    CustomUserPreferences = {
+      "com.apple.desktopservices".DSDontWriteNetworkStores = true;  # no .DS_Store on network drives
+    };
   };
 
   system.primaryUser = user;
