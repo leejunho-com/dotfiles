@@ -38,6 +38,8 @@ bash ~/code/dotfiles/install.sh
 
 Platform and hostname are auto-detected — no manual editing required.
 
+---
+
 ### Apply changes (day-to-day)
 
 ```bash
