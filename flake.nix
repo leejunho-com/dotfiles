@@ -79,21 +79,22 @@
           homeModules = [ ./home/darwin/mac-studio.nix ];
         };
 
-        # MacBook example (no extraModules = common only)
-        # "Juns-MacBook-Pro" = mkDarwin {
-        #   system = "aarch64-darwin";
-        # };
+        # Generic aarch64 darwin — used as fallback by install.sh
+        "darwin" = mkDarwin {
+          system = "aarch64-darwin";
+        };
 
-        # Intel Mac example
-        # "Juns-MacBook-Intel" = mkDarwin {
-        #   system = "x86_64-darwin";
-        # };
+        # Generic x86_64 darwin — used as fallback by install.sh for Intel Macs
+        "darwin-x86" = mkDarwin {
+          system = "x86_64-darwin";
+        };
       };
 
       # Standalone home-manager for non-NixOS Linux (Rocky, Fedora, WSL Ubuntu, etc.)
       # Apply with: home-manager switch --flake ~/code/dotfiles#<hostname>
       homeConfigurations = {
-        # "my-hostname" = mkLinux { system = "x86_64-linux"; };
+        # Generic linux — used as fallback by install.sh
+        "linux" = mkLinux { system = "x86_64-linux"; };
       };
     };
 }
