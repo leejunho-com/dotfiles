@@ -10,7 +10,8 @@
 
     # Desktop & Dock
     dock.tilesize = 16;                                              # Desktop & Dock > Size: Small
-    dock.magnification = false;                                      # Desktop & Dock > Magnification: off
+    dock.magnification = true;                                       # Desktop & Dock > Magnification: on
+    dock.largesize = 128;                                            # Desktop & Dock > Magnification size: Large
     dock.autohide = true;                                            # Desktop & Dock > Automatically hide and show the Dock: on
     dock.mru-spaces = false;                                         # Desktop & Dock > Mission Control > Automatically rearrange Spaces based on most recent use: off
     finder.CreateDesktop = false;                                    # Desktop & Dock > Show Items on Desktop: none
