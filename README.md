@@ -13,6 +13,17 @@ Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager â€
 
 ```bash
 git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+```
+
+Edit `flake.nix` if your username differs from `leejunho`:
+
+```nix
+user = "your-username";
+```
+
+Then run:
+
+```bash
 bash ~/code/dotfiles/install.sh
 ```
 
