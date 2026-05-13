@@ -84,6 +84,16 @@
           extraModules = [ ./hosts/darwin/labtop.nix ];
         };
 
+        "macbook-neo" = mkDarwin {
+          system = "aarch64-darwin";
+          extraModules = [ ./hosts/darwin/labtop.nix ];
+        };
+
+        "macbook-pro-2018" = mkDarwin {
+          system = "x86_64-darwin";
+          extraModules = [ ./hosts/darwin/labtop.nix ];
+        };
+
         # Generic aarch64 darwin — used as fallback by install.sh
         "darwin" = mkDarwin {
           system = "aarch64-darwin";
