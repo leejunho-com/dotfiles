@@ -1,4 +1,4 @@
-<img width="3840" alt="Screenshot 2025-05-04 at 00 08 58" src="https://github.com/user-attachments/assets/f8bec232-5731-48fc-8bbd-ea115d98ef4f" />
+<img width="3440" height="1440" alt="Screenshot 2026-05-13 at 14 27 18" src="https://github.com/user-attachments/assets/2dfa87f4-b4bf-472c-885d-812a954dd6ed" />
 
 # dotfiles
 
