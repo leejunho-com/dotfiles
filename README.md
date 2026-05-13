@@ -166,13 +166,6 @@ Boot into Recovery Mode, then:
 csrutil disable
 ```
 
-#### Defaults
-
-```bash
-# Enable key repeat (disable press-and-hold accent popup)
-defaults write -g ApplePressAndHoldEnabled -bool false
-```
-
 #### SSH
 
 `/etc/ssh/sshd_config`:
