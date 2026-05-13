@@ -45,20 +45,30 @@ load   # alias for load.sh — auto-detects platform and hostname
 | Edit zshrc, ghostty, nvim, etc. | Just save — symlinked, no rebuild needed |
 | Add / remove packages | Edit `home/common.nix` → rebuild |
 | Change system settings | Edit `hosts/darwin/default.nix` → rebuild |
-| Machine-specific changes | Edit `hosts/darwin/<hostname>.nix` → rebuild |
+| Machine-specific changes | Edit `hosts/darwin/<role>.nix` → rebuild |
 
 ---
 
 ## Adding a New Machine
 
-1. Add an entry to `flake.nix`:
+`install.sh` and `load.sh` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
+
+| Platform | Fallback key |
+|----------|-------------|
+| macOS Apple Silicon | `darwin` |
+| macOS Intel | `darwin-x86` |
+| Linux | `linux` |
+
+**No flake.nix edit needed** for generic machines — just run `install.sh`.
+
+Only add a flake entry when the machine needs custom config (e.g. yabai, specific services):
 
 **macOS** — under `darwinConfigurations`:
 ```nix
 "your-hostname" = mkDarwin {
   system = "aarch64-darwin";  # or x86_64-darwin for Intel
-  # extraModules = [ ./hosts/darwin/your-hostname.nix ];  # optional
-  # homeModules  = [ ./home/darwin/your-hostname.nix ];   # optional
+  extraModules = [ ./hosts/darwin/your-role.nix ];  # optional
+  homeModules  = [ ./home/darwin/your-role.nix ];   # optional
 };
 ```
 
@@ -69,7 +79,7 @@ load   # alias for load.sh — auto-detects platform and hostname
 };
 ```
 
-2. Run `install.sh` on the new machine — hostname is auto-detected:
+Run `install.sh` on the new machine:
 
 ```bash
 git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
@@ -91,15 +101,16 @@ dotfiles/
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
 │   ├── darwin/
 │   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
-│   │   └── mac-studio.nix       # Mac Studio: transmission_4
+│   │   └── workstation.nix      # Mac Studio: transmission_4
 │   └── linux/
 │       └── default.nix          # Linux standalone HM (Rocky, Fedora, WSL Ubuntu, etc.)
 │
 ├── hosts/                       # nix-darwin — system-level (darwin only)
-│   ├── common.nix               # Platform-agnostic: nix.settings, nixpkgs.config
+│   ├── common.nix               # Platform-agnostic: nixpkgs.config, nix.enable = false (Determinate Nix)
 │   └── darwin/
 │       ├── default.nix          # All Macs: system.defaults, skhd, users
-│       └── mac-studio.nix       # Mac Studio: yabai, sketchybar, jankyborders, transmission launchd
+│       ├── workstation.nix      # Mac Studio: yabai, sketchybar, jankyborders, transmission launchd
+│       └── labtop.nix           # MacBook Pro: yabai, sketchybar, jankyborders
 │
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
 ├── nix/                         # nix.conf → ~/.config/nix/nix.conf (linked by install.sh)
@@ -164,13 +175,15 @@ Every package is installed into `/nix/store/<hash>-<name>/` — isolated, no con
 **Per-machine layering** — machines share a common base and add only what they need:
 
 ```
-hosts/common.nix           ← nix settings (all platforms)
-hosts/darwin/default.nix   ← system defaults, skhd (all Macs)
-hosts/darwin/<hostname>.nix ← machine-specific services
-home/common.nix            ← packages + zsh + symlinks (all machines)
-home/darwin/default.nix    ← macOS-only packages + symlinks
-home/darwin/<hostname>.nix ← machine-specific home config
+hosts/common.nix              ← nixpkgs.config, nix.enable = false (all platforms)
+hosts/darwin/default.nix      ← system defaults, skhd (all Macs)
+hosts/darwin/<role>.nix       ← machine-specific services (workstation, labtop, …)
+home/common.nix               ← packages + zsh + symlinks (all machines)
+home/darwin/default.nix       ← macOS-only packages + symlinks
+home/darwin/<role>.nix        ← machine-specific home packages (optional)
 ```
+
+Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
 
 **Dotfile management** — config files live in this repo and are symlinked into `~/.config/` via `mkOutOfStoreSymlink`. Edit files directly; changes reflect immediately without rebuilding.
 
