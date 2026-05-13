@@ -4,9 +4,10 @@
   services.skhd.enable = true;
 
   system.defaults = {
-    dock.autohide = true;
-    finder.AppleShowAllExtensions = true;
-    NSGlobalDomain.AppleInterfaceStyle = "Dark";
+    dock.autohide = true;                               # hide dock automatically
+    finder.AppleShowAllExtensions = true;               # show all file extensions
+    NSGlobalDomain.AppleInterfaceStyle = "Dark";        # dark mode
+    NSGlobalDomain.ApplePressAndHoldEnabled = false;    # enable key repeat (disable accent popup)
   };
 
   system.primaryUser = user;
