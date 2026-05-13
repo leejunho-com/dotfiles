@@ -46,6 +46,12 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
   fi
 
   cd "$DOTFILES" && git add -A
+  FALLBACK="$([[ "$(uname -m)" == "arm64" ]] && echo "darwin" || echo "darwin-x86")"
+  if ! nix --extra-experimental-features 'nix-command flakes' eval ".#darwinConfigurations" \
+      --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
+    warn "No darwinConfigurations.$HOSTNAME found, falling back to '$FALLBACK'"
+    HOSTNAME="$FALLBACK"
+  fi
   if ! command -v darwin-rebuild &>/dev/null; then
     info "Bootstrapping nix-darwin for $HOSTNAME..."
     sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake ".#$HOSTNAME"
@@ -57,6 +63,11 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
 # ── Linux ────────────────────────────────────────────────────────────
 else
   cd "$DOTFILES" && git add -A
+  if ! nix --extra-experimental-features 'nix-command flakes' eval ".#homeConfigurations" \
+      --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
+    warn "No homeConfigurations.$HOSTNAME found, falling back to 'linux'"
+    HOSTNAME="linux"
+  fi
   info "Running home-manager switch for $HOSTNAME..."
   nix --extra-experimental-features 'nix-command flakes' run home-manager -- switch --flake "$DOTFILES#$HOSTNAME"
 fi
