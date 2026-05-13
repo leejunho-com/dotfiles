@@ -49,6 +49,18 @@ load   # alias for load.sh — auto-detects platform and hostname
 
 ---
 
+## Forking / Using with a Different Username
+
+The system username is declared once in `flake.nix`:
+
+```nix
+user = "leejunho";
+```
+
+If your username differs, change this line before running `install.sh`. Everything else (Home Manager paths, nix-darwin user config, symlinks) derives from this single value.
+
+---
+
 ## Adding a New Machine
 
 `install.sh` and `load.sh` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
