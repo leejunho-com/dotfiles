@@ -53,7 +53,12 @@ nix-switch   # rebuild current config (auto-detects platform/hostname)
 
 ```bash
 nix-update   # flake update + build + nvd diff preview
+nix-switch   # apply after reviewing diff
 ```
+
+> `nix-update` previews changes without applying. Run `nix-switch` to apply — it reuses the existing build.
+>
+> On macOS, `sudo darwin-rebuild switch` runs as root and changes `flake.lock` ownership to root. `nix-switch` automatically restores ownership so `nix-update` can write `flake.lock` next time.
 
 ---
 
