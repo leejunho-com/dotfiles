@@ -12,13 +12,13 @@ in
     # essential
     bat eza fd fzf ripgrep tree jq wget
     unar p7zip rsync convmv mc w3m
-
-    # gnu
-    coreutils findutils gnused gawk gnugrep
-    diffutils gnutar which getopt util-linux
     htop btop duf iperf3 nmap
     wireguard-tools zoxide
     magic-wormhole tealdeer yazi poppler
+
+    # gnu
+    coreutils findutils gnused gawk gnugrep
+    gnutar diffutils which getopt util-linux
 
     # media
     ffmpeg ffmpegthumbnailer imagemagick
