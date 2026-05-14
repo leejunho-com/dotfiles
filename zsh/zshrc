@@ -129,8 +129,8 @@ function copy() {
 alias vi="nvim"
 
 # dotfiles
-alias switch="bash ~/code/dotfiles/switch.sh"
-alias update="bash ~/code/dotfiles/update.sh"
+alias nix-switch="bash ~/code/dotfiles/nix-switch.sh"
+alias nix-update="bash ~/code/dotfiles/nix-update.sh"
 
 # load custom env
 _PRIVATE=~/.config/private
