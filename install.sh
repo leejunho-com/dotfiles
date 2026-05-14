@@ -30,11 +30,6 @@ if [[ ! -d "$DOTFILES" ]]; then
   git clone https://github.com/leejunho-com/dotfiles.git "$DOTFILES"
 fi
 
-# ── nix.conf ─────────────────────────────────────────────────────────
-mkdir -p "$HOME/.config/nix"
-ln -sf "$DOTFILES/nix/nix.conf" "$HOME/.config/nix/nix.conf"
-info "Linked nix.conf"
-
 # ── Darwin ───────────────────────────────────────────────────────────
 if [[ "$PLATFORM" == "Darwin" ]]; then
   for f in /etc/bashrc /etc/zshrc; do
@@ -80,12 +75,6 @@ if [[ ! -d "$DOTFILES/private" ]]; then
   fi
   info "Cloning private repo..."
   gh repo clone leejunho-com/private "$DOTFILES/private"
-fi
-
-# ── TPM ──────────────────────────────────────────────────────────────
-if [[ ! -d "$DOTFILES/tmux/plugins/tpm" ]]; then
-  info "Installing TPM..."
-  git clone https://github.com/tmux-plugins/tpm "$DOTFILES/tmux/plugins/tpm"
 fi
 
 info "Done. Restart your shell."

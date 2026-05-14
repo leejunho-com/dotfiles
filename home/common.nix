@@ -14,7 +14,7 @@ in
     coreutils findutils gnused gawk gnugrep
     unar p7zip rsync convmv mc w3m
     htop btop duf iperf3 nmap
-    wireguard-tools tmux zoxide
+    wireguard-tools zoxide
     magic-wormhole tealdeer yazi poppler
 
     # media
@@ -50,6 +50,29 @@ in
     '';
   };
 
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      {
+        plugin = prefix-highlight;
+        extraConfig = ''
+          set -g @prefix_highlight_empty_prompt '  #H  #S '
+          set -g @prefix_highlight_prefix_prompt ' #H  #S'
+          set -g @prefix_highlight_fg '#f37021'
+          set -g @prefix_highlight_bg 'default'
+          set -g @prefix_highlight_show_copy_mode 'on'
+          set -g @prefix_highlight_copy_prompt ' VISUAL'
+          set -g @prefix_highlight_copy_mode_attr 'fg=default,bg=#800080'
+          set -g @prefix_highlight_show_sync_mode 'on'
+          set -g @prefix_highlight_sync_prompt ' SYNC'
+          set -g @prefix_highlight_sync_mode_attr 'fg=black,bg=green'
+        '';
+      }
+    ];
+    extraConfig = "source-file ${config.home.homeDirectory}/code/dotfiles/tmux/tmux.conf";
+  };
+
   # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
     ".p10k.zsh".source      = link "zsh/p10k.zsh";
@@ -58,7 +81,6 @@ in
     ".config/nvim".source   = link "nvim";
     ".config/yazi".source   = link "yazi";
     ".config/mpv".source    = link "mpv";
-    ".config/tmux".source   = link "tmux";
     ".config/pip".source    = link "pip";
     ".config/fzf".source    = link "fzf";
     ".config/yt-dlp".source  = link "yt-dlp";
