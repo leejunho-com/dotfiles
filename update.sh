@@ -4,7 +4,7 @@ set -e
 DOTFILES="$HOME/code/dotfiles"
 cd "$DOTFILES"
 
-nix flake update "$DOTFILES"
+nix flake update
 
 if [[ "$(uname)" == "Darwin" ]]; then
   HOST="$(scutil --get LocalHostName)"
