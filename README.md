@@ -58,7 +58,7 @@ nix-switch   # apply after reviewing diff
 
 > `nix-update` previews changes without applying. Run `nix-switch` to apply — it reuses the existing build.
 >
-> On macOS, `sudo darwin-rebuild switch` runs as root and changes `flake.lock` ownership to root. `nix-switch` automatically restores ownership so `nix-update` can write `flake.lock` next time.
+> On macOS, `flake.lock` is root-owned. Both `nix-update` and `nix-switch` use `sudo` on Darwin.
 
 ---
 
