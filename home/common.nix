@@ -9,28 +9,21 @@ in
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 
   home.packages = with pkgs; [
-    # essential
-    bat eza fd fzf ripgrep tree jq wget
-    unar p7zip rsync convmv mc w3m
-    htop btop duf iperf3 nmap
-    wireguard-tools zoxide
-    magic-wormhole tealdeer yazi poppler
-
     # gnu
-    coreutils findutils gnused gawk gnugrep
-    gnutar diffutils util-linux
+    coreutils findutils util-linux gnused gawk gnugrep gnutar diffutils
+
+    # essential
+    bat eza fd fzf ripgrep tree jq wget zoxide unar p7zip rsync mc yazi w3m htop btop duf
+    iperf3 nmap wireguard-tools convmv magic-wormhole tealdeer poppler
 
     # media
-    ffmpeg ffmpegthumbnailer imagemagick
-    mediainfo yt-dlp viu chafa resvg exiftool
+    ffmpeg ffmpegthumbnailer imagemagick mediainfo yt-dlp viu chafa resvg exiftool
 
     # ricing
-    fastfetch figlet lolcat cmatrix
-    asciinema asciinema-agg ascii-image-converter
+    fastfetch figlet lolcat cmatrix asciinema asciinema-agg ascii-image-converter
 
     # dev
-    nodejs
-    neovim delta lazygit gh nvd
+    nodejs neovim delta lazygit gh nvd
   ];
 
   programs.zsh = {
