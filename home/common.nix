@@ -18,7 +18,7 @@ in
 
     # gnu
     coreutils findutils gnused gawk gnugrep
-    gnutar diffutils which getopt util-linux
+    gnutar diffutils which util-linux
 
     # media
     ffmpeg ffmpegthumbnailer imagemagick
