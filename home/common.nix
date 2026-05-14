@@ -11,8 +11,11 @@ in
   home.packages = with pkgs; [
     # essential
     bat eza fd fzf ripgrep tree jq wget
-    coreutils findutils gnused gawk gnugrep
     unar p7zip rsync convmv mc w3m
+
+    # gnu
+    coreutils findutils gnused gawk gnugrep
+    diffutils gnutar which getopt util-linux
     htop btop duf iperf3 nmap
     wireguard-tools zoxide
     magic-wormhole tealdeer yazi poppler
