@@ -57,8 +57,6 @@ nix-switch   # apply after reviewing diff
 ```
 
 > `nix-update` previews changes without applying. Run `nix-switch` to apply — it reuses the existing build.
->
-> On macOS, `flake.lock` is root-owned. Both `nix-update` and `nix-switch` use `sudo` on Darwin.
 
 ---
 
