@@ -57,16 +57,20 @@ in
       {
         plugin = prefix-highlight;
         extraConfig = ''
-          set -g @prefix_highlight_empty_prompt '  #H  #S '
-          set -g @prefix_highlight_prefix_prompt ' #H  #S'
-          set -g @prefix_highlight_fg '#f37021'
-          set -g @prefix_highlight_bg 'default'
-          set -g @prefix_highlight_show_copy_mode 'on'
-          set -g @prefix_highlight_copy_prompt ' VISUAL'
-          set -g @prefix_highlight_copy_mode_attr 'fg=default,bg=#800080'
-          set -g @prefix_highlight_show_sync_mode 'on'
-          set -g @prefix_highlight_sync_prompt ' SYNC'
-          set -g @prefix_highlight_sync_mode_attr 'fg=black,bg=green'
+        set -g @prefix_highlight_empty_prompt '  #H  #S '
+        set -g @prefix_highlight_prefix_prompt ' #H  #S'
+        set -g @prefix_highlight_fg '#f37021' # default is 'colour231'
+        set -g @prefix_highlight_bg 'default'  # default is 'colour04'
+        set -g @prefix_highlight_show_copy_mode 'on'
+        set -g @prefix_highlight_copy_prompt ' VISUAL'
+        set -g @prefix_highlight_copy_mode_attr 'fg=default,bg=#800080' # default is 'fg=default,bg=yellow'
+        set -g @prefix_highlight_show_sync_mode 'on'
+        set -g @prefix_highlight_sync_prompt ' SYNC'
+        set -g @prefix_highlight_sync_mode_attr 'fg=black,bg=green' # default is 'fg=default,bg=yellow'
+        set -g status-left "#{prefix_highlight}"
+        set -g status-left-length 50
+        set -g status-right ""
+        set -g status-right-length 50
         '';
       }
     ];
