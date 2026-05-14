@@ -1,4 +1,5 @@
 .DS_Store
+/result
 *.log
 *.bak
 /private
