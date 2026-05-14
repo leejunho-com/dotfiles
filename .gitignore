@@ -3,7 +3,6 @@
 *.log
 *.bak
 /private
-/tmux/plugins
 /incoming/log
 /karabiner/automatic_backups
 /nvim/lazy-lock.json

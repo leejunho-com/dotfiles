@@ -30,11 +30,9 @@ bash ~/code/dotfiles/install.sh
 `install.sh` handles everything automatically:
 - Installs Nix (if not present)
 - Clones the dotfiles repo
-- Links `nix/nix.conf` → `~/.config/nix/nix.conf` (required before rebuild)
 - Renames conflicting system files (macOS)
 - Bootstraps nix-darwin (macOS) or runs home-manager switch (Linux)
 - Clones the private config repo
-- Installs TPM (tmux plugin manager)
 
 Platform and hostname are auto-detected — no manual editing required.
 
@@ -65,6 +63,7 @@ nix-switch   # apply after reviewing diff
 | Change | Command |
 |--------|---------|
 | Edit zshrc, ghostty, nvim, etc. | Just save — symlinked, no rebuild needed |
+| Edit `tmux/tmux.conf` | `prefix+r` — sourced at runtime, no rebuild needed |
 | Add / remove packages | Edit `home/common.nix` → rebuild |
 | Change system settings | Edit `hosts/darwin/default.nix` → rebuild |
 | Machine-specific changes | Edit `hosts/darwin/<role>.nix` → rebuild |
@@ -136,7 +135,6 @@ dotfiles/
 │       └── labtop.nix           # MacBook Pro: yabai, sketchybar, jankyborders
 │
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
-├── nix/                         # nix.conf → ~/.config/nix/nix.conf (linked by install.sh)
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
 ├── vim/                         # → ~/.vimrc
@@ -144,7 +142,7 @@ dotfiles/
 ├── fzf/                         # → ~/.config/fzf
 ├── ghostty/                     # → ~/.config/ghostty (all platforms)
 ├── nvim/                        # → ~/.config/nvim
-├── tmux/                        # → ~/.config/tmux
+├── tmux/                        # tmux.conf sourced by programs.tmux (plugins managed by Nix)
 ├── yabai/                       # → ~/.config/yabai
 ├── skhd/                        # → ~/.config/skhd
 ├── sketchybar/                  # → ~/.config/sketchybar
@@ -290,3 +288,15 @@ Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the
 **Dotfile management** — config files live in this repo and are symlinked into `~/.config/` via `mkOutOfStoreSymlink`. Edit files directly; changes reflect immediately without rebuilding.
 
 **zsh plugins** — managed via `programs.zsh` in Home Manager (powerlevel10k, autosuggestions, syntaxHighlighting). The `zsh/zshrc` file is sourced via `initContent` — edit it directly, no rebuild needed.
+
+---
+
+## Roadmap
+
+Known gaps and planned improvements:
+
+- **Secret management** — `secrets/` is currently empty. Plan to adopt [agenix](https://github.com/ryantm/agenix) or [sops-nix](https://github.com/Mic92/sops-nix) for encrypted secrets inside the repo.
+- **CI** — No automated validation yet. Plan to add a GitHub Actions workflow that runs `nix flake check` on every push, catching broken configs before they reach machines.
+- **`install.sh` staging scope** — `git add -A` before rebuild is overly broad; will narrow to specific files to avoid accidentally staging sensitive files.
+- **Linux host entries** — Only a generic `linux` fallback exists. Specific hosts will be added as Linux machines are provisioned.
+- **Linux keybindings** — keyd + sway planned for Linux key remapping (Super as Cmd equivalent). Currently on hold.
