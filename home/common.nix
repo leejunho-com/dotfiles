@@ -27,7 +27,7 @@ in
 
     # dev
     nodejs
-    neovim delta lazygit gh
+    neovim delta lazygit gh nvd
   ];
 
   programs.zsh = {

@@ -44,10 +44,16 @@ Platform and hostname are auto-detected — no manual editing required.
 
 ```bash
 git add .
-load   # alias for load.sh — auto-detects platform and hostname
+switch   # alias for switch.sh — rebuild current config (auto-detects platform/hostname)
 ```
 
 > Nix flakes only read git-tracked files. Always `git add` before rebuilding.
+
+### Update packages
+
+```bash
+update   # alias for update.sh — nix flake update + rebuild + nvd diff
+```
 
 ---
 
@@ -64,7 +70,7 @@ load   # alias for load.sh — auto-detects platform and hostname
 
 ## Adding a New Machine
 
-`install.sh` and `load.sh` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
+`install.sh` and `switch.sh` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
 
 | Platform | Fallback key |
 |----------|-------------|
@@ -108,7 +114,8 @@ dotfiles/
 ├── flake.nix                    # Entry point — defines all machines
 ├── flake.lock                   # Pinned dependency versions (commit this)
 ├── install.sh                   # Bootstrap script — first-time setup (auto-detects platform/hostname)
-├── load.sh                      # Rebuild script — day-to-day (auto-detects platform/hostname)
+├── switch.sh                    # Rebuild script — day-to-day (auto-detects platform/hostname)
+├── update.sh                    # Update packages — nix flake update + rebuild + nvd diff
 │
 ├── home/                        # Home Manager — user-level
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
