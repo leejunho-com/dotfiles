@@ -13,12 +13,10 @@ if [[ "$(uname)" == "Darwin" ]]; then
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   darwin-rebuild build --flake "$DOTFILES#$HOST"
   nvd diff /run/current-system ./result
-  rm -f ./result
 else
   HOST="$(hostname -s)"
   nix eval "$DOTFILES#homeConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="linux"
   home-manager build --flake "$DOTFILES#$HOST"
   nvd diff ~/.local/state/nix/profiles/home-manager ./result
-  rm -f ./result
 fi
