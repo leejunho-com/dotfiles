@@ -1,1 +1,36 @@
 **/.claude/settings.local.json
+
+# darwin
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+
+# editor
+*.swp
+*.swo
+*~
+.netrwhist
+
+# nix
+/result
+/result-*
+.direnv/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# secrets / env
+.env
+.env.local
+*.pem
+*.key
+
+# logs / temp
+*.log
+*.bak
+*.orig
