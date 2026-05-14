@@ -10,6 +10,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   nix eval "$DOTFILES#darwinConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   sudo darwin-rebuild switch --flake "$DOTFILES#$HOST"
+  sudo chown "$USER" "$DOTFILES/flake.lock"
   command -v yabai &>/dev/null && sudo yabai --load-sa
   command -v nvd &>/dev/null && nvd diff "$BEFORE" /run/current-system
 else
