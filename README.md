@@ -223,20 +223,28 @@ Core fonts are managed by Nix and installed automatically on `nix-switch`:
 
 | Package | Use |
 |---------|-----|
-| `nerd-fonts.d2coding` | Monospace (terminal, editors, mpv OSD) |
+| `nerd-fonts.d2coding` | Monospace (terminal, editors) |
 | `noto-fonts-cjk-sans` | CJK sans fallback |
 | `noto-fonts-cjk-serif` | CJK serif |
 | `pretendard-jp` | Primary sans-serif (Latin + Korean + Japanese superset) |
-| `nerd-fonts.symbols-only` | Icon glyphs for sketchybar / mpv |
+| `nerd-fonts.symbols-only` | Icon glyphs for sketchybar / mpv OSD |
 | `sketchybar-app-font` | App icons in sketchybar (macOS only) |
+| `fontconfig` | `fc-list` for looking up exact font family names |
 
 **Font policy** — Firefox and mpv are configured to ignore page/system font selections and use the fonts declared here:
 
 - **Sans-serif**: Pretendard JP (Latin, Korean, Japanese)
 - **Serif**: Noto Serif CJK KR (Latin/Korean), Noto Serif CJK JP (Japanese)
 - **Monospace**: D2CodingLigature Nerd Font
+- **mpv OSD**: Pretendard JP Bold — icon glyphs rendered via ASS font tags (Symbols Nerd Font Mono)
 
 Firefox `user.js` applies these via `font.name.*` prefs and disables page font override (`browser.display.use_document_fonts=0`). No manual `about:config` editing needed.
+
+To look up the exact family name of any installed font (works on all platforms):
+
+```bash
+fc-list | grep -i <name>
+```
 
 On macOS, Nix fonts are copied to `~/Library/Fonts/HomeManager/` and recognized by CoreText immediately after `nix-switch`.
 
