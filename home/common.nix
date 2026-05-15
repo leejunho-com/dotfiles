@@ -81,9 +81,10 @@ in
     in ''
       profile_dir=$(ls -d "${profilesBase}/"*.default-release 2>/dev/null | head -1)
       if [[ -z "$profile_dir" ]]; then
-        echo "Firefox profile not found, skipping chrome symlink"
-      elif [[ ! -L "$profile_dir/chrome" ]]; then
-        ln -s "${dotfiles}/firefox/chrome" "$profile_dir/chrome"
+        echo "Firefox profile not found, skipping"
+      else
+        [[ ! -L "$profile_dir/chrome" ]] && ln -s "${dotfiles}/firefox/chrome" "$profile_dir/chrome"
+        [[ ! -L "$profile_dir/user.js" ]] && ln -s "${dotfiles}/firefox/user.js" "$profile_dir/user.js"
       fi
     ''
   );
