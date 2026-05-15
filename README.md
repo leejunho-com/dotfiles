@@ -220,6 +220,8 @@ Nix takes precedence over Homebrew in `PATH`. `zshrc` appends Homebrew at the en
 
 nix-darwin sets Nix paths in `/etc/zshrc` before the user's `~/.zshrc` runs, so appending Homebrew in `zshrc` naturally puts it last.
 
+> **Note**: Homebrew's installer automatically writes `eval "$(brew shellenv)"` to `~/.zprofile`, which would prepend Homebrew and override this order. `install.sh` removes that line automatically after installation.
+
 #### Photoshop
 
 Restore settings:
