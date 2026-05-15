@@ -4,6 +4,8 @@ user_pref("browser.download.alwaysOpenPanel", false);
 user_pref("widget.macos.titlebar-blend-mode.behind-window", true);
 user_pref("browser.theme.native-theme", true);
 
+// Use user font selections instead of page fonts
+user_pref("browser.display.use_document_fonts", 0);
 // Fonts — Latin (x-western)
 user_pref("font.default.x-western", "sans-serif");
 user_pref("font.name.sans-serif.x-western", "Pretendard JP");
