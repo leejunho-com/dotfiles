@@ -37,6 +37,12 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
+  # Homebrew installer writes shellenv to ~/.zprofile — remove it since
+  # zshrc handles PATH with Homebrew appended after Nix
+  if grep -q "brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
+    sed -i'' '/brew shellenv/d' "$HOME/.zprofile"
+    info "Removed brew shellenv from ~/.zprofile"
+  fi
 fi
 
 # ── Darwin ───────────────────────────────────────────────────────────
