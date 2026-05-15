@@ -72,6 +72,22 @@ in
     extraConfig = "source-file ${config.home.homeDirectory}/code/dotfiles/tmux/tmux.conf";
   };
 
+  home.activation.firefoxChrome = config.lib.dag.entryAfter ["writeBoundary"] (
+    let
+      profilesBase =
+        if pkgs.stdenv.isDarwin
+        then "$HOME/Library/Application Support/Firefox/Profiles"
+        else "$HOME/.mozilla/firefox";
+    in ''
+      profile_dir=$(ls -d "${profilesBase}/"*.default-release 2>/dev/null | head -1)
+      if [[ -z "$profile_dir" ]]; then
+        echo "Firefox profile not found, skipping chrome symlink"
+      elif [[ ! -L "$profile_dir/chrome" ]]; then
+        ln -s "${dotfiles}/firefox/chrome" "$profile_dir/chrome"
+      fi
+    ''
+  );
+
   # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
     ".p10k.zsh".source      = link "zsh/p10k.zsh";
