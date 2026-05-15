@@ -204,11 +204,7 @@ Launch Firefox once after bootstrapping to create the profile, then run `nix-swi
 
 #### Homebrew
 
-Nix manages CLI tools. Homebrew is kept for GUI apps only:
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
+Homebrew is installed automatically by `install.sh`. Casks are managed declaratively via nix-darwin's `homebrew` module and synced on every `nix-switch`.
 
 #### Photoshop
 
@@ -223,10 +219,12 @@ sudo mv ./Adobe\ Photoshop\ 2025\ Settings ~/Library/Preferences/
 
 #### Fonts
 
-Restore fonts:
+Core fonts (`nerd-fonts`, `sketchybar-app-font`) are managed by Nix and installed automatically on `nix-switch`.
+
+For any additional fonts, restore from backup:
 
 ```bash
-rsync -avh /path/to/backup/Fonts/ ~/Library/Fonts/
+rsync -avh --exclude="HomeManager/" /path/to/backup/Fonts/ ~/Library/Fonts/
 ```
 
 ---
