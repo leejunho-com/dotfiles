@@ -30,6 +30,15 @@ if [[ ! -d "$DOTFILES" ]]; then
   git clone https://github.com/leejunho-com/dotfiles.git "$DOTFILES"
 fi
 
+# ── Homebrew ─────────────────────────────────────────────────────────
+if [[ "$PLATFORM" == "Darwin" ]]; then
+  if ! command -v brew &>/dev/null; then
+    info "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+fi
+
 # ── Darwin ───────────────────────────────────────────────────────────
 if [[ "$PLATFORM" == "Darwin" ]]; then
   for f in /etc/bashrc /etc/zshrc; do

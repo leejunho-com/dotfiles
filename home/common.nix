@@ -24,6 +24,9 @@ in
 
     # dev
     nodejs neovim delta lazygit gh nvd
+
+    # fonts
+    nerd-fonts.symbols-only nerd-fonts.d2coding
   ];
 
   programs.zsh = {

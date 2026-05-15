@@ -1,6 +1,10 @@
 { user, pkgs, ... }:
 
 {
+  homebrew.casks = [
+    "kid3"
+  ];
+
   services.sketchybar.enable = true;
   services.jankyborders = {
     enable = true;
