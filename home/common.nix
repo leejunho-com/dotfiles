@@ -26,7 +26,7 @@ in
     nodejs neovim delta lazygit gh nvd
 
     # fonts
-    nerd-fonts.d2coding noto-fonts-cjk-sans noto-fonts-cjk-serif nerd-fonts.symbols-only
+    nerd-fonts.d2coding noto-fonts-cjk-sans noto-fonts-cjk-serif pretendard-jp nerd-fonts.symbols-only
   ];
 
   programs.zsh = {
