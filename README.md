@@ -138,7 +138,7 @@ dotfiles/
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
 ├── vim/                         # → ~/.vimrc
-├── firefox/                     # userChrome.css, userContent.css
+├── firefox/                     # chrome/userChrome.css, user.js (symlinked to profile via home.activation)
 ├── fzf/                         # → ~/.config/fzf
 ├── ghostty/                     # → ~/.config/ghostty (all platforms)
 ├── nvim/                        # → ~/.config/nvim
@@ -165,15 +165,6 @@ dotfiles/
 Steps that cannot be automated by Nix — run once after bootstrapping.
 
 ### Common
-
-#### Firefox
-
-Enable custom CSS in `about:config`:
-
-| Key | Value |
-|-----|-------|
-| `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` |
-| `browser.download.alwaysOpenPanel` | `false` |
 
 ---
 
@@ -209,12 +200,7 @@ PermitEmptyPasswords no
 
 #### Firefox
 
-macOS-specific `about:config` keys (in addition to Common above):
-
-| Key | Value |
-|-----|-------|
-| `widget.macos.titlebar-blend-mode.behind-window` | `true` |
-| `browser.theme.native-theme` | `true` |
+Launch Firefox once after bootstrapping to create the profile, then run `nix-switch` again to apply `chrome/` and `user.js` symlinks automatically.
 
 #### Homebrew
 
