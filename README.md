@@ -219,9 +219,28 @@ sudo mv ./Adobe\ Photoshop\ 2025\ Settings ~/Library/Preferences/
 
 #### Fonts
 
-Core fonts (`nerd-fonts`, `sketchybar-app-font`) are managed by Nix and installed automatically on `nix-switch`.
+Core fonts are managed by Nix and installed automatically on `nix-switch`:
 
-For any additional fonts, restore from backup:
+| Package | Use |
+|---------|-----|
+| `nerd-fonts.d2coding` | Monospace (terminal, editors, mpv OSD) |
+| `noto-fonts-cjk-sans` | CJK sans fallback |
+| `noto-fonts-cjk-serif` | CJK serif |
+| `pretendard-jp` | Primary sans-serif (Latin + Korean + Japanese superset) |
+| `nerd-fonts.symbols-only` | Icon glyphs for sketchybar / mpv |
+| `sketchybar-app-font` | App icons in sketchybar (macOS only) |
+
+**Font policy** — Firefox and mpv are configured to ignore page/system font selections and use the fonts declared here:
+
+- **Sans-serif**: Pretendard JP (Latin, Korean, Japanese)
+- **Serif**: Noto Serif CJK KR (Latin/Korean), Noto Serif CJK JP (Japanese)
+- **Monospace**: D2CodingLigature Nerd Font
+
+Firefox `user.js` applies these via `font.name.*` prefs and disables page font override (`browser.display.use_document_fonts=0`). No manual `about:config` editing needed.
+
+On macOS, Nix fonts are copied to `~/Library/Fonts/HomeManager/` and recognized by CoreText immediately after `nix-switch`.
+
+For any additional fonts not managed by Nix, restore from backup:
 
 ```bash
 rsync -avh --exclude="HomeManager/" /path/to/backup/Fonts/ ~/Library/Fonts/
