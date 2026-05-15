@@ -206,6 +206,20 @@ Launch Firefox once after bootstrapping to create the profile, then run `nix-swi
 
 Homebrew is installed automatically by `install.sh`. Casks are managed declaratively via nix-darwin's `homebrew` module and synced on every `nix-switch`.
 
+#### PATH Order
+
+Nix takes precedence over Homebrew in `PATH`. `zshrc` appends Homebrew at the end so Nix-managed CLI tools are always preferred:
+
+```
+/etc/profiles/per-user/<user>/bin  ← Home Manager packages (Nix)
+/run/current-system/sw/bin         ← nix-darwin system packages
+/nix/var/nix/profiles/default/bin  ← Nix default profile
+/usr/bin, /bin, ...                ← macOS system
+/opt/homebrew/bin                  ← Homebrew (GUI app deps, fallback only)
+```
+
+nix-darwin sets Nix paths in `/etc/zshrc` before the user's `~/.zshrc` runs, so appending Homebrew in `zshrc` naturally puts it last.
+
 #### Photoshop
 
 Restore settings:
