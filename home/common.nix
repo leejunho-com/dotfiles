@@ -17,7 +17,7 @@ in
     iperf3 nmap wireguard-tools convmv magic-wormhole tealdeer poppler
 
     # media
-    ffmpeg ffmpegthumbnailer imagemagick mediainfo yt-dlp viu chafa resvg exiftool
+    mpv ffmpeg ffmpegthumbnailer imagemagick mediainfo yt-dlp viu chafa resvg exiftool
 
     # ricing
     fastfetch figlet lolcat cmatrix asciinema asciinema-agg ascii-image-converter

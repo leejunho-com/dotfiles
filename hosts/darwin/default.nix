@@ -57,7 +57,6 @@
       "protonvpn"
       "sf-symbols"
       "font-sf-pro"
-      "stolendata-mpv"
       "visual-studio-code"
     ];
   };
