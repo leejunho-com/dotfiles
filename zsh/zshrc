@@ -1,9 +1,9 @@
-# Homebrew (darwin)
+# Homebrew (darwin) — appended so Nix takes precedence
 if [[ "$OSTYPE" == darwin* ]]; then
   if [[ "$(uname -m)" == "arm64" ]]; then
-    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+    export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
   else
-    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+    export PATH="$PATH:/usr/local/bin:/usr/local/sbin"
   fi
 fi
 
