@@ -131,6 +131,7 @@ alias vi="nvim"
 # dotfiles
 alias nix-switch="bash ~/code/dotfiles/nix-switch.sh"
 alias nix-update="bash ~/code/dotfiles/nix-update.sh"
+alias nix-list='nix-store -q --references $(nix-store -q --references ~/.local/state/nix/profiles/home-manager | grep home-manager-path) | sed "s|/nix/store/[^-]*-||" | sort'
 
 # load custom env
 _PRIVATE=~/.config/private
