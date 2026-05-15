@@ -33,6 +33,34 @@
     };
   };
 
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = false;
+      upgrade = false;
+      cleanup = "none";
+    };
+    casks = [
+      "alfred"
+      "anki"
+      "appcleaner"
+      "cyberduck"
+      "discord"
+      "firefox"
+      "ghostty"
+      "github"
+      "handbrake"
+      "karabiner-elements"
+      "obsidian"
+      "plex"
+      "proton-pass"
+      "protonvpn"
+      "sf-symbols"
+      "stolendata-mpv"
+      "visual-studio-code"
+    ];
+  };
+
   system.primaryUser = user;
 
   # Used for backwards compatibility — do not change
