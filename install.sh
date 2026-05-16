@@ -78,8 +78,12 @@ else
     warn "No homeConfigurations.$HOSTNAME found, falling back to 'linux'"
     HOSTNAME="linux"
   fi
+  if ! command -v home-manager &>/dev/null; then
+    info "Installing home-manager..."
+    nix --extra-experimental-features 'nix-command flakes' profile install nixpkgs#home-manager
+  fi
   info "Running home-manager switch for $HOSTNAME..."
-  nix --extra-experimental-features 'nix-command flakes' run home-manager -- switch --flake "$DOTFILES#$HOSTNAME"
+  home-manager switch --flake "$DOTFILES#$HOSTNAME" -b backup
 fi
 
 # ── Private repo (gh installed via nix above) ────────────────────────
