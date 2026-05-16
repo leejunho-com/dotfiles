@@ -88,6 +88,12 @@ else
   fi
 fi
 
+# ── Non-NixOS GPU setup (Linux only) ────────────────────────────────
+if [[ "$PLATFORM" != "Darwin" ]]; then
+  GPU_SETUP=$(ls /nix/store/*-non-nixos-gpu*/bin/non-nixos-gpu-setup 2>/dev/null | head -1)
+  [[ -n "$GPU_SETUP" ]] && sudo "$GPU_SETUP"
+fi
+
 # ── Default shell (Linux only) ───────────────────────────────────────
 if [[ "$PLATFORM" != "Darwin" ]]; then
   ZSH_PATH="$HOME/.nix-profile/bin/zsh"
