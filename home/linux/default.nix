@@ -5,11 +5,6 @@ let
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in
 {
-  home.packages = with pkgs; [
-    firefox
-    ghostty
-  ];
-
   home.file = {
     ".config/private".source = link "private";
   };
