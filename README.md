@@ -26,7 +26,11 @@ bash ~/code/dotfiles/install.sh
 
 Platform and hostname are auto-detected — no manual editing required.
 
-> The username is hardcoded as `leejunho`. Update `flake.nix` → `user = "your-username"` if yours differs.
+Obviously the username is `leejunho` — update `flake.nix` if yours somehow differs:
+
+```nix
+user = "your-username";
+```
 
 ---
 
