@@ -78,7 +78,6 @@ else
     warn "No homeConfigurations.$HOSTNAME found, falling back to 'linux'"
     HOSTNAME="linux"
   fi
-  export PATH="$HOME/.nix-profile/bin:$PATH"
   info "Running home-manager switch for $HOSTNAME..."
   if command -v home-manager &>/dev/null; then
     home-manager switch --flake "$DOTFILES#$HOSTNAME"
