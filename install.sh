@@ -80,7 +80,8 @@ else
   fi
   if ! command -v home-manager &>/dev/null; then
     info "Installing home-manager..."
-    nix --extra-experimental-features 'nix-command flakes' profile install nixpkgs#home-manager
+    nix --extra-experimental-features 'nix-command flakes' profile add nixpkgs#home-manager
+    export PATH="$HOME/.nix-profile/bin:$PATH"
   fi
   info "Running home-manager switch for $HOSTNAME..."
   home-manager switch --flake "$DOTFILES#$HOSTNAME" -b backup
