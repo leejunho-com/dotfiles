@@ -5,7 +5,7 @@ let
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in
 {
-  home.packages = with pkgs; [ darwin.trash wireguard-go sketchybar-app-font ];
+  home.packages = with pkgs; [ darwin.trash wireguard-go sketchybar-app-font mpv ];
 
   # macOS-only dotfiles → ~/.config/ symlinks
   home.file = {
