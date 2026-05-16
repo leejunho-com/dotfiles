@@ -11,14 +11,15 @@ Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager â€
 
 ### Bootstrap (first time)
 
+**Requires**: `git`, `curl` (macOS: pre-installed; Linux/WSL: install via package manager first)
+
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh)
+git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+bash ~/code/dotfiles/install.sh
 ```
 
-Works on both macOS and Linux/WSL. `install.sh` handles everything automatically:
-- Installs missing prerequisites (`git`, `curl`, `hostname`) â€” Linux only, distro-detected
+`install.sh` handles everything automatically:
 - Installs Nix (if not present)
-- Clones the dotfiles repo to `~/code/dotfiles`
 - Renames conflicting system files (macOS)
 - Bootstraps nix-darwin (macOS) or home-manager (Linux)
 - Clones the private config repo
@@ -101,7 +102,8 @@ Only add a flake entry when the machine needs custom config (e.g. yabai, specifi
 Run `install.sh` on the new machine:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh)
+git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+bash ~/code/dotfiles/install.sh
 ```
 
 ---
@@ -294,14 +296,16 @@ wsl --shutdown
 
 #### Package Manager Update
 
-Update the system before installing anything:
+Update the system and install required packages before running `install.sh`:
 
 ```bash
 # Fedora
 sudo dnf upgrade -y
+sudo dnf install -y git curl
 
 # Ubuntu / Debian
 sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl
 ```
 
 #### sudo Password (optional)
