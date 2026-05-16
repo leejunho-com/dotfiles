@@ -28,10 +28,11 @@ bash ~/code/dotfiles/install.sh
 ```
 
 `install.sh` handles everything automatically:
+- Installs missing prerequisites (`git`, `curl`, `hostname`) — Linux only, distro-detected
 - Installs Nix (if not present)
 - Clones the dotfiles repo
 - Renames conflicting system files (macOS)
-- Bootstraps nix-darwin (macOS) or runs home-manager switch (Linux)
+- Bootstraps nix-darwin (macOS) or home-manager (Linux)
 - Clones the private config repo
 
 Platform and hostname are auto-detected — no manual editing required.
@@ -95,8 +96,15 @@ Only add a flake entry when the machine needs custom config (e.g. yabai, specifi
 
 **Linux** — under `homeConfigurations`:
 ```nix
+# CLI only
 "your-hostname" = mkLinux {
   system = "x86_64-linux";
+};
+
+# GUI (WSL with WSLg, desktop distro)
+"your-hostname" = mkLinux {
+  system = "x86_64-linux";
+  homeModules = [ ./home/linux/desktop.nix ];
 };
 ```
 
@@ -125,7 +133,8 @@ dotfiles/
 │   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
 │   │   └── workstation.nix      # Mac Studio: transmission_4
 │   └── linux/
-│       └── default.nix          # Linux standalone HM (Rocky, Fedora, WSL Ubuntu, etc.)
+│       ├── default.nix          # Linux standalone HM — CLI base (all Linux)
+│       └── desktop.nix          # GUI Linux: firefox, ghostty, mpv (WSL, desktop distros)
 │
 ├── hosts/                       # nix-darwin — system-level (darwin only)
 │   ├── common.nix               # Platform-agnostic: nixpkgs.config, nix.enable = false (Determinate Nix)
@@ -274,7 +283,39 @@ rsync -avh --exclude="HomeManager/" /path/to/backup/Fonts/ ~/Library/Fonts/
 
 ### Linux
 
-> TBD
+#### WSL Setup
+
+Create `/etc/wsl.conf` before running `install.sh`:
+
+```ini
+[boot]
+systemd = true
+
+[network]
+hostname = your-hostname
+```
+
+Then restart WSL from PowerShell:
+
+```powershell
+wsl --shutdown
+```
+
+`systemd = true` is required for the Nix daemon to run. The hostname here must match the key in `flake.nix` (or leave as-is to fall back to the generic `linux` config).
+
+#### Default Shell
+
+After bootstrapping, set zsh as the default shell:
+
+```bash
+chsh -s ~/.nix-profile/bin/zsh
+```
+
+Restart the terminal. The next session will load the full zsh config.
+
+#### Firefox
+
+Same as macOS — launch Firefox once after bootstrapping to create the profile, then run `nix-switch` again to apply `chrome/` and `user.js` symlinks.
 
 ---
 
@@ -325,5 +366,5 @@ Known gaps and planned improvements:
 - **Secret management** — `secrets/` is currently empty. Plan to adopt [agenix](https://github.com/ryantm/agenix) or [sops-nix](https://github.com/Mic92/sops-nix) for encrypted secrets inside the repo.
 - **CI** — No automated validation yet. Plan to add a GitHub Actions workflow that runs `nix flake check` on every push, catching broken configs before they reach machines.
 - **`install.sh` staging scope** — `git add -A` before rebuild is overly broad; will narrow to specific files to avoid accidentally staging sensitive files.
-- **Linux host entries** — Only a generic `linux` fallback exists. Specific hosts will be added as Linux machines are provisioned.
+- **Linux host entries** — `wsl-fedora` added. More hosts will be added as Linux machines are provisioned.
 - **Linux keybindings** — keyd + sway planned for Linux key remapping (Super as Cmd equivalent). Currently on hold.
