@@ -12,30 +12,20 @@ Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager �
 ### Bootstrap (first time)
 
 ```bash
-git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
+bash <(curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh)
 ```
 
-Obviously the username is `leejunho` — update `flake.nix` if yours somehow differs:
-
-```nix
-user = "your-username";
-```
-
-Then run:
-
-```bash
-bash ~/code/dotfiles/install.sh
-```
-
-`install.sh` handles everything automatically:
+Works on both macOS and Linux/WSL. `install.sh` handles everything automatically:
 - Installs missing prerequisites (`git`, `curl`, `hostname`) — Linux only, distro-detected
 - Installs Nix (if not present)
-- Clones the dotfiles repo
+- Clones the dotfiles repo to `~/code/dotfiles`
 - Renames conflicting system files (macOS)
 - Bootstraps nix-darwin (macOS) or home-manager (Linux)
 - Clones the private config repo
 
 Platform and hostname are auto-detected — no manual editing required.
+
+> The username is hardcoded as `leejunho`. Update `flake.nix` → `user = "your-username"` if yours differs.
 
 ---
 
@@ -111,8 +101,7 @@ Only add a flake entry when the machine needs custom config (e.g. yabai, specifi
 Run `install.sh` on the new machine:
 
 ```bash
-git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
-bash ~/code/dotfiles/install.sh
+bash <(curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh)
 ```
 
 ---
