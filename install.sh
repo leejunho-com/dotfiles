@@ -16,7 +16,7 @@ if [[ "$PLATFORM" != "Darwin" ]]; then
   if [[ ${#MISSING[@]} -gt 0 ]]; then
     info "Installing prerequisites: ${MISSING[*]}"
     if   command -v dnf     &>/dev/null; then sudo dnf     install -y "${MISSING[@]}"
-    elif command -v apt-get &>/dev/null; then sudo apt-get install -y "${MISSING[@]}"
+    elif command -v apt-get &>/dev/null; then sudo apt-get update -y && sudo apt-get install -y "${MISSING[@]}"
     elif command -v pacman  &>/dev/null; then sudo pacman  -S --noconfirm "${MISSING[@]/hostname/inetutils}"
     elif command -v zypper  &>/dev/null; then sudo zypper  install -y "${MISSING[@]}"
     elif command -v apk     &>/dev/null; then sudo apk     add "${MISSING[@]}"
