@@ -303,6 +303,18 @@ wsl --shutdown
 
 `systemd = true` is required for the Nix daemon to run. The hostname here must match the key in `flake.nix` (or leave as-is to fall back to the generic `linux` config).
 
+#### Package Manager Update
+
+Update the system before installing anything:
+
+```bash
+# Fedora
+sudo dnf upgrade -y
+
+# Ubuntu / Debian
+sudo apt update && sudo apt upgrade -y
+```
+
 #### sudo Password (optional)
 
 WSL defaults to passwordless sudo. To require a password like bare metal:
