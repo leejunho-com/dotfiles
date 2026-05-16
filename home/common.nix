@@ -82,7 +82,7 @@ in
         then "$HOME/Library/Application Support/Firefox/Profiles"
         else "$HOME/.mozilla/firefox";
     in ''
-      profile_dir=$(ls -d "${profilesBase}/"*.default-release 2>/dev/null | head -1)
+      profile_dir=$(ls -d "${profilesBase}/"*.default-release 2>/dev/null | head -1) || true
       if [[ -z "$profile_dir" ]]; then
         echo "Firefox profile not found, skipping"
       else
