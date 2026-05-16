@@ -285,25 +285,23 @@ rsync -avh --exclude="HomeManager/" /path/to/backup/Fonts/ ~/Library/Fonts/
 
 #### WSL Setup
 
-Run `wsl-setup.sh` once on a fresh WSL instance, before `install.sh`:
+Create `/etc/wsl.conf` before running `install.sh`:
 
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/wsl-setup.sh) wsl-fedora
+```ini
+[boot]
+systemd = true
+
+[network]
+hostname = your-hostname
 ```
 
-Or after cloning:
-
-```bash
-bash ~/code/dotfiles/wsl-setup.sh wsl-fedora
-```
-
-This sets up `/etc/wsl.conf` (systemd + hostname) and optionally removes the NOPASSWD sudoers rule. Then restart from PowerShell:
+Then restart WSL from PowerShell:
 
 ```powershell
 wsl --shutdown
 ```
 
-`systemd = true` is required for the Nix daemon to run. The hostname must match the key in `flake.nix` (or fall back to the generic `linux` config).
+`systemd = true` is required for the Nix daemon to run. The hostname here must match the key in `flake.nix` (or leave as-is to fall back to the generic `linux` config).
 
 #### Default Shell
 
