@@ -14,7 +14,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   command -v nvd &>/dev/null && nvd diff "$BEFORE" /run/current-system
 else
   BEFORE=$(readlink -f ~/.local/state/nix/profiles/home-manager)
-  HOST="$(hostname -s)"
+  HOST="$(uname -n)"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#homeConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="linux"
   home-manager switch --flake "$DOTFILES#$HOST"

@@ -7,29 +7,11 @@ PLATFORM="$(uname)"
 info()  { echo "[INFO] $*"; }
 warn()  { echo "[WARN] $*"; }
 
-# ── Prerequisites (Linux only) ───────────────────────────────────────
-if [[ "$PLATFORM" != "Darwin" ]]; then
-  MISSING=()
-  command -v git      &>/dev/null || MISSING+=(git)
-  command -v curl     &>/dev/null || MISSING+=(curl)
-  command -v hostname &>/dev/null || MISSING+=(hostname)
-  if [[ ${#MISSING[@]} -gt 0 ]]; then
-    info "Installing prerequisites: ${MISSING[*]}"
-    if   command -v dnf     &>/dev/null; then sudo dnf     install -y "${MISSING[@]}"
-    elif command -v apt-get &>/dev/null; then sudo apt-get update -y && sudo apt-get install -y "${MISSING[@]}"
-    elif command -v pacman  &>/dev/null; then sudo pacman  -S --noconfirm "${MISSING[@]/hostname/inetutils}"
-    elif command -v zypper  &>/dev/null; then sudo zypper  install -y "${MISSING[@]}"
-    elif command -v apk     &>/dev/null; then sudo apk     add "${MISSING[@]}"
-    else warn "Unknown package manager. Install manually: ${MISSING[*]}"; exit 1
-    fi
-  fi
-fi
-
 # ── Hostname detection ───────────────────────────────────────────────
 if [[ "$PLATFORM" == "Darwin" ]]; then
   HOSTNAME="$(scutil --get LocalHostName)"
 else
-  HOSTNAME="$(hostname -s)"
+  HOSTNAME="$(uname -n)"
 fi
 
 info "Platform: $PLATFORM / Hostname: $HOSTNAME"
