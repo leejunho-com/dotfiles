@@ -88,6 +88,15 @@ else
   fi
 fi
 
+# ── Default shell (Linux only) ───────────────────────────────────────
+if [[ "$PLATFORM" != "Darwin" ]]; then
+  ZSH_PATH="$HOME/.nix-profile/bin/zsh"
+  if [[ -x "$ZSH_PATH" && "$SHELL" != "$ZSH_PATH" ]]; then
+    grep -qF "$ZSH_PATH" /etc/shells || echo "$ZSH_PATH" | sudo tee -a /etc/shells
+    chsh -s "$ZSH_PATH"
+  fi
+fi
+
 # ── Private repo (gh installed via nix above) ────────────────────────
 if [[ ! -d "$DOTFILES/private" ]]; then
   if ! gh auth status &>/dev/null; then
