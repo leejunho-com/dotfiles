@@ -303,6 +303,15 @@ wsl --shutdown
 
 `systemd = true` is required for the Nix daemon to run. The hostname here must match the key in `flake.nix` (or leave as-is to fall back to the generic `linux` config).
 
+#### sudo Password (optional)
+
+WSL defaults to passwordless sudo. To require a password like bare metal:
+
+```bash
+sudo passwd <your-username>
+sudo rm /etc/sudoers.d/wsluser
+```
+
 #### Default Shell
 
 After bootstrapping, set zsh as the default shell:
