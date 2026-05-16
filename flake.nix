@@ -110,6 +110,11 @@
       homeConfigurations = {
         # Generic linux — used as fallback by install.sh
         "linux" = mkLinux { system = "x86_64-linux"; };
+
+        "wsl-fedora" = mkLinux {
+          system = "x86_64-linux";
+          homeModules = [ ./home/linux/desktop.nix ];
+        };
       };
     };
 }
