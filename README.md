@@ -3,7 +3,7 @@
 # dotfiles
 
 Cross-platform dotfiles managed with **Nix** + **Home Manager** + **nix-darwin**.
-Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager — Rocky, Fedora, Ubuntu, WSL).
+Supports macOS (Apple Silicon & Intel) and Linux (standalone Home Manager — Rocky, Fedora, Ubuntu, WSL).
 
 ---
 
@@ -11,7 +11,7 @@ Supports macOS (Apple Silicon & Intel) and Linux/WSL (standalone Home Manager �
 
 ### Bootstrap (first time)
 
-**Requires**: `git`, `curl` (macOS: pre-installed; Linux/WSL: install via package manager first)
+**Requires**: `git`, `curl` (macOS: pre-installed; Linux: install via package manager first)
 
 ```bash
 git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
