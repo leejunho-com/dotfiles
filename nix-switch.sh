@@ -17,6 +17,6 @@ else
   HOST="$(hostname -s)"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#homeConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="linux"
-  home-manager switch --flake "$DOTFILES#$HOST"
+  nix --extra-experimental-features 'nix-command flakes' run home-manager -- switch --flake "$DOTFILES#$HOST"
   command -v nvd &>/dev/null && nvd diff "$BEFORE" ~/.local/state/nix/profiles/home-manager
 fi
