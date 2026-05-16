@@ -319,13 +319,7 @@ sudo rm /etc/sudoers.d/wsluser
 
 #### Default Shell
 
-After bootstrapping, set zsh as the default shell:
-
-```bash
-chsh -s ~/.nix-profile/bin/zsh
-```
-
-Restart the terminal. The next session will load the full zsh config.
+`install.sh` automatically sets zsh (`~/.nix-profile/bin/zsh`) as the default shell. Restart the terminal after bootstrapping — the next session will load the full zsh config.
 
 #### Firefox
 
