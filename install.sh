@@ -91,7 +91,7 @@ fi
 # ── Non-NixOS GPU setup (Linux only) ────────────────────────────────
 if [[ "$PLATFORM" != "Darwin" ]]; then
   GPU_SETUP=$(ls /nix/store/*-non-nixos-gpu*/bin/non-nixos-gpu-setup 2>/dev/null | head -1)
-  [[ -n "$GPU_SETUP" ]] && sudo "$GPU_SETUP"
+  [[ -n "$GPU_SETUP" ]] && sudo LANG=C LC_ALL=C "$GPU_SETUP"
 fi
 
 # ── Default shell (Linux only) ───────────────────────────────────────
