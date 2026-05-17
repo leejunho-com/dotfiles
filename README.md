@@ -22,6 +22,8 @@ bash ~/code/dotfiles/install.sh
 - Installs Nix (if not present)
 - Renames conflicting system files (macOS)
 - Bootstraps nix-darwin (macOS) or home-manager (Linux)
+- Sets zsh as the default shell (Linux)
+- Sets up GPU drivers for WSLg (Linux)
 - Clones the private config repo
 
 Platform and hostname are auto-detected — no manual editing required.
