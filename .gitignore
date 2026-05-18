@@ -4,6 +4,5 @@
 /incoming/log
 /karabiner/automatic_backups
 /nvim/lazy-lock.json
-/nvim/lazyvim.json
 /nvim/.neoconf.json
 .direnv/
