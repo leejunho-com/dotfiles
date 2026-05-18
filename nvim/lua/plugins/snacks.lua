@@ -148,7 +148,6 @@ return {
     zen = {
       enabled = true,
       toggles = {
-        ufo = true,
         dim = true,
         git_signs = false,
         diagnostics = false,
@@ -161,26 +160,5 @@ return {
   },
   config = function(_, opts)
     require("snacks").setup(opts)
-
-    Snacks.toggle.new({
-      id = "ufo",
-      name = "Enable/Disable ufo",
-      get = function()
-        return require("ufo").inspect()
-      end,
-      set = function(state)
-        if state == nil then
-          require("noice").enable()
-          require("ufo").enable()
-          vim.o.foldenable = true
-          vim.o.foldcolumn = "1"
-        else
-          require("noice").disable()
-          require("ufo").disable()
-          vim.o.foldenable = false
-          vim.o.foldcolumn = "0"
-        end
-      end,
-    })
   end,
 }
