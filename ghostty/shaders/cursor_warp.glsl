@@ -4,7 +4,7 @@ vec3 sRGBToLinear(vec3 c) {
 }
 
 // --- CONFIGURATION ---
-vec4 TRAIL_COLOR = vec4(sRGBToLinear(iCurrentCursorColor.rgb), iCurrentCursorColor.a); // for custom color: vec4(0.2, 0.6, 1.0, 0.5); (wrap in sRGBToLinear for correct brightness)
+vec4 TRAIL_COLOR = iCurrentCursorColor;
 const float DURATION = 0.15; // total animation time
 const float TRAIL_SIZE = 0.8; // 0.0 = all corners move together. 1.0 = max smear (leading corners jump instantly)
 const float THRESHOLD_MIN_DISTANCE = 1.0; // min distance to show trail (units of cursor height)
