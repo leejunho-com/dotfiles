@@ -2,7 +2,7 @@
 const float DURATION = 0.15;
 const float MAX_RADIUS = 0.06;
 const float ANIMATION_START_OFFSET = 0.0;
-vec4 COLOR = vec4(0.953, 0.439, 0.008, 1.0); // #F37021
+vec4 COLOR = iCurrentCursorColor;
 const float CURSOR_WIDTH_CHANGE_THRESHOLD = 0.5;
 const float BLUR = 3.0;
 
