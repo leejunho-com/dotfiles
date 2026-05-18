@@ -7,6 +7,7 @@ macos-option-as-alt = true
 
 # font
 font-family = D2CodingLigature Nerd Font
+font-family = Noto Sans CJK KR
 font-size = 25
 font-style = Regular
 font-style-bold = Bold
