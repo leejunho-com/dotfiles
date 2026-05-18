@@ -31,6 +31,9 @@ window-padding-y = 5
 quit-after-last-window-closed = true
 confirm-close-surface= always
 
+# clipboard
+clipboard-read = allow
+
 # scrollback
 scrollback-limit = 9999
 
