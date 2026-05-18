@@ -8,7 +8,9 @@ vim.opt.clipboard = "unnamedplus"
 -- the query and responds with its own buffer, not the host terminal's clipboard).
 -- For paste over SSH, use Ghostty terminal paste (Cmd+V) in insert mode.
 local function get_paste()
-  if vim.fn.has('mac') == 1 then
+  if os.getenv('TMUX') then
+    return require('vim.ui.clipboard.osc52').paste('+')
+  elseif vim.fn.has('mac') == 1 then
     return { 'pbpaste' }
   elseif os.getenv('WAYLAND_DISPLAY') then
     return { 'wl-paste', '--no-newline' }
