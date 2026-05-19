@@ -5,10 +5,12 @@ prepend_keymap = [
 	{ on = [ "<C-q>" ], run = 'quit', desc = "Exit the process" },
   { on = "$", for = "unix", run = 'shell "ghostty --working-directory=$PWD &" --block false', desc = "Open Ghostty here" },
 # goto
-  { on = [ "g", "v" ], run = "cd /Volumes", desc = "Go /Volumes" },
-  { on = [ "g", "l" ], run = "cd ~/Downloads", desc = "Go ~/Downloads" },
-	{ on = [ "g", "d" ], run = "cd ~/Desktop",   desc = "Go ~/Desktop"   },
-  { on = [ "g", "o" ], run = "cd ~/Documents", desc = "Go ~/Documents" },
+  { on = [ "g", "v" ], for = "macos", run = "cd /Volumes",     desc = "Go /Volumes"    },
+  { on = [ "g", "v" ], for = "linux", run = "cd /mnt",         desc = "Go /mnt"        },
+  { on = [ "g", "l" ], for = "unix",  run = "cd ~/Downloads",  desc = "Go ~/Downloads" },
+  { on = [ "g", "d" ], for = "unix",  run = "cd ~/Desktop",    desc = "Go ~/Desktop"   },
+  { on = [ "g", "o" ], for = "unix",  run = "cd ~/Documents",  desc = "Go ~/Documents" },
+
 # plugin
   # zoom
   {on   = "+", run  = "plugin zoom 1", desc = "Zoom in hovered file"},
