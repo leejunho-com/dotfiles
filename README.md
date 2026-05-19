@@ -417,4 +417,4 @@ Known gaps and planned improvements:
 
 ## Known Issues
 
-- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency during heavy terminal output.
+- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency.
