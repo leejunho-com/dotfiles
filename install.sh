@@ -17,8 +17,11 @@ fi
 info "Platform: $PLATFORM / Hostname: $HOSTNAME"
 
 # ── Nix ─────────────────────────────────────────────────────────────
-if ! command -v nix &>/dev/null; then
-  info "Installing Nix..."
+# Skip on NixOS (Nix is built into the OS)
+if [[ "$PLATFORM" != "Darwin" ]] && [ -f /etc/NIXOS ]; then
+  info "NixOS detected — skipping Nix install"
+elif ! command -v nix &>/dev/null; then
+  info "Installing Nix (Determinate)..."
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
@@ -70,7 +73,20 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     sudo darwin-rebuild switch --flake "$DOTFILES#$HOSTNAME"
   fi
 
-# ── Linux ────────────────────────────────────────────────────────────
+# ── NixOS ────────────────────────────────────────────────────────────
+elif [ -f /etc/NIXOS ]; then
+  cd "$DOTFILES" && git add -A
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos")"
+  if ! nix --extra-experimental-features 'nix-command flakes' eval ".#nixosConfigurations" \
+      --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
+    warn "No nixosConfigurations.$HOSTNAME found, falling back to '$FALLBACK'"
+    HOSTNAME="$FALLBACK"
+  fi
+  info "Running nixos-rebuild switch for $HOSTNAME..."
+  sudo nixos-rebuild switch --flake "$DOTFILES#$HOSTNAME" \
+    --option experimental-features 'nix-command flakes'
+
+# ── Standalone Linux (Fedora, WSL, etc.) ─────────────────────────────
 else
   cd "$DOTFILES" && git add -A
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#homeConfigurations" \
@@ -86,16 +102,12 @@ else
     nix --extra-experimental-features 'nix-command flakes' run nixpkgs#home-manager -- \
       switch --flake "$DOTFILES#$HOSTNAME"
   fi
-fi
 
-# ── Non-NixOS GPU setup (Linux only) ────────────────────────────────
-if [[ "$PLATFORM" != "Darwin" ]]; then
+  # Non-NixOS GPU setup (WSLg etc.)
   GPU_SETUP=$(ls /nix/store/*-non-nixos-gpu*/bin/non-nixos-gpu-setup 2>/dev/null | head -1)
   [[ -n "$GPU_SETUP" ]] && sudo LANG=C LC_ALL=C "$GPU_SETUP"
-fi
 
-# ── Default shell (Linux only) ───────────────────────────────────────
-if [[ "$PLATFORM" != "Darwin" ]]; then
+  # Set zsh as default shell
   ZSH_PATH="$HOME/.nix-profile/bin/zsh"
   if [[ -x "$ZSH_PATH" && "$SHELL" != "$ZSH_PATH" ]]; then
     grep -qF "$ZSH_PATH" /etc/shells || echo "$ZSH_PATH" | sudo tee -a /etc/shells
@@ -103,7 +115,7 @@ if [[ "$PLATFORM" != "Darwin" ]]; then
   fi
 fi
 
-# ── Private repo (gh installed via nix above) ────────────────────────
+# ── Private repo ─────────────────────────────────────────────────────
 if [[ ! -d "$DOTFILES/private" ]]; then
   if ! gh auth status &>/dev/null; then
     info "GitHub authentication required for private repo..."

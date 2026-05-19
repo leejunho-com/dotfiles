@@ -1,4 +1,4 @@
-{ user, pkgs, ... }:
+{ ... }:
 
 {
   services.sketchybar.enable = true;
