@@ -82,7 +82,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
 # ── NixOS ────────────────────────────────────────────────────────────
 elif [ -f /etc/NIXOS ]; then
   cd "$DOTFILES" && git add -A
-  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos")"
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos-x86")"
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#nixosConfigurations" \
       --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
     warn "No nixosConfigurations.$HOSTNAME found, falling back to '$FALLBACK'"
