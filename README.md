@@ -71,11 +71,11 @@ nix-switch   # apply after reviewing diff
 
 | Platform | Fallback key |
 |----------|-------------|
-| macOS Apple Silicon | `darwin` |
-| macOS Intel | `darwin-x86` |
-| NixOS x86_64 | `nixos` |
-| NixOS aarch64 | `nixos-arm` |
-| Standalone Linux | `linux` |
+| macOS Apple Silicon | `default` |
+| macOS Intel | `default-x86` |
+| NixOS x86_64 | `default` |
+| NixOS aarch64 | `default-arm` |
+| Standalone Linux | `default` |
 
 **No flake.nix edit needed** for generic machines — just run `install.sh`.
 
