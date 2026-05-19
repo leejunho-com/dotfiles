@@ -29,7 +29,13 @@ fi
 # ── Git bootstrap ────────────────────────────────────────────────────
 if ! command -v git &>/dev/null; then
   info "git not found — bootstrapping via nix-shell..."
-  exec nix-shell -p git --run "bash '$0'"
+  SELF="$0"
+  # curl | bash sets $0 to "bash" (not a file) — re-download to temp file
+  if [[ ! -f "$SELF" ]]; then
+    SELF=$(mktemp)
+    curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh -o "$SELF"
+  fi
+  exec nix-shell -p git --run "bash '$SELF'"
 fi
 
 # ── Dotfiles ─────────────────────────────────────────────────────────
