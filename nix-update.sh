@@ -19,7 +19,7 @@ elif [ -f /etc/NIXOS ]; then
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#nixosConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   nix --extra-experimental-features 'nix-command flakes' flake update
-  sudo nixos-rebuild build --flake "$DOTFILES#$HOST"
+  sudo nixos-rebuild build --flake "$DOTFILES#$HOST" --impure
   command -v nvd &>/dev/null && nvd diff /run/current-system ./result
 
 else

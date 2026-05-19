@@ -96,7 +96,7 @@ elif [ -f /etc/NIXOS ]; then
   fi
   info "Running nixos-rebuild switch for $HOSTNAME..."
   sudo nixos-rebuild switch --flake "$DOTFILES#$HOSTNAME" \
-    --option experimental-features 'nix-command flakes'
+    --option experimental-features 'nix-command flakes' --impure
 
 # ── Standalone Linux (Fedora, WSL, etc.) ─────────────────────────────
 else
