@@ -5,5 +5,6 @@
     firefox
     ghostty
     mpv
+    wl-clipboard
   ];
 }
