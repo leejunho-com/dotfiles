@@ -3,7 +3,7 @@
 # dotfiles
 
 Cross-platform dotfiles managed with **Nix** + **Home Manager** + **nix-darwin**.
-Supports macOS (Apple Silicon & Intel) and Linux (standalone Home Manager — Rocky, Fedora, Ubuntu, WSL).
+Supports macOS (Apple Silicon & Intel), NixOS, and standalone Linux (Home Manager — Rocky, Fedora, Ubuntu, WSL).
 
 ---
 
@@ -19,11 +19,11 @@ bash ~/code/dotfiles/install.sh
 ```
 
 `install.sh` handles everything automatically:
-- Installs Nix (if not present)
+- Installs Nix via Determinate Systems installer (macOS / standalone Linux only — NixOS skips this)
 - Renames conflicting system files (macOS)
-- Bootstraps nix-darwin (macOS) or home-manager (Linux)
-- Sets zsh as the default shell (Linux)
-- Sets up GPU drivers for WSLg (Linux)
+- Bootstraps nix-darwin (macOS), runs nixos-rebuild (NixOS), or bootstraps home-manager (standalone Linux)
+- Sets zsh as the default shell (standalone Linux)
+- Sets up GPU drivers for WSLg (standalone Linux)
 - Clones the private config repo
 
 Platform and hostname are auto-detected — no manual editing required.
@@ -59,8 +59,8 @@ nix-switch   # apply after reviewing diff
 | Edit zshrc, ghostty, nvim, etc. | Just save — symlinked, no rebuild needed |
 | Edit `tmux/tmux.conf` | `prefix+r` — sourced at runtime, no rebuild needed |
 | Add / remove packages | Edit `home/common.nix` → rebuild |
-| Change system settings | Edit `hosts/darwin/default.nix` → rebuild |
-| Machine-specific changes | Edit `hosts/darwin/<role>.nix` → rebuild |
+| Change system settings (macOS) | Edit `modules/darwin/common.nix` → rebuild |
+| Machine-specific changes | Edit `modules/darwin/<role>.nix` or `hosts/<name>/default.nix` → rebuild |
 
 ---
 
@@ -72,7 +72,9 @@ nix-switch   # apply after reviewing diff
 |----------|-------------|
 | macOS Apple Silicon | `darwin` |
 | macOS Intel | `darwin-x86` |
-| Linux | `linux` |
+| NixOS x86_64 | `nixos` |
+| NixOS aarch64 | `nixos-arm` |
+| Standalone Linux | `linux` |
 
 **No flake.nix edit needed** for generic machines — just run `install.sh`.
 
@@ -81,18 +83,25 @@ Only add a flake entry when the machine needs custom config (e.g. yabai, specifi
 **macOS** — under `darwinConfigurations`:
 ```nix
 "your-hostname" = mkDarwin {
-  system = "aarch64-darwin";  # or x86_64-darwin for Intel
-  extraModules = [ ./hosts/darwin/your-role.nix ];  # optional
-  homeModules  = [ ./home/darwin/your-role.nix ];   # optional
+  system = "aarch64-darwin";       # or x86_64-darwin for Intel
+  hostModules = [ ./hosts/your-hostname ];  # create hosts/your-hostname/default.nix
+  homeModules = [ ./home/darwin/your-role.nix ];  # optional
 };
 ```
 
-**Linux** — under `homeConfigurations`:
+**NixOS** — under `nixosConfigurations`:
+```nix
+"your-hostname" = mkNixos {
+  system = "x86_64-linux";         # or aarch64-linux
+  hostModules = [ ./hosts/your-hostname ];
+  homeModules = [ ./home/linux/desktop.nix ];  # include for GUI machines
+};
+```
+
+**Standalone Linux** — under `homeConfigurations`:
 ```nix
 # CLI only
-"your-hostname" = mkLinux {
-  system = "x86_64-linux";
-};
+"your-hostname" = mkLinux { system = "x86_64-linux"; };
 
 # GUI (WSL with WSLg, desktop distro)
 "your-hostname" = mkLinux {
@@ -120,22 +129,33 @@ dotfiles/
 ├── nix-switch.sh                # Rebuild script — day-to-day (auto-detects platform/hostname)
 ├── nix-update.sh                # Update packages — nix flake update + build + nvd diff preview
 │
+├── modules/                     # Reusable config building blocks
+│   ├── darwin/
+│   │   ├── common.nix           # All Macs: nix.enable=false, skhd, system.defaults, homebrew casks, users
+│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, transmission launchd
+│   │   └── labtop.nix           # MacBook role: yabai, sketchybar, jankyborders
+│   └── nixos/
+│       ├── common.nix           # All NixOS: boot, networking, users, hyprland, greetd, flakes
+│       └── parallels.nix        # Parallels VM: hardware.parallels.enable
+│
+├── hosts/                       # Per-machine thin wrappers (import modules)
+│   ├── mac-studio/              # imports darwin/common + darwin/workstation
+│   ├── macbook-pro/             # imports darwin/common + darwin/labtop
+│   ├── macbook-neo/             # imports darwin/common + darwin/labtop
+│   ├── macbook-pro-2018/        # imports darwin/common + darwin/labtop
+│   └── nixos-vm/                # imports nixos/common + nixos/parallels + hostName
+│
 ├── home/                        # Home Manager — user-level
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
 │   ├── darwin/
 │   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
 │   │   └── workstation.nix      # Mac Studio: transmission_4
 │   └── linux/
-│       ├── default.nix          # Linux standalone HM — CLI base (all Linux)
-│       └── desktop.nix          # GUI Linux: firefox, ghostty, mpv (WSL, desktop distros)
+│       ├── default.nix          # Standalone Linux HM — CLI base (Fedora, WSL, etc.)
+│       ├── nixos.nix            # NixOS home-manager — private + hyprland symlinks
+│       └── desktop.nix          # GUI Linux: firefox, ghostty, mpv (WSL, desktop distros, NixOS)
 │
-├── hosts/                       # nix-darwin — system-level (darwin only)
-│   ├── common.nix               # Platform-agnostic: nixpkgs.config, nix.enable = false (Determinate Nix)
-│   └── darwin/
-│       ├── default.nix          # All Macs: system.defaults, skhd, users
-│       ├── workstation.nix      # Mac Studio: yabai, sketchybar, jankyborders, transmission launchd
-│       └── labtop.nix           # MacBook Pro: yabai, sketchybar, jankyborders
-│
+├── hyprland/                    # → ~/.config/hypr (NixOS)
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
@@ -192,7 +212,7 @@ PermitEmptyPasswords no
 
 #### System Preferences
 
-> Most settings are managed via `system.defaults` in `hosts/darwin/default.nix`.
+> Most settings are managed via `system.defaults` in `modules/darwin/common.nix`.
 > The following require manual configuration:
 
 **Keyboard**
@@ -242,7 +262,7 @@ Core fonts are managed by Nix and installed automatically on `nix-switch`:
 | Package | Use |
 |---------|-----|
 | `nerd-fonts.d2coding` | Monospace (terminal, editors) |
-| `noto-fonts-cjk-sans` | CJK sans fallback |
+| `noto-fonts-cjk-sans` | CJK sans fallback (incl. Hangul Jamo for NFD filenames) |
 | `noto-fonts-cjk-serif` | CJK serif |
 | `pretendard-jp` | Primary sans-serif (Latin + Korean + Japanese superset) |
 | `nerd-fonts.symbols-only` | Icon glyphs for sketchybar / mpv OSD |
@@ -271,6 +291,18 @@ For any additional fonts not managed by Nix, restore from backup:
 ```bash
 rsync -avh --exclude="HomeManager/" /path/to/backup/Fonts/ ~/Library/Fonts/
 ```
+
+---
+
+### NixOS
+
+#### Parallels VM
+
+No extra manual steps — `hosts/nixos-vm` already imports `modules/nixos/parallels.nix` which enables `hardware.parallels.enable`. Boot from the NixOS ISO, partition, and run `install.sh`.
+
+#### Bare Metal
+
+`modules/nixos/common.nix` imports `/etc/nixos/hardware-configuration.nix` (generated by the NixOS installer — not tracked in this repo). Run `nixos-generate-config` during installation as usual, then run `install.sh`.
 
 ---
 
@@ -353,12 +385,21 @@ Every package is installed into `/nix/store/<hash>-<name>/` — isolated, no con
 **Per-machine layering** — machines share a common base and add only what they need:
 
 ```
-hosts/common.nix              ← nixpkgs.config, nix.enable = false (all platforms)
-hosts/darwin/default.nix      ← system defaults, skhd (all Macs)
-hosts/darwin/<role>.nix       ← machine-specific services (workstation, labtop, …)
-home/common.nix               ← packages + zsh + symlinks (all machines)
-home/darwin/default.nix       ← macOS-only packages + symlinks
-home/darwin/<role>.nix        ← machine-specific home packages (optional)
+modules/darwin/common.nix        ← system defaults, skhd, homebrew (all Macs)
+modules/darwin/<role>.nix        ← role-specific services: workstation, labtop
+hosts/<name>/default.nix         ← thin wrapper that imports the right modules
+home/common.nix                  ← packages + zsh + symlinks (all machines)
+home/darwin/default.nix          ← macOS-only packages + symlinks
+home/darwin/<role>.nix           ← machine-specific home packages (optional)
+```
+
+For NixOS:
+```
+modules/nixos/common.nix         ← boot, networking, users, hyprland, greetd (all NixOS)
+modules/nixos/parallels.nix      ← Parallels VM hardware support
+hosts/<name>/default.nix         ← thin wrapper + hostName
+home/linux/nixos.nix             ← NixOS home-manager (private + hyprland symlinks)
+home/linux/desktop.nix           ← GUI packages: firefox, ghostty, mpv
 ```
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
@@ -376,5 +417,5 @@ Known gaps and planned improvements:
 - **Secret management** — `secrets/` is currently empty. Plan to adopt [agenix](https://github.com/ryantm/agenix) or [sops-nix](https://github.com/Mic92/sops-nix) for encrypted secrets inside the repo.
 - **CI** — No automated validation yet. Plan to add a GitHub Actions workflow that runs `nix flake check` on every push, catching broken configs before they reach machines.
 - **`install.sh` staging scope** — `git add -A` before rebuild is overly broad; will narrow to specific files to avoid accidentally staging sensitive files.
-- **Linux host entries** — `wsl-fedora` added. More hosts will be added as Linux machines are provisioned.
 - **Linux keybindings** — keyd + sway planned for Linux key remapping (Super as Cmd equivalent). Currently on hold.
+- **NixOS bare metal** — MacBook Pro 2018 (T2) target: t2linux kernel patches via `nixos-hardware`, to be added under `hosts/macbook-pro-2018-nixos/` when attempted.
