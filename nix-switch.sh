@@ -6,7 +6,7 @@ DOTFILES="$HOME/code/dotfiles"
 if [[ "$(uname)" == "Darwin" ]]; then
   BEFORE=$(readlink -f /run/current-system)
   HOST="$(scutil --get LocalHostName)"
-  FALLBACK="$([[ "$(uname -m)" == "arm64" ]] && echo "darwin" || echo "darwin-x86")"
+  FALLBACK="$([[ "$(uname -m)" == "arm64" ]] && echo "default" || echo "default-x86")"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#darwinConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   sudo darwin-rebuild switch --flake "$DOTFILES#$HOST"
@@ -16,7 +16,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 elif [ -f /etc/NIXOS ]; then
   BEFORE=$(readlink -f /run/current-system)
   HOST="$(uname -n)"
-  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos")"
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "default-arm" || echo "default")"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#nixosConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   sudo nixos-rebuild switch --flake "$DOTFILES#$HOST"

@@ -65,7 +65,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
   fi
 
   cd "$DOTFILES" && git add -A
-  FALLBACK="$([[ "$(uname -m)" == "arm64" ]] && echo "darwin" || echo "darwin-x86")"
+  FALLBACK="$([[ "$(uname -m)" == "arm64" ]] && echo "default" || echo "default-x86")"
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#darwinConfigurations" \
       --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
     warn "No darwinConfigurations.$HOSTNAME found, falling back to '$FALLBACK'"
@@ -82,7 +82,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
 # ── NixOS ────────────────────────────────────────────────────────────
 elif [ -f /etc/NIXOS ]; then
   cd "$DOTFILES" && git add -A
-  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos")"
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "default-arm" || echo "default")"
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#nixosConfigurations" \
       --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
     warn "No nixosConfigurations.$HOSTNAME found, falling back to '$FALLBACK'"
@@ -98,7 +98,7 @@ else
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#homeConfigurations" \
       --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
     warn "No homeConfigurations.$HOSTNAME found, falling back to 'linux'"
-    HOSTNAME="linux"
+    HOSTNAME="default"
   fi
   info "Running home-manager switch for $HOSTNAME..."
   if command -v home-manager &>/dev/null; then

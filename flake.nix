@@ -118,29 +118,27 @@
           hostModules = [ ./hosts/macbook-pro-2018 ];
         };
 
-        # Generic aarch64 darwin — used as fallback by install.sh / nix-switch.sh
-        "darwin" = mkDarwin {
+        # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
+        "default" = mkDarwin {
           system = "aarch64-darwin";
           hostModules = [ ./modules/darwin/common.nix ];
         };
 
-        # Generic x86_64 darwin — used as fallback for Intel Macs
-        "darwin-x86" = mkDarwin {
+        "default-x86" = mkDarwin {
           system = "x86_64-darwin";
           hostModules = [ ./modules/darwin/common.nix ];
         };
       };
 
       nixosConfigurations = {
-        # Generic x86_64 NixOS — bare metal Intel / Parallels on Intel
-        "nixos" = mkNixos {
+        # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
+        "default" = mkNixos {
           system = "x86_64-linux";
           hostModules = [ ./modules/nixos/common.nix ];
           homeModules = [ ./home/linux/desktop.nix ];
         };
 
-        # Generic aarch64 NixOS — Parallels on Apple Silicon
-        "nixos-arm" = mkNixos {
+        "default-arm" = mkNixos {
           system = "aarch64-linux";
           hostModules = [ ./modules/nixos/common.nix ];
           homeModules = [ ./home/linux/desktop.nix ];
@@ -156,8 +154,8 @@
       # Standalone home-manager for non-NixOS Linux (Rocky, Fedora, WSL, etc.)
       # Apply with: home-manager switch --flake ~/code/dotfiles#<hostname>
       homeConfigurations = {
-        # Generic linux — used as fallback by install.sh / nix-switch.sh
-        "linux" = mkLinux { system = "x86_64-linux"; };
+        # Generic fallback — used by install.sh / nix-switch.sh when no hostname match
+        "default" = mkLinux { system = "x86_64-linux"; };
 
         "wsl-fedora" = mkLinux {
           system = "x86_64-linux";
