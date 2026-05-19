@@ -26,6 +26,12 @@ elif ! command -v nix &>/dev/null; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
+# ── Git bootstrap ────────────────────────────────────────────────────
+if ! command -v git &>/dev/null; then
+  info "git not found — bootstrapping via nix-shell..."
+  exec nix-shell -p git --run "bash '$0'"
+fi
+
 # ── Dotfiles ─────────────────────────────────────────────────────────
 if [[ ! -d "$DOTFILES" ]]; then
   info "Cloning dotfiles..."

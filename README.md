@@ -11,17 +11,13 @@ Supports macOS (Apple Silicon & Intel), NixOS, and standalone Linux (Home Manage
 
 ### Bootstrap (first time)
 
-**Requires**: `git`, `curl` (macOS: pre-installed; Linux: install via package manager first)
+**Requires**: `curl` (macOS: pre-installed; Linux: system package manager)
 
 ```bash
-git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
-bash ~/code/dotfiles/install.sh
+curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh | bash
 ```
 
-> **NixOS**: `git` is not pre-installed. Bootstrap with:
-> ```bash
-> nix-shell -p git --run "git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles && bash ~/code/dotfiles/install.sh"
-> ```
+Nix and `git` are bootstrapped automatically — no manual prerequisites beyond `curl`.
 
 `install.sh` handles everything automatically:
 - Installs Nix via Determinate Systems installer (macOS / standalone Linux only — NixOS skips this)
@@ -329,16 +325,14 @@ wsl --shutdown
 
 #### Package Manager Update
 
-Update the system and install required packages before running `install.sh`:
+Update the system before running `install.sh`:
 
 ```bash
 # Fedora
 sudo dnf upgrade -y
-sudo dnf install -y git curl
 
 # Ubuntu / Debian
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y git curl
 ```
 
 #### sudo Password (optional)
