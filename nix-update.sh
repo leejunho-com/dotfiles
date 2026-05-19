@@ -15,7 +15,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
 elif [ -f /etc/NIXOS ]; then
   HOST="$(uname -n)"
-  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos-x86")"
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos")"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#nixosConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   nix --extra-experimental-features 'nix-command flakes' flake update
