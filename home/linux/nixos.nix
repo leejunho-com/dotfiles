@@ -1,0 +1,12 @@
+{ config, ... }:
+
+let
+  dotfiles = "${config.home.homeDirectory}/code/dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+in
+{
+  home.file = {
+    ".config/private".source = link "private";
+    ".config/hypr".source    = link "hyprland";
+  };
+}

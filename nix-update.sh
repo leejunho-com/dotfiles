@@ -12,8 +12,18 @@ if [[ "$(uname)" == "Darwin" ]]; then
   nix --extra-experimental-features 'nix-command flakes' flake update
   sudo darwin-rebuild build --flake "$DOTFILES#$HOST"
   command -v nvd &>/dev/null && nvd diff /run/current-system ./result
+
+elif [ -f /etc/NIXOS ]; then
+  HOST="$(uname -n)"
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "nixos-arm" || echo "nixos")"
+  nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#nixosConfigurations" \
+    --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
+  nix --extra-experimental-features 'nix-command flakes' flake update
+  sudo nixos-rebuild build --flake "$DOTFILES#$HOST"
+  command -v nvd &>/dev/null && nvd diff /run/current-system ./result
+
 else
-  HOST="$(hostname -s)"
+  HOST="$(uname -n)"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#homeConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="linux"
   nix --extra-experimental-features 'nix-command flakes' flake update

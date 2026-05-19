@@ -1,6 +1,11 @@
 { user, ... }:
 
 {
+  # Determinate Nix manages the Nix installation; disable nix-darwin's management
+  nix.enable = false;
+
+  nixpkgs.config.allowUnfree = true;
+
   services.skhd.enable = true;
 
   system.defaults = {
@@ -19,7 +24,6 @@
 
     # Finder
     finder.AppleShowAllExtensions = true;                            # Finder > Show all filename extensions: on
-    # finder.QuitMenuItem = true;                                    # Finder > Quit Menu Item: on
 
     # Keyboard
     NSGlobalDomain.KeyRepeat = 2;                                    # Keyboard > Key repeat rate: Fast
