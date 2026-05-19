@@ -412,3 +412,9 @@ Known gaps and planned improvements:
 - **`install.sh` staging scope** — `git add -A` before rebuild is overly broad; will narrow to specific files to avoid accidentally staging sensitive files.
 - **Linux keybindings** — keyd + sway planned for Linux key remapping (Super as Cmd equivalent). Currently on hold.
 - **NixOS bare metal** — MacBook Pro 2018 (T2) target: t2linux kernel patches via `nixos-hardware`, to be added under `hosts/macbook-pro-2018-nixos/` when attempted.
+
+---
+
+## Known Issues
+
+- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency during heavy terminal output.
