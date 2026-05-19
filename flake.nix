@@ -133,7 +133,7 @@
 
       nixosConfigurations = {
         # Generic x86_64 NixOS — bare metal Intel / Parallels on Intel
-        "nixos-x86" = mkNixos {
+        "nixos" = mkNixos {
           system = "x86_64-linux";
           hostModules = [ ./modules/nixos/common.nix ];
           homeModules = [ ./home/linux/desktop.nix ];
