@@ -18,6 +18,11 @@ git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles
 bash ~/code/dotfiles/install.sh
 ```
 
+> **NixOS**: `git` is not pre-installed. Bootstrap with:
+> ```bash
+> nix-shell -p git --run "git clone https://github.com/leejunho-com/dotfiles.git ~/code/dotfiles && bash ~/code/dotfiles/install.sh"
+> ```
+
 `install.sh` handles everything automatically:
 - Installs Nix via Determinate Systems installer (macOS / standalone Linux only — NixOS skips this)
 - Renames conflicting system files (macOS)
