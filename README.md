@@ -73,7 +73,7 @@ nix-switch   # apply after reviewing diff
 |----------|-------------|
 | macOS Apple Silicon | `darwin` |
 | macOS Intel | `darwin-x86` |
-| NixOS x86_64 | `nixos` |
+| NixOS x86_64 | `nixos-x86` |
 | NixOS aarch64 | `nixos-arm` |
 | Standalone Linux | `linux` |
 
