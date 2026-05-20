@@ -4,4 +4,6 @@
   ];
 
   networking.hostName = "nixos-vm";
+
+  services.openssh.enable = true;
 }
