@@ -7,6 +7,7 @@ IOREG=$(ioreg -rn AppleSmartBattery)
 BATTERY_INSTALLED=$(echo "$IOREG" | grep '"BatteryInstalled"' | grep -o 'Yes\|No')
 PERCENTAGE=$(echo "$IOREG" | grep '"CurrentCapacity"' | grep -o '[0-9]*')
 IS_CHARGING=$(echo "$IOREG" | grep '"IsCharging"' | grep -o 'Yes\|No')
+EXTERNAL=$(echo "$IOREG" | grep '"ExternalConnected"' | grep -o 'Yes\|No')
 WATTS=$(echo "$IOREG" | grep -o '"SystemPowerIn"=[0-9]*' | grep -o '[0-9]*')
 WATTS_W=$(awk "BEGIN {printf \"%.1f\", $WATTS/1000}")
 
@@ -27,4 +28,10 @@ if [ "$IS_CHARGING" = "Yes" ]; then
   ICON="$ICON_BAT_CHARGING"
 fi
 
-sketchybar --set $NAME icon="$ICON" label="${PERCENTAGE}%" label.drawing=on
+if [ "$EXTERNAL" = "Yes" ]; then
+  LABEL="${PERCENTAGE}% ${WATTS_W}W"
+else
+  LABEL="${PERCENTAGE}%"
+fi
+
+sketchybar --set $NAME icon="$ICON" label="$LABEL" label.drawing=on

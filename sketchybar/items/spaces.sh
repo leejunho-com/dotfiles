@@ -15,12 +15,6 @@ do
 done
 
 sketchybar --add item space_separator left                             \
-           --set space_separator icon="􀆊"                              \
-                                 icon.color=$WHITE \
-                                 icon.padding_left=5 \
-                                 icon.padding_right=-3 \
-                                 label.drawing=on \
-                                 background.drawing=on \
-                                 background.corner_radius=12 \
+           --set space_separator drawing=off                           \
                                  script="$PLUGIN_DIR/space_windows.sh" \
            --subscribe space_separator space_windows_change                           
