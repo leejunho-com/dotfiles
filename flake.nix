@@ -157,7 +157,7 @@
         };
       };
 
-      # Standalone home-manager for non-NixOS Linux (Rocky, Fedora, WSL, etc.)
+      # Standalone home-manager for non-nixos linux (Rocky, Fedora, WSL, etc.)
       # Apply with: home-manager switch --flake ~/code/dotfiles#<hostname>
       homeConfigurations = {
         # Generic fallback — used by install.sh / nix-switch.sh when no hostname match

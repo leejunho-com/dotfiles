@@ -42,6 +42,17 @@
             "C-S-p" = "S-up";
           };
         }
+        {
+          name = "darwin-style shortcuts";
+          application.not = [ "com.mitchellh.ghostty" ];
+          remap = {
+            "Super-c" = "C-c";
+            "Super-v" = "C-v";
+            "Super-x" = "C-x";
+            "Super-z" = "C-z";
+            "Super-a" = "C-a";
+          };
+        }
       ];
     };
   };

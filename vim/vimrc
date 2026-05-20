@@ -165,9 +165,9 @@ set background=dark
 
 " Sync clipboard with OS
 if system('uname -s') == "Darwin\n"
-  set clipboard=unnamed "OSX
+  set clipboard=unnamed "darwin
 else
-  set clipboard=unnamedplus "Linux
+  set clipboard=unnamedplus "linux
 endif
 
 " True colors
