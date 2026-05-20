@@ -61,3 +61,14 @@ export ACCENT_COLOR=$BLACK
 export FONT_FAMILY="D2CodingLigature Nerd Font Mono"
 export FONT="$FONT_FAMILY:Bold:15.0"
 export FONT_REG="$FONT_FAMILY:Regular:15.0"
+export ICON_FONT="Symbols Nerd Font:Regular:16.0"
+
+# -- Icons --
+
+export ICON_CPU=""
+export ICON_MEMORY=""
+export ICON_VOL_HIGH="󰕾"
+export ICON_VOL_MID="󰖀"
+export ICON_VOL_LOW="󰕿"
+export ICON_VOL_MUTE="󰸈"
+export ICON_CALENDAR="󰃰"
