@@ -38,7 +38,6 @@ clipboard-read = allow
 # cursor shaders (community, not official Ghostty)
 # custom-shader = shaders/cursor_warp.glsl
 # custom-shader = shaders/sonic_boom_cursor.glsl
-# custom-shader-animation = always
 
 # scrollback
 scrollback-limit = 9999
