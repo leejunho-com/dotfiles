@@ -5,16 +5,17 @@ CPU_PERCENT=$(ps -eo pcpu | awk -v cores="$CORE_COUNT" \
   'NR>1 {sum+=$1} END {printf "%.0f", sum/cores}')
 
 PAGE_SIZE=$(pagesize)
-MEM_LABEL=$(vm_stat | awk -v page="$PAGE_SIZE" '
-  /Pages active/                 {gsub(/\./, "", $3); active=$3}
-  /Pages wired down/             {gsub(/\./, "", $4); wired=$4}
-  /Pages free/                   {gsub(/\./, "", $3); free=$3}
-  /Pages speculative/            {gsub(/\./, "", $3); spec=$3}
-  /Pages purgeable/              {gsub(/\./, "", $3); purgeable=$3}
-  /File-backed pages/            {gsub(/\./, "", $3); filebacked=$3}
+TOTAL_BYTES=$(sysctl -n hw.memsize)
+MEM_LABEL=$(vm_stat | awk -v page="$PAGE_SIZE" -v total="$TOTAL_BYTES" '
+  /Pages active/                  {gsub(/\./, "", $3); active=$3}
+  /Pages wired down/              {gsub(/\./, "", $4); wired=$4}
+  /Pages free/                    {gsub(/\./, "", $3); free=$3}
+  /Pages speculative/             {gsub(/\./, "", $3); spec=$3}
+  /Pages purgeable/               {gsub(/\./, "", $3); purgeable=$3}
+  /File-backed pages/             {gsub(/\./, "", $3); filebacked=$3}
   END {
     used     = (active + wired) * page / 1073741824
-    avail_gb = (free + spec + purgeable + filebacked) * page / 1073741824
+    avail_gb = (total - (active + wired) * page) / 1073741824
     cache_gb = filebacked * page / 1073741824
     free_gb  = (free + spec) * page / 1073741824
     printf "used %.1fG  avail %.1fG  cache %.1fG  free %.1fG", used, avail_gb, cache_gb, free_gb
