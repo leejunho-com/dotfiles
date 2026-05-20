@@ -46,15 +46,19 @@ sketchybar --default icon.font="SF Pro:Semibold:15.0"  \
                      background.padding_left=0 \
                      background.padding_right=4
 
-# -- Left Side Items --
+# -- Left Side Items (--add item <name> left) --
 source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/front_app.sh
 source $ITEM_DIR/input_source.sh
 
-# -- Right Side Of Notch Items --
+# -- Left Side Of Notch Items (--add item <name> q) --
+
+# -- Center Items (--add item <name> center) --
+
+# -- Right Side Of Notch Items (--add item <name> e) --
 #source $ITEM_DIR/media.sh
 
-# -- Right Side Items --
+# -- Right Side Items (--add item <name> right) --
 source $ITEM_DIR/calendar.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
