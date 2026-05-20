@@ -61,7 +61,7 @@ source $ITEM_DIR/input_source.sh
 # -- Right Side Items (--add item <name> right) --
 source $ITEM_DIR/clock.sh
 source $ITEM_DIR/volume.sh
-source $ITEM_DIR/battery.sh
+source $ITEM_DIR/power.sh
 source $ITEM_DIR/memory.sh
 source $ITEM_DIR/cpu.sh
 
