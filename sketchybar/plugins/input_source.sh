@@ -4,7 +4,7 @@ SOURCE=$(defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSele
 
 if [[ "$SOURCE" == *"com.apple.inputmethod.Korean"* ]]; then
   sketchybar --set inputsource label="ko" background.color=0xfff37021 \
-             --bar color=0x600C8FDE
+             --bar color=0x6d000000
 else
   sketchybar --set inputsource label="en" background.color=0x3f000000 \
              --bar color=0x00000000

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/theme.sh" # Loads colors and fonts
 
 # This is a demo config to show some of the most important commands more easily.
 # This is meant to be changed and configured, as it is intentionally kept sparse.
@@ -17,7 +17,7 @@ ITEM_DIR="$CONFIG_DIR/items"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar height=37        \
+sketchybar --bar height=38        \
                  blur_radius=10   \
                  position=top     \
                  sticky=off       \
@@ -30,9 +30,9 @@ sketchybar --bar height=37        \
 # For a full list of all available item properties see:
 # https://felixkratz.github.io/SketchyBar/config/items
 
-sketchybar --default icon.font="SF Pro:Semibold:15.0"  \
+sketchybar --default icon.font="$FONT"                 \
                      icon.color=$WHITE                 \
-                     label.font="SF Pro:Semibold:15.0" \
+                     label.font="$FONT"                \
                      label.color=$WHITE                \
                      background.color=$ITEM_BG_COLOR       \
                      background.corner_radius=12            \
