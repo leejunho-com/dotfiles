@@ -48,10 +48,10 @@ sketchybar --default icon.font="$FONT"                 \
 
 # -- Left Side Items (--add item <name> left) --
 source $ITEM_DIR/spaces.sh
-source $ITEM_DIR/front_app.sh
 source $ITEM_DIR/input_source.sh
 
 # -- Left Side Of Notch Items (--add item <name> q) --
+source $ITEM_DIR/front_app.sh
 
 # -- Center Items (--add item <name> center) --
 

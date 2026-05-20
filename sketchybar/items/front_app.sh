@@ -1,9 +1,7 @@
 #!/bin/bash
 
-sketchybar --add item front_app left \
-           --set front_app background.color=$AERO_0 \
-                           icon.background.drawing=on \
-                           label.font="$FONT" \
-                           label.color=$WHITE \
+sketchybar --add item front_app q \
+           --set front_app icon.background.drawing=on \
+                           background.x_offset=4 \
                            script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
