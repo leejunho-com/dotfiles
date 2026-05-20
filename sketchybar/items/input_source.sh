@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sketchybar --add item inputsource center \
+sketchybar --add item inputsource left \
            --set inputsource \
                script="$PLUGIN_DIR/input_source.sh" \
                icon.drawing=off \
