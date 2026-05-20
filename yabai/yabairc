@@ -75,10 +75,9 @@ yabai -m rule --add app!="^(Ghostty|Finder|Code|Claude|Firefox|Discord|Obsidian|
 # not work with disabling above
 
 # Status bar
-# add 32 padding to the top and 0 padding to the bottom of every space located on the main display
-#yabai -m config external_bar all:32:0
-# add 20 padding to the top and bottom of all spaces regardless of the display it belongs to
-yabai -m config external_bar all:29:0
+yabai -m config external_bar all:30:0
+# yabai -m config external_bar main:30:0
+# yabai -m config external_bar off:30:0
 
 # In yabai v6.0.12+ you can also completely disable the menubar using yabai -m config menubar_opacity 0.0regardless this setting.
 #yabai -m config menubar_opacity 0.8
