@@ -59,8 +59,6 @@
       "plex"
       "proton-pass"
       "protonvpn"
-      "sf-symbols"
-      "font-sf-pro"
       "visual-studio-code"
     ];
   };
