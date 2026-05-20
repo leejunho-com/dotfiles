@@ -13,6 +13,7 @@ export AERO_1=0x50ffffff
 export SELECT=0xfff37021
 
 export BAR_COLOR=$NONE
+export BAR_KO_COLOR=0x6da9e15d
 export ITEM_BG_COLOR=$AERO_0
 export ACCENT_COLOR=$BLACK
 
@@ -58,13 +59,14 @@ export ACCENT_COLOR=$BLACK
 
 # -- Fonts --
 
-export FONT_FAMILY="D2CodingLigature Nerd Font Mono"
+export FONT_FAMILY="Pretendard JP"
 export FONT="$FONT_FAMILY:Bold:15.0"
 export FONT_REG="$FONT_FAMILY:Regular:15.0"
 export ICON_FONT="Symbols Nerd Font:Regular:16.0"
 
 # -- Icons --
 
+export ICON_INPUT=""
 export ICON_CPU=""
 export ICON_MEMORY=""
 export ICON_VOL_HIGH="󰕾"

@@ -17,38 +17,42 @@ ITEM_DIR="$CONFIG_DIR/items"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar height=38        \
-                 blur_radius=10   \
-                 position=top     \
-                 sticky=off       \
-                 padding_left=10  \
-                 padding_right=10 \
-                 color=$BAR_COLOR
+sketchybar --bar height=38 \
+  blur_radius=10 \
+  position=top \
+  sticky=off \
+  padding_left=10 \
+  padding_right=10 \
+  color=$BAR_COLOR
 
 ##### Changing Defaults #####
 # We now change some default values that are applied to all further items
 # For a full list of all available item properties see:
 # https://felixkratz.github.io/SketchyBar/config/items
 
-sketchybar --default icon.font="$FONT"                 \
-                     icon.color=$WHITE                 \
-                     label.font="$FONT"                \
-                     label.color=$WHITE                \
-                     background.color=$ITEM_BG_COLOR       \
-                     background.corner_radius=12            \
-                     background.height=24                  \
-                     padding_left=4                        \
-                     padding_right=0                       \
-                     label.padding_left=0                  \
-                     label.padding_right=10                \
-                     icon.padding_left=10                  \
-                     icon.padding_right=2 \
-                     background.padding_left=0 \
-                     background.padding_right=4
+sketchybar --default y_offset=1 \
+  icon.font="$FONT" \
+  icon.color=$WHITE \
+  label.font="$FONT" \
+  label.color=$WHITE \
+  background.color=$ITEM_BG_COLOR \
+  background.corner_radius=12 \
+  background.height=24 \
+  padding_left=4 \
+  padding_right=0 \
+  label.padding_left=0 \
+  label.padding_right=10 \
+  icon.padding_left=10 \
+  icon.padding_right=2 \
+  background.padding_left=0 \
+  background.padding_right=4
 
 # -- Left Side Items (--add item <name> left) --
-source $ITEM_DIR/spaces.sh
+source $ITEM_DIR/logo.sh
+sketchybar --add item spacer1 left --set spacer1 width=10 background.drawing=off label.drawing=off icon.drawing=off
 source $ITEM_DIR/input_source.sh
+sketchybar --add item spacer2 left --set spacer2 width=7 background.drawing=off label.drawing=off icon.drawing=off
+source $ITEM_DIR/spaces.sh
 
 # -- Left Side Of Notch Items (--add item <name> q) --
 source $ITEM_DIR/front_app.sh
@@ -56,14 +60,13 @@ source $ITEM_DIR/front_app.sh
 # -- Center Items (--add item <name> center) --
 
 # -- Right Side Of Notch Items (--add item <name> e) --
-#source $ITEM_DIR/media.sh
+source $ITEM_DIR/cpu.sh
+source $ITEM_DIR/memory.sh
+source $ITEM_DIR/power.sh
 
 # -- Right Side Items (--add item <name> right) --
 source $ITEM_DIR/clock.sh
 source $ITEM_DIR/volume.sh
-source $ITEM_DIR/power.sh
-source $ITEM_DIR/memory.sh
-source $ITEM_DIR/cpu.sh
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to

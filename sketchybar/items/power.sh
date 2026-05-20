@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sketchybar --add item power right \
+sketchybar --add item power e \
            --set power icon.font="$ICON_FONT" \
                        update_freq=30 \
                        script="$PLUGIN_DIR/power.sh" \
