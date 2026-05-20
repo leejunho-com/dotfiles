@@ -7,7 +7,7 @@ in
 {
   home.packages = with pkgs; [ darwin.trash wireguard-go sketchybar-app-font mpv ];
 
-  # macOS-only dotfiles → ~/.config/ symlinks
+  # darwin-only dotfiles → ~/.config/ symlinks
   home.file = {
     ".config/sketchybar".source = link "sketchybar";
     ".config/skhd".source       = link "skhd";

@@ -17,7 +17,7 @@ fi
 info "Platform: $PLATFORM / Hostname: $HOSTNAME"
 
 # ── Nix ─────────────────────────────────────────────────────────────
-# Skip on NixOS (Nix is built into the OS)
+# Skip on nixos (Nix is built into the OS)
 if [[ "$PLATFORM" != "Darwin" ]] && [ -f /etc/NIXOS ]; then
   info "NixOS detected — skipping Nix install"
 elif ! command -v nix &>/dev/null; then
@@ -85,7 +85,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     sudo darwin-rebuild switch --flake "$DOTFILES#$HOSTNAME"
   fi
 
-# ── NixOS ────────────────────────────────────────────────────────────
+# ── nixos ────────────────────────────────────────────────────────────
 elif [ -f /etc/NIXOS ]; then
   cd "$DOTFILES" && git add -A
   FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "default-arm" || echo "default")"
@@ -98,7 +98,7 @@ elif [ -f /etc/NIXOS ]; then
   sudo nixos-rebuild switch --flake "$DOTFILES#$HOSTNAME" \
     --option experimental-features 'nix-command flakes' --impure
 
-# ── Standalone Linux (Fedora, WSL, etc.) ─────────────────────────────
+# ── Standalone linux (Fedora, WSL, etc.) ─────────────────────────────
 else
   cd "$DOTFILES" && git add -A
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#homeConfigurations" \
@@ -115,7 +115,7 @@ else
       switch --flake "$DOTFILES#$HOSTNAME"
   fi
 
-  # Non-NixOS GPU setup (WSLg etc.)
+  # Non-nixos GPU setup (WSLg etc.)
   GPU_SETUP=$(ls /nix/store/*-non-nixos-gpu*/bin/non-nixos-gpu-setup 2>/dev/null | head -1)
   [[ -n "$GPU_SETUP" ]] && sudo LANG=C LC_ALL=C "$GPU_SETUP"
 
