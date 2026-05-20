@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    xremap-nix = {
+      url = "github:xremap/nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -21,8 +26,9 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      xremap-nix,
       ...
-    }:
+    }@inputs:
     let
       user = "leejunho";
 
@@ -59,7 +65,7 @@
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          extraSpecialArgs = { inherit user; };
+          extraSpecialArgs = { inherit user inputs; };
           modules = [
             ./home/common.nix
             ./home/linux
@@ -81,7 +87,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit user; };
+              home-manager.extraSpecialArgs = { inherit user inputs; };
               home-manager.users.${user} = {
                 imports = [
                   ./home/common.nix
