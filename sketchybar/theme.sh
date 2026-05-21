@@ -6,7 +6,7 @@
 export WHITE=0xffffffff
 export BLACK=0xff000000
 
-# -- forepaly --
+# -- foreplay --
 export NONE=0x00000000 # opacity 0%
 export AERO_0=0x3f000000
 export AERO_1=0x50ffffff
