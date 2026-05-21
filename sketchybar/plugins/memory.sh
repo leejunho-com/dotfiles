@@ -1,9 +1,5 @@
 #!/bin/bash
 
-CORE_COUNT=$(sysctl -n machdep.cpu.thread_count)
-CPU_PERCENT=$(ps -eo pcpu | awk -v cores="$CORE_COUNT" \
-  'NR>1 {sum+=$1} END {printf "%.0f", sum/cores}')
-
 PAGE_SIZE=$(pagesize)
 TOTAL_BYTES=$(sysctl -n hw.memsize)
 MEM_LABEL=$(vm_stat | awk -v page="$PAGE_SIZE" -v total="$TOTAL_BYTES" '
@@ -30,5 +26,4 @@ SWAP_GB=$(sysctl -n vm.swapusage | awk '{
   else                  printf "0.0"
 }')
 
-sketchybar --set $NAME label="$CPU_PERCENT%" \
-           --set memory label="$MEM_LABEL s${SWAP_GB}G"
+sketchybar --set $NAME label="$MEM_LABEL s${SWAP_GB}G"
