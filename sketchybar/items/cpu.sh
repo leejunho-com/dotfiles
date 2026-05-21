@@ -5,4 +5,5 @@ sketchybar --add item cpu e \
                      icon="$ICON_CPU" \
                      icon.font="$ICON_FONT" \
                      background.padding_left=6 \
-                     script="$PLUGIN_DIR/resources.sh"
+                     label.width=40 \
+                     script="$PLUGIN_DIR/cpu.sh"
