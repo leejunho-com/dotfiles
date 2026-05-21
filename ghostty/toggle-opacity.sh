@@ -9,4 +9,4 @@ else
   sed -i 's/^background-opacity = .*/background-opacity = 0.5/' "$CONFIG"
 fi
 
-kill -SIGUSR2 $(pgrep -x ghostty) 2>/dev/null
+kill -SIGUSR2 $(pgrep ghostty) 2>/dev/null
