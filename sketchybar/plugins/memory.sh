@@ -14,7 +14,7 @@ MEM_LABEL=$(vm_stat | awk -v page="$PAGE_SIZE" -v total="$TOTAL_BYTES" '
     avail_gb = (total - (active + wired) * page) / 1073741824
     cache_gb = filebacked * page / 1073741824
     free_gb  = (free + spec) * page / 1073741824
-    printf "u%.1fG a%.1fG c%.1fG f%.1fG", used, avail_gb, cache_gb, free_gb
+    printf "u%.1f a%.1f c%.1f f%.1f", used, avail_gb, cache_gb, free_gb
   }
 ')
 
@@ -26,4 +26,4 @@ SWAP_GB=$(sysctl -n vm.swapusage | awk '{
   else                  printf "0.0"
 }')
 
-sketchybar --set $NAME label="$MEM_LABEL s${SWAP_GB}G"
+sketchybar --set $NAME label="$MEM_LABEL s${SWAP_GB}"
