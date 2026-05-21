@@ -1,8 +1,7 @@
 #!/bin/bash
 
-source "$CONFIG_DIR/theme.sh"
-
 if [ "$SENDER" = "volume_change" ]; then
+  source "$CONFIG_DIR/theme.sh"
   VOLUME=$INFO
 
   case $VOLUME in
