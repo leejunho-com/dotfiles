@@ -113,6 +113,7 @@ alt - r             : open -a "Adobe Photoshop 2026"
 alt + shift - t     : open -a Terminal
 alt - y             : yabai -m window --toggle float --grid 10:10:1:1:8:8 # toggle window float
 alt - u             : skhd -k "cmd - tab"
+alt + shift - u     : bash ~/.config/ghostty/toggle-opacity.sh
 alt - i             : open -a Firefox
 alt - o             : open -a Obsidian
 alt - p             : open -a "Proton Pass"
