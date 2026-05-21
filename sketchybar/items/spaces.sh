@@ -11,10 +11,10 @@ do
                               label.padding_left=-5                     \
                               label.padding_right=16                     \
                               label.y_offset=-1                          \
-                              script="$PLUGIN_DIR/space.sh"              
+                              script="$PLUGIN_DIR/space.sh"
 done
 
 sketchybar --add item space_separator left                             \
            --set space_separator drawing=off                           \
                                  script="$PLUGIN_DIR/space_windows.sh" \
-           --subscribe space_separator space_windows_change                           
+           --subscribe space_separator space_windows_change

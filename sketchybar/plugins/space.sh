@@ -10,10 +10,10 @@ if [ $SELECTED = true ]; then
   sketchybar --set $NAME background.drawing=on \
                          background.color=$SELECT \
                          label.color=$WHITE \
-                         icon.color=$WHITE 
+                         icon.color=$WHITE
 else
   sketchybar --set $NAME background.drawing=on \
                          background.color=$AERO_0 \
                          label.color=$WHITE \
-                         icon.color=$WHITE 
+                         icon.color=$WHITE
 fi
