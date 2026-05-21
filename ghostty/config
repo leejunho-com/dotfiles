@@ -32,6 +32,9 @@ window-padding-y = 5
 quit-after-last-window-closed = true
 confirm-close-surface= always
 
+# keybind
+keybind = cmd+u=toggle_background_opacity
+
 # clipboard
 clipboard-read = allow
 
