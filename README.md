@@ -69,13 +69,13 @@ nix-switch   # apply after reviewing diff
 
 `install.sh` and `nix-switch.sh` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
 
-| Platform | Fallback key |
-|----------|-------------|
-| macOS Apple Silicon | `default` |
-| macOS Intel | `default-x86` |
-| NixOS x86_64 | `default` |
-| NixOS aarch64 | `default-arm` |
-| Standalone Linux | `default` |
+| Platform | Config |
+|----------|--------|
+| macOS Apple Silicon | `modules/darwin/common.nix` |
+| macOS Intel | `modules/darwin/common.nix` |
+| NixOS x86_64 | `modules/nixos/common.nix` |
+| NixOS aarch64 | `modules/nixos/common.nix` |
+| Standalone Linux | `home/linux/default.nix` |
 
 **No flake.nix edit needed** for generic machines — just run `install.sh`.
 
