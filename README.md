@@ -14,7 +14,7 @@ Supports macOS (Apple Silicon & Intel), NixOS, and standalone Linux (Home Manage
 **Requires**: `curl` (macOS: pre-installed; Linux: system package manager)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/leejunho-com/dotfiles/main/install.sh | bash
+curl -fsSL nix.leejunho.com | bash
 ```
 
 Nix and `git` are bootstrapped automatically — no manual prerequisites beyond `curl`.
