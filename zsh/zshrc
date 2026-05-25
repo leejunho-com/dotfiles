@@ -147,28 +147,6 @@ source "$_PRIVATE/common/zsh.env"
 [[ -f "$_PRIVATE/linux/zsh.env" ]]   && source "$_PRIVATE/linux/zsh.env"
 [[ -f "$_PRIVATE/$_HOSTNAME/zsh.env" ]] && source "$_PRIVATE/$_HOSTNAME/zsh.env"
 
-# discord webhook
-discord() {
-  local msg
-  if [ $# -gt 0 ]; then
-    msg="# $*"
-  else
-    msg=""
-  fi
-
-  [ -n "$TMUX" ] && session=" (tmux: $(tmux display-message -p '#S'))"
-
-  msg="${msg}\n⚡️Job Finished\n> 📍 $(hostname)${session:-}\n> 🕒 $(date '+%Y-%m-%d %H:%M:%S')\n"
-
-  printf "%b" "$msg" | jq -R -s '{content: .}' | \
-    curl -s -H "Content-Type: application/json" \
-         -X POST \
-         -d @- "$DISCORD_WEBHOOK" > /dev/null
-}
-
-function _insert_time() {
-  LBUFFER+=$(date "+#   %y-%m-%d %a %H:%M:%S %Z")
-  zle redisplay
-}
-zle -N _insert_time
-bindkey "^[t" _insert_time
+# load functions
+for _f in ~/code/dotfiles/zsh/func/*.sh; do source "$_f"; done
+unset _f
