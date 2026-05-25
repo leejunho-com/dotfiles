@@ -3,6 +3,7 @@
 #   discord "msg"     plain text, no footer
 #   discord -m "msg"  plain text + footer
 #   discord -c "code" code block + footer
+#   discord -c -      code block from stdin (ls | discord -c -)
 #   discord -j        job notification, title auto-detected from preceding command
 
 _discord_host=${HOSTNAME%%.*}
@@ -24,7 +25,7 @@ discord() {
   done
   shift $((OPTIND-1))
   [[ "$mode" == "plain" && -z "$content" ]] && content="$*"
-  [[ -z "$content" && ! -t 0 ]] && content=$(cat)
+  [[ "$content" == "-" ]] && content=$(cat)
 
   local host=$_discord_host session="" payload
   [[ -n "$TMUX" ]] && session=" (tmux: $(tmux display-message -p '#S'))"
