@@ -24,6 +24,7 @@ discord() {
   done
   shift $((OPTIND-1))
   [[ "$mode" == "plain" && -z "$content" ]] && content="$*"
+  [[ -z "$content" && ! -t 0 ]] && content=$(cat)
 
   local host=$_discord_host session="" payload
   [[ -n "$TMUX" ]] && session=" (tmux: $(tmux display-message -p '#S'))"
