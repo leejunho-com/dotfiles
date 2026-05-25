@@ -4,7 +4,13 @@
 #   discord -m "msg"  plain text + footer
 #   discord -c "code" code block + footer
 #   discord -j        job notification, title auto-detected from preceding command
+
 _discord_host=${HOSTNAME%%.*}
+_discord_last_cmd=""
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec _discord_preexec
+_discord_preexec() { _discord_last_cmd="$1" }
 
 discord() {
   local OPTIND=1 opt mode="plain" content=""
@@ -40,7 +46,7 @@ discord() {
       ;;
     job)
       local title
-      title=$(fc -ln -1 2>/dev/null | sed 's/ *&&[[:space:]]*discord.*//; s/^[[:space:]]*//')
+      title=$(echo "$_discord_last_cmd" | sed 's/ *[|&][|&][[:space:]]*discord.*//; s/^[[:space:]]*//')
       local body
       printf -v body "# %s\n⚡️Job Finished\n> 📍 %s%s\n> 🕒 %s\n" \
         "$title" "$host" "$session" "$(date '+%Y-%m-%d %H:%M:%S')"
