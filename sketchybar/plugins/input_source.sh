@@ -14,7 +14,7 @@ if [[ "$SOURCE" == *"com.apple.inputmethod.Korean"* ]]; then
              --set volume     background.color=$SELECT \
              #--bar color=$BAR_KO_COLOR
 else
-  sketchybar --set inputsource label="en" label.color=$WHITE background.color=$NONE \
+  sketchybar --set inputsource label="en" label.color=$WHITE background.color=$NONE background.border_width=0 \
              --set front_app  background.color=$ITEM_BG_COLOR \
              --set cpu        background.color=$ITEM_BG_COLOR \
              --set memory     background.color=$ITEM_BG_COLOR \
