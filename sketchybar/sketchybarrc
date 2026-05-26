@@ -45,7 +45,8 @@ sketchybar --default y_offset=1 \
   icon.padding_left=10 \
   icon.padding_right=2 \
   background.padding_left=0 \
-  background.padding_right=4
+  background.padding_right=4 \
+  blur_radius=5
 
 # -- Left Side Items (--add item <name> left) --
 source $ITEM_DIR/logo.sh
