@@ -62,10 +62,11 @@
         {
           system,
           homeModules ? [ ],
+          username ? user,
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          extraSpecialArgs = { inherit user inputs; };
+          extraSpecialArgs = { user = username; inherit inputs; };
           modules = [
             ./home/common.nix
             ./home/linux
@@ -166,6 +167,7 @@
 
         "galaxy-tab" = mkLinux {
           system = "aarch64-linux";
+          username = "droid";
           homeModules = [ ./home/linux/desktop.nix ];
         };
 
