@@ -8,6 +8,11 @@
 
   services.skhd.enable = true;
 
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    KbdInteractiveAuthentication = false;
+  };
+
   system.defaults = {
     # Appearance
     NSGlobalDomain.AppleInterfaceStyle = "Dark";                     # Appearance > Appearance: Dark
