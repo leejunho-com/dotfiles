@@ -103,8 +103,9 @@ else
   cd "$DOTFILES" && git add -A
   if ! nix --extra-experimental-features 'nix-command flakes' eval ".#homeConfigurations" \
       --apply "x: builtins.hasAttr \"$HOSTNAME\" x" 2>/dev/null | grep -q true; then
-    warn "No homeConfigurations.$HOSTNAME found, falling back to 'linux'"
-    HOSTNAME="default"
+    FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "default-arm" || echo "default")"
+    warn "No homeConfigurations.$HOSTNAME found, falling back to '$FALLBACK'"
+    HOSTNAME="$FALLBACK"
   fi
   info "Running home-manager switch for $HOSTNAME..."
   if command -v home-manager &>/dev/null; then

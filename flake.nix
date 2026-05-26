@@ -160,8 +160,14 @@
       # Standalone home-manager for non-nixos linux (Rocky, Fedora, WSL, etc.)
       # Apply with: home-manager switch --flake ~/code/dotfiles#<hostname>
       homeConfigurations = {
-        # Generic fallback — used by install.sh / nix-switch.sh when no hostname match
-        "default" = mkLinux { system = "x86_64-linux"; };
+        # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
+        "default"     = mkLinux { system = "x86_64-linux"; };
+        "default-arm" = mkLinux { system = "aarch64-linux"; };
+
+        "galaxy-tab" = mkLinux {
+          system = "aarch64-linux";
+          homeModules = [ ./home/linux/desktop.nix ];
+        };
 
         "wsl-fedora" = mkLinux {
           system = "x86_64-linux";
