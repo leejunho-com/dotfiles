@@ -11,6 +11,11 @@
   services.openssh.extraConfig = ''
     PasswordAuthentication no
     KbdInteractiveAuthentication no
+    PermitRootLogin no
+    LoginGraceTime 30
+    MaxAuthTries 3
+    ClientAliveInterval 300
+    ClientAliveCountMax 48
   '';
 
   system.defaults = {
