@@ -165,7 +165,7 @@
         "default"     = mkLinux { system = "x86_64-linux"; };
         "default-arm" = mkLinux { system = "aarch64-linux"; };
 
-        "galaxy-tab" = mkLinux {
+        "debian" = mkLinux {
           system = "aarch64-linux";
           username = "droid";
           homeModules = [ ./home/linux/desktop.nix ];
