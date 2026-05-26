@@ -58,7 +58,6 @@ source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/front_app.sh
 
 # -- Center Items (--add item <name> center) --
-source $ITEM_DIR/center.sh
 
 # -- Right Side Of Notch Items (--add item <name> e) --
 source $ITEM_DIR/cpu.sh

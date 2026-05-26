@@ -12,7 +12,6 @@ if [[ "$SOURCE" == *"com.apple.inputmethod.Korean"* ]]; then
              --set power      background.color=$SELECT \
              --set clock      background.color=$SELECT \
              --set volume     background.color=$SELECT \
-             --set center     background.color=0xffe42022 \
              #--bar color=$BAR_KO_COLOR
 else
   sketchybar --set inputsource label="en" label.color=$WHITE background.color=$NONE \
@@ -22,6 +21,5 @@ else
              --set power      background.color=$ITEM_BG_COLOR \
              --set clock      background.color=$ITEM_BG_COLOR \
              --set volume     background.color=$ITEM_BG_COLOR \
-             --set center     background.color=0x55e42022 \
              #--bar color=0x00000000
 fi
