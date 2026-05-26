@@ -62,11 +62,10 @@
         {
           system,
           homeModules ? [ ],
-          username ? user,
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          extraSpecialArgs = { user = username; inherit inputs; };
+          extraSpecialArgs = { inherit user inputs; };
           modules = [
             ./home/common.nix
             ./home/linux
@@ -164,12 +163,6 @@
         # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
         "default"     = mkLinux { system = "x86_64-linux"; };
         "default-arm" = mkLinux { system = "aarch64-linux"; };
-
-        "debian" = mkLinux {
-          system = "aarch64-linux";
-          username = "droid";
-          homeModules = [ ./home/linux/desktop.nix ];
-        };
 
         "wsl-fedora" = mkLinux {
           system = "x86_64-linux";
