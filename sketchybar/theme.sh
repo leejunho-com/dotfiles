@@ -8,18 +8,18 @@ export BLACK=0xff000000
 
 # -- foreplay --
 export NONE=0x00000000 # opacity 0%
-export AERO_0=0x3f000000
-export AERO_1=0x50ffffff
+export LIQUID_GLASS=0x3f000000
+export LIQUID_GLASS_BORDER=0x20ffffff
 export SELECT=0xfff37021
 
 export BAR_COLOR=$NONE
 export BAR_KO_COLOR=0x6da9e15d
-export ITEM_BG_COLOR=$AERO_0
+export ITEM_BG_COLOR=$LIQUID_GLASS
 export ACCENT_COLOR=$BLACK
 
 # -- Teal Scheme --
 # export BAR_COLOR=0x00000000
-# export ITEM_BG_COLOR=$AERO_0
+# export ITEM_BG_COLOR=$LIQUID_GLASS
 # export ACCENT_COLOR=$WHITE
 
 # -- Gray Scheme --
