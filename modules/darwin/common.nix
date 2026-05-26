@@ -8,10 +8,10 @@
 
   services.skhd.enable = true;
 
-  services.openssh.settings = {
-    PasswordAuthentication = false;
-    KbdInteractiveAuthentication = false;
-  };
+  services.openssh.extraConfig = ''
+    PasswordAuthentication no
+    KbdInteractiveAuthentication no
+  '';
 
   system.defaults = {
     # Appearance
