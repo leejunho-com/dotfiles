@@ -47,7 +47,7 @@ sketchybar --default y_offset=1 \
   background.padding_left=0 \
   background.padding_right=4 \
   background.border_width=1 \
-  background.border_color=0x20ffffff \
+  background.border_color=$LIQUID_GLASS_BORDER \
   blur_radius=5
 
 # -- Left Side Items (--add item <name> left) --

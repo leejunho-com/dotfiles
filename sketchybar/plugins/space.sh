@@ -7,13 +7,13 @@
 source "$CONFIG_DIR/theme.sh"
 
 if [ $SELECTED = true ]; then
-  sketchybar --set $NAME background.drawing=on \
-                         background.color=$SELECT \
+  sketchybar --set $NAME background.border_color=$SELECT \
+                         background.border_width=3 \
                          label.color=$WHITE \
                          icon.color=$WHITE
 else
-  sketchybar --set $NAME background.drawing=on \
-                         background.color=$AERO_0 \
+  sketchybar --set $NAME background.border_color=$LIQUID_GLASS_BORDER \
+                         background.border_width=1 \
                          label.color=$WHITE \
                          icon.color=$WHITE
 fi
