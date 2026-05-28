@@ -12,7 +12,7 @@
 
   services.xremap = {
     enable = true;
-    withX11 = true;
+    withWlroots = true;
     config = {
       keymap = [
         {
