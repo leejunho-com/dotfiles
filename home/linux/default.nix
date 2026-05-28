@@ -1,3 +1,4 @@
+# standalone home-manager only (non-nixos linux)
 { ... }:
 
 {
