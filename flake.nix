@@ -139,13 +139,13 @@
         # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
         "default" = mkNixos {
           system = "x86_64-linux";
-          hostModules = [ ./modules/nixos/common.nix ];
+          hostModules = [ ./modules/nixos/common.nix ./modules/nixos/uefi.nix ];
           homeModules = [ ./home/linux/desktop.nix ];
         };
 
         "default-arm" = mkNixos {
           system = "aarch64-linux";
-          hostModules = [ ./modules/nixos/common.nix ];
+          hostModules = [ ./modules/nixos/common.nix ./modules/nixos/uefi.nix ];
           homeModules = [ ./home/linux/desktop.nix ];
         };
 
