@@ -21,17 +21,8 @@
   security.sudo.wheelNeedsPassword = false;
 
   programs.zsh.enable = true;
-  programs.hyprland.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-      user = "greeter";
-    };
-  };
 
   system.stateVersion = "25.11";
 }
