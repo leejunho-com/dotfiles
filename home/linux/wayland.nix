@@ -1,5 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
 
+let
+  dotfiles = "${config.home.homeDirectory}/code/dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+in
 {
   imports = [ inputs.xremap-nix.homeManagerModules.default ];
 
@@ -9,6 +13,8 @@
     mpv
     wl-clipboard
   ];
+
+  home.file.".config/hypr".source = link "hyprland";
 
   services.xremap = {
     enable = true;

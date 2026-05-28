@@ -149,6 +149,12 @@
           homeModules = [ ./home/linux/wayland.nix ];
         };
 
+        "thinkpad-x200s" = mkNixos {
+          system = "x86_64-linux";
+          hostModules = [ ./hosts/thinkpad-x200s ];
+          homeModules = [ ./home/linux/x11.nix ];
+        };
+
       };
 
       # Standalone home-manager for non-nixos linux (Rocky, Fedora, WSL, etc.)
