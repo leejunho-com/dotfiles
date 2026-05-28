@@ -140,13 +140,13 @@
         "default" = mkNixos {
           system = "x86_64-linux";
           hostModules = [ ./modules/nixos/common.nix ./modules/nixos/uefi.nix ];
-          homeModules = [ ./home/linux/desktop.nix ];
+          homeModules = [ ./home/linux/wayland.nix ];
         };
 
         "default-arm" = mkNixos {
           system = "aarch64-linux";
           hostModules = [ ./modules/nixos/common.nix ./modules/nixos/uefi.nix ];
-          homeModules = [ ./home/linux/desktop.nix ];
+          homeModules = [ ./home/linux/wayland.nix ];
         };
 
       };
@@ -160,7 +160,7 @@
 
         "wsl-fedora" = mkLinux {
           system = "x86_64-linux";
-          homeModules = [ ./home/linux/desktop.nix ];
+          homeModules = [ ./home/linux/wayland.nix ];
         };
       };
     };
