@@ -12,7 +12,7 @@
 
   services.xremap = {
     enable = true;
-    withHypr = true;
+    withX11 = true;
     config = {
       keymap = [
         {

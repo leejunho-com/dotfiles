@@ -91,7 +91,6 @@
               home-manager.users.${user} = {
                 imports = [
                   ./home/common.nix
-                  ./home/linux/nixos.nix
                 ] ++ homeModules;
                 home.stateVersion = "25.11";
               };
@@ -150,11 +149,6 @@
           homeModules = [ ./home/linux/desktop.nix ];
         };
 
-        "nixos-vm" = mkNixos {
-          system = "aarch64-linux";
-          hostModules = [ ./hosts/nixos-vm ];
-          homeModules = [ ./home/linux/desktop.nix ];
-        };
       };
 
       # Standalone home-manager for non-nixos linux (Rocky, Fedora, WSL, etc.)
