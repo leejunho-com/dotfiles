@@ -25,8 +25,9 @@ elif [ -f /etc/NIXOS ]; then
 else
   BEFORE=$(readlink -f ~/.local/state/nix/profiles/home-manager)
   HOST="$(uname -n)"
+  FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "default-arm" || echo "default")"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#homeConfigurations" \
-    --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="linux"
+    --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   home-manager switch --flake "$DOTFILES#$HOST"
   command -v nvd &>/dev/null && nvd diff "$BEFORE" ~/.local/state/nix/profiles/home-manager
 fi
