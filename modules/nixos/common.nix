@@ -1,8 +1,6 @@
 { pkgs, user, ... }:
 
 {
-  imports = [ /etc/nixos/hardware-configuration.nix ];
-
   nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
