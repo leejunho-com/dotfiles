@@ -1,7 +1,14 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
+
+let
+  dotfiles = "${config.home.homeDirectory}/code/dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+in
 
 {
   imports = [ inputs.xremap-nix.homeManagerModules.default ];
+
+  home.file.".config/private".source = link "private";
 
   home.packages = with pkgs; [
     fcitx5
