@@ -40,11 +40,9 @@
       PermitRootLogin = "no";
       LoginGraceTime = 30;
       MaxAuthTries = 3;
+      ClientAliveInterval = 300;
+      ClientAliveCountMax = 48;
     };
-    extraConfig = ''
-      ClientAliveInterval 300
-      ClientAliveCountMax 48
-    '';
   };
 
   users.users.${user}.initialPassword = "nixos";
