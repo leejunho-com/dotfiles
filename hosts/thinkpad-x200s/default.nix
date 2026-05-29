@@ -32,5 +32,20 @@
 
   services.tlp.enable = true;
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      LoginGraceTime = 30;
+      MaxAuthTries = 3;
+    };
+    extraConfig = ''
+      ClientAliveInterval 300
+      ClientAliveCountMax 48
+    '';
+  };
+
   users.users.${user}.initialPassword = "nixos";
 }
