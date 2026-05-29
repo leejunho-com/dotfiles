@@ -50,6 +50,9 @@
 
   hardware.uinput.enable = true;
 
+  services.xserver.xkb.options = "ctrl:nocaps";
+  console.useXkbConfig = true;
+
   console.font = "ter-v24b";
   console.packages = [ pkgs.terminus_font ];
 
