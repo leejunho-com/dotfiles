@@ -17,7 +17,7 @@
     enable = true;
     windowManager.i3.enable = true;
   };
-  services.displayManager.lightdm.enable = true;
+  services.displayManager.sddm.enable = true;
 
   # acpi_osi: mute button fix
   # nohpet: suppress NMI error on resume
