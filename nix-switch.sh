@@ -19,7 +19,7 @@ elif [ -f /etc/NIXOS ]; then
   FALLBACK="$([[ "$(uname -m)" == "aarch64" ]] && echo "default-arm" || echo "default")"
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#nixosConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
-  sudo -E nixos-rebuild switch --flake "$DOTFILES#$HOST" --impure
+  sudo nixos-rebuild switch --flake "$DOTFILES#$HOST" --impure
   command -v nvd &>/dev/null && nvd diff "$BEFORE" /run/current-system
 
 else
