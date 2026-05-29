@@ -95,8 +95,8 @@ in
           };
         }
         {
-          name = "darwin-style shortcuts (st)";
-          application.only = [ "st" ];
+          name = "darwin-style shortcuts (terminal)";
+          application.only = [ "com.mitchellh.ghostty" "st" ];
           remap = {
             "Super-c" = "C-S-c";
             "Super-v" = "C-S-v";
