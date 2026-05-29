@@ -8,7 +8,11 @@
     ghostty
     mpv
     xclip
-    st
+    (pkgs.st.overrideAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+        sed -i 's/pixelsize=[0-9]*/pixelsize=16/' config.def.h
+      '';
+    }))
   ];
 
   services.xremap = {
