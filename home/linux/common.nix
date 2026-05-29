@@ -22,7 +22,9 @@ in
     XMODIFIERS = "@im=fcitx";
   };
 
-  xdg.configFile."fcitx5/profile".text = ''
+  xdg.configFile."fcitx5/profile" = {
+    force = true;
+    text = ''
     [Groups/0]
     Name=Default
     Default Layout=us
@@ -39,6 +41,7 @@ in
     [GroupOrder]
     0=Default
   '';
+  };
 
   services.xremap = {
     enable = true;
