@@ -52,8 +52,8 @@ in
           device.only = [ "AT Translated Set 2 keyboard" ];
           remap = {
             "CapsLock" = "Ctrl_L";
-            "Alt_L" = "Super_L";
-            "Super_L" = "Alt_L";
+            "LeftAlt" = "LeftMeta";
+            "LeftMeta" = "LeftAlt";
           };
         }
       ];
