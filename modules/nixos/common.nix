@@ -11,6 +11,8 @@
   time.timeZone = "Asia/Seoul";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  users.groups.staff = {};
+
   users.users.${user} = {
     isSystemUser = false;
     uid = 501;
