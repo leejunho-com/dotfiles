@@ -8,6 +8,7 @@
     ghostty
     mpv
     xclip
+    st
   ];
 
   services.xremap = {
