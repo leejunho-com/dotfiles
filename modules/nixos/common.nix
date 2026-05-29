@@ -11,9 +11,13 @@
   time.timeZone = "Asia/Seoul";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  users.groups.staff.gid = 20;
+
   users.users.${user} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "input" ];
+    uid = 501;
+    group = "staff";
+    extraGroups = [ "wheel" "networkmanager" "video" "input" "uinput" ];
     shell = pkgs.zsh;
   };
   security.sudo.wheelNeedsPassword = false;
