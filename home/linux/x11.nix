@@ -1,7 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
+let
+  dotfiles = "${config.home.homeDirectory}/code/dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+in
 {
   imports = [ ./gui.nix ];
+
+  home.file.".xinitrc".source = link "xinitrc";
 
   home.packages = with pkgs; [
     xclip

@@ -16,10 +16,7 @@
   services.xserver = {
     enable = true;
     windowManager.i3.enable = true;
-  };
-  services.displayManager.sddm = {
-    enable = true;
-    settings.Users.MinimumUid = 501;
+    displayManager.startx.enable = true;
   };
 
   # acpi_osi: mute button fix
