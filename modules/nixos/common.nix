@@ -3,7 +3,10 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.macAddress = "permanent";
+  };
 
   time.timeZone = "Asia/Seoul";
   i18n.defaultLocale = "en_US.UTF-8";
