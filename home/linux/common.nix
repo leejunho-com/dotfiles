@@ -61,7 +61,7 @@ in
         }
         {
           name = "emacs editing";
-          application.not = [ "com.mitchellh.ghostty" ];
+          application.not = [ "com.mitchellh.ghostty" "st" ];
           remap = {
             "C-a" = "home";
             "C-e" = "end";
@@ -76,7 +76,7 @@ in
         }
         {
           name = "darwin-style shortcuts";
-          application.not = [ "com.mitchellh.ghostty" ];
+          application.not = [ "com.mitchellh.ghostty" "st" ];
           remap = {
             "Super-c" = "C-c";
             "Super-v" = "C-v";
