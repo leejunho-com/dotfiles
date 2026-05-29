@@ -17,7 +17,10 @@
     enable = true;
     windowManager.i3.enable = true;
   };
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    settings.Users.MinimumUid = 501;
+  };
 
   # acpi_osi: mute button fix
   # nohpet: suppress NMI error on resume
