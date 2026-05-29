@@ -11,12 +11,12 @@
   time.timeZone = "Asia/Seoul";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.groups.staff.gid = 20;
-
   users.users.${user} = {
-    isNormalUser = true;
+    isSystemUser = false;
     uid = 501;
     group = "staff";
+    createHome = true;
+    home = "/home/${user}";
     extraGroups = [ "wheel" "networkmanager" "video" "input" "uinput" ];
     shell = pkgs.zsh;
   };
