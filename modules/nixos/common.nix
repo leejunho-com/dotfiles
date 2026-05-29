@@ -50,6 +50,9 @@
 
   hardware.uinput.enable = true;
 
+  console.font = "ter-v24n";
+  console.packages = [ pkgs.terminus_font ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";
