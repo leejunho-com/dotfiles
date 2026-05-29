@@ -92,6 +92,10 @@ in
     ''
   );
 
+  home.file.".ssh/authorized_keys".text = ''
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPjroV9eMQkw8Q3vTYrRyr2VJH/bTlyYyN/zv1Swfk8 leejunho@mac-studio
+  '';
+
   # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
     ".p10k.zsh".source      = link "zsh/p10k.zsh";
