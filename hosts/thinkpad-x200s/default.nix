@@ -16,7 +16,6 @@
   services.xserver = {
     enable = true;
     windowManager.i3.enable = true;
-    xkb.options = "ctrl:nocaps";
   };
   services.displayManager.sddm.enable = true;
 

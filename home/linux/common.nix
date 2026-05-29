@@ -48,6 +48,15 @@ in
     config = {
       keymap = [
         {
+          name = "built-in keyboard remapping";
+          device.only = [ "AT Translated Set 2 keyboard" ];
+          remap = {
+            "CapsLock" = "Ctrl_L";
+            "Alt_L" = "Super_L";
+            "Super_L" = "Alt_L";
+          };
+        }
+        {
           name = "emacs navigation";
           remap = {
             "C-p" = "up";
@@ -83,6 +92,14 @@ in
             "Super-x" = "C-x";
             "Super-z" = "C-z";
             "Super-a" = "C-a";
+          };
+        }
+        {
+          name = "darwin-style shortcuts (st)";
+          application.only = [ "st" ];
+          remap = {
+            "Super-c" = "C-S-c";
+            "Super-v" = "C-S-v";
           };
         }
       ];
