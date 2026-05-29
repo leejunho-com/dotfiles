@@ -1,2 +1,2 @@
 systemctl --user daemon-reload
-exec i3
+exec dbus-launch --exit-with-session i3
