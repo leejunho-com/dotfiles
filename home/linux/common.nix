@@ -48,13 +48,19 @@ in
     config = {
       modmap = [
         {
-          name = "built-in keyboard remapping";
+          name = "built-in keyboard: caps to ctrl";
           device.only = [ "AT Translated Set 2 keyboard" ];
-          remap = {
-            "CapsLock" = "Ctrl_L";
-            "LeftAlt" = "LeftMeta";
-            "LeftMeta" = "LeftAlt";
-          };
+          remap = { "CapsLock" = "Ctrl_L"; };
+        }
+        {
+          name = "built-in keyboard: alt to super";
+          device.only = [ "AT Translated Set 2 keyboard" ];
+          remap = { "LeftAlt" = "LeftMeta"; };
+        }
+        {
+          name = "built-in keyboard: super to alt";
+          device.only = [ "AT Translated Set 2 keyboard" ];
+          remap = { "LeftMeta" = "LeftAlt"; };
         }
       ];
       keymap = [
