@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./common.nix ];
+  imports = [ ./gui.nix ];
 
   home.packages = with pkgs; [
     xclip

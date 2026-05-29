@@ -5,7 +5,7 @@ let
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in
 {
-  imports = [ ./common.nix ];
+  imports = [ ./gui.nix ];
 
   home.packages = with pkgs; [
     wl-clipboard
