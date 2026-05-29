@@ -46,7 +46,7 @@ in
   services.xremap = {
     enable = true;
     config = {
-      keymap = [
+      modmap = [
         {
           name = "built-in keyboard remapping";
           device.only = [ "AT Translated Set 2 keyboard" ];
@@ -56,6 +56,8 @@ in
             "Super_L" = "Alt_L";
           };
         }
+      ];
+      keymap = [
         {
           name = "emacs navigation";
           remap = {
