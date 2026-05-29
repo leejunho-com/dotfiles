@@ -46,23 +46,6 @@ in
   services.xremap = {
     enable = true;
     config = {
-      modmap = [
-        {
-          name = "built-in keyboard: caps to ctrl";
-          device.only = [ "AT Translated Set 2 keyboard" ];
-          remap = { "CapsLock" = "Ctrl_L"; };
-        }
-        {
-          name = "built-in keyboard: alt to super";
-          device.only = [ "AT Translated Set 2 keyboard" ];
-          remap = { "LeftAlt" = "LeftMeta"; };
-        }
-        {
-          name = "built-in keyboard: super to alt";
-          device.only = [ "AT Translated Set 2 keyboard" ];
-          remap = { "LeftMeta" = "LeftAlt"; };
-        }
-      ];
       keymap = [
         {
           name = "emacs navigation";
