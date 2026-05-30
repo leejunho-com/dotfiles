@@ -18,6 +18,9 @@ in
     (pkgs.st.overrideAttrs (old: {
       postPatch = (old.postPatch or "") + ''
         sed -i 's/font = "[^"]*"/font = "D2CodingLigature Nerd Font,Noto Sans CJK KR:pixelsize=25:antialias=true:autohint=true"/' config.def.h
+        sed -Ei 's/\{ TERMMOD,[[:space:]]+XK_Prior,[[:space:]]+zoom,[[:space:]]+\{\.f = \+1\} \}/{ Mod4Mask, XK_equal, zoom,      {.f = +1} }/' config.def.h
+        sed -Ei 's/\{ TERMMOD,[[:space:]]+XK_Next,[[:space:]]+zoom,[[:space:]]+\{\.f = -1\} \}/{ Mod4Mask, XK_minus, zoom,      {.f = -1} }/' config.def.h
+        sed -Ei 's/\{ TERMMOD,[[:space:]]+XK_Home,[[:space:]]+zoomreset,[[:space:]]+\{\.f =[[:space:]]+0\} \}/{ Mod4Mask, XK_0,     zoomreset, {.f =  0} }/' config.def.h
         awk '
         /^static const char \*colorname/ { skip=1
           print "static const char *colorname[] = {"
