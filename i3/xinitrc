@@ -1,5 +1,4 @@
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
-xrdb -merge ~/.Xresources
 systemctl --user import-environment DISPLAY XAUTHORITY
 systemctl --user start xremap.service
 exec i3
