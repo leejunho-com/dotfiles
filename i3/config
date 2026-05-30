@@ -7,10 +7,10 @@ default_border pixel 0
 floating_modifier $mod
 focus_follows_mouse yes
 
-# terminal / launcher
-bindsym $mod+Return exec st
-bindsym $mod+d      exec dmenu_run
-bindsym $mod+w      exec firefox
+# app shortcuts (matches skhd pattern)
+bindsym $mod+semicolon exec st
+bindsym $mod+w         exec firefox
+bindsym $mod+i         exec firefox
 
 # kill (hyprland: SUPER+Q)
 bindsym $mod+q kill
