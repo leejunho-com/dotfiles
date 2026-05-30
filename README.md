@@ -73,8 +73,8 @@ nix-switch   # apply after reviewing diff
 |----------|--------|
 | macOS Apple Silicon | `modules/darwin/common.nix` |
 | macOS Intel | `modules/darwin/common.nix` |
-| NixOS x86_64 | `modules/nixos/common.nix` |
-| NixOS aarch64 | `modules/nixos/common.nix` |
+| NixOS x86_64 | `modules/nixos/common.nix` + `uefi.nix` |
+| NixOS aarch64 | `modules/nixos/common.nix` + `uefi.nix` |
 | Standalone Linux | `home/linux/default.nix` |
 
 **No flake.nix edit needed** for generic machines — just run `install.sh`.
@@ -208,12 +208,12 @@ csrutil disable
 
 #### SSH
 
-`/etc/ssh/sshd_config`:
+SSH hardening (PasswordAuthentication, PermitRootLogin, etc.) is managed by nix-darwin in `modules/darwin/common.nix`. Only SSH key setup needs to be done manually:
 
-```
-PubkeyAuthentication yes
-PasswordAuthentication no
-PermitEmptyPasswords no
+```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+echo "your-public-key" >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
 ```
 
 #### System Preferences
@@ -401,6 +401,15 @@ hosts/<name>/default.nix         ← thin wrapper: imports modules + machine-spe
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland: wl-clipboard, hyprland symlink
 home/linux/x11.nix               ← X11/i3: xclip, st, xinitrc symlinks
+```
+
+For standalone Linux (Home Manager only):
+```
+home/linux/default.nix           ← CLI base: programs.home-manager, genericLinux
+home/linux/common.nix            ← All Linux: fcitx5, private symlink
+home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
+home/linux/wayland.nix           ← Wayland GUI: wl-clipboard, hyprland symlink
+home/linux/x11.nix               ← X11/i3 GUI: xclip, st, i3/xinitrc symlinks
 ```
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
