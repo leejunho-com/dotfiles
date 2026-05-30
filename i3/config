@@ -7,10 +7,10 @@ default_border pixel 0
 floating_modifier $mod
 focus_follows_mouse yes
 
-# app shortcuts (matches skhd pattern)
-bindsym $mod+semicolon exec st
-bindsym $mod+w         exec firefox
-bindsym $mod+i         exec firefox
+# app shortcuts — focus if running, else launch (matches skhd pattern)
+bindsym $mod+semicolon exec --no-startup-id i3-msg '[class="st-256color"] focus' || st
+bindsym $mod+w         exec --no-startup-id i3-msg '[class="firefox"] focus' || firefox
+bindsym $mod+i         exec --no-startup-id i3-msg '[class="firefox"] focus' || firefox
 
 # kill (hyprland: SUPER+Q)
 bindsym $mod+q kill
