@@ -3,57 +3,69 @@ set $mod Mod4
 font pango:monospace 10
 
 floating_modifier $mod
+focus_follows_mouse yes
 
+# terminal / launcher
 bindsym $mod+Return exec st
-bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d      exec dmenu_run
+bindsym $mod+w      exec firefox
 
+# kill (hyprland: SUPER+Q)
+bindsym $mod+q kill
+
+# focus (vim, matches skhd/hyprland)
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
+# move window (matches skhd alt+shift)
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# resize (matches skhd alt+ctrl)
+bindsym $mod+ctrl+h resize shrink width  50 px
+bindsym $mod+ctrl+j resize grow   height 50 px
+bindsym $mod+ctrl+k resize shrink height 50 px
+bindsym $mod+ctrl+l resize grow   width  50 px
+
+# fullscreen / float (matches hyprland)
+bindsym $mod+ctrl+m fullscreen toggle
+bindsym $mod+y      floating toggle
+bindsym $mod+space  focus mode_toggle
+
+# split (i3-specific)
 bindsym $mod+v split h
 bindsym $mod+s split v
 
-bindsym $mod+f fullscreen toggle
-
-bindsym $mod+e layout toggle split
-bindsym $mod+w layout tabbed
-
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-
+# workspaces — switch
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
 bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
 
+# workspaces — move window
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
 
+# i3 management
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-
-mode "resize" {
-    bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize grow height 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
-    bindsym l resize grow width 10 px or 10 ppt
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
+bindsym $mod+Shift+e exec i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'
 
 bar {
     status_command i3status
