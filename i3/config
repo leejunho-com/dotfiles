@@ -2,6 +2,11 @@ set $mod Mod1
 
 font pango:monospace 10
 
+default_border pixel 1
+client.focused          #f37021 #f37021 #ffffff #f37021 #f37021
+client.unfocused        #595959 #595959 #888888 #595959 #595959
+client.focused_inactive #595959 #595959 #888888 #595959 #595959
+
 floating_modifier $mod
 focus_follows_mouse yes
 
