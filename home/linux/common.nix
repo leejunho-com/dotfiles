@@ -49,7 +49,7 @@ in
       keymap = [
         {
           name = "emacs navigation";
-          application.not = [ "com.mitchellh.ghostty" "st" ];
+          application.not = [ "com.mitchellh.ghostty" "st-256color" ];
           remap = {
             "C-p" = "up";
             "C-n" = "down";
@@ -62,7 +62,7 @@ in
         }
         {
           name = "emacs editing";
-          application.not = [ "com.mitchellh.ghostty" "st" ];
+          application.not = [ "com.mitchellh.ghostty" "st-256color" ];
           remap = {
             "C-a" = "home";
             "C-e" = "end";
@@ -77,7 +77,7 @@ in
         }
         {
           name = "darwin-style shortcuts";
-          application.not = [ "com.mitchellh.ghostty" "st" ];
+          application.not = [ "com.mitchellh.ghostty" "st-256color" ];
           remap = {
             "Super-c" = "C-c";
             "Super-v" = "C-v";
@@ -88,7 +88,7 @@ in
         }
         {
           name = "darwin-style shortcuts (terminal)";
-          application.only = [ "com.mitchellh.ghostty" "st" ];
+          application.only = [ "com.mitchellh.ghostty" "st-256color" ];
           remap = {
             "Super-c" = "C-S-c";
             "Super-v" = "C-S-v";
