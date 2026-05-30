@@ -13,6 +13,7 @@ in
   home.packages = with pkgs; [
     xclip
     rofi
+    alttab
     (pkgs.st.overrideAttrs (old: {
       postPatch = (old.postPatch or "") + ''
         sed -i 's/font = "[^"]*"/font = "D2CodingLigature Nerd Font,Noto Sans CJK KR:pixelsize=25:antialias=true:autohint=true"/' config.def.h
