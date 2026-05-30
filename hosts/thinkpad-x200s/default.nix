@@ -31,8 +31,6 @@
 
   services.tlp.enable = true;
 
-  users.users.${user}.initialPassword = "nixos";
-
   home-manager.users.${user}.services.xremap.config.modmap = [
     {
       name = "built-in keyboard: alt to super";
