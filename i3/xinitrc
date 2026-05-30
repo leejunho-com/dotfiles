@@ -1,4 +1,4 @@
 systemctl --user daemon-reload
 systemctl --user import-environment DISPLAY XAUTHORITY
-systemctl --user start graphical-session.target
+systemctl --user start xremap.service
 exec i3
