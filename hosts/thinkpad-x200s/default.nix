@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
     ../../modules/nixos/bios.nix
+    ../../modules/nixos/x11.nix
   ];
 
   networking.hostName = "thinkpad-x200s";
