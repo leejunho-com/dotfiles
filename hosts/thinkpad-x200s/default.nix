@@ -37,5 +37,14 @@
       device.only = [ "AT Translated Set 2 keyboard" ];
       remap = { "LeftMeta" = "LeftAlt"; };
     }
+    {
+      name = "built-in keyboard: grave/backspace/escape rotation";
+      device.only = [ "AT Translated Set 2 keyboard" ];
+      remap = {
+        "Grave" = "Escape";
+        "BackSpace" = "Grave";
+        "Escape" = "BackSpace";
+      };
+    }
   ];
 }
