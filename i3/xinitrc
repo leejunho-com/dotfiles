@@ -1,4 +1,6 @@
+echo "xinitrc started at $(date)" >> /tmp/xinitrc.log
 systemctl --user daemon-reload
 systemctl --user import-environment DISPLAY XAUTHORITY
-systemctl --user start xremap.service
+systemctl --user start xremap.service >> /tmp/xinitrc.log 2>&1
+echo "xremap exit code: $?" >> /tmp/xinitrc.log
 exec i3
