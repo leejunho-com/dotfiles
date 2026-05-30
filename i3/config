@@ -39,7 +39,10 @@ bindsym $mod+ctrl+l resize grow   width  50 px
 # fullscreen / float (matches hyprland)
 bindsym $mod+ctrl+m fullscreen toggle
 bindsym $mod+y      floating toggle
-bindsym $mod+space  focus mode_toggle
+
+# launcher / window switcher
+bindsym $mod+space  exec --no-startup-id rofi -show drun
+bindsym Mod4+Tab    exec --no-startup-id rofi -show window
 
 # split (i3-specific)
 bindsym $mod+v split h
