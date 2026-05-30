@@ -1,8 +1,5 @@
-echo "xinitrc started at $(date)" >> /tmp/xinitrc.log
-xrdb -merge ~/.Xresources >> /tmp/xinitrc.log 2>&1
-echo "xrdb exit: $?" >> /tmp/xinitrc.log
-systemctl --user daemon-reload >> /tmp/xinitrc.log 2>&1
-systemctl --user import-environment DISPLAY XAUTHORITY >> /tmp/xinitrc.log 2>&1
-systemctl --user start xremap.service >> /tmp/xinitrc.log 2>&1
-echo "xremap exit: $?" >> /tmp/xinitrc.log
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+xrdb -merge ~/.Xresources
+systemctl --user import-environment DISPLAY XAUTHORITY
+systemctl --user start xremap.service
 exec i3
