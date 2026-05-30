@@ -1,0 +1,4 @@
+systemctl --user daemon-reload
+systemctl --user import-environment DISPLAY XAUTHORITY
+systemctl --user start graphical-session.target
+exec i3

@@ -7,7 +7,7 @@ in
 {
   imports = [ ./gui.nix ];
 
-  home.file.".xinitrc".source = link "xinitrc";
+  home.file.".xinitrc".source = link "i3/xinitrc";
 
   home.packages = with pkgs; [
     xclip
