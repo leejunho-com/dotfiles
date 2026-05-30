@@ -62,6 +62,28 @@
             "Super-v" = "C-S-v";
           };
         }
+        {
+          name = "firefox shortcuts";
+          application.only = [ "firefox" ];
+          remap = {
+            "Super-t" = "C-t";
+            "Super-w" = "C-w";
+            "Super-n" = "C-n";
+            "Super-l" = "C-l";
+            "Super-r" = "C-r";
+            "Super-f" = "C-f";
+            "Super-S-t" = "C-S-t";
+            "Super-1" = "C-1";
+            "Super-2" = "C-2";
+            "Super-3" = "C-3";
+            "Super-4" = "C-4";
+            "Super-5" = "C-5";
+            "Super-6" = "C-6";
+            "Super-7" = "C-7";
+            "Super-8" = "C-8";
+            "Super-9" = "C-9";
+          };
+        }
       ];
     };
   };
