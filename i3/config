@@ -2,7 +2,8 @@ set $mod Mod1
 
 font pango:monospace 10
 
-default_border pixel 0
+default_border none
+default_floating_border none
 
 floating_modifier $mod
 focus_follows_mouse yes
