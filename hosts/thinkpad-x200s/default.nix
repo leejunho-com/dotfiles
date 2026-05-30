@@ -6,6 +6,7 @@
     ../../modules/nixos/common.nix
     ../../modules/nixos/bios.nix
     ../../modules/nixos/x11.nix
+    ../../modules/nixos/i3.nix
   ];
 
   networking.hostName = "thinkpad-x200s";
@@ -14,7 +15,6 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  services.xserver.windowManager.i3.enable = true;
 
   # acpi_osi: mute button fix
   # nohpet: suppress NMI error on resume
