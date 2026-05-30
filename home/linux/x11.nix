@@ -14,7 +14,7 @@ in
     xclip
     (pkgs.st.overrideAttrs (old: {
       postPatch = (old.postPatch or "") + ''
-        sed -i 's/pixelsize=[0-9]*/pixelsize=25/' config.def.h
+        sed -i 's/font = "[^"]*"/font = "D2CodingLigature Nerd Font,Noto Sans CJK KR:pixelsize=25:antialias=true:autohint=true"/' config.def.h
         awk '
         /^static const char \*colorname/ { skip=1
           print "static const char *colorname[] = {"
