@@ -158,7 +158,7 @@ dotfiles/
 │       ├── common.nix           # All Linux: fcitx5, private symlink
 │       ├── gui.nix              # GUI Linux base: firefox, mpv, xremap keymaps
 │       ├── wayland.nix          # Wayland GUI: wl-clipboard, hyprland symlink, xremap(withWlroots)
-│       └── x11.nix              # X11 GUI: xclip, st, i3/xinitrc symlinks, xremap(withX11)
+│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, st, i3/xinitrc symlinks, xremap(withX11)
 │
 ├── i3/                          # i3 config, xinitrc (symlinked by x11.nix)
 ├── hyprland/                    # → ~/.config/hypr (Wayland)
@@ -194,6 +194,10 @@ Steps that cannot be automated by Nix — run once after bootstrapping.
 
 ### Common
 
+#### Firefox
+
+Launch Firefox once after bootstrapping to create the profile, then run `nix-switch` again to apply `chrome/` and `user.js` symlinks automatically.
+
 ---
 
 ### macOS
@@ -225,10 +229,6 @@ chmod 600 ~/.ssh/authorized_keys
 - Mission Control → Switch to Desktop {1–n}: `ctrl + {1–n}`
 - Modifier Keys → Caps Lock: Control
 - Dictation → Shortcut: Press mic
-
-#### Firefox
-
-Launch Firefox once after bootstrapping to create the profile, then run `nix-switch` again to apply `chrome/` and `user.js` symlinks automatically.
 
 #### Homebrew
 
@@ -353,10 +353,6 @@ sudo rm /etc/sudoers.d/wsluser
 
 `install.sh` automatically sets zsh (`~/.nix-profile/bin/zsh`) as the default shell. Restart the terminal after bootstrapping — the next session will load the full zsh config.
 
-#### Firefox
-
-Same as macOS — launch Firefox once after bootstrapping to create the profile, then run `nix-switch` again to apply `chrome/` and `user.js` symlinks.
-
 ---
 
 ## Why Nix?
@@ -400,7 +396,7 @@ modules/nixos/x11.nix            ← X11 + i3 (xserver, startx, windowManager.i3
 hosts/<name>/default.nix         ← thin wrapper: imports modules + machine-specific config
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3: xclip, st, xinitrc symlinks
+home/linux/x11.nix               ← X11/i3: xclip, rofi, alttab, picom, st, xinitrc symlinks
 ```
 
 For standalone Linux (Home Manager only):
@@ -409,7 +405,7 @@ home/linux/default.nix           ← CLI base: programs.home-manager, genericLin
 home/linux/common.nix            ← All Linux: fcitx5, private symlink
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland GUI: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3 GUI: xclip, st, i3/xinitrc symlinks
+home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, st, i3/xinitrc symlinks
 ```
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
