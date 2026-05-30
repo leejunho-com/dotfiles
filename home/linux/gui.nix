@@ -64,7 +64,6 @@
         }
         {
           name = "window switcher";
-          application.not = [ "com.mitchellh.ghostty" "st-256color" ];
           remap = {
             "M-u" = "Super-Tab";
           };
