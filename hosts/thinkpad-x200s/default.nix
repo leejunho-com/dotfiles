@@ -14,10 +14,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  services.xserver = {
-    enable = true;
-    windowManager.i3.enable = true;
-  };
+  services.xserver.windowManager.i3.enable = true;
 
   # acpi_osi: mute button fix
   # nohpet: suppress NMI error on resume
