@@ -39,4 +39,12 @@ in
   ];
 
   services.xremap.withX11 = true;
+
+  services.picom = {
+    enable = true;
+    activeOpacity = 1.0;
+    inactiveOpacity = 0.85;
+    fade = false;
+    shadow = false;
+  };
 }
