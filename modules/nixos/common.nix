@@ -56,6 +56,10 @@
   console.font = "ter-v24b";
   console.packages = [ pkgs.terminus_font ];
 
+  systemd.tmpfiles.rules = [
+    "f /var/lib/systemd/linger/${user} 0644 root root -"
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";
