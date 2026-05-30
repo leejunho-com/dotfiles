@@ -10,6 +10,7 @@ focus_follows_mouse yes
 
 # app shortcuts — focus if running, else launch (matches skhd pattern)
 bindsym $mod+semicolon exec --no-startup-id i3-msg '[class="st-256color"] focus' || st
+bindsym Mod4+n         exec st
 bindsym $mod+w         exec --no-startup-id i3-msg '[class="firefox"] focus' || firefox
 bindsym $mod+i         exec --no-startup-id i3-msg '[class="firefox"] focus' || firefox
 
