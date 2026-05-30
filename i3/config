@@ -35,7 +35,8 @@ bindsym $mod+ctrl+k resize shrink height 50 px
 bindsym $mod+ctrl+l resize grow   width  50 px
 
 # fullscreen / float (matches hyprland)
-bindsym $mod+ctrl+m fullscreen toggle
+bindsym $mod+ctrl+m   fullscreen toggle
+bindsym Mod4+ctrl+f   fullscreen toggle
 bindsym $mod+y      floating toggle
 
 # launcher / window switcher
