@@ -49,6 +49,7 @@ in
       keymap = [
         {
           name = "emacs navigation";
+          application.not = [ "com.mitchellh.ghostty" "st" ];
           remap = {
             "C-p" = "up";
             "C-n" = "down";
