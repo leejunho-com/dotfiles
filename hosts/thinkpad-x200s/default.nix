@@ -15,7 +15,6 @@
 
   hardware.enableRedistributableFirmware = true;
 
-
   # acpi_osi: mute button fix
   # nohpet: suppress NMI error on resume
   boot.kernelParams = [ "acpi_osi=Linux" "nohpet" ];
