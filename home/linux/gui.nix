@@ -63,12 +63,6 @@
           };
         }
         {
-          name = "window switcher";
-          remap = {
-            "M-u" = "Super-Tab";
-          };
-        }
-        {
           name = "firefox shortcuts";
           application.only = [ "firefox" ];
           remap = {
