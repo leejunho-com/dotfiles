@@ -41,9 +41,9 @@
       name = "built-in keyboard: grave/backspace/escape rotation";
       device.only = [ "AT Translated Set 2 keyboard" ];
       remap = {
-        "KEY_GRAVE" = "KEY_ESC";
-        "KEY_BACKSPACE" = "KEY_GRAVE";
-        "KEY_ESC" = "KEY_BACKSPACE";
+        "Grave" = "Esc";
+        "BackSpace" = "Grave";
+        "Esc" = "BackSpace";
       };
     }
   ];
