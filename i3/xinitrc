@@ -2,5 +2,5 @@ export XDG_RUNTIME_DIR=/run/user/$(id -u)
 systemctl --user import-environment DISPLAY XAUTHORITY
 systemctl --user start xremap.service
 picom --active-opacity 1.0 --inactive-opacity 0.5 &
-alttab -mk Super_L -d 1 &
+alttab -mk Super_L -d 1 -w 1 &
 exec i3
