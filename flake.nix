@@ -14,12 +14,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
     xremap-nix = {
       url = "github:xremap/nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixos-hardware.url = "github:nixos/nixos-hardware";
 
   };
 
@@ -28,8 +28,8 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      xremap-nix,
       nixos-hardware,
+      xremap-nix,
       ...
     }@inputs:
     let
