@@ -19,6 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
   };
 
   outputs =
@@ -27,6 +29,7 @@
       nix-darwin,
       home-manager,
       xremap-nix,
+      nixos-hardware,
       ...
     }@inputs:
     let
@@ -151,7 +154,7 @@
 
         "thinkpad-x200s" = mkNixos {
           system = "x86_64-linux";
-          hostModules = [ ./hosts/thinkpad-x200s ];
+          hostModules = [ nixos-hardware.nixosModules.lenovo-thinkpad-x200s ./hosts/thinkpad-x200s ];
           homeModules = [ ./home/linux/x11.nix ];
         };
 
