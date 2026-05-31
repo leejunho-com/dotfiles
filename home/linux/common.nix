@@ -8,12 +8,6 @@ in
 {
   home.file.".config/private".source = link "private";
 
-  home.packages = with pkgs; [
-    fcitx5
-    fcitx5-hangul
-    fcitx5-gtk
-  ];
-
   home.sessionVariables = {
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";

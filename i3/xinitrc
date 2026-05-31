@@ -1,7 +1,7 @@
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 systemctl --user import-environment DISPLAY XAUTHORITY
 systemctl --user start xremap.service
-fcitx5 -d
+/run/current-system/sw/bin/fcitx5 -d
 for id in $(xinput list --id-only); do
   xinput set-prop "$id" "libinput Natural Scrolling Enabled" 1 2>/dev/null || true
 done
