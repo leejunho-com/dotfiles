@@ -9,6 +9,7 @@ in
 
   home.file.".xinitrc".source = link "i3/xinitrc";
   home.file.".config/i3/config".source = link "i3/config";
+  home.file.".config/i3status/config".source = link "i3/i3status.conf";
 
   home.packages = with pkgs; [
     xclip

@@ -82,5 +82,7 @@ bindsym $mod+Shift+e exec i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg ex
 
 bar {
     position bottom
+    mode hide
+    modifier $mod
     status_command i3status
 }
