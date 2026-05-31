@@ -19,6 +19,14 @@
   services.xremap = {
     enable = true;
     config = {
+      modmap = [
+        {
+          name = "capslock to ctrl";
+          remap = {
+            "CapsLock" = "LeftCtrl";
+          };
+        }
+      ];
       keymap = [
         {
           name = "emacs navigation";
