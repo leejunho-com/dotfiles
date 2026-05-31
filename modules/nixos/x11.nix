@@ -7,7 +7,7 @@
     windowManager.i3.enable = true;
   };
 
-  services.xserver.libinput.mouse.naturalScrolling = true;
+  services.libinput.mouse.naturalScrolling = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
