@@ -22,7 +22,10 @@
   boot.blacklistedKernelModules = [ "mei" "mei_me" ];
 
   # drm poll causes responsiveness issues on GMA 4500MHD
-  boot.extraModprobeConfig = "options drm_kms_helper poll=N";
+  boot.extraModprobeConfig = ''
+    options drm_kms_helper poll=N
+    options snd-hda-intel model=thinkpad
+  '';
 
   services.tlp.enable = true;
 
