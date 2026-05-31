@@ -75,22 +75,25 @@ in
     extraConfig = "source-file ${config.home.homeDirectory}/code/dotfiles/tmux/tmux.conf";
   };
 
-  home.activation.firefoxChrome = config.lib.dag.entryAfter ["writeBoundary"] (
-    let
-      profilesBase =
-        if pkgs.stdenv.isDarwin
-        then "$HOME/Library/Application Support/Firefox/Profiles"
-        else "$HOME/.mozilla/firefox";
-    in ''
-      profile_dir=$(ls -d "${profilesBase}/"*.default-release 2>/dev/null | head -1) || true
-      if [[ -z "$profile_dir" ]]; then
-        echo "Firefox profile not found, skipping"
-      else
-        [[ ! -L "$profile_dir/chrome" ]] && ln -s "${dotfiles}/firefox/chrome" "$profile_dir/chrome"
-        [[ ! -L "$profile_dir/user.js" ]] && ln -s "${dotfiles}/firefox/user.js" "$profile_dir/user.js"
-      fi
-    ''
-  );
+  home.activation.firefoxChrome = config.lib.dag.entryAfter ["writeBoundary"] (''
+    if ${pkgs.lib.boolToString pkgs.stdenv.isDarwin}; then
+      _ff_bases=("$HOME/Library/Application Support/Firefox/Profiles")
+    else
+      # Firefox 147+: XDG path (~/.config/mozilla) for new installs; legacy (~/.mozilla) for existing
+      _ff_bases=("$HOME/.config/mozilla/firefox" "$HOME/.mozilla/firefox")
+    fi
+    profile_dir=""
+    for _base in "''${_ff_bases[@]}"; do
+      profile_dir=$(ls -d "$_base/"*.default-release 2>/dev/null | head -1) || true
+      [[ -n "$profile_dir" ]] && break
+    done
+    if [[ -z "$profile_dir" ]]; then
+      echo "Firefox profile not found, skipping"
+    else
+      [[ ! -L "$profile_dir/chrome" ]] && ln -s "${dotfiles}/firefox/chrome" "$profile_dir/chrome"
+      [[ ! -L "$profile_dir/user.js" ]] && ln -s "${dotfiles}/firefox/user.js" "$profile_dir/user.js"
+    fi
+  '');
 
   # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
