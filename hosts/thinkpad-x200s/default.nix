@@ -27,6 +27,9 @@
     options snd-hda-intel model=thinkpad
   '';
 
+  # SSD — hdapsd (HDD fall protection) not needed
+  services.hdapsd.enable = false;
+
   services.tlp.enable = true;
 
   home-manager.users.${user}.services.xremap.config.modmap = [
