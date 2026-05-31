@@ -84,7 +84,7 @@ in
     fi
     profile_dir=""
     for _base in "''${_ff_bases[@]}"; do
-      profile_dir=$(ls -d "$_base/"*.default-release 2>/dev/null | head -1) || true
+      profile_dir=$(ls -d "$_base/"*.default* 2>/dev/null | head -1) || true
       [[ -n "$profile_dir" ]] && break
     done
     if [[ -z "$profile_dir" ]]; then
