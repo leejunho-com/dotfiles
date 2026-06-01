@@ -14,6 +14,7 @@ in
   home.packages = with pkgs; [
     xclip
     rofi
+    pulsemixer
     alttab
     picom
     (pkgs.st.overrideAttrs (old: {
