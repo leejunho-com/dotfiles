@@ -32,6 +32,8 @@
 
   services.tlp.enable = true;
 
+  services.fprintd.enable = true;
+
   home-manager.users.${user}.services.xremap.config.modmap = [
     {
       name = "built-in keyboard: alt to super";
