@@ -34,6 +34,15 @@
 
   services.fprintd.enable = true;
 
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id.indexOf("net.reactivated.fprint") !== -1 &&
+          subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
   security.pam.services.sudo.fprintAuth = true;
   security.pam.services.login.fprintAuth = true;
 
