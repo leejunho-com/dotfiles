@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     ../../modules/nixos/common.nix
     ../../modules/nixos/bios.nix
     ../../modules/nixos/x11.nix
