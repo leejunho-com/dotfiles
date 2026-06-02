@@ -34,6 +34,9 @@
 
   services.fprintd.enable = true;
 
+  security.pam.services.sudo.fprintAuth = true;
+  security.pam.services.login.fprintAuth = true;
+
   home-manager.users.${user}.services.xremap.config.modmap = [
     {
       name = "built-in keyboard: alt to super";
