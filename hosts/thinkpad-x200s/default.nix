@@ -11,8 +11,6 @@
 
   networking.hostName = "thinkpad-x200s";
 
-  boot.loader.grub.device = "/dev/sda";
-
   hardware.enableRedistributableFirmware = true;
 
   # acpi_osi: mute button fix
