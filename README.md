@@ -133,10 +133,10 @@ dotfiles/
 ├── modules/                     # Reusable config building blocks
 │   ├── darwin/
 │   │   ├── common.nix           # All Macs: nix.enable=false, skhd, system.defaults, homebrew casks, users
-│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, transmission launchd
+│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, transmission launchd, NFS exports
 │   │   └── labtop.nix           # MacBook role: yabai, sketchybar, jankyborders
 │   └── nixos/
-│       ├── common.nix           # All NixOS: networking, users, zsh, flakes, systemd linger
+│       ├── common.nix           # All NixOS: networking, users, zsh, flakes, systemd linger, NFS/CIFS support
 │       ├── uefi.nix             # UEFI bootloader: systemd-boot
 │       ├── bios.nix             # BIOS bootloader: grub (device declared per-host)
 │       └── x11.nix              # X11 + i3: xserver.enable, startx, windowManager.i3
