@@ -5,6 +5,10 @@
     "kid3"
   ];
 
+  environment.etc."exports".text = ''
+    /Volumes/dock -network 192.168.50.0 -mask 255.255.255.0
+  '';
+
   services.sketchybar.enable = true;
   services.jankyborders = {
     enable = true;
