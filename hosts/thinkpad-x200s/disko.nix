@@ -39,20 +39,20 @@
             type = "swap";
           };
         };
-        root = {
+        home = {
           size = "128G";
           content = {
             type = "filesystem";
             format = "ext4";
-            mountpoint = "/";
+            mountpoint = "/home";
           };
         };
-        home = {
+        root = {
           size = "100%FREE";
           content = {
             type = "filesystem";
             format = "ext4";
-            mountpoint = "/home";
+            mountpoint = "/";
           };
         };
       };
