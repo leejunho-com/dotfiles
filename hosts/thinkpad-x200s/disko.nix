@@ -4,8 +4,13 @@
       type = "disk";
       device = "/dev/sda";
       content = {
-        type = "msdos";
+        type = "gpt";
         partitions = {
+          bios = {
+            size = "1M";
+            type = "EF02";
+            priority = 1;
+          };
           boot = {
             size = "500M";
             content = {
