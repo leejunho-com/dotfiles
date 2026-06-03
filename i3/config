@@ -20,7 +20,7 @@ bindsym $mod+w         exec --no-startup-id sh -c 'i3-msg "[class=firefox] focus
 bindsym $mod+i         exec --no-startup-id sh -c 'i3-msg "[class=firefox] focus" || firefox'
 
 # kill (hyprland: SUPER+Q)
-bindsym $mod+q kill
+bindsym Mod4+q kill
 
 # focus (vim, matches skhd/hyprland)
 bindsym $mod+h focus left
