@@ -60,8 +60,6 @@
     "f /var/lib/systemd/linger/${user} 0644 root root -"
   ];
 
-  boot.supportedFilesystems = [ "nfs" "cifs" ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";
