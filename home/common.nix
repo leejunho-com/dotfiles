@@ -14,7 +14,7 @@ in
 
     # essential
     bat eza fd fzf ripgrep tree jq wget zoxide unar p7zip rsync mc yazi w3m htop btop duf
-    iperf3 nmap wireguard-tools convmv magic-wormhole tealdeer poppler fontconfig
+    iperf3 nmap wireguard-tools convmv magic-wormhole tealdeer poppler fontconfig cifs-utils
 
     # media
     ffmpeg ffmpegthumbnailer imagemagick mediainfo yt-dlp viu chafa resvg exiftool
