@@ -32,11 +32,12 @@ URxvt.borderLess: false
 ! perl extensions
 URxvt.perl-ext-common: clipboard,font-size,opacity-toggle
 
-! osc 52 clipboard
-URxvt.clipboard.autocopy: true
+! clipboard
+URxvt.clipboard.autocopy: false
 
 ! font size keybindings
 URxvt.keysym.Mod4-equal: font-size:increase
 URxvt.keysym.Mod4-minus: font-size:decrease
 URxvt.keysym.Mod4-0:     font-size:reset
 URxvt.keysym.Mod4-u:     perl:opacity-toggle:toggle
+URxvt.keysym.Mod4-v:     perl:clipboard:paste
