@@ -44,6 +44,10 @@
   pointer-events: none;
 }
 
+#navigator-toolbox:not(:hover):not(:focus-within) {
+  min-height: 3px;
+}
+
 #navigator-toolbox:hover > #titlebar,
 #navigator-toolbox:hover > #nav-bar,
 #navigator-toolbox:focus-within > #titlebar,
