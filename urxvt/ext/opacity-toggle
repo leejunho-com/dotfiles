@@ -16,7 +16,7 @@ sub on_action {
         $self->cmd_parse("\033]11;rgba:0000/0000/0000/8888\007");
         $self->{bg_toggled} = 0;
     } else {
-        $self->cmd_parse("\033]11;rgba:0000/0000/0000/0000\007");
+        $self->cmd_parse("\033]11;rgba:0000/0000/0000/ffff\007");
         $self->{bg_toggled} = 1;
     }
 }
