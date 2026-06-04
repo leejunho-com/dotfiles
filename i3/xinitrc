@@ -1,5 +1,6 @@
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 xrdb -merge ~/.Xresources
+echo "URxvt.perl-lib: $HOME/.urxvt/ext" | xrdb -merge -
 systemctl --user import-environment DISPLAY XAUTHORITY
 systemctl --user start xremap.service
 /run/current-system/sw/bin/fcitx5 -d
