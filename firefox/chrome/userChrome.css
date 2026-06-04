@@ -47,11 +47,15 @@
 }
 
 #navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
-  animation: hide-navbar 0.3s ease 2s both;
+  animation: hide-navbar 0.4s ease 4s both;
+}
+
+#navigator-toolbox:not(:hover):not(:focus-within) {
+  min-height: 10px;
 }
 
 #navigator-toolbox:hover > #nav-bar,
 #navigator-toolbox:focus-within > #nav-bar {
-  animation: show-navbar 0.2s ease forwards;
+  animation: show-navbar 0.4s ease forwards;
   pointer-events: auto;
 }
