@@ -29,7 +29,6 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.depth: 32
 URxvt.scrollBar: false
-URxvt.borderLess: false
 
 ! perl extensions
 URxvt.perl-ext-common: clipboard,font-size,opacity-toggle
@@ -39,7 +38,7 @@ URxvt.clipboard.autocopy:  false
 URxvt.clipboard.copycmd:   xclip -in -selection clipboard
 URxvt.clipboard.pastecmd:  xclip -out -selection clipboard
 
-! font size keybindings
+! keybindings
 URxvt.keysym.Mod4-equal: font-size:increase
 URxvt.keysym.Mod4-minus: font-size:decrease
 URxvt.keysym.Mod4-0:     font-size:reset
