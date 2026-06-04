@@ -33,23 +33,19 @@
 }
 
 /* auto-hide navbar */
-#navigator-toolbox:not(:hover):not(:focus-within) {
-  min-height: 15px !important;
-}
-
 #nav-bar {
-  transition: opacity 0.2s ease;
+  transition: margin-top 0.2s ease, opacity 0.2s ease;
 }
 
 #navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
-  visibility: collapse;
+  margin-top: -36px;
   opacity: 0;
   pointer-events: none;
 }
 
 #navigator-toolbox:hover > #nav-bar,
 #navigator-toolbox:focus-within > #nav-bar {
-  visibility: visible;
+  margin-top: 0;
   opacity: 1;
   pointer-events: auto;
 }
