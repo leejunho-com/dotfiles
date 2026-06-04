@@ -1,0 +1,40 @@
+! Font
+URxvt.font: xft:D2CodingLigature Nerd Font:pixelsize=25:antialias=true:autohint=true,\
+            xft:Noto Sans CJK KR:pixelsize=25:antialias=true:autohint=true
+
+! Colors
+URxvt.foreground: #feffff
+URxvt.background: #000000
+URxvt.cursorColor: #a9e15d
+
+URxvt.color0:  #000000
+URxvt.color1:  #c6341b
+URxvt.color2:  #a9e15d
+URxvt.color3:  #c9ae38
+URxvt.color4:  #749fe7
+URxvt.color5:  #83668b
+URxvt.color6:  #46a4a8
+URxvt.color7:  #cccccc
+URxvt.color8:  #808080
+URxvt.color9:  #e15140
+URxvt.color10: #ccfd7e
+URxvt.color11: #f9eb77
+URxvt.color12: #588df6
+URxvt.color13: #b595b4
+URxvt.color14: #73e2e6
+URxvt.color15: #e1e1e1
+
+! UI
+URxvt.scrollBar: false
+URxvt.borderLess: false
+
+! Perl extensions
+URxvt.perl-ext-common: clipboard,font-size
+
+! OSC 52 clipboard
+URxvt.clipboard.autocopy: true
+
+! Font size keybindings (st의 Mod4+=/- 대응)
+URxvt.keysym.Super_L+equal: font-size:increase
+URxvt.keysym.Super_L+minus: font-size:decrease
+URxvt.keysym.Super_L+0:     font-size:reset
