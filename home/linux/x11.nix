@@ -21,7 +21,7 @@ in
     alttab
     feh
     unclutter
-    rxvt-unicode
+    (rxvt-unicode.override { emojiSupport = true; })
     ueberzugpp
   ];
 
