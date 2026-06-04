@@ -31,3 +31,29 @@
 .browser-toolbar {
   background-color: transparent !important;
 }
+
+/* auto-hide navbar */
+#titlebar,
+#nav-bar {
+  transition: margin-top 0.2s ease, opacity 0.2s ease;
+}
+
+#navigator-toolbox:not(:hover):not(:focus-within) {
+  min-height: 15px !important;
+}
+
+#navigator-toolbox:not(:hover):not(:focus-within) > #titlebar,
+#navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
+  margin-top: -36px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#navigator-toolbox:hover > #titlebar,
+#navigator-toolbox:hover > #nav-bar,
+#navigator-toolbox:focus-within > #titlebar,
+#navigator-toolbox:focus-within > #nav-bar {
+  margin-top: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
