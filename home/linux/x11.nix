@@ -23,6 +23,7 @@ in
     unclutter
     rxvt-unicode
     ueberzugpp
+    d2coding
   ];
 
   services.xremap.withX11 = true;
