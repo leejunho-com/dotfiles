@@ -37,23 +37,19 @@
   min-height: 15px !important;
 }
 
+#nav-bar {
+  transition: opacity 0.2s ease;
+}
+
 #navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
-  height: 0 !important;
-  min-height: 0 !important;
-  padding-block: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
+  visibility: collapse;
+  opacity: 0;
   pointer-events: none;
-  transition: height 0.2s ease, opacity 0.2s ease;
 }
 
 #navigator-toolbox:hover > #nav-bar,
 #navigator-toolbox:focus-within > #nav-bar {
-  height: auto !important;
-  min-height: unset !important;
-  padding-block: unset !important;
-  overflow: unset !important;
-  opacity: 1 !important;
+  visibility: visible;
+  opacity: 1;
   pointer-events: auto;
-  transition: height 0.2s ease, opacity 0.2s ease;
 }
