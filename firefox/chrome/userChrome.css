@@ -51,7 +51,8 @@
 }
 
 #navigator-toolbox:hover > #nav-bar,
-#navigator-toolbox:focus-within > #nav-bar {
+#navigator-toolbox:focus-within > #nav-bar,
+#navigator-toolbox:has(#downloads-button[notification]) > #nav-bar {
   animation: show-navbar 0.4s ease forwards;
   pointer-events: auto;
 }
