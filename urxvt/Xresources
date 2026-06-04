@@ -27,9 +27,6 @@ URxvt.color15: #e1e1e1
 ! ui
 URxvt.scrollBar: false
 URxvt.borderLess: false
-URxvt.transparent: true
-URxvt.inheritPixmap: true
-URxvt.shading: 20
 
 ! perl extensions
 URxvt.perl-ext-common: clipboard,font-size
