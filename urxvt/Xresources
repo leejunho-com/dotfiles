@@ -1,8 +1,9 @@
-! Font
-URxvt.font: xft:D2CodingLigature Nerd Font Mono:pixelsize=25:antialias=true:autohint=true,\
+! font
+URxvt.font: xft:D2Coding:pixelsize=25:antialias=true:autohint=true,\
+            xft:Symbols Nerd Font Mono:pixelsize=25:antialias=true:autohint=true,\
             xft:Noto Sans CJK KR:pixelsize=25:antialias=true:autohint=true
 
-! Colors
+! colors
 URxvt.foreground: #feffff
 URxvt.background: #000000
 URxvt.cursorColor: #a9e15d
@@ -24,17 +25,17 @@ URxvt.color13: #b595b4
 URxvt.color14: #73e2e6
 URxvt.color15: #e1e1e1
 
-! UI
+! ui
 URxvt.scrollBar: false
 URxvt.borderLess: false
 
-! Perl extensions
+! perl extensions
 URxvt.perl-ext-common: clipboard,font-size
 
-! OSC 52 clipboard
+! osc 52 clipboard
 URxvt.clipboard.autocopy: true
 
-! Font size keybindings (st의 Mod4+=/- 대응)
+! font size keybindings
 URxvt.keysym.Super_L+equal: font-size:increase
 URxvt.keysym.Super_L+minus: font-size:decrease
 URxvt.keysym.Super_L+0:     font-size:reset
