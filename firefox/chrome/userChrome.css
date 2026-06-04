@@ -1,30 +1,6 @@
 /* Remove close button*/
 .titlebar-buttonbox-container {
-  display: none
-}
-
-/* Hide Tab Close buttons */
-.tabbrowser-tab .tab-close-button {
-  visibility: collapse !important;
-}
-
-/* TABS: height */
-:root {
-  --tab-toolbar-navbar-overlap: 0px !important;
-  --tab-min-height: 25px !important;
-}
-
-:root #tabbrowser-tabs {
-  --tab-min-height: 25px !important;
-}
-
-#TabsToolbar {
-  height: var(--tab-min-height) !important;
-}
-
-/* no space besides tabbar */
-.titlebar-spacer {
-  width: 10px !important;
+  display: none;
 }
 
 /* nav bar transparent */
