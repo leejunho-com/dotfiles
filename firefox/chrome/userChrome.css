@@ -33,10 +33,6 @@
 }
 
 /* auto-hide navbar */
-#navigator-toolbox:not(:hover):not(:focus-within) {
-  border-top: 15px solid transparent !important;
-}
-
 #nav-bar {
   transition: margin-top 0.2s ease, opacity 0.2s ease;
 }
