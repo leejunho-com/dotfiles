@@ -12,6 +12,7 @@ in
   home.file.".config/i3status/config".source = link "i3/i3status.conf";
 
   home.file.".Xresources".source = link "urxvt/Xresources";
+  home.file.".urxvt/ext".source = link "urxvt/ext";
 
   home.packages = with pkgs; [
     xclip
