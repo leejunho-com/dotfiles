@@ -25,6 +25,8 @@ URxvt.color14: #73e2e6
 URxvt.color15: #e1e1e1
 
 ! ui
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 URxvt.depth: 32
 URxvt.scrollBar: false
 URxvt.borderLess: false
@@ -40,4 +42,4 @@ URxvt.keysym.Mod4-equal: font-size:increase
 URxvt.keysym.Mod4-minus: font-size:decrease
 URxvt.keysym.Mod4-0:     font-size:reset
 URxvt.keysym.Mod4-u:     perl:opacity-toggle:toggle
-URxvt.keysym.Mod4-v:     perl:clipboard:paste
+URxvt.keysym.C-S-v:      perl:clipboard:paste
