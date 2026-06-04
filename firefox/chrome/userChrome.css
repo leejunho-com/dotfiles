@@ -33,24 +33,17 @@
 }
 
 /* auto-hide navbar */
-#titlebar, #nav-bar {
+#nav-bar {
   transition: margin-top 0.3s ease 1s, opacity 0.3s ease 1s;
 }
 
-#navigator-toolbox:not(:hover):not(:focus-within) > #titlebar,
 #navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
-  margin-top: -100px;
+  margin-top: -36px;
   opacity: 0;
   pointer-events: none;
 }
 
-#navigator-toolbox:not(:hover):not(:focus-within) {
-  min-height: 3px;
-}
-
-#navigator-toolbox:hover > #titlebar,
 #navigator-toolbox:hover > #nav-bar,
-#navigator-toolbox:focus-within > #titlebar,
 #navigator-toolbox:focus-within > #nav-bar {
   margin-top: 0;
   opacity: 1;
