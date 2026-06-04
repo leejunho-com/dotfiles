@@ -39,7 +39,7 @@
 
 @keyframes hide-navbar {
   from { margin-top: 0; opacity: 1; }
-  to { margin-top: -36px; opacity: 0; }
+  to { margin-top: -44px; opacity: 0; }
 }
 
 #nav-bar {
@@ -47,11 +47,7 @@
 }
 
 #navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
-  animation: hide-navbar 0.4s ease 4s both;
-}
-
-#navigator-toolbox:not(:hover):not(:focus-within) {
-  min-height: 10px;
+  animation: hide-navbar 0.4s ease 8s both;
 }
 
 #navigator-toolbox:hover > #nav-bar,
