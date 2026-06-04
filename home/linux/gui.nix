@@ -69,10 +69,17 @@
         }
         {
           name = "darwin-style shortcuts (terminal)";
-          application.only = [ "com.mitchellh.ghostty" "URxvt" ];
+          application.only = [ "com.mitchellh.ghostty" ];
           remap = {
             "Super-c" = "C-S-c";
             "Super-v" = "C-S-v";
+          };
+        }
+        {
+          name = "darwin-style shortcuts (urxvt)";
+          application.only = [ "URxvt" ];
+          remap = {
+            "Super-c" = "C-S-c";
           };
         }
         {
