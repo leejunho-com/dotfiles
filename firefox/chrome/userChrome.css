@@ -34,10 +34,6 @@
 
 /* auto-hide navbar */
 #nav-bar {
-  transition: margin-top 0.2s ease, opacity 0.2s ease;
-}
-
-#navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
   margin-top: -36px;
   opacity: 0;
   pointer-events: none;
@@ -49,4 +45,5 @@
   margin-top: 0;
   opacity: 1;
   pointer-events: auto;
+  transition: margin-top 0.2s ease, opacity 0.2s ease;
 }
