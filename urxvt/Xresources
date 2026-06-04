@@ -34,14 +34,14 @@ URxvt.scrollBar: false
 URxvt.perl-ext-common: clipboard,font-size,opacity-toggle
 
 ! clipboard
-URxvt.clipboard.autocopy:  false
-URxvt.clipboard.copycmd:   xclip -in -selection clipboard
-URxvt.clipboard.pastecmd:  xclip -out -selection clipboard
+URxvt.clipboard.autocopy: false
+URxvt.clipboard.copycmd: xclip -in -selection clipboard
+URxvt.clipboard.pastecmd: xclip -out -selection clipboard
 
 ! keybindings
 URxvt.keysym.Mod4-equal: font-size:increase
 URxvt.keysym.Mod4-minus: font-size:decrease
-URxvt.keysym.Mod4-0:     font-size:reset
-URxvt.keysym.Mod4-u:     opacity-toggle:toggle
-URxvt.keysym.Mod4-c:     clipboard:copy
-URxvt.keysym.Mod4-v:     clipboard:paste
+URxvt.keysym.Mod4-0: font-size:reset
+URxvt.keysym.Mod4-u: opacity-toggle:toggle
+URxvt.keysym.Mod4-c: clipboard:copy
+URxvt.keysym.Mod4-v: clipboard:paste
