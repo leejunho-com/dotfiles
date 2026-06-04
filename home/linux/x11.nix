@@ -15,7 +15,7 @@ in
 
   home.packages = with pkgs; [
     xclip
-    xorg.xrdb
+    xrdb
     rofi
     pulsemixer
     alttab
