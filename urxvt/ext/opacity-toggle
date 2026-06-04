@@ -3,10 +3,6 @@ sub on_button_press {
     return 1 if $event->{button} == 2;
 }
 
-sub on_button_release {
-    my ($self, $event) = @_;
-    return 1 if $event->{button} == 2;
-}
 
 sub on_action {
     my ($self, $action) = @_;
