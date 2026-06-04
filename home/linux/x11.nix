@@ -22,6 +22,7 @@ in
     feh
     unclutter
     rxvt-unicode
+    ueberzugpp
   ];
 
   services.xremap.withX11 = true;
