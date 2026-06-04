@@ -34,7 +34,7 @@
 
 /* auto-hide navbar */
 #nav-bar {
-  margin-top: -36px;
+  margin-top: -100px;
   opacity: 0;
   pointer-events: none;
   transition: margin-top 0.3s ease 1s, opacity 0.3s ease 1s;
