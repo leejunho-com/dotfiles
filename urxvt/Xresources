@@ -4,7 +4,7 @@ URxvt.font: xft:D2CodingLigature Nerd Font:pixelsize=25:antialias=true:autohint=
 
 ! colors
 URxvt.foreground: #feffff
-URxvt.background: rgba:0000/0000/0000/cccc
+URxvt.background: rgba:0000/0000/0000/8888
 URxvt.cursorColor: #a9e15d
 
 URxvt.color0:  #000000
