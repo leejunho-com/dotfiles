@@ -21,6 +21,7 @@ in
     alttab
     feh
     unclutter
+    picom
     (rxvt-unicode.override {
       rxvt-unicode-unwrapped = rxvt-unicode-unwrapped.override { emojiSupport = true; };
     })

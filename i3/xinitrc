@@ -8,5 +8,6 @@ for id in $(xinput list --id-only); do
 done
 feh --randomize --bg-fill ~/Pictures/wallpaper/ &
 unclutter -idle 1 -root &
+picom --backend xrender &
 alttab -mk Super_L -d 1 -w 1 &
 exec i3
