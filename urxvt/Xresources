@@ -35,6 +35,6 @@ URxvt.perl-ext-common: clipboard,font-size
 URxvt.clipboard.autocopy: true
 
 ! font size keybindings
-URxvt.keysym.Super_L+equal: font-size:increase
-URxvt.keysym.Super_L+minus: font-size:decrease
-URxvt.keysym.Super_L+0:     font-size:reset
+URxvt.keysym.Mod4-equal: font-size:increase
+URxvt.keysym.Mod4-minus: font-size:decrease
+URxvt.keysym.Mod4-0:     font-size:reset
