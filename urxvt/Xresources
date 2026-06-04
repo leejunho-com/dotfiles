@@ -1,6 +1,5 @@
 ! Font
-URxvt.font: xft:D2CodingLigature Nerd Font:pixelsize=25:antialias=true:autohint=true,\
-            xft:Symbols Nerd Font Mono:pixelsize=25:antialias=true:autohint=true,\
+URxvt.font: xft:D2CodingLigature Nerd Font Mono:pixelsize=25:antialias=true:autohint=true,\
             xft:Noto Sans CJK KR:pixelsize=25:antialias=true:autohint=true
 
 ! Colors
