@@ -10,7 +10,6 @@
 
 /* Tab height */
 :root {
-  --tab-toolbar-navbar-overlap: 0px !important;
   --tab-min-height: 25px !important;
 }
 
