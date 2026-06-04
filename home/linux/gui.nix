@@ -76,13 +76,6 @@
           };
         }
         {
-          name = "darwin-style shortcuts (urxvt)";
-          application.only = [ "URxvt" ];
-          remap = {
-            "Super-c" = "C-S-c";
-          };
-        }
-        {
           name = "firefox shortcuts";
           application.only = [ "firefox" ];
           remap = {
