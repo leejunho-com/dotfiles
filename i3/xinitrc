@@ -6,6 +6,7 @@ systemctl --user start xremap.service
 for id in $(xinput list --id-only); do
   xinput set-prop "$id" "libinput Natural Scrolling Enabled" 1 2>/dev/null || true
 done
+xset r rate 225 31
 feh --randomize --bg-fill ~/Pictures/wallpaper/ &
 unclutter -idle 1 -root &
 picom --backend xrender &
