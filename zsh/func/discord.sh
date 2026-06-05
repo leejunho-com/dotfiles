@@ -1,4 +1,5 @@
 # discord webhook
+# requires: $DISCORD_WEBHOOK env var — set your webhook URL before sourcing this file
 # usage:
 #   discord "msg"     plain text, no footer
 #   discord -m "msg"  plain text + footer
