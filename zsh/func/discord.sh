@@ -4,6 +4,7 @@
 #   discord -m "msg"  plain text + footer
 #   discord -c "code" code block + footer
 #   discord -c -      code block from stdin (ls | discord -c -)
+#   ls | discord      same as above — pipe auto-detected, no flags needed
 #   discord -j        job notification, title auto-detected from preceding command
 
 # capture short hostname once at load time
