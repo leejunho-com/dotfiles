@@ -6,7 +6,7 @@
 #   discord -c -      code block from stdin (ls | discord -c -)
 #   discord -j        job notification, title auto-detected from preceding command
 
-_discord_host=${HOSTNAME%%.*}
+_discord_host=${HOST%%.*}
 _discord_last_cmd=""
 
 autoload -Uz add-zsh-hook
