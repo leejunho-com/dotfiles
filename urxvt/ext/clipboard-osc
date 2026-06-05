@@ -1,0 +1,19 @@
+use MIME::Base64;
+
+sub on_osc_seq {
+    my ($self, $op, $args) = @_;
+    return unless $op == 52;
+
+    my ($sel, $data) = split /;/, $args, 2;
+    return unless defined $data && $data ne '?';
+
+    my $text = eval { decode_base64($data) };
+    return unless defined $text;
+
+    open my $fh, '|-', 'xclip', '-in', '-selection', 'clipboard'
+        or return;
+    print $fh $text;
+    close $fh;
+
+    return 1;
+}
