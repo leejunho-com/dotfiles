@@ -31,7 +31,7 @@ URxvt.depth: 32
 URxvt.scrollBar: false
 
 ! perl extensions
-URxvt.perl-ext-common: clipboard,font-size,opacity-toggle
+URxvt.perl-ext-common: clipboard,clipboard-osc,font-size,opacity-toggle
 
 ! clipboard
 URxvt.clipboard.autocopy: false
