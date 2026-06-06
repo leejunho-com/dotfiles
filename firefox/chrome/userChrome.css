@@ -33,7 +33,7 @@
 }
 
 #navigator-toolbox:not(:hover):not(:focus-within) > #nav-bar {
-  animation: hide-navbar 0.4s ease 8s both;
+  animation: hide-navbar 0.4s ease 30s both;
 }
 
 #navigator-toolbox:hover > #nav-bar,
