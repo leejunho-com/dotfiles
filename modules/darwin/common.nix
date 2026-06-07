@@ -1,8 +1,8 @@
 { user, ... }:
 
 {
-  # Determinate Nix manages the Nix installation; disable nix-darwin's management
-  nix.enable = false;
+  nix.enable = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfree = true;
 
