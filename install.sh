@@ -21,10 +21,20 @@ info "Platform: $PLATFORM / Hostname: $HOSTNAME"
 if [[ "$PLATFORM" != "Darwin" ]] && [ -f /etc/NIXOS ]; then
   info "NixOS detected — skipping Nix install"
 elif ! command -v nix &>/dev/null; then
-  info "Installing Nix (Determinate)..."
-  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  info "Installing Nix..."
+  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
+  if [[ "$PLATFORM" == "Darwin" ]]; then
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  else
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  fi
 fi
+
+# ── Nix experimental features ────────────────────────────────────────
+# Home Manager manages this after first switch; created here for bootstrap
+mkdir -p "$HOME/.config/nix"
+grep -qxF "extra-experimental-features = nix-command flakes" "$HOME/.config/nix/nix.conf" 2>/dev/null || \
+  echo "extra-experimental-features = nix-command flakes" >> "$HOME/.config/nix/nix.conf"
 
 # ── Git bootstrap ────────────────────────────────────────────────────
 if ! command -v git &>/dev/null; then
@@ -54,9 +64,11 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
   fi
   # Homebrew installer writes shellenv to ~/.zprofile — remove it since
   # zshrc handles PATH with Homebrew appended after Nix
-  if grep -q "brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
-    sed -i'' '/brew shellenv/d' "$HOME/.zprofile"
-    info "Removed brew shellenv from ~/.zprofile"
+  # Homebrew writes shellenv to ~/.zprofile — delete the file entirely since
+  # HM (programs.zsh) manages ~/.zprofile and will conflict with any existing file
+  if [[ -f "$HOME/.zprofile" && ! -L "$HOME/.zprofile" ]]; then
+    rm "$HOME/.zprofile"
+    info "Removed ~/.zprofile (brew shellenv)"
   fi
 fi
 

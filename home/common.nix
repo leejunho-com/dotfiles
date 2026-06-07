@@ -75,6 +75,12 @@ in
     extraConfig = "source-file ${config.home.homeDirectory}/code/dotfiles/tmux/tmux.conf";
   };
 
+  home.activation.nixExperimentalFeatures = config.lib.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "$HOME/.config/nix"
+    grep -qxF "extra-experimental-features = nix-command flakes" "$HOME/.config/nix/nix.conf" 2>/dev/null || \
+      echo "extra-experimental-features = nix-command flakes" >> "$HOME/.config/nix/nix.conf"
+  '';
+
   home.activation.firefoxChrome = config.lib.dag.entryAfter ["writeBoundary"] (''
     if ${pkgs.lib.boolToString pkgs.stdenv.isDarwin}; then
       _ff_bases=("$HOME/Library/Application Support/Firefox/Profiles")
