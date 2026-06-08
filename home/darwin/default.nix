@@ -24,6 +24,29 @@ in
         --set __NIX_DARWIN_SET_ENVIRONMENT_DONE ""
     '';
 
+  # Compile alt-monitor on nix-switch if source is newer than binary
+  home.activation.buildAltMonitor = config.lib.dag.entryAfter ["writeBoundary"] ''
+    _src="${dotfiles}/scripts/alt-monitor.swift"
+    _bin="$HOME/.local/bin/alt-monitor"
+    mkdir -p "$HOME/.local/bin" "$HOME/.local/log"
+    if [[ ! -f "$_bin" ]] || [[ "$_src" -nt "$_bin" ]]; then
+      echo "Building alt-monitor..."
+      /usr/bin/swiftc -O "$_src" -o "$_bin"
+    fi
+  '';
+
+  # launchd user agent — starts alt-monitor at login
+  launchd.agents.alt-monitor = {
+    enable = true;
+    config = {
+      Label = "com.leejunho.alt-monitor";
+      ProgramArguments = [ "${config.home.homeDirectory}/.local/bin/alt-monitor" ];
+      KeepAlive = true;
+      RunAtLoad = true;
+      StandardErrorPath = "${config.home.homeDirectory}/.local/log/alt-monitor.log";
+    };
+  };
+
   # darwin-only dotfiles → ~/.config/ symlinks
   home.file = {
     ".config/sketchybar".source = link "sketchybar";
