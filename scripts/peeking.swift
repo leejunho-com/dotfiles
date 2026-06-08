@@ -21,8 +21,11 @@ func isBarHidden() -> Bool {
     try? task.run()
     task.waitUntilExit()
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8) ?? ""
-    return output.contains("\"hidden\":\"on\"")
+    if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+       let hidden = json["hidden"] as? String {
+        return hidden == "on"
+    }
+    return false
 }
 
 class Peeking {
