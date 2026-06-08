@@ -24,7 +24,6 @@ sketchybar --bar height=38 \
   padding_left=10 \
   padding_right=10 \
   color=$BAR_COLOR \
-  hidden=on \
   topmost=window
 
 ##### Changing Defaults #####

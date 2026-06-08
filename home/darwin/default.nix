@@ -25,25 +25,25 @@ in
     '';
 
   # Compile alt-monitor on nix-switch if source is newer than binary
-  home.activation.buildAltMonitor = config.lib.dag.entryAfter ["writeBoundary"] ''
-    _src="${dotfiles}/scripts/alt-monitor.swift"
-    _bin="$HOME/.local/bin/alt-monitor"
+  home.activation.buildPeeking = config.lib.dag.entryAfter ["writeBoundary"] ''
+    _src="${dotfiles}/scripts/peeking.swift"
+    _bin="$HOME/.local/bin/peeking"
     mkdir -p "$HOME/.local/bin" "$HOME/.local/log"
     if [[ ! -f "$_bin" ]] || [[ "$_src" -nt "$_bin" ]]; then
-      echo "Building alt-monitor..."
+      echo "Building peeking..."
       /usr/bin/swiftc -O "$_src" -o "$_bin"
     fi
   '';
 
-  # launchd user agent — starts alt-monitor at login
-  launchd.agents.alt-monitor = {
+  # launchd user agent — starts peeking at login
+  launchd.agents.peeking = {
     enable = true;
     config = {
-      Label = "com.leejunho.alt-monitor";
-      ProgramArguments = [ "${config.home.homeDirectory}/.local/bin/alt-monitor" ];
+      Label = "com.leejunho.peeking";
+      ProgramArguments = [ "${config.home.homeDirectory}/.local/bin/peeking" ];
       KeepAlive = true;
       RunAtLoad = true;
-      StandardErrorPath = "${config.home.homeDirectory}/.local/log/alt-monitor.log";
+      StandardErrorPath = "${config.home.homeDirectory}/.local/log/peeking.log";
     };
   };
 

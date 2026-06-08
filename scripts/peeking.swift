@@ -2,6 +2,7 @@ import Cocoa
 
 // Passive CGEventTap — listenOnly mode does not consume events,
 // so skhd and other tools receive option key events normally.
+// Only shows sketchybar when it is currently hidden (peek behavior).
 let sketchybarPath = "/run/current-system/sw/bin/sketchybar"
 
 func runSketchybar(_ args: String...) {
@@ -11,8 +12,22 @@ func runSketchybar(_ args: String...) {
     try? task.run()
 }
 
-class AltMonitor {
+func isBarHidden() -> Bool {
+    let task = Process()
+    task.executableURL = URL(fileURLWithPath: sketchybarPath)
+    task.arguments = ["--query", "bar"]
+    let pipe = Pipe()
+    task.standardOutput = pipe
+    try? task.run()
+    task.waitUntilExit()
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output = String(data: data, encoding: .utf8) ?? ""
+    return output.contains("\"hidden\":\"on\"")
+}
+
+class Peeking {
     var optionPressed = false
+    var didShow = false
 
     func start() {
         let mask = CGEventMask(1 << CGEventType.flagsChanged.rawValue)
@@ -23,8 +38,8 @@ class AltMonitor {
             options: .listenOnly,
             eventsOfInterest: mask,
             callback: { _, _, event, userInfo -> Unmanaged<CGEvent>? in
-                let monitor = Unmanaged<AltMonitor>.fromOpaque(userInfo!).takeUnretainedValue()
-                monitor.handleEvent(event)
+                let p = Unmanaged<Peeking>.fromOpaque(userInfo!).takeUnretainedValue()
+                p.handleEvent(event)
                 return nil
             },
             userInfo: Unmanaged.passUnretained(self).toOpaque()
@@ -49,13 +64,19 @@ class AltMonitor {
         let isPressed = event.flags.contains(.maskAlternate)
 
         if isPressed && !optionPressed {
-            runSketchybar("--bar", "hidden=off")
+            if isBarHidden() {
+                didShow = true
+                runSketchybar("--bar", "hidden=off")
+            }
         } else if !isPressed && optionPressed {
-            runSketchybar("--bar", "hidden=on")
+            if didShow {
+                didShow = false
+                runSketchybar("--bar", "hidden=on")
+            }
         }
         optionPressed = isPressed
     }
 }
 
-let monitor = AltMonitor()
-monitor.start()
+let peeking = Peeking()
+peeking.start()
