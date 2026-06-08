@@ -7,11 +7,11 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "left_option",
+            "key_code": "right_option",
             "modifiers": { "optional": ["any"] }
           },
           "to": [
-            { "key_code": "left_option", "lazy": true },
+            { "key_code": "right_option", "lazy": true },
             {
               "shell_command": "sketchybar --bar hidden=off"
             }
