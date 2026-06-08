@@ -13,12 +13,12 @@
           "to": [
             { "key_code": "right_option", "lazy": true },
             {
-              "shell_command": "sketchybar --bar hidden=off"
+              "shell_command": "/run/current-system/sw/bin/sketchybar --bar hidden=off"
             }
           ],
           "to_after_key_up": [
             {
-              "shell_command": "sketchybar --bar hidden=on"
+              "shell_command": "/run/current-system/sw/bin/sketchybar --bar hidden=on"
             }
           ]
         }
