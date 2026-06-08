@@ -1,0 +1,28 @@
+{
+  "title": "sketchybar: show while Option held",
+  "rules": [
+    {
+      "description": "Show sketchybar while left Option (Alt) is held, hide on release",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_option",
+            "modifiers": { "optional": ["any"] }
+          },
+          "to": [
+            { "key_code": "left_option", "lazy": true },
+            {
+              "shell_command": "sketchybar --bar hidden=off"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "shell_command": "sketchybar --bar hidden=on"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
