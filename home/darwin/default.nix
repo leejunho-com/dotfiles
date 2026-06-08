@@ -24,29 +24,6 @@ in
         --set __NIX_DARWIN_SET_ENVIRONMENT_DONE ""
     '';
 
-  # Compile alt-monitor on nix-switch if source is newer than binary
-  home.activation.buildPeeking = config.lib.dag.entryAfter ["writeBoundary"] ''
-    _src="${dotfiles}/scripts/peeking.swift"
-    _bin="$HOME/.local/bin/peeking"
-    mkdir -p "$HOME/.local/bin" "$HOME/.local/log"
-    if [[ ! -f "$_bin" ]] || [[ "$_src" -nt "$_bin" ]]; then
-      echo "Building peeking..."
-      /usr/bin/swiftc -O "$_src" -o "$_bin"
-    fi
-  '';
-
-  # launchd user agent — starts peeking at login
-  launchd.agents.peeking = {
-    enable = true;
-    config = {
-      Label = "com.leejunho.peeking";
-      ProgramArguments = [ "${config.home.homeDirectory}/.local/bin/peeking" ];
-      KeepAlive = true;
-      RunAtLoad = true;
-      StandardErrorPath = "${config.home.homeDirectory}/.local/log/peeking.log";
-    };
-  };
-
   # darwin-only dotfiles → ~/.config/ symlinks
   home.file = {
     ".config/sketchybar".source = link "sketchybar";

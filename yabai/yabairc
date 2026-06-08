@@ -75,7 +75,7 @@ yabai -m rule --add app!="^(Ghostty|Finder|Code|Claude|Firefox|Discord|Obsidian|
 # not work with disabling above
 
 # Status bar
-yabai -m config external_bar all:0:0
+yabai -m config external_bar all:30:0
 # yabai -m config external_bar main:30:0
 # yabai -m config external_bar off:30:0
 
