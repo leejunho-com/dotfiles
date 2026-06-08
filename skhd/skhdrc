@@ -118,7 +118,7 @@ alt + shift - f     : yabai -m space --focus 1 ; open ~/Desktop
 alt - g             : open -a "Adobe Lightroom"
 alt - 0x029         : open -a ghostty # semicolon
 alt + shift - 0x029 : open -na ghostty # colon
-alt - 0x027 : HIDDEN=$(sketchybar --query bar | jq -r '.hidden'); if [ "$HIDDEN" = "off" ]; then sketchybar --bar hidden=on; yabai -m config external_bar all:0:0; else sketchybar --bar hidden=off; yabai -m config external_bar all:30:0; fi
+# alt - 0x027 : HIDDEN=$(sketchybar --query bar | jq -r '.hidden'); if [ "$HIDDEN" = "off" ]; then sketchybar --bar hidden=on; yabai -m config external_bar all:0:0; else sketchybar --bar hidden=off; yabai -m config external_bar all:30:0; fi
 
 alt - z [
  *                  : open -a ghostty
