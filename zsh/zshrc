@@ -111,7 +111,11 @@ function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd "$cwd"
+		case "$cwd" in
+			search://*) cd "$(echo "$cwd" | sed -E 's|^search://[^/]+/||')" ;;
+			*://*) ;;
+			*) cd "$cwd" ;;
+		esac
 	fi
 	rm -f -- "$tmp"
 }
