@@ -20,7 +20,7 @@ curl -fsSL nix.leejunho.com | bash
 Nix and `git` are bootstrapped automatically — no manual prerequisites beyond `curl`.
 
 `install.sh` handles everything automatically:
-- Installs Nix via Determinate Systems installer (macOS / standalone Linux only — NixOS skips this)
+- Installs Nix via the official installer (nixos.org) — macOS daemon mode, standalone Linux single-user (NixOS skips this)
 - Renames conflicting system files (macOS)
 - Bootstraps nix-darwin (macOS), runs nixos-rebuild (NixOS), or bootstraps home-manager (standalone Linux)
 - Sets zsh as the default shell (standalone Linux)
@@ -132,7 +132,7 @@ dotfiles/
 │
 ├── modules/                     # Reusable config building blocks
 │   ├── darwin/
-│   │   ├── common.nix           # All Macs: nix.enable=false, skhd, system.defaults, homebrew casks, users
+│   │   ├── common.nix           # All Macs: nix.enable=true, skhd, system.defaults, homebrew casks, users
 │   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, transmission launchd, NFS exports
 │   │   └── labtop.nix           # MacBook role: yabai, sketchybar, jankyborders
 │   └── nixos/
@@ -248,7 +248,7 @@ Nix takes precedence over Homebrew in `PATH`. `zshrc` appends Homebrew at the en
 
 nix-darwin sets Nix paths in `/etc/zshrc` before the user's `~/.zshrc` runs, so appending Homebrew in `zshrc` naturally puts it last.
 
-> **Note**: Homebrew's installer automatically writes `eval "$(brew shellenv)"` to `~/.zprofile`, which would prepend Homebrew and override this order. `install.sh` removes that line automatically after installation.
+> **Note**: Homebrew's installer automatically writes `eval "$(brew shellenv)"` to `~/.zprofile`, which would prepend Homebrew and override this order. Home Manager also manages `~/.zprofile` itself, so any pre-existing regular file (even empty) blocks activation. `install.sh` deletes `~/.zprofile` entirely after Homebrew installation to avoid both issues.
 
 #### Photoshop
 
@@ -256,9 +256,9 @@ Restore settings:
 
 ```bash
 # backup
-cp -r ~/Library/Preferences/"Adobe Photoshop 2025 Settings" /path/to/backup
+cp -r ~/Library/Preferences/"Adobe Photoshop 2026 Settings" /path/to/backup
 # restore
-sudo mv ./Adobe\ Photoshop\ 2025\ Settings ~/Library/Preferences/
+sudo mv ./Adobe\ Photoshop\ 2026\ Settings ~/Library/Preferences/
 ```
 
 #### Fonts
