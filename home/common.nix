@@ -8,6 +8,8 @@ in
   home.username = user;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
   home.packages = with pkgs; [
     # gnu
     coreutils findutils util-linux gnused gawk gnugrep gnutar diffutils
