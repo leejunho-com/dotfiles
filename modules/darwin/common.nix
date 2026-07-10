@@ -1,10 +1,18 @@
-{ user, ... }:
+{ user, pkgs, ... }:
 
 {
   nix.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfree = true;
+
+  # Nix fontconfig looks for /etc/fonts/fonts.conf (absent on macOS) — fc-list
+  # falls back to DejaVu-only without this. makeFontsConf includes macOS font
+  # dirs (/System/Library/Fonts, /Library/Fonts, ~/Library/Fonts) by default.
+  environment.etc."fonts/fonts.conf".source = pkgs.makeFontsConf {
+    fontDirectories = [ "/etc/profiles/per-user/${user}/share/fonts" ];
+    includes = [ "${pkgs.fontconfig.out}/etc/fonts/conf.d" ];
+  };
 
   services.skhd.enable = true;
 
