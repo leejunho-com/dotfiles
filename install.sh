@@ -21,13 +21,12 @@ info "Platform: $PLATFORM / Hostname: $HOSTNAME"
 if [[ "$PLATFORM" != "Darwin" ]] && [ -f /etc/NIXOS ]; then
   info "NixOS detected — skipping Nix install"
 elif ! command -v nix &>/dev/null; then
-  info "Installing Nix..."
-  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
-  if [[ "$PLATFORM" == "Darwin" ]]; then
-    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-  else
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-  fi
+  info "Installing Nix (multi-user daemon)..."
+  # --daemon (multi-user) on both darwin and standalone linux.
+  # darwin only supports daemon mode; linux servers/systemd hosts prefer it
+  # for sandboxed builds and a root-owned, shared /nix store.
+  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
 # ── Nix experimental features ────────────────────────────────────────
@@ -120,12 +119,14 @@ else
     HOSTNAME="$FALLBACK"
   fi
   info "Running home-manager switch for $HOSTNAME..."
+  # -b backup: on first install, move pre-existing ~/.zshrc etc. aside instead
+  # of aborting activation (distro default shell files would otherwise clobber)
   if command -v home-manager &>/dev/null; then
-    home-manager switch --flake "$DOTFILES#$HOSTNAME"
+    home-manager switch -b backup --flake "$DOTFILES#$HOSTNAME"
   else
     info "Bootstrapping via nix run (first install)..."
     nix --extra-experimental-features 'nix-command flakes' run nixpkgs#home-manager -- \
-      switch --flake "$DOTFILES#$HOSTNAME"
+      switch -b backup --flake "$DOTFILES#$HOSTNAME"
   fi
 
   # Non-nixos GPU setup (WSLg etc.)
