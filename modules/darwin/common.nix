@@ -24,6 +24,11 @@
     MaxAuthTries 3
     ClientAliveInterval 300
     ClientAliveCountMax 48
+    AuthenticationMethods publickey
+    PermitEmptyPasswords no
+    HostbasedAuthentication no
+    IgnoreRhosts yes
+    LogLevel VERBOSE
   '';
 
   system.defaults = {
