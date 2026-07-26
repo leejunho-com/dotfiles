@@ -16,17 +16,32 @@ fi
 
 info "Platform: $PLATFORM / Hostname: $HOSTNAME"
 
+# ── RHEL/Fedora prerequisites (minimal installs lack these) ──────────
+# The Nix installer needs tar/xz/gzip to unpack; git/curl for bootstrap.
+if [[ "$PLATFORM" != "Darwin" ]] && command -v dnf &>/dev/null; then
+  for p in tar xz gzip git curl; do
+    rpm -q "$p" &>/dev/null || sudo dnf install -y "$p"
+  done
+fi
+
 # ── Nix ─────────────────────────────────────────────────────────────
 # Skip on nixos (Nix is built into the OS)
 if [[ "$PLATFORM" != "Darwin" ]] && [ -f /etc/NIXOS ]; then
   info "NixOS detected — skipping Nix install"
 elif ! command -v nix &>/dev/null; then
-  info "Installing Nix (multi-user daemon)..."
-  # --daemon (multi-user) on both darwin and standalone linux.
-  # darwin only supports daemon mode; linux servers/systemd hosts prefer it
-  # for sandboxed builds and a root-owned, shared /nix store.
-  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
-  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  if [[ "$PLATFORM" == "Darwin" ]]; then
+    info "Installing Nix (multi-user daemon)..."
+    sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  else
+    # Standalone linux: single-user. Avoids nix-daemon friction on non-NixOS
+    # distros — RHEL/SELinux refuses the multi-user installer, and the daemon
+    # runs in a clean systemd env that can't find the RHEL CA bundle (SSL fails).
+    # Single-user runs as the user, using the system CA directly.
+    info "Installing Nix (single-user)..."
+    sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  fi
 fi
 
 # ── Nix experimental features ────────────────────────────────────────
