@@ -25,7 +25,7 @@ in
     fastfetch figlet lolcat cmatrix asciinema asciinema-agg ascii-image-converter
 
     # dev
-    git nodejs neovim delta lazygit gh nvd
+    git nodejs neovim delta lazygit gh nvd tree-sitter
 
     # fonts
     nerd-fonts.d2coding noto-fonts-cjk-sans noto-fonts-cjk-serif pretendard-jp nerd-fonts.symbols-only
