@@ -6,6 +6,9 @@ let
 in
 
 {
+  # C toolchain for nvim-treesitter parser builds (macOS uses clang)
+  home.packages = with pkgs; [ gcc gnumake ];
+
   home.file.".config/private".source = link "private";
 
   home.sessionVariables = {
