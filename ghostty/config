@@ -15,7 +15,7 @@ font-style-italic = Italic
 font-style-bold-italic = Bold Italic
 
 # cursor
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 cursor-style = block
 cursor-style-blink = true
 cursor-color = #a9e15d
