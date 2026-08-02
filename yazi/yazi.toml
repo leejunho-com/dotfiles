@@ -22,18 +22,23 @@ unar = [
 mpv = [
   { run = 'mpv "$@"', desc = "mpv" },
 ]
+firefox = [
+  { run = 'for f in "$@"; do firefox --new-tab "file://$(realpath "$f")"; done', desc = "Firefox", orphan = true },
+]
 
 [open]
 prepend_rules = [
   # archive
-  { url = "*.{zip,7z}", use = [ "extract", "mpv", "reveal" ] },
-  { url = "*.rar",      use = [ "unar", "mpv", "reveal" ] },
+  { url = "*.{zip,7z}", use = [ "extract", "mpv", "firefox", "reveal" ] },
+  { url = "*.rar",      use = [ "unar", "mpv", "firefox", "reveal" ] },
   # image
-  { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw,dng}", use = [ "mpv", "photoshop", "open", "reveal" ] },
+  { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw,dng}", use = [ "mpv", "photoshop", "open", "firefox", "reveal" ] },
   # video
-  { url = "*.{3gp,avi,mkv,mp4,webm,mov,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "mpv", "reveal" ] },
+  { url = "*.{3gp,avi,mkv,mp4,webm,mov,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [ "mpv", "firefox", "reveal" ] },
   # other
-  { url = "*.smi", use = [ "edit" ] }
+  { url = "*.smi", use = [ "edit", "firefox" ] },
+  # any file — Firefox in open-with menu (O)
+  { url = "*", use = [ "open", "firefox", "reveal" ] }
 ]
 
 [tasks]
