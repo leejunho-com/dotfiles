@@ -114,7 +114,6 @@
         "mac-studio" = mkDarwin {
           system = "aarch64-darwin";
           hostModules = [ ./hosts/mac-studio ];
-          homeModules = [ ./home/darwin/workstation.nix ];
         };
 
         "macbook-pro" = mkDarwin {
