@@ -6,6 +6,7 @@ prepend_keymap = [
   { on = "!", for = "macos", run = '''shell 'open -na Ghostty --args --working-directory="$PWD"' --block false''', desc = "Open Ghostty here" },
   { on = "!", for = "linux", run = 'shell "ghostty --working-directory=$PWD &" --block false', desc = "Open Ghostty here" },
 # goto
+  { on = [ "g", "/" ], for = "unix",  run = "cd /",            desc = "Go /"    },
   { on = [ "g", "t" ], for = "unix",  run = "cd /tmp",         desc = "Go /tmp" },
   { on = [ "g", "v" ], for = "macos", run = "cd /Volumes",     desc = "Go /Volumes"    },
   { on = [ "g", "v" ], for = "linux", run = "cd /mnt",         desc = "Go /mnt"        },
