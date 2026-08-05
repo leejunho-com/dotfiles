@@ -1,6 +1,6 @@
 {
-  "src_dir_path": "/Volumes/dock/incoming/in",
-  "dst_dir_path": "/Volumes/dock/incoming/out",
+  "src_dir_path": "/Users/leejunho/mnt/ark/scratch/incoming/in",
+  "dst_dir_path": "/Users/leejunho/mnt/ark/scratch/incoming/out",
   "default_preset_path": "/Users/leejunho/.config/incoming/preset/default.json",
   "open_dst_dir_when_done": false,
   "logging": {
