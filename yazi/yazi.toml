@@ -43,9 +43,9 @@ prepend_rules = [
   { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw,dng}", use = [
     "mpv",
     "photoshop",
-    "open",
     "firefox",
     "reveal",
+    "open",
   ] },
   # video
   { url = "*.{3gp,avi,mkv,mp4,webm,mov,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [
