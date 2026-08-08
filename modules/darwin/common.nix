@@ -56,7 +56,10 @@
 
     CustomUserPreferences = {
       "NSGlobalDomain".AppleAccentColor = 1;                         # Appearance > Accent Color: Orange
-      "com.apple.desktopservices".DSDontWriteNetworkStores = true;   # no .DS_Store on network drives
+      "com.apple.desktopservices" = {
+        DSDontWriteNetworkStores = true;                             # no .DS_Store on network drives
+        DSDontWriteUSBStores = true;                                 # no .DS_Store on USB volumes
+      };
     };
   };
 
