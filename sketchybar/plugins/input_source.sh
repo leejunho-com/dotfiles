@@ -7,18 +7,14 @@ SOURCE=$(defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSele
 if [[ "$SOURCE" == *"com.apple.inputmethod.Korean"* ]]; then
   sketchybar --set inputsource label="ko" label.color=$WHITE background.color=$SELECT \
              --set front_app  background.color=$SELECT \
-             --set cpu        background.color=$SELECT \
-             --set memory     background.color=$SELECT \
-             --set power      background.color=$SELECT \
+             --set sysinfo    background.color=$SELECT \
              --set clock      background.color=$SELECT \
              --set volume     background.color=$SELECT \
              #--bar color=$BAR_KO_COLOR
 else
   sketchybar --set inputsource label="en" label.color=$WHITE background.color=$NONE background.border_width=0 \
              --set front_app  background.color=$ITEM_BG_COLOR \
-             --set cpu        background.color=$ITEM_BG_COLOR \
-             --set memory     background.color=$ITEM_BG_COLOR \
-             --set power      background.color=$ITEM_BG_COLOR \
+             --set sysinfo    background.color=$ITEM_BG_COLOR \
              --set clock      background.color=$ITEM_BG_COLOR \
              --set volume     background.color=$ITEM_BG_COLOR \
              #--bar color=0x00000000
