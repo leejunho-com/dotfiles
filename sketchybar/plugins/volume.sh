@@ -9,7 +9,11 @@ else
 fi
 
 if [ -z "$VOLUME" ] || [ "$VOLUME" = "missing value" ]; then
-  sketchybar --set $NAME icon="$ICON_VOL_EXTERNAL" label=""
+  # icon only: empty label still reserves its padding, so balance both sides
+  sketchybar --set $NAME icon="$ICON_VOL_EXTERNAL" label="" \
+                         label.padding_right=0 \
+                         icon.padding_right=9 \
+                         background.padding_right=4
   exit 0
 fi
 
@@ -20,4 +24,8 @@ case $VOLUME in
   *)               ICON="$ICON_VOL_MUTE"  ;;
 esac
 
-sketchybar --set $NAME icon="$ICON" label="$VOLUME%"
+# restore the defaults in case the previous state was icon-only
+sketchybar --set $NAME icon="$ICON" label="$VOLUME%" \
+                       label.padding_right=10 \
+                       icon.padding_right=2 \
+                       background.padding_right=4

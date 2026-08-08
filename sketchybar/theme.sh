@@ -66,6 +66,8 @@ export ICON_FONT="Symbols Nerd Font:Regular:16.0"
 
 # -- Icons --
 
+export ICON_NETWORK="󰛳"
+
 export ICON_INPUT=""
 export ICON_CPU=""
 export ICON_MEMORY=""

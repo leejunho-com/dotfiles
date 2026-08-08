@@ -67,6 +67,34 @@ source $ITEM_DIR/front_app.sh
 source $ITEM_DIR/cpu.sh
 source $ITEM_DIR/memory.sh
 source $ITEM_DIR/power.sh
+source $ITEM_DIR/network.sh
+
+# one background for the whole stat cluster instead of one per item, tighter spacing
+for item in cpu memory power network; do
+  sketchybar --set $item background.drawing=off \
+                         padding_left=4 \
+                         icon.padding_left=5 \
+                         icon.padding_right=0 \
+                         label.padding_left=0 \
+                         label.padding_right=0 \
+                         background.padding_left=4 \
+                         background.padding_right=0
+done
+
+# first item: extra icon padding so it does not hug the bracket edge
+sketchybar --set cpu icon.padding_left=12
+
+# last item in the cluster, keep its label off the bracket edge
+sketchybar --set network label.padding_right=10
+
+sketchybar --add bracket sysinfo cpu memory power network \
+           --set sysinfo background.x_offset=6 \
+                         background.color=$ITEM_BG_COLOR \
+                         background.corner_radius=12 \
+                         background.height=24 \
+                         background.border_width=1 \
+                         background.border_color=$LIQUID_GLASS_BORDER \
+                         blur_radius=5
 
 # -- Right Side Items (--add item <name> right) --
 source $ITEM_DIR/clock.sh
