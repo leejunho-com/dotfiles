@@ -1,7 +1,7 @@
 # cut fanart.jpg to poster.jpg
 # usage:
 #   poster                          right edge (default)
-#   poster l|lm|m|rm|r              5-step preset positions
+#   poster l|ml|m|mr|r              5-step preset positions
 #   poster <ratio>                  custom x ratio (0.0 ~ 0.5275)
 #   poster -i|--input <file>        custom input file (default: fanart.jpg)
 #   poster -a|--append <pos>        append position to filename (poster-<pos>.jpg)
@@ -21,9 +21,9 @@ poster() {
   local x
   case "$pos" in
     l)      x=0 ;;
-    lm)     x=0.1318 ;;
+    ml)     x=0.1318 ;;
     m)      x=0.2638 ;;
-    rm)     x=0.3956 ;;
+    mr)     x=0.3956 ;;
     r|"")   x=0.5275 ;;
     *)      x="$pos" ;;
   esac
