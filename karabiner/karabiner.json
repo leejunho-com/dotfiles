@@ -74,9 +74,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -103,9 +101,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -136,9 +132,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -165,9 +159,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -210,9 +202,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -274,9 +264,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -304,9 +292,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -334,9 +320,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -364,9 +348,7 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
-                      "^com\\.mitchellh\\.ghostty$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^com\\.microsoft\\.VSCode$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_unless"
                   }

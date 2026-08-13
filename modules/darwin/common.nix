@@ -85,7 +85,6 @@
       "plex"
       "proton-pass"
       "protonvpn"
-      "visual-studio-code"
     ];
   };
 

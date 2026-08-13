@@ -124,9 +124,8 @@ alt - z [
  *                  : open -a ghostty
  "ghostty"            ~      # fzf cd
 ]
-# alt + shift - z     : open -a iterm
 # x is display switching
-alt - c             : open -a "Visual Studio Code"
+alt - c             : open -a
 alt + shift - c     : open -a Calendar
 alt - v             : open -a "Screen Sharing"
 alt + shift - v     : open -a Preview

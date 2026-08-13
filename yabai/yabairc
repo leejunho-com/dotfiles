@@ -62,12 +62,11 @@ yabai -m config window_opacity off
 # yabai -m config normal_window_opacity 0.7
 
 # disable specific apps
-yabai -m rule --add app!="^(Ghostty|Finder|Code|Claude|Firefox|Discord|Obsidian|Safari|Adobe Lightroom|Adobe Photoshop 2026)$" manage=off
+yabai -m rule --add app!="^(Ghostty|Finder|Claude|Firefox|Discord|Obsidian|Safari|Adobe Lightroom|Adobe Photoshop 2026)$" manage=off
 
 # space rule at satart yabai
-# yabai -m rule --add app="^iTerm2$" space=1
 # yabai -m rule --add app="^ForkLift$" space=2
-# yabai -m rule --add app="^Code$" space=3
+# yabai -m rule --add app="^$" space=3
 # yabai -m rule --add app="^Discord$" space=4
 # yabai -m rule --add app="^Firefox$" space=4
 # yabai -m rule --add app="^Obsidian$" space=7
