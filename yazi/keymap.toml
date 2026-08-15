@@ -18,8 +18,7 @@ prepend_keymap = [
   { on = [ "g", "w" ], for = "macos", run = '''shell --confirm 'open -a "Parallels Desktop" "$(dirname "$1")" && osascript -e "tell application \"Parallels Desktop\" to activate"' ''', desc = "Reveal in Windows" },
 
 # edit
-  # zoom round-trip forces a re-render; yazi keeps a stale preview when a file is overwritten
-  { on = [ "e", "p" ], run = [ '''shell 'poster -d %h ' --block --interactive''', "plugin zoom -1", "plugin zoom 1" ], desc = "Crop fanart.jpg beside hovered file (type l|ml|m|mr|r)" },
+  { on = [ "e", "p" ], run = '''shell 'poster -d %h ' --interactive''', desc = "Crop fanart.jpg beside hovered file (type l|ml|m|mr|r)" },
 
 # plugin
   # zoom

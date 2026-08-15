@@ -6,6 +6,7 @@ linemode = "size"
 [preview]
 max_width = 2000
 max_height = 3000
+image_delay = 0   # default 30; send immediately instead of debouncing
 
 [opener]
 edit = [

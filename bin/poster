@@ -45,6 +45,11 @@ poster() {
 
   # -y: overwrite without prompting — no tty when called from yazi
   ffmpeg -y -i "$input" -vf "crop=iw*0.4725:ih:iw*$x:0" -update 1 "$output"
+
+  # repaint yazi's stale preview; press - to zoom back out. YAZI_ID is unset outside yazi
+  if [[ -n "${YAZI_ID:-}" ]]; then
+    ya emit -- plugin zoom 1 || true
+  fi
 }
 
 poster "$@"
