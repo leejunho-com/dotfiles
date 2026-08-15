@@ -8,7 +8,8 @@ in
   home.username = user;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  # bin/ is on PATH directly — new scripts need only chmod +x, no nix change
+  home.sessionPath = [ "$HOME/.local/bin" "${dotfiles}/bin" ];
 
   home.packages = with pkgs; [
     # gnu

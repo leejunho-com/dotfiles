@@ -1,18 +1,27 @@
+#!/usr/bin/env bash
 # cut fanart.jpg to poster.jpg
 # usage:
 #   poster                          right edge (default)
 #   poster l|ml|m|mr|r              5-step preset positions
 #   poster <ratio>                  custom x ratio (0.0 ~ 0.5275)
 #   poster -i|--input <file>        custom input file (default: fanart.jpg)
+#   poster -d|--dir <path>          fanart.jpg beside <path> (a file's dir, or the dir itself)
 #   poster -a|--append <pos>        append position to filename (poster-<pos>.jpg)
+#
+# output goes next to the input file. -d takes an absolute path so it works from
+# yazi search results, where the cwd stays at the search origin.
+
+set -euo pipefail
+
 poster() {
   local append=0
   local input="fanart.jpg"
 
-  while [[ "$1" == -* ]]; do
+  while [[ "${1:-}" == -* ]]; do
     case "$1" in
       -a|--append) append=1; shift ;;
       -i|--input)  input="$2"; shift 2 ;;
+      -d|--dir)    if [[ -d "$2" ]]; then input="$2/fanart.jpg"; else input="$(dirname "$2")/fanart.jpg"; fi; shift 2 ;;
       *) break ;;
     esac
   done
@@ -28,8 +37,14 @@ poster() {
     *)      x="$pos" ;;
   esac
 
-  local output="poster.jpg"
-  (( append )) && output="poster-$pos.jpg"
+  # write next to the input, not the caller's cwd
+  local dir output
+  dir="$(dirname "$input")"
+  output="$dir/poster.jpg"
+  (( append )) && output="$dir/poster-$pos.jpg"
 
-  ffmpeg -i "$input" -vf "crop=iw*0.4725:ih:iw*$x:0" -update 1 "$output"
+  # -y: overwrite without prompting — no tty when called from yazi
+  ffmpeg -y -i "$input" -vf "crop=iw*0.4725:ih:iw*$x:0" -update 1 "$output"
 }
+
+poster "$@"
