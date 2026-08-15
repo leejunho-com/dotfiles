@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# mirror the tree below cwd into ./dummy/ as zero-byte files
+
+set -euo pipefail
+
+mkdir -p dummy
+
+find . -type f ! -path "./dummy/*" | while read -r file; do
+  relpath="${file#./}"
+  mkdir -p "dummy/$(dirname "$relpath")"
+  : >"dummy/$relpath"
+done
+
+echo "done"
