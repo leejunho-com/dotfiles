@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# print a timestamped log path, creating its directory
+# usage: logfile <name>   ->  ~/log/<name>/<name>-2026-08-17_015908.log
+#   rsync -ah --log-file="$(logfile rsync)" src/ dst/
+#   ffmpeg -i in.mkv out.mp4 2> "$(logfile encode)"
+
+set -euo pipefail
+
+name="${1:?usage: logfile <name>}"
+dir="$HOME/log/$name"
+
+mkdir -p "$dir"
+printf '%s/%s-%s.log\n' "$dir" "$name" "$(date +%Y-%m-%d_%H%M%S)"

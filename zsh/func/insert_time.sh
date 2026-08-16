@@ -1,5 +1,6 @@
+# filename-safe timestamp at the cursor, leading dash so it appends to a name
 function _insert_time() {
-  LBUFFER+=$(date "+#   %y-%m-%d %a %H:%M:%S %Z")
+  LBUFFER+="-$(date +%Y-%m-%d_%H%M%S)"
   zle redisplay
 }
 zle -N _insert_time
