@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# pick a random image from a folder and set it as the wallpaper
+# usage: wallpaper [dir]        default: ~/Pictures/wallpaper
+
+set -euo pipefail
+
+dir="${1:-$HOME/Pictures/wallpaper}"
+[[ -d "$dir" ]] || { echo "no such directory: $dir" >&2; exit 1; }
+
+img=$(find "$dir" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.heic' \) | shuf -n1)
+[[ -n "$img" ]] || { echo "no image under: $dir" >&2; exit 1; }
+
+case "$(uname -s)" in
+  # TODO: needs the desktoppr package before this branch works
+  Darwin) desktoppr "$img" ;;
+  Linux)  feh --bg-fill "$img" ;;
+  *)      echo "unsupported platform: $(uname -s)" >&2; exit 1 ;;
+esac
+
+echo "$img"
