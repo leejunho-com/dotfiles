@@ -4,6 +4,9 @@
 
 vim.opt.clipboard = "unnamedplus"
 
+-- no format on save; <leader>uf to toggle, <leader>cf to format manually
+vim.g.autoformat = false
+
 vim.g.clipboard = {
   name = 'OSC 52',
   copy = {
