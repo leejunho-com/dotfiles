@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# copy text to the clipboard — locally, over SSH, and inside tmux
+# usage: copy <text>...   ->  one line per argument
+#        <cmd> | copy     ->  stdin as-is
+#   copy "$@"
+#   for f in "$@"; do dirname -- "$f"; done | copy
+
+set -euo pipefail
+
+if (($#)); then
+	data=$(printf '%s\n' "$@")
+else
+	data=$(cat)
+fi
+
+# A local session owns the system clipboard directly.
+if [[ -z ${SSH_CONNECTION:-} ]]; then
+	if command -v pbcopy >/dev/null; then
+		printf '%s' "$data" | pbcopy
+		exit 0
+	elif [[ -n ${WAYLAND_DISPLAY:-} ]] && command -v wl-copy >/dev/null; then
+		printf '%s' "$data" | wl-copy
+		exit 0
+	elif [[ -n ${DISPLAY:-} ]] && command -v xclip >/dev/null; then
+		printf '%s' "$data" | xclip -selection clipboard
+		exit 0
+	fi
+fi
+
+# Remote or headless: let tmux write the client's clipboard. It calls
+# tty_set_selection() directly, unlike an app's own OSC 52 which tmux drops
+# whenever a full redraw is pending — see docs/troubleshooting.
+if [[ -n ${TMUX:-} ]]; then
+	tmux set-buffer -w -- "$data"
+	exit 0
+fi
+
+printf '\033]52;c;%s\007' "$(printf '%s' "$data" | base64 | tr -d '\n')" >/dev/tty
