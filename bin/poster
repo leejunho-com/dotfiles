@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # cut fanart.jpg to poster.jpg
 # usage:
-#   poster                          right edge (default)
+#   poster                          left edge (default)
 #   poster l|ml|m|mr|r              5-step preset positions
+#   poster f                        full, no crop (plain copy)
 #   poster <ratio>                  custom x ratio (0.0 ~ 0.5275)
 #   poster -i|--input <file>        custom input file (default: fanart.jpg)
 #   poster -d|--dir <path>          fanart.jpg beside <path> (a file's dir, or the dir itself)
@@ -26,14 +27,15 @@ poster() {
     esac
   done
 
-  local pos="${1:-r}"
+  local pos="${1:-l}"
   local x
   case "$pos" in
-    l)      x=0 ;;
+    l|"")   x=0 ;;
     ml)     x=0.1318 ;;
     m)      x=0.2638 ;;
     mr)     x=0.3956 ;;
-    r|"")   x=0.5275 ;;
+    r)      x=0.5275 ;;
+    f)      x=full ;;
     *)      x="$pos" ;;
   esac
 
@@ -43,8 +45,13 @@ poster() {
   output="$dir/poster.jpg"
   (( append )) && output="$dir/poster-$pos.jpg"
 
-  # -y: overwrite without prompting — no tty when called from yazi
-  ffmpeg -y -i "$input" -vf "crop=iw*0.4725:ih:iw*$x:0" -update 1 "$output"
+  if [[ "$x" == full ]]; then
+    # copy instead of re-encoding — nothing is cropped, so ffmpeg would only lose quality
+    cp -f -- "$input" "$output"
+  else
+    # -y: overwrite without prompting — no tty when called from yazi
+    ffmpeg -y -i "$input" -vf "crop=iw*0.4725:ih:iw*$x:0" -update 1 "$output"
+  fi
 
   # repaint yazi's stale preview; press - to zoom back out. YAZI_ID is unset outside yazi
   if [[ -n "${YAZI_ID:-}" ]]; then
