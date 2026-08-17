@@ -34,10 +34,8 @@ elif ! command -v nix &>/dev/null; then
     sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   else
-    # Standalone linux: single-user. Avoids nix-daemon friction on non-NixOS
-    # distros — RHEL/SELinux refuses the multi-user installer, and the daemon
-    # runs in a clean systemd env that can't find the RHEL CA bundle (SSL fails).
-    # Single-user runs as the user, using the system CA directly.
+    # single-user: RHEL/SELinux refuses the multi-user installer, and the daemon
+    # runs in a clean systemd env that misses the system CA bundle
     info "Installing Nix (single-user)..."
     sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
@@ -76,10 +74,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
-  # Homebrew installer writes shellenv to ~/.zprofile — remove it since
-  # zshrc handles PATH with Homebrew appended after Nix
-  # Homebrew writes shellenv to ~/.zprofile — delete the file entirely since
-  # HM (programs.zsh) manages ~/.zprofile and will conflict with any existing file
+  # brew writes shellenv here, and programs.zsh conflicts with any existing file
   if [[ -f "$HOME/.zprofile" && ! -L "$HOME/.zprofile" ]]; then
     rm "$HOME/.zprofile"
     info "Removed ~/.zprofile (brew shellenv)"
