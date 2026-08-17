@@ -133,7 +133,7 @@ dotfiles/
 ├── modules/                     # Reusable config building blocks
 │   ├── darwin/
 │   │   ├── common.nix           # All Macs: nix.enable=true, skhd, system.defaults, homebrew casks, users
-│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, transmission launchd, NFS exports
+│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, NFS exports, homebrew casks
 │   │   └── labtop.nix           # MacBook role: yabai, sketchybar, jankyborders
 │   └── nixos/
 │       ├── common.nix           # All NixOS: networking, users, zsh, flakes, systemd linger, NFS/CIFS support
@@ -151,17 +151,19 @@ dotfiles/
 ├── home/                        # Home Manager — user-level
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
 │   ├── darwin/
-│   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
-│   │   └── workstation.nix      # Mac Studio: transmission_4
+│   │   └── default.nix          # macOS-only packages + symlinks (all Macs)
 │   └── linux/
 │       ├── default.nix          # Standalone Linux HM — CLI base (Fedora, WSL, etc.)
 │       ├── common.nix           # All Linux: fcitx5, private symlink
 │       ├── gui.nix              # GUI Linux base: firefox, mpv, xremap keymaps
 │       ├── wayland.nix          # Wayland GUI: wl-clipboard, hyprland symlink, xremap(withWlroots)
-│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, st, i3/xinitrc symlinks, xremap(withX11)
+│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, st, urxvt, ueberzugpp, i3/xinitrc symlinks, xremap(withX11)
 │
+├── bin/                         # scripts on PATH (home.sessionPath)
 ├── i3/                          # i3 config, xinitrc (symlinked by x11.nix)
+├── urxvt/                       # Xresources + perl extensions
 ├── hyprland/                    # → ~/.config/hypr (Wayland)
+├── secrets/                     # empty
 ├── private/                     # Private nested repo (gitignored) → ~/.config/private
 │
 ├── zsh/                         # sourced via programs.zsh.initContent
@@ -396,7 +398,7 @@ modules/nixos/x11.nix            ← X11 + i3 (xserver, startx, windowManager.i3
 hosts/<name>/default.nix         ← thin wrapper: imports modules + machine-specific config
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3: xclip, rofi, alttab, picom, st, xinitrc symlinks
+home/linux/x11.nix               ← X11/i3: xclip, rofi, alttab, picom, st, urxvt, xinitrc symlinks
 ```
 
 For standalone Linux (Home Manager only):
@@ -405,7 +407,7 @@ home/linux/default.nix           ← CLI base: programs.home-manager, genericLin
 home/linux/common.nix            ← All Linux: fcitx5, private symlink
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland GUI: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, st, i3/xinitrc symlinks
+home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, st, urxvt, i3/xinitrc symlinks
 ```
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
@@ -429,4 +431,4 @@ Known gaps and planned improvements:
 
 ## Known Issues
 
-- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency at idle (~39% without `custom-shader-animation = always`).
+- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency at idle (~39% without `custom-shader-animation = always`). Commented out in `ghostty/config`.
