@@ -3,54 +3,124 @@
 # usage:
 #   poster                          left edge (default)
 #   poster l|ml|m|mr|r              5-step preset positions
-#   poster f                        full, no crop (plain copy)
+#   poster f                        full width, no horizontal crop
 #   poster <ratio>                  custom x ratio (0.0 ~ 0.5275)
+#   poster <s>-<e>                  x range, same as -x
+#   poster -x <s>-<e>               x range in percent, left to right
+#   poster -y <s>-<e>               y range in percent, top to bottom
 #   poster -i|--input <file>        custom input file (default: fanart.jpg)
 #   poster -d|--dir <path>          fanart.jpg beside <path> (a file's dir, or the dir itself)
-#   poster -a|--append <pos>        append position to filename (poster-<pos>.jpg)
+#   poster -a|--append              append the position to the filename (poster-<pos>.jpg)
 #
-# output goes next to the input file. -d takes an absolute path so it works from
-# yazi search results, where the cwd stays at the search origin.
+# ranges are percentages from the top-left corner. output goes next to the input
+# file. -d takes an absolute path so it works from yazi search results, where the
+# cwd stays at the search origin.
 
 set -euo pipefail
+
+# validate a percent range and echo "start end"
+range() {
+  local axis="$1" spec="$2"
+  if [[ ! "$spec" =~ ^([0-9]+(\.[0-9]+)?)-([0-9]+(\.[0-9]+)?)$ ]]; then
+    echo "poster: -$axis wants start-end in percent, e.g. 30-70 (got '$spec')" >&2
+    return 1
+  fi
+  local s="${BASH_REMATCH[1]}" e="${BASH_REMATCH[3]}"
+  if ! awk -v s="$s" -v e="$e" 'BEGIN { exit !(s >= 0 && e <= 100 && s < e) }'; then
+    echo "poster: -$axis wants 0 <= start < end <= 100 (got '$spec')" >&2
+    return 1
+  fi
+  echo "$s $e"
+}
 
 poster() {
   local append=0
   local input="fanart.jpg"
+  local xspec="" yspec=""
+  local -a args=()
 
-  while [[ "${1:-}" == -* ]]; do
+  while (( $# )); do
     case "$1" in
       -a|--append) append=1; shift ;;
       -i|--input)  input="$2"; shift 2 ;;
       -d|--dir)    if [[ -d "$2" ]]; then input="$2/fanart.jpg"; else input="$(dirname "$2")/fanart.jpg"; fi; shift 2 ;;
-      *) break ;;
+      -x)          xspec="$2"; shift 2 ;;
+      -y)          yspec="$2"; shift 2 ;;
+      -*)          echo "poster: unknown option '$1'" >&2; return 1 ;;
+      *)           args+=("$1"); shift ;;
     esac
   done
 
-  local pos="${1:-l}"
-  local x
-  case "$pos" in
-    l|"")   x=0 ;;
-    ml)     x=0.1318 ;;
-    m)      x=0.2638 ;;
-    mr)     x=0.3956 ;;
-    r)      x=0.5275 ;;
-    f)      x=full ;;
-    *)      x="$pos" ;;
-  esac
+  # a bare s-e argument is an x range; anything else is the preset
+  local pos="" arg
+  if (( ${#args[@]} )); then
+    for arg in "${args[@]}"; do
+      if [[ "$arg" =~ ^[0-9.]+-[0-9.]+$ ]]; then
+        if   [[ -z "$xspec" ]]; then xspec="$arg"
+        elif [[ -z "$yspec" ]]; then yspec="$arg"
+        else echo "poster: more than two ranges given" >&2; return 1
+        fi
+      elif [[ -z "$pos" ]]; then
+        pos="$arg"
+      else
+        echo "poster: unexpected argument '$arg'" >&2; return 1
+      fi
+    done
+  fi
+
+  local x1 x2 y1 y2 parsed
+  if [[ -n "$xspec" ]]; then
+    parsed="$(range x "$xspec")" || return 1
+    read -r x1 x2 <<<"$parsed"
+  fi
+  if [[ -n "$yspec" ]]; then
+    parsed="$(range y "$yspec")" || return 1
+    read -r y1 y2 <<<"$parsed"
+  fi
+
+  # crop geometry as ffmpeg expressions
+  local cw cx ch cy
+  if [[ -n "$xspec" ]]; then
+    cw="iw*($x2-$x1)/100"; cx="iw*$x1/100"
+  else
+    local ratio
+    case "$pos" in
+      ""|l) ratio=0 ;;
+      ml)   ratio=0.1318 ;;
+      m)    ratio=0.2638 ;;
+      mr)   ratio=0.3956 ;;
+      r)    ratio=0.5275 ;;
+      f)    ratio=full ;;
+      *)    ratio="$pos" ;;
+    esac
+    if [[ "$ratio" == full ]]; then
+      cw="iw"; cx="0"
+    else
+      cw="iw*0.4725"; cx="iw*$ratio"
+    fi
+  fi
+  if [[ -n "$yspec" ]]; then
+    ch="ih*($y2-$y1)/100"; cy="ih*$y1/100"
+  else
+    ch="ih"; cy="0"
+  fi
 
   # write next to the input, not the caller's cwd
-  local dir output
+  local dir output suffix
   dir="$(dirname "$input")"
   output="$dir/poster.jpg"
-  (( append )) && output="$dir/poster-$pos.jpg"
+  if (( append )); then
+    if [[ -n "$xspec" ]]; then suffix="x$x1-$x2"; else suffix="${pos:-l}"; fi
+    [[ -n "$yspec" ]] && suffix="${suffix}y$y1-$y2"
+    output="$dir/poster-$suffix.jpg"
+  fi
 
-  if [[ "$x" == full ]]; then
-    # copy instead of re-encoding — nothing is cropped, so ffmpeg would only lose quality
+  if [[ "$cw" == iw && "$ch" == ih ]]; then
+    # nothing cropped, so copy instead of re-encoding
     cp -f -- "$input" "$output"
   else
     # -y: overwrite without prompting — no tty when called from yazi
-    ffmpeg -y -i "$input" -vf "crop=iw*0.4725:ih:iw*$x:0" -update 1 "$output"
+    ffmpeg -y -i "$input" -vf "crop=$cw:$ch:$cx:$cy" -update 1 "$output"
   fi
 
   # repaint yazi's stale preview; press - to zoom back out. YAZI_ID is unset outside yazi
