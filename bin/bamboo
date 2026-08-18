@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+# shorten names in cwd keeping the (NNNN) product codes, then mirror them
+# into ./bamboo/ as zero-byte files
+# usage: bamboo [-r] [-n] [--max-bytes N]
+
+set -euo pipefail
+
+max_bytes=252
+recursive=false
+dry_run=false
+out=bamboo
+
+while (($#)); do
+	case $1 in
+	-r | --recursive) recursive=true ;;
+	-n | --dry-run) dry_run=true ;;
+	--max-bytes)
+		max_bytes=$2
+		shift
+		;;
+	*)
+		echo "unknown option: $1" >&2
+		exit 2
+		;;
+	esac
+	shift
+done
+
+# A byte-wise cut can land inside a character; drop the partial tail if so.
+trim_partial() {
+	local s=$1
+	local LC_ALL=C
+	local i=${#s} n=0 lead need
+	while ((i > 0)) && [[ ${s:i-1:1} == [$'\x80'-$'\xbf'] ]]; do
+		((i--, n++))
+	done
+	((i > 0)) || return 0
+	lead=${s:i-1:1}
+	case $lead in
+	[$'\xc0'-$'\xdf']) need=1 ;;
+	[$'\xe0'-$'\xef']) need=2 ;;
+	[$'\xf0'-$'\xf7']) need=3 ;;
+	*) need=0 ;;
+	esac
+	if ((n == need)); then printf '%s' "$s"; else printf '%s' "${s:0:i-1}"; fi
+}
+
+# LC_ALL=C makes ${#s} and ${s:0:n} count bytes, which is what the limit is in.
+shorten_name() {
+	local name=$1 max=$2
+	local LC_ALL=C
+	((${#name} > max)) || {
+		printf '%s' "$name"
+		return
+	}
+
+	# split off up to two extension segments (.zip, .cbz.zip, .tar.gz)
+	local ext="" work=$name i stem seg
+	local ext_re='^(.+)\.([A-Za-z0-9]{1,5})$'
+	for ((i = 0; i < 2; i++)); do
+		[[ $work =~ $ext_re ]] || break
+		stem=${BASH_REMATCH[1]} seg=${BASH_REMATCH[2]} # a later match clobbers these
+		if [[ $seg =~ ^[0-9]+$ ]]; then break; fi      # "v1.0" is not an extension
+		ext=".$seg$ext"
+		work=$stem
+	done
+
+	# lift out every (NNN) in order — product codes and rsync dedup markers alike
+	local codes="" title="" rest=$work
+	local code_re='^([^(]*)\(([0-9]+)\)(.*)$'
+	while [[ $rest =~ $code_re ]]; do
+		title+=${BASH_REMATCH[1]}
+		codes+=" (${BASH_REMATCH[2]})"
+		rest=${BASH_REMATCH[3]}
+	done
+	title+=$rest
+
+	while [[ $title == *"  "* ]]; do title=${title//  / }; done
+	while [[ ${title:0:1} == " " ]]; do title=${title:1}; done
+	while [[ ${title: -1} == [\ .,_-] ]]; do title=${title%?}; done
+
+	local suffix="$codes$ext" ellipsis="…"
+	local avail=$((max - ${#suffix}))
+	if ((avail < ${#ellipsis} + 1)); then # suffix alone overflows: plain cut
+		trim_partial "${name:0:max}"
+		return
+	fi
+
+	if ((${#title} > avail)); then
+		title=$(trim_partial "${title:0:$((avail - ${#ellipsis}))}")
+		while [[ ${title: -1} == [\ .,_-] ]]; do title=${title%?}; done
+		title+=$ellipsis
+	fi
+
+	printf '%s' "$title$suffix"
+}
+
+rename_path() {
+	local path=$1 dir base short
+	dir=$(dirname -- "$path")
+	base=$(basename -- "$path")
+	short=$(shorten_name "$base" "$max_bytes")
+	[[ $short == "$base" ]] && return 0
+	if [[ -e "$dir/$short" ]]; then
+		printf 'skip (target exists): %s\n' "$path" >&2
+		return 0
+	fi
+	printf '  %s\n    -> %s\n' "$base" "$short"
+	$dry_run || mv -n -- "$path" "$dir/$short"
+}
+
+depth=(-maxdepth 1)
+if $recursive; then depth=(); fi
+
+# -depth renames the deepest entries first, so parent paths stay valid
+if $recursive; then
+	while IFS= read -r -d '' d; do rename_path "$d"; done \
+		< <(find . -mindepth 1 -depth -type d ! -path "./$out" ! -path "./$out/*" -print0)
+fi
+while IFS= read -r -d '' f; do rename_path "$f"; done \
+	< <(find . "${depth[@]}" -type f ! -path "./$out/*" -print0)
+
+if $dry_run; then exit 0; fi
+
+mkdir -p "$out"
+while IFS= read -r -d '' f; do
+	rel=${f#./}
+	mkdir -p "$out/$(dirname -- "$rel")"
+	: >"$out/$rel"
+done < <(find . "${depth[@]}" -type f ! -path "./$out/*" -print0)
+
+echo "done"

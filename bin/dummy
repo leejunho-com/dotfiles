@@ -1,14 +1,31 @@
 #!/usr/bin/env bash
-# mirror the tree below cwd into ./dummy/ as zero-byte files
+# mirror files below cwd into ./dummy/ as zero-byte files
+# usage: dummy [-r]   -> -r walks the whole tree, otherwise cwd only
 
 set -euo pipefail
 
-mkdir -p dummy
+recursive=false
+out=dummy
 
-find . -type f ! -path "./dummy/*" | while read -r file; do
-  relpath="${file#./}"
-  mkdir -p "dummy/$(dirname "$relpath")"
-  : >"dummy/$relpath"
+while (($#)); do
+	case $1 in
+	-r | --recursive) recursive=true ;;
+	*)
+		echo "unknown option: $1" >&2
+		exit 2
+		;;
+	esac
+	shift
 done
+
+depth=(-maxdepth 1)
+if $recursive; then depth=(); fi
+
+mkdir -p "$out"
+while IFS= read -r -d '' f; do
+	rel=${f#./}
+	mkdir -p "$out/$(dirname -- "$rel")"
+	: >"$out/$rel"
+done < <(find . "${depth[@]}" -type f ! -path "./$out/*" -print0)
 
 echo "done"

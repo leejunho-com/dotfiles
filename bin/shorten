@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# rename names that overflow the filesystem byte limit (ext4/xfs: 255)
+# usage: shorten [-n] [--max-bytes N] <path>...  -> rename in place, deepest first
+#        shorten --name <name>                   -> print the shortened name only
+
+set -euo pipefail
+
+max_bytes=255
+dry_run=false
+name_only=false
+
+while (($#)); do
+	case $1 in
+	-n | --dry-run) dry_run=true ;;
+	--max-bytes)
+		max_bytes=$2
+		shift
+		;;
+	--name) name_only=true ;;
+	--)
+		shift
+		break
+		;;
+	-*)
+		echo "unknown option: $1" >&2
+		exit 2
+		;;
+	*) break ;;
+	esac
+	shift
+done
+
+# A byte-wise cut can land inside a character; drop the partial tail if so.
+trim_partial() {
+	local s=$1
+	local LC_ALL=C
+	local i=${#s} n=0 lead need
+	while ((i > 0)) && [[ ${s:i-1:1} == [$'\x80'-$'\xbf'] ]]; do
+		((i--, n++))
+	done
+	((i > 0)) || return 0
+	lead=${s:i-1:1}
+	case $lead in
+	[$'\xc0'-$'\xdf']) need=1 ;;
+	[$'\xe0'-$'\xef']) need=2 ;;
+	[$'\xf0'-$'\xf7']) need=3 ;;
+	*) need=0 ;;
+	esac
+	if ((n == need)); then printf '%s' "$s"; else printf '%s' "${s:0:i-1}"; fi
+}
+
+# LC_ALL=C makes ${#s} and ${s:0:n} count bytes, which is what the limit is in.
+shorten_name() {
+	local name=$1 max=$2
+	local LC_ALL=C
+	((${#name} > max)) || {
+		printf '%s' "$name"
+		return
+	}
+
+	# split off up to two extension segments (.gz, .tar.gz)
+	local ext="" stem=$name work=$name i head seg
+	local ext_re='^(.+)\.([A-Za-z0-9]{1,10})$'
+	for ((i = 0; i < 2; i++)); do
+		[[ $work =~ $ext_re ]] || break
+		head=${BASH_REMATCH[1]} seg=${BASH_REMATCH[2]} # a later match clobbers these
+		if [[ $seg =~ ^[0-9]+$ ]]; then break; fi      # "v1.0" is not an extension
+		ext=".$seg$ext"
+		work=$head
+	done
+	stem=$work
+
+	local avail=$((max - ${#ext}))
+	if ((avail < 1)); then # extension alone overflows: cut the whole name
+		trim_partial "${name:0:max}"
+		return
+	fi
+
+	stem=$(trim_partial "${stem:0:avail}")
+	while [[ ${stem: -1} == " " ]]; do stem=${stem%?}; done
+	printf '%s' "$stem$ext"
+}
+
+if $name_only; then
+	shorten_name "${1-}" "$max_bytes"
+	echo
+	exit 0
+fi
+
+rename_path() {
+	local path=$1 dir base short
+	dir=$(dirname -- "$path")
+	base=$(basename -- "$path")
+	short=$(shorten_name "$base" "$max_bytes")
+	[[ $short == "$base" ]] && return 0
+	if [[ -e "$dir/$short" ]]; then
+		printf 'skip (target exists): %s\n' "$path" >&2
+		return 0
+	fi
+	printf '  %s\n    -> %s\n' "$base" "$short"
+	$dry_run || mv -n -- "$path" "$dir/$short"
+}
+
+for target in "$@"; do
+	if [[ -d $target ]]; then
+		# -depth renames the deepest entries first, so parent paths stay valid
+		while IFS= read -r -d '' d; do rename_path "$d"; done \
+			< <(find "$target" -mindepth 1 -depth -type d -print0)
+		while IFS= read -r -d '' f; do rename_path "$f"; done \
+			< <(find "$target" -type f -print0)
+	elif [[ -e $target ]]; then
+		rename_path "$target"
+	fi
+done
