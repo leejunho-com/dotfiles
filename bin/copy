@@ -35,4 +35,8 @@ if [[ -n ${TMUX:-} ]]; then
 	exit 0
 fi
 
-printf '\033]52;c;%s\007' "$(printf '%s' "$data" | base64 | tr -d '\n')" >/dev/tty
+seq=$(printf '\033]52;c;%s\007' "$(printf '%s' "$data" | base64 | tr -d '\n')")
+
+# Detached children (yazi's shell) have no /dev/tty; the ssh pty still opens.
+{ printf '%s' "$seq" >/dev/tty; } 2>/dev/null ||
+	printf '%s' "$seq" >"${SSH_TTY:?no terminal available for the clipboard escape}"
