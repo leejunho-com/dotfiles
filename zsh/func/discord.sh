@@ -15,7 +15,17 @@ _discord_last_cmd=""
 # track the last command via preexec hook for -j and stdin title
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec _discord_preexec
-_discord_preexec() { _discord_last_cmd="$1" }
+
+# ignore trailing discord calls so the title stays the real command
+_discord_preexec() {
+  emulate -L zsh
+  setopt extendedglob
+  local c=$1
+  c=${c%%[[:space:]]#[;|&]##[[:space:]]#discord([[:space:]]*|)}
+  c=${c##[[:space:]]#}
+  c=${c%%[[:space:]]#}
+  [[ -n $c && $c != discord([[:space:]]*|) ]] && _discord_last_cmd=$c
+}
 
 discord() {
   local OPTIND=1 opt mode="plain" content=""
@@ -58,7 +68,7 @@ discord() {
     # code: fenced code block; stdin adds pwd + command as heading
     code)
       local title=""
-      [[ $_stdin == 1 ]] && title=$(echo "$_discord_last_cmd" | sed 's/ *[|&]\+[[:space:]]*discord.*//; s/^[[:space:]]*//')
+      [[ $_stdin == 1 ]] && title=$_discord_last_cmd
       if [[ -n "$title" ]]; then
         printf -v body $'# %s\n# ❯  %s\n```\n%s\n```\n%s' \
           "$dir" "$title" "$content" "$footer"
@@ -68,9 +78,12 @@ discord() {
       ;;
     # job: fire-and-forget notification with preceding command as title
     job)
-      local title
-      title=$(echo "$_discord_last_cmd" | sed 's/ *[|&]\+[[:space:]]*discord.*//; s/^[[:space:]]*//')
-      printf -v body $'# %s\n⚡️Job Finished\n%s' "$title" "$footer"
+      local title=$_discord_last_cmd
+      if [[ -n "$title" ]]; then
+        printf -v body $'# %s\n⚡️Job Finished\n%s' "$title" "$footer"
+      else
+        printf -v body $'⚡️Job Finished\n%s' "$footer"
+      fi
       ;;
   esac
 
