@@ -4,9 +4,8 @@
 #   discord "msg"     plain text, no footer
 #   discord -m "msg"  plain text + footer
 #   discord -c "code" code block + footer
-#   discord -c -      code block from stdin (ls | discord -c -)
-#   ls | discord      same as above — pipe auto-detected, no flags needed
-#   discord -j        job notification, title auto-detected from preceding command
+#   discord -j "note" job notification headed by the preceding command
+#   ls | discord      stdin becomes the body and the argument becomes a note
 
 # capture short hostname once at load time
 _discord_host=${HOST%%.*}
@@ -27,68 +26,94 @@ _discord_preexec() {
   [[ -n $c && $c != discord([[:space:]]*|) ]] && _discord_last_cmd=$c
 }
 
-discord() {
-  local OPTIND=1 opt mode="plain" content=""
+_discord_usage() {
+  print -u2 'usage: discord [msg | -m msg | -c code | -j job], or pipe into discord'
+}
 
-  # parse options
-  while getopts ":m:c:j" opt; do
+discord() {
+  local OPTIND=1 opt arg mode="plain" content
+
+  # parse options; the message is the remaining argument, if any
+  while getopts ":mcj" opt; do
     case $opt in
-      m) mode="msg";  content="$OPTARG" ;;
-      c) mode="code"; content="$OPTARG" ;;
+      m) mode="msg" ;;
+      c) mode="code" ;;
       j) mode="job" ;;
+      '?') _discord_usage; return 1 ;;
     esac
   done
   shift $((OPTIND-1))
 
-  # auto-detect pipe: bare `discord` or `discord -c -` with stdin
-  local _stdin=0
-  if [[ "$mode" == "plain" && -z "$content" && ! -t 0 ]]; then
-    mode="code"; content=$(cat); _stdin=1
-  else
-    [[ "$mode" == "plain" && -z "$content" ]] && content="$*"
-    [[ "$content" == "-" ]] && { content=$(cat); _stdin=1; }
+  # flags only count before the message, so catch the reversed order
+  for arg in "$@"; do
+    [[ "$arg" == -[mcj] ]] && { _discord_usage; return 1 }
+  done
+  content="$*"
+
+  # piped input becomes the body and demotes the argument to a note;
+  # an empty pipe is ignored so scripts can still pass a message
+  local note="" piped _stdin=0
+  if [[ ! -t 0 ]]; then
+    piped=$(cat)
+    if [[ -n "$piped" ]]; then
+      note="$content"; content="$piped"; _stdin=1
+    fi
   fi
 
-  # build shared footer
-  local host=$_discord_host session="" dir payload body footer
+  # job carries no body: the argument is the note and piped input is dropped
+  if [[ "$mode" == "job" ]]; then
+    [[ $_stdin == 0 ]] && note="$content"
+    content=""
+  fi
+
+  # nothing to send
+  if [[ "$mode" != "job" && -z "$content" ]]; then
+    _discord_usage
+    return 1
+  fi
+
+  # build the shared footer and note, both sitting under the body
+  local host=$_discord_host session="" dir payload body footer noteline=""
   [[ -n "$TMUX" ]] && session=" (tmux: $(tmux display-message -p '#S'))"
   dir=$(pwd)
   printf -v footer $'> 📍 %s%s\n> 📂 %s\n> 🕒 %s\n' \
     "$host" "$session" "$dir" "$(date '+%Y-%m-%d %H:%M:%S')"
+  [[ -n "$note" ]] && noteline=$'💬 '$note$'\n'
 
   case "$mode" in
     # plain: no footer, just the message
     plain)
       body="$content"
+      [[ -n "$noteline" ]] && body+=$'\n'$noteline
       ;;
     # msg: message with footer
     msg)
-      printf -v body $'%s\n%s' "$content" "$footer"
+      printf -v body $'%s\n%s%s' "$content" "$noteline" "$footer"
       ;;
-    # code: fenced code block; stdin adds pwd + command as heading
+    # code: fenced code block; stdin adds the command as heading
     code)
       local title=""
       [[ $_stdin == 1 ]] && title=$_discord_last_cmd
       if [[ -n "$title" ]]; then
-        printf -v body $'# %s\n# ❯  %s\n```\n%s\n```\n%s' \
-          "$dir" "$title" "$content" "$footer"
+        printf -v body $'# ❯  %s\n```\n%s\n```\n%s%s' \
+          "$title" "$content" "$noteline" "$footer"
       else
-        printf -v body $'```\n%s\n```\n%s' "$content" "$footer"
+        printf -v body $'```\n%s\n```\n%s%s' "$content" "$noteline" "$footer"
       fi
       ;;
-    # job: fire-and-forget notification with preceding command as title
+    # job: notification only, headed by the preceding command
     job)
-      local title=$_discord_last_cmd
-      if [[ -n "$title" ]]; then
-        printf -v body $'# %s\n⚡️Job Finished\n%s' "$title" "$footer"
-      else
-        printf -v body $'⚡️Job Finished\n%s' "$footer"
-      fi
+      local head=""
+      [[ -n "$_discord_last_cmd" ]] && head=$'# ❯  '$_discord_last_cmd$'\n'
+      printf -v body $'%s%s⚡️Job Finished\n%s' "$head" "$noteline" "$footer"
       ;;
   esac
 
   payload=$(jq -n --arg c "$body" '{content: $c}')
 
-  printf '%s' "$payload" | \
-    curl -s -H "Content-Type: application/json" -X POST -d @- "$DISCORD_WEBHOOK" > /dev/null
+  if ! printf '%s' "$payload" | \
+    curl -sf -H "Content-Type: application/json" -X POST -d @- "$DISCORD_WEBHOOK" > /dev/null; then
+    print -u2 'discord: post failed'
+    return 1
+  fi
 }
