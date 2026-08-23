@@ -55,8 +55,8 @@ alt + shift - x      : yabai -m window --display recent; yabai -m display --focu
 alt + ctrl - g       : yabai -m window --display east; yabai -m display --focus east;
 
 # move window to prev and next space
-alt + ctrl - p : yabai -m window --space prev;
-alt + ctrl - n : yabai -m window --space next;
+# alt + ctrl - p : yabai -m window --space prev;
+# alt + ctrl - n : yabai -m window --space next;
 
 # switch space
 alt - 1 : yabai -m space --focus 1
@@ -114,7 +114,7 @@ alt - s             : open -a Safari
 alt + shift - s     : open -a "System Settings"
 alt - d             : open -a Discord
 # f emacs word forward
-alt + shift - f     : yabai -m space --focus 1 ; open ~/Desktop
+# shift + f emacs word select forward
 alt - g             : open -a "Adobe Lightroom"
 alt - 0x029         : open -a ghostty # semicolon
 alt + shift - 0x029 : open -na ghostty # colon
@@ -130,6 +130,6 @@ alt + shift - c     : open -a Calendar
 alt - v             : open -a "Screen Sharing"
 alt + shift - v     : open -a Preview
 # b emacs word back
-alt + shift - b     : open -a Blender
+# shift + b emacs word select back
 alt - n             : open -na ghostty
 # m
