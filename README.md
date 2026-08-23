@@ -157,7 +157,7 @@ dotfiles/
 │       ├── common.nix           # All Linux: fcitx5, private symlink
 │       ├── gui.nix              # GUI Linux base: firefox, mpv, xremap keymaps
 │       ├── wayland.nix          # Wayland GUI: wl-clipboard, hyprland symlink, xremap(withWlroots)
-│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, st, urxvt, ueberzugpp, i3/xinitrc symlinks, xremap(withX11)
+│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, urxvt, ueberzugpp, i3/xinitrc symlinks, xremap(withX11)
 │
 ├── bin/                         # scripts on PATH (home.sessionPath)
 ├── i3/                          # i3 config, xinitrc (symlinked by x11.nix)
@@ -398,7 +398,7 @@ modules/nixos/x11.nix            ← X11 + i3 (xserver, startx, windowManager.i3
 hosts/<name>/default.nix         ← thin wrapper: imports modules + machine-specific config
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3: xclip, rofi, alttab, picom, st, urxvt, xinitrc symlinks
+home/linux/x11.nix               ← X11/i3: xclip, rofi, alttab, picom, urxvt, xinitrc symlinks
 ```
 
 For standalone Linux (Home Manager only):
@@ -407,7 +407,7 @@ home/linux/default.nix           ← CLI base: programs.home-manager, genericLin
 home/linux/common.nix            ← All Linux: fcitx5, private symlink
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland GUI: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, st, urxvt, i3/xinitrc symlinks
+home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, urxvt, i3/xinitrc symlinks
 ```
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.

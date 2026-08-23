@@ -37,8 +37,9 @@
             "C-f" = "right";
             "C-b" = "left";
             "C-h" = "backspace";
-            "M-f" = "M-right";
-            "M-b" = "M-left";
+            # word motion is Ctrl+arrow on linux, not Alt+arrow as on darwin
+            "M-f" = "C-right";
+            "M-b" = "C-left";
           };
         }
         {
@@ -54,6 +55,8 @@
             "C-S-b" = "S-left";
             "C-S-n" = "S-down";
             "C-S-p" = "S-up";
+            "M-S-f" = "C-S-right";
+            "M-S-b" = "C-S-left";
           };
         }
         {
@@ -85,6 +88,8 @@
             "Super-l" = "C-l";
             "Super-r" = "C-r";
             "Super-f" = "C-f";
+            "Super-p" = "C-p";
+            "Super-d" = "C-d";
             "Super-S-t" = "C-S-t";
           };
         }
