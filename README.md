@@ -228,7 +228,7 @@ chmod 600 ~/.ssh/authorized_keys
 > The following require manual configuration:
 
 **Keyboard**
-- Mission Control → Switch to Desktop {1–n}: `ctrl + {1–n}`
+- Mission Control → Switch to Desktop {1–n}: `ctrl + {1–n}` — the only space-switching path (skhd binds `ctrl + shift + {1–n}` to send a window there, matching i3 and hyprland)
 - Modifier Keys → Caps Lock: Control
 - Dictation → Shortcut: Press mic
 
