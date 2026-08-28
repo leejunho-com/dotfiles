@@ -6,7 +6,7 @@ let
 in
 {
   home.username = user;
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
+  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${user}" else "/home/${user}";
 
   # bin/ is on PATH directly — new scripts need only chmod +x, no nix change
   home.sessionPath = [ "$HOME/.local/bin" "${dotfiles}/bin" ];
@@ -85,7 +85,7 @@ in
   '';
 
   home.activation.firefoxChrome = config.lib.dag.entryAfter ["writeBoundary"] (''
-    if ${pkgs.lib.boolToString pkgs.stdenv.isDarwin}; then
+    if ${pkgs.lib.boolToString pkgs.stdenv.hostPlatform.isDarwin}; then
       _ff_bases=("$HOME/Library/Application Support/Firefox/Profiles")
     else
       # Firefox 147+: XDG path (~/.config/mozilla) for new installs; legacy (~/.mozilla) for existing
