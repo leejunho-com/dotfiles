@@ -10,18 +10,18 @@ image_delay = 0   # default 30; send immediately instead of debouncing
 
 [opener]
 edit = [
-  { run = 'nvim "$@"', block = true },
-  { run = 'bat "$@"', block = true },
+  { run = 'nvim %s', block = true },
+  { run = 'bat %s', block = true },
 ]
 photoshop = [
-  { for = "macos", run = 'open -a "Adobe Photoshop 2026" "$@"', desc = "Adobe Photoshop" },
+  { for = "macos", run = 'open -a "Adobe Photoshop 2026" %s', desc = "Adobe Photoshop" },
 ]
 unar = [
-  { run = 'for rar in "$@"; do unar "$rar"; done', desc = "Extract with unar" },
+  { run = 'for rar in %s; do unar "$rar"; done', desc = "Extract with unar" },
 ]
-mpv = [{ run = 'mpv "$@"', desc = "mpv" }]
+mpv = [{ run = 'mpv %s', desc = "mpv" }]
 firefox = [
-  { run = 'for f in "$@"; do firefox --new-tab "file://$(realpath "$f")"; done', desc = "Firefox", orphan = true },
+  { run = 'for f in %s; do firefox --new-tab "file://$(realpath "$f")"; done', desc = "Firefox", orphan = true },
 ]
 
 [open]

@@ -2,8 +2,8 @@
 # copy text to the clipboard — locally, over SSH, and inside tmux
 # usage: copy <text>...   ->  one line per argument
 #        <cmd> | copy     ->  stdin as-is
-#   copy "$@"
-#   for f in "$@"; do dirname -- "$f"; done | copy
+#   copy %s
+#   for f in %s; do basename -- "$f"; done | copy
 
 set -euo pipefail
 

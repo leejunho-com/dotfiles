@@ -15,16 +15,16 @@ prepend_keymap = [
   { on = [ "g", "l" ], for = "unix",  run = "cd ~/Downloads",  desc = "Go ~/Downloads" },
   { on = [ "g", "d" ], for = "unix",  run = "cd ~/Desktop",    desc = "Go ~/Desktop"   },
   { on = [ "g", "o" ], for = "unix",  run = "cd ~/Documents",  desc = "Go ~/Documents" },
-  { on = [ "g", "w" ], for = "macos", run = '''shell --confirm 'open -a "Parallels Desktop" "$(dirname "$1")" && osascript -e "tell application \"Parallels Desktop\" to activate"' ''', desc = "Reveal in Windows" },
+  { on = [ "g", "w" ], for = "macos", run = '''shell --confirm 'open -a "Parallels Desktop" %d1 && osascript -e "tell application \"Parallels Desktop\" to activate"' ''', desc = "Reveal in Windows" },
 
 # edit
   { on = [ "e", "p" ], run = '''shell 'poster -d %h ' --interactive''', desc = "Crop fanart.jpg beside hovered file (type l|ml|m|mr|r)" },
 
 # clipboard — route through bin/copy; tmux drops yazi's own OSC 52 (see docs/troubleshooting)
-  { on = [ "c", "c" ], run = '''shell 'copy "$@"' ''', desc = "Copy the file path" },
-  { on = [ "c", "d" ], run = '''shell 'for f in "$@"; do dirname -- "$f"; done | copy' ''', desc = "Copy the directory path" },
-  { on = [ "c", "f" ], run = '''shell 'for f in "$@"; do basename -- "$f"; done | copy' ''', desc = "Copy the filename" },
-  { on = [ "c", "n" ], run = '''shell 'for f in "$@"; do basename -- "$f"; done | sed "s/\(.\)\.[^.]*$/\1/" | copy' ''', desc = "Copy the filename without extension" },
+  { on = [ "c", "c" ], run = '''shell 'copy %s' ''', desc = "Copy the file path" },
+  { on = [ "c", "d" ], run = '''shell 'copy %d' ''', desc = "Copy the directory path" },
+  { on = [ "c", "f" ], run = '''shell 'for f in %s; do basename -- "$f"; done | copy' ''', desc = "Copy the filename" },
+  { on = [ "c", "n" ], run = '''shell 'for f in %s; do basename -- "$f"; done | sed "s/\(.\)\.[^.]*$/\1/" | copy' ''', desc = "Copy the filename without extension" },
 
 # plugin
   # zoom
