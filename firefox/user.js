@@ -61,14 +61,14 @@ user_pref("browser.display.use_document_fonts", 0);
 user_pref("font.default.x-western", "sans-serif");
 user_pref("font.name.sans-serif.x-western", "Pretendard JP");
 user_pref("font.name.serif.x-western", "Noto Serif CJK KR");
-user_pref("font.name.monospace.x-western", "D2CodingLigature Nerd Font");
+user_pref("font.name.monospace.x-western", "D2KodingLigature Nerd Font");
 // Fonts — Korean
 user_pref("font.default.ko", "sans-serif");
 user_pref("font.name.sans-serif.ko", "Pretendard JP");
 user_pref("font.name.serif.ko", "Noto Serif CJK KR");
-user_pref("font.name.monospace.ko", "D2CodingLigature Nerd Font");
+user_pref("font.name.monospace.ko", "D2KodingLigature Nerd Font");
 // Fonts — Japanese
 user_pref("font.default.ja", "sans-serif");
 user_pref("font.name.sans-serif.ja", "Pretendard JP");
 user_pref("font.name.serif.ja", "Noto Serif CJK JP");
-user_pref("font.name.monospace.ja", "D2CodingLigature Nerd Font");
+user_pref("font.name.monospace.ja", "D2KodingLigature Nerd Font");
