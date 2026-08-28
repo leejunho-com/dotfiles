@@ -281,7 +281,7 @@ Core fonts are managed by Nix and installed automatically on `nix-switch`:
 
 - **Sans-serif**: Pretendard JP (Latin, Korean, Japanese)
 - **Serif**: Noto Serif CJK KR (Latin/Korean), Noto Serif CJK JP (Japanese)
-- **Monospace**: D2KodingLigature Nerd Font — Nerd Fonts renamed the family from `D2Coding` to `D2Koding` to honour the upstream OFL reserved font name. Ghostty needs the `Mono` variant on top of that.
+- **Monospace**: D2KodingLigature Nerd Font
 - **mpv OSD**: Pretendard JP Bold — icon glyphs rendered via ASS font tags (Symbols Nerd Font Mono)
 
 Firefox `user.js` applies these via `font.name.*` prefs and disables page font override (`browser.display.use_document_fonts=0`). No manual `about:config` editing needed.
