@@ -10,8 +10,12 @@ if [[ "$(uname)" == "Darwin" ]]; then
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#darwinConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   sudo darwin-rebuild switch --flake "$DOTFILES#$HOST"
-  command -v yabai &>/dev/null && sudo yabai --load-sa
-  command -v nvd &>/dev/null && nvd diff "$BEFORE" /run/current-system
+  if command -v yabai &>/dev/null; then
+    sudo yabai --load-sa || echo "WARNING: yabai --load-sa failed — scripting addition is broken"
+  fi
+  if command -v nvd &>/dev/null; then
+    nvd diff "$BEFORE" /run/current-system
+  fi
 
 elif [ -f /etc/NIXOS ]; then
   BEFORE=$(readlink -f /run/current-system)
@@ -20,7 +24,9 @@ elif [ -f /etc/NIXOS ]; then
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#nixosConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   sudo nixos-rebuild switch --flake "$DOTFILES#$HOST" --impure
-  command -v nvd &>/dev/null && nvd diff "$BEFORE" /run/current-system
+  if command -v nvd &>/dev/null; then
+    nvd diff "$BEFORE" /run/current-system
+  fi
 
 else
   BEFORE=$(readlink -f ~/.local/state/nix/profiles/home-manager)
@@ -29,5 +35,7 @@ else
   nix --extra-experimental-features 'nix-command flakes' eval "$DOTFILES#homeConfigurations" \
     --apply "x: builtins.hasAttr \"$HOST\" x" 2>/dev/null | grep -q true || HOST="$FALLBACK"
   home-manager switch --flake "$DOTFILES#$HOST"
-  command -v nvd &>/dev/null && nvd diff "$BEFORE" ~/.local/state/nix/profiles/home-manager
+  if command -v nvd &>/dev/null; then
+    nvd diff "$BEFORE" ~/.local/state/nix/profiles/home-manager
+  fi
 fi
