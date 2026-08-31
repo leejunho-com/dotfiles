@@ -1,10 +1,9 @@
 # https://github.com/koekeishiya/yabai/wiki/Configuration
 # Scripting addition
 # Inject on start, and put it back when Dock restarts.
-# sudoers grants NOPASSWD to the store path, not the /run/current-system symlink.
-YABAI_BIN="$(readlink -f "$(command -v yabai)")"
-yabai -m signal --add event=dock_did_restart action="sudo $YABAI_BIN --load-sa"
-sudo "$YABAI_BIN" --load-sa
+# nix-darwin grants NOPASSWD to this symlink path, so do not resolve it.
+yabai -m signal --add event=dock_did_restart action="sudo /run/current-system/sw/bin/yabai --load-sa"
+sudo /run/current-system/sw/bin/yabai --load-sa
 
 # Tiling options
 # Layout
