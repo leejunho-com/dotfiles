@@ -1,8 +1,8 @@
 [mgr]
 
 prepend_keymap = [
-	{ on = [ "q" ], run = 'close', desc = "Close the current tab, or quit if it is last tab" },
-	{ on = [ "<C-q>" ], run = 'quit', desc = "Exit the process" },
+	{ on = [ "q" ], run = 'close', desc = "Close tab, quit if last" },
+	{ on = [ "<C-q>" ], run = 'quit', desc = "Exit yazi" },
   { on = "!", for = "macos", run = '''shell 'open -na Ghostty --args --working-directory="$PWD"' --block false''', desc = "Open Ghostty here" },
   { on = "!", for = "linux", run = 'shell "ghostty --working-directory=$PWD &" --block false', desc = "Open Ghostty here" },
 # goto
@@ -18,13 +18,20 @@ prepend_keymap = [
   { on = [ "g", "w" ], for = "macos", run = '''shell --confirm 'open -a "Parallels Desktop" %d1 && osascript -e "tell application \"Parallels Desktop\" to activate"' ''', desc = "Reveal in Windows" },
 
 # edit
-  { on = [ "e", "p" ], run = '''shell 'poster -d %h ' --interactive''', desc = "Crop fanart.jpg beside hovered file (type l|ml|m|mr|r)" },
+  { on = [ "e", "p" ], run = '''shell 'poster -d %h ' --interactive''', desc = "Crop fanart.jpg (l|ml|m|mr|r)" },
 
 # clipboard — route through bin/copy; tmux drops yazi's own OSC 52 (see docs/troubleshooting)
-  { on = [ "c", "c" ], run = '''shell 'copy %s' ''', desc = "Copy the file path" },
-  { on = [ "c", "d" ], run = '''shell 'copy %d' ''', desc = "Copy the directory path" },
-  { on = [ "c", "f" ], run = '''shell 'for f in %s; do basename -- "$f"; done | copy' ''', desc = "Copy the filename" },
-  { on = [ "c", "n" ], run = '''shell 'for f in %s; do basename -- "$f"; done | sed "s/\(.\)\.[^.]*$/\1/" | copy' ''', desc = "Copy the filename without extension" },
+  { on = [ "c", "c" ], run = '''shell 'copy %s' ''', desc = "cp file path" },
+  { on = [ "c", "C" ], run = '''shell 'copy %S' ''', desc = "cp file URL" },
+  { on = [ "c", "d" ], run = '''shell 'copy %d' ''', desc = "cp dir path" },
+  { on = [ "c", "D" ], run = '''shell 'copy %D' ''', desc = "cp dir URL" },
+  { on = [ "c", "b" ], run = '''shell 'for d in %d; do basename -- "$d"; done | copy' ''', desc = "cp dir name" },
+  { on = [ "c", "f" ], run = '''shell 'for f in %s; do basename -- "$f"; done | copy' ''', desc = "cp filename" },
+  { on = [ "c", "n" ], run = '''shell 'for f in %s; do basename -- "$f"; done | sed "s/\(.\)\.[^.]*$/\1/" | copy' ''', desc = "cp filename w/o ext" },
+
+# tab — yazi 26.8.15 changed `Url::pair()`, so the builtin `tab_create --current`
+# now stays in the search view instead of opening the file's real directory
+  { on = [ "t", "t" ], run = '''shell 'ya emit -- tab_create --current && [ -n %h ] && ya emit -- reveal %h' ''', desc = "New tab in file's dir" },
 
 # plugin
   # zoom
