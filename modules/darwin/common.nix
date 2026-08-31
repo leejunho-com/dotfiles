@@ -6,6 +6,16 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # nixpkgs strips LC_UUID for reproducible builds, but the scripting addition
+  # payload is dlopen'd into Dock.app and dyld rejects images without it.
+  nixpkgs.overlays = [
+    (final: prev: {
+      yabai = prev.yabai.overrideAttrs (old: {
+        postPatch = builtins.replaceStrings [ " -Wl,-no_uuid" ] [ "" ] old.postPatch;
+      });
+    })
+  ];
+
   # nix fontconfig wants /etc/fonts/fonts.conf, absent on macOS: fc-list sees only DejaVu
   environment.etc."fonts/fonts.conf".source = pkgs.makeFontsConf {
     fontDirectories = [ "/etc/profiles/per-user/${user}/share/fonts" ];
