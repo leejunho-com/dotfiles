@@ -31,7 +31,7 @@ prepend_keymap = [
 
 # tab — yazi 26.8.15 changed `Url::pair()`, so the builtin `tab_create --current`
 # now stays in the search view instead of opening the file's real directory
-  { on = [ "t", "t" ], run = '''shell 'ya emit -- tab_create --current && [ -n %h ] && ya emit -- reveal %h' ''', desc = "New tab in file's dir" },
+  { on = [ "t", "t" ], run = '''shell 'ya emit -- tab_create --current && [ -n %h ] && ya emit -- reveal %h || true' ''', desc = "New tab in file's dir" },
 
 # plugin
   # zoom
