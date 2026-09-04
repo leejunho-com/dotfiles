@@ -59,7 +59,7 @@ nix-switch   # apply after reviewing diff
 |--------|---------|
 | Edit zshrc, ghostty, nvim, etc. | Just save — symlinked, no rebuild needed |
 | Edit `tmux/tmux.conf` | `prefix+r` — sourced at runtime, no rebuild needed |
-| Add / remove packages | Edit `home/common.nix` → rebuild |
+| Add / remove packages | Edit `home/common.nix`, or `home/linux/common.nix` if the package is Linux-only → rebuild |
 | Change system settings (macOS) | Edit `modules/darwin/common.nix` → rebuild |
 | Machine-specific changes | Edit `modules/darwin/<role>.nix` or `hosts/<name>/default.nix` → rebuild |
 
@@ -404,7 +404,7 @@ home/linux/x11.nix               ← X11/i3: xclip, rofi, alttab, picom, urxvt, 
 For standalone Linux (Home Manager only):
 ```
 home/linux/default.nix           ← CLI base: programs.home-manager, genericLinux
-home/linux/common.nix            ← All Linux: fcitx5, private symlink
+home/linux/common.nix            ← All Linux: gcc toolchain, kid3-cli, fcitx5, private symlink
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland GUI: wl-clipboard, hyprland symlink
 home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, urxvt, i3/xinitrc symlinks
