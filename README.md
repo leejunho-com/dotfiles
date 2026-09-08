@@ -157,7 +157,7 @@ dotfiles/
 │       ├── common.nix           # All Linux: fcitx5, private symlink
 │       ├── gui.nix              # GUI Linux base: firefox, mpv, xremap keymaps
 │       ├── wayland.nix          # Wayland GUI: wl-clipboard, hyprland symlink, xremap(withWlroots)
-│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, urxvt, ueberzugpp, i3/xinitrc symlinks, xremap(withX11)
+│       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, urxvt, ueberzugpp, config/i3/xinitrc symlinks, xremap(withX11)
 │
 ├── config/                      # App configs — symlinked into ~/ and ~/.config/
 │   ├── zsh/                     # sourced via programs.zsh.initContent
@@ -408,7 +408,7 @@ home/linux/default.nix           ← CLI base: programs.home-manager, genericLin
 home/linux/common.nix            ← All Linux: gcc toolchain, kid3-cli, fcitx5, private symlink
 home/linux/gui.nix               ← GUI base: firefox, mpv, xremap keymaps
 home/linux/wayland.nix           ← Wayland GUI: wl-clipboard, hyprland symlink
-home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, urxvt, i3/xinitrc symlinks
+home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, urxvt, config/i3/xinitrc symlinks
 ```
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
