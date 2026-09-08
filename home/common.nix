@@ -86,19 +86,22 @@ in
 
   home.activation.firefoxChrome = config.lib.dag.entryAfter ["writeBoundary"] (''
     if ${pkgs.lib.boolToString pkgs.stdenv.hostPlatform.isDarwin}; then
-      _ff_bases=("$HOME/Library/Application Support/Firefox/Profiles")
+      _ff_roots=("$HOME/Library/Application Support/Firefox")
     else
       # Firefox 147+: XDG path (~/.config/mozilla) for new installs; legacy (~/.mozilla) for existing
-      _ff_bases=("$HOME/.config/mozilla/firefox" "$HOME/.mozilla/firefox")
+      _ff_roots=("$HOME/.config/mozilla/firefox" "$HOME/.mozilla/firefox")
     fi
     profile_dir=""
-    for _base in "''${_ff_bases[@]}"; do
-      # .default-release first — macs keep a stale .default that may sort ahead of it
-      for _pat in "*.default-release" "*.default*"; do
-        profile_dir=$(ls -d "$_base/"$_pat 2>/dev/null | head -1) || true
-        if [[ -n "$profile_dir" ]]; then break; fi
-      done
-      if [[ -n "$profile_dir" ]]; then break; fi
+    for _root in "''${_ff_roots[@]}"; do
+      # installs.ini names the profile this install opens; its paths are relative to the ini
+      _rel=$(sed -n 's/^Default=//p' "$_root/installs.ini" 2>/dev/null | head -1) || true
+      case "$_rel" in
+        "") continue ;;
+        /*) profile_dir="$_rel" ;;
+        *)  profile_dir="$_root/$_rel" ;;
+      esac
+      if [[ -d "$profile_dir" ]]; then break; fi
+      profile_dir=""
     done
     if [[ -z "$profile_dir" ]]; then
       echo "Firefox profile not found, skipping"
