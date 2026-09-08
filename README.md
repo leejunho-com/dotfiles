@@ -131,7 +131,7 @@ dotfiles/
 ├── modules/                     # Reusable config building blocks
 │   ├── darwin/
 │   │   ├── common.nix           # All Macs: nix.enable=true, skhd, system.defaults, homebrew casks, users, yabai overlay
-│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, NFS exports, homebrew casks
+│   │   ├── workstation.nix      # Mac Studio role: yabai, sketchybar, jankyborders, NFS exports
 │   │   └── labtop.nix           # MacBook role: yabai, sketchybar, jankyborders
 │   └── nixos/
 │       ├── common.nix           # All NixOS: networking, users, zsh, flakes, systemd linger, NFS/CIFS support

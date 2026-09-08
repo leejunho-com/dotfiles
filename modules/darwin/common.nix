@@ -89,6 +89,7 @@
       "github"
       "handbrake"
       "karabiner-elements"
+      "kid3"
       "obsidian"
       "plex"
       "proton-pass"
