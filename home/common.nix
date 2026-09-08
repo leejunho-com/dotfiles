@@ -48,7 +48,7 @@ in
       if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
         source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
       fi
-      source ${dotfiles}/zsh/zshrc
+      source ${dotfiles}/config/zsh/zshrc
     '';
   };
 
@@ -75,7 +75,7 @@ in
         '';
       }
     ];
-    extraConfig = "source-file ${config.home.homeDirectory}/code/dotfiles/tmux/tmux.conf";
+    extraConfig = "source-file ${config.home.homeDirectory}/code/dotfiles/config/tmux/tmux.conf";
   };
 
   home.activation.nixExperimentalFeatures = config.lib.dag.entryAfter ["writeBoundary"] ''
@@ -99,26 +99,32 @@ in
     if [[ -z "$profile_dir" ]]; then
       echo "Firefox profile not found, skipping"
     else
-      [[ ! -L "$profile_dir/chrome" ]] && ln -s "${dotfiles}/firefox/chrome" "$profile_dir/chrome"
-      [[ ! -L "$profile_dir/user.js" ]] && ln -s "${dotfiles}/firefox/user.js" "$profile_dir/user.js"
+      # -e, not -L: a link left pointing at an old path is dead, so replace it.
+      # ln -n replaces the link itself instead of writing inside it.
+      if [[ ! -e "$profile_dir/chrome" ]]; then
+        ln -sfn "${dotfiles}/config/firefox/chrome" "$profile_dir/chrome"
+      fi
+      if [[ ! -e "$profile_dir/user.js" ]]; then
+        ln -sfn "${dotfiles}/config/firefox/user.js" "$profile_dir/user.js"
+      fi
     fi
   '');
 
   # dotfiles → ~/ and ~/.config/ symlinks
   home.file = {
-    ".p10k.zsh".source      = link "zsh/p10k.zsh";
-    ".vimrc".source         = link "vim/vimrc";
-    ".config/ghostty".source = link "ghostty";
-    ".config/nvim".source   = link "nvim";
-    ".config/yazi".source   = link "yazi";
-    ".config/mpv".source    = link "mpv";
-    ".config/pip".source    = link "pip";
-    ".config/fzf".source    = link "fzf";
-    ".config/yt-dlp".source  = link "yt-dlp";
-    ".config/btop".source    = link "btop";
-    ".config/git".source     = link "git";
-    ".config/htop".source    = link "htop";
-    ".config/incoming".source = link "incoming";
-    ".config/PureRef".source  = link "PureRef";
+    ".p10k.zsh".source      = link "config/zsh/p10k.zsh";
+    ".vimrc".source         = link "config/vim/vimrc";
+    ".config/ghostty".source = link "config/ghostty";
+    ".config/nvim".source   = link "config/nvim";
+    ".config/yazi".source   = link "config/yazi";
+    ".config/mpv".source    = link "config/mpv";
+    ".config/pip".source    = link "config/pip";
+    ".config/fzf".source    = link "config/fzf";
+    ".config/yt-dlp".source  = link "config/yt-dlp";
+    ".config/btop".source    = link "config/btop";
+    ".config/git".source     = link "config/git";
+    ".config/htop".source    = link "config/htop";
+    ".config/incoming".source = link "config/incoming";
+    ".config/PureRef".source  = link "config/PureRef";
   };
 }

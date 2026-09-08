@@ -1,8 +1,8 @@
 /result
 /result-*
 /private
-/incoming/log
-/karabiner/automatic_backups
-/nvim/lazy-lock.json
-/nvim/.neoconf.json
+/config/incoming/log
+/config/karabiner/automatic_backups
+/config/nvim/lazy-lock.json
+/config/nvim/.neoconf.json
 .direnv/

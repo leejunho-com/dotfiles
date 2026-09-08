@@ -7,12 +7,12 @@ in
 {
   imports = [ ./gui.nix ];
 
-  home.file.".xinitrc".source = link "i3/xinitrc";
-  home.file.".config/i3/config".source = link "i3/config";
-  home.file.".config/i3status/config".source = link "i3/i3status.conf";
+  home.file.".xinitrc".source = link "config/i3/xinitrc";
+  home.file.".config/i3/config".source = link "config/i3/config";
+  home.file.".config/i3status/config".source = link "config/i3/i3status.conf";
 
-  home.file.".Xresources".source = link "urxvt/Xresources";
-  home.file.".urxvt/ext".source = link "urxvt/ext";
+  home.file.".Xresources".source = link "config/urxvt/Xresources";
+  home.file.".urxvt/ext".source = link "config/urxvt/ext";
 
   home.packages = with pkgs; [
     xclip

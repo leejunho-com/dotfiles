@@ -11,7 +11,7 @@ in
     wl-clipboard
   ];
 
-  home.file.".config/hypr".source = link "hyprland";
+  home.file.".config/hypr".source = link "config/hyprland";
 
   services.xremap.withWlroots = true;
 }

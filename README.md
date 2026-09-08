@@ -58,7 +58,7 @@ nix-switch   # apply after reviewing diff
 | Change | Command |
 |--------|---------|
 | Edit zshrc, ghostty, nvim, etc. | Just save — symlinked, no rebuild needed |
-| Edit `tmux/tmux.conf` | `prefix+r` — sourced at runtime, no rebuild needed |
+| Edit `config/tmux/tmux.conf` | `prefix+r` — sourced at runtime, no rebuild needed |
 | Add / remove packages | Edit `home/common.nix`, or `home/linux/common.nix` if the package is Linux-only → rebuild |
 | Change system settings (macOS) | Edit `modules/darwin/common.nix` → rebuild |
 | Machine-specific changes | Edit `modules/darwin/<role>.nix` or `hosts/<name>/default.nix` → rebuild |
@@ -159,33 +159,34 @@ dotfiles/
 │       ├── wayland.nix          # Wayland GUI: wl-clipboard, hyprland symlink, xremap(withWlroots)
 │       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, urxvt, ueberzugpp, i3/xinitrc symlinks, xremap(withX11)
 │
-├── bin/                         # scripts on PATH (home.sessionPath)
-├── i3/                          # i3 config, xinitrc (symlinked by x11.nix)
-├── urxvt/                       # Xresources + perl extensions
-├── hyprland/                    # → ~/.config/hypr (Wayland)
-├── secrets/                     # empty
-├── private/                     # Private nested repo (gitignored) → ~/.config/private
+├── config/                      # App configs — symlinked into ~/ and ~/.config/
+│   ├── zsh/                     # sourced via programs.zsh.initContent
+│   ├── vim/                     # → ~/.vimrc
+│   ├── i3/                      # i3 config, xinitrc (symlinked by x11.nix)
+│   ├── urxvt/                   # Xresources + perl extensions
+│   ├── hyprland/                # → ~/.config/hypr (Wayland)
+│   ├── firefox/                 # chrome/userChrome.css, user.js (symlinked to profile via home.activation)
+│   ├── ghostty/                 # → ~/.config/ghostty (all platforms)
+│   ├── nvim/                    # → ~/.config/nvim
+│   ├── tmux/                    # tmux.conf sourced by programs.tmux (plugins managed by Nix)
+│   ├── yabai/                   # → ~/.config/yabai
+│   ├── skhd/                    # → ~/.config/skhd
+│   ├── sketchybar/              # → ~/.config/sketchybar
+│   ├── karabiner/               # → ~/.config/karabiner
+│   ├── yazi/                    # → ~/.config/yazi
+│   ├── mpv/                     # → ~/.config/mpv
+│   ├── pip/                     # → ~/.config/pip
+│   ├── fzf/                     # → ~/.config/fzf
+│   ├── yt-dlp/                  # → ~/.config/yt-dlp
+│   ├── btop/                    # → ~/.config/btop
+│   ├── git/                     # → ~/.config/git
+│   ├── htop/                    # → ~/.config/htop
+│   ├── incoming/                # → ~/.config/incoming (HandBrake presets)
+│   └── PureRef/                 # → ~/.config/PureRef
 │
-├── zsh/                         # sourced via programs.zsh.initContent
-├── vim/                         # → ~/.vimrc
-├── firefox/                     # chrome/userChrome.css, user.js (symlinked to profile via home.activation)
-├── fzf/                         # → ~/.config/fzf
-├── ghostty/                     # → ~/.config/ghostty (all platforms)
-├── nvim/                        # → ~/.config/nvim
-├── tmux/                        # tmux.conf sourced by programs.tmux (plugins managed by Nix)
-├── yabai/                       # → ~/.config/yabai
-├── skhd/                        # → ~/.config/skhd
-├── sketchybar/                  # → ~/.config/sketchybar
-├── karabiner/                   # → ~/.config/karabiner
-├── yazi/                        # → ~/.config/yazi
-├── mpv/                         # → ~/.config/mpv
-├── pip/                         # → ~/.config/pip
-├── yt-dlp/                      # → ~/.config/yt-dlp
-├── btop/                        # → ~/.config/btop
-├── git/                         # → ~/.config/git
-├── htop/                        # → ~/.config/htop
-├── incoming/                    # → ~/.config/incoming (HandBrake presets)
-└── PureRef/                     # → ~/.config/PureRef
+├── bin/                         # scripts on PATH (home.sessionPath)
+├── secrets/                     # empty
+└── private/                     # Private nested repo (gitignored) → ~/.config/private
 ```
 
 ---
@@ -412,9 +413,9 @@ home/linux/x11.nix               ← X11/i3 GUI: xclip, rofi, alttab, picom, urx
 
 Module files use a **role name** (e.g. `workstation.nix`, `labtop.nix`), not the hostname — multiple machines can share the same role.
 
-**Dotfile management** — config files live in this repo and are symlinked into `~/.config/` via `mkOutOfStoreSymlink`. Edit files directly; changes reflect immediately without rebuilding.
+**Dotfile management** — config files live under `config/` in this repo and are symlinked into `~/.config/` via `mkOutOfStoreSymlink`. Edit files directly; changes reflect immediately without rebuilding.
 
-**zsh plugins** — managed via `programs.zsh` in Home Manager (powerlevel10k, autosuggestions, syntaxHighlighting). The `zsh/zshrc` file is sourced via `initContent` — edit it directly, no rebuild needed.
+**zsh plugins** — managed via `programs.zsh` in Home Manager (powerlevel10k, autosuggestions, syntaxHighlighting). The `config/zsh/zshrc` file is sourced via `initContent` — edit it directly, no rebuild needed.
 
 ---
 
@@ -431,4 +432,4 @@ Known gaps and planned improvements:
 
 ## Known Issues
 
-- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency at idle (~39% without `custom-shader-animation = always`). Commented out in `ghostty/config`.
+- **Ghostty cursor shaders (macOS)** — `cursor_warp.glsl` and `sonic_boom_cursor.glsl` cause ~78% GPU active residency at idle (~39% without `custom-shader-animation = always`). Commented out in `config/ghostty/config`.

@@ -26,10 +26,10 @@ in
 
   # darwin-only dotfiles → ~/.config/ symlinks
   home.file = {
-    ".config/sketchybar".source = link "sketchybar";
-    ".config/skhd".source       = link "skhd";
-    ".config/yabai".source      = link "yabai";
-    ".config/karabiner".source  = link "karabiner";
+    ".config/sketchybar".source = link "config/sketchybar";
+    ".config/skhd".source       = link "config/skhd";
+    ".config/yabai".source      = link "config/yabai";
+    ".config/karabiner".source  = link "config/karabiner";
     ".config/private".source   = link "private";
   };
 }

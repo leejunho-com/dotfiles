@@ -146,5 +146,5 @@ source "$_PRIVATE/common/zsh.env"
 [[ -f "$_PRIVATE/$_HOSTNAME/zsh.env" ]] && source "$_PRIVATE/$_HOSTNAME/zsh.env"
 
 # load functions
-for _f in ~/code/dotfiles/zsh/func/*.sh; do source "$_f"; done
+for _f in ~/code/dotfiles/config/zsh/func/*.sh; do source "$_f"; done
 unset _f
