@@ -93,20 +93,25 @@ in
     fi
     profile_dir=""
     for _base in "''${_ff_bases[@]}"; do
-      profile_dir=$(ls -d "$_base/"*.default* 2>/dev/null | head -1) || true
-      [[ -n "$profile_dir" ]] && break
+      # .default-release first — macs keep a stale .default that may sort ahead of it
+      for _pat in "*.default-release" "*.default*"; do
+        profile_dir=$(ls -d "$_base/"$_pat 2>/dev/null | head -1) || true
+        if [[ -n "$profile_dir" ]]; then break; fi
+      done
+      if [[ -n "$profile_dir" ]]; then break; fi
     done
     if [[ -z "$profile_dir" ]]; then
       echo "Firefox profile not found, skipping"
     else
-      # -e, not -L: a link left pointing at an old path is dead, so replace it.
-      # ln -n replaces the link itself instead of writing inside it.
-      if [[ ! -e "$profile_dir/chrome" ]]; then
-        ln -sfn "${dotfiles}/config/firefox/chrome" "$profile_dir/chrome"
-      fi
-      if [[ ! -e "$profile_dir/user.js" ]]; then
-        ln -sfn "${dotfiles}/config/firefox/user.js" "$profile_dir/user.js"
-      fi
+      for _f in chrome user.js; do
+        _dst="$profile_dir/$_f"
+        # replace any symlink, even a live one aimed elsewhere; real files stay
+        if [[ -L "$_dst" || ! -e "$_dst" ]]; then
+          ln -sfn "${dotfiles}/config/firefox/$_f" "$_dst"
+        else
+          echo "Firefox: $_dst is not a symlink, leaving it alone"
+        fi
+      done
     fi
   '');
 
