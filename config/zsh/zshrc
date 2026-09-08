@@ -134,15 +134,16 @@ alias nix-list='nix-store -q --references $(nix-store -q --references ~/.local/s
 # load custom env
 _PRIVATE=~/.config/private
 _HOSTNAME=${HOST%%.*}
+# private/ is one repo synced to every machine, so darwin/ exists on linux too.
+# pick the platform here or both get sourced everywhere.
+if [[ "$OSTYPE" == darwin* ]]; then _OS=darwin; else _OS=linux; fi
 
-[[ -d "$_PRIVATE/common/script" ]]        && path+=("$_PRIVATE/common/script")
-[[ -d "$_PRIVATE/darwin/script" ]]       && path+=("$_PRIVATE/darwin/script")
-[[ -d "$_PRIVATE/linux/script" ]]        && path+=("$_PRIVATE/linux/script")
-[[ -d "$_PRIVATE/$_HOSTNAME/script" ]]   && path+=("$_PRIVATE/$_HOSTNAME/script")
+[[ -d "$_PRIVATE/common/script" ]]      && path+=("$_PRIVATE/common/script")
+[[ -d "$_PRIVATE/$_OS/script" ]]        && path+=("$_PRIVATE/$_OS/script")
+[[ -d "$_PRIVATE/$_HOSTNAME/script" ]]  && path+=("$_PRIVATE/$_HOSTNAME/script")
 
 source "$_PRIVATE/common/zsh.env"
-[[ -f "$_PRIVATE/darwin/zsh.env" ]]  && source "$_PRIVATE/darwin/zsh.env"
-[[ -f "$_PRIVATE/linux/zsh.env" ]]   && source "$_PRIVATE/linux/zsh.env"
+[[ -f "$_PRIVATE/$_OS/zsh.env" ]]       && source "$_PRIVATE/$_OS/zsh.env"
 [[ -f "$_PRIVATE/$_HOSTNAME/zsh.env" ]] && source "$_PRIVATE/$_HOSTNAME/zsh.env"
 
 # load functions
