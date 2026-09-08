@@ -109,7 +109,7 @@
     in
     {
       darwinConfigurations = {
-        # Set key to your hostname: `scutil --get LocalHostName`
+        # Set key to your hostname: `uname -n`
 
         "mac-studio" = mkDarwin {
           system = "aarch64-darwin";
@@ -131,7 +131,7 @@
           hostModules = [ ./hosts/macbook-pro-2018 ];
         };
 
-        # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
+        # Generic fallbacks — used by install.sh / bin/nix-switch when no hostname match
         "default" = mkDarwin {
           system = "aarch64-darwin";
           hostModules = [ ./modules/darwin/common.nix ];
@@ -144,7 +144,7 @@
       };
 
       nixosConfigurations = {
-        # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
+        # Generic fallbacks — used by install.sh / bin/nix-switch when no hostname match
         "default" = mkNixos {
           system = "x86_64-linux";
           hostModules = [ ./modules/nixos/common.nix ./modules/nixos/uefi.nix ];
@@ -168,7 +168,7 @@
       # Standalone home-manager for non-nixos linux (Rocky, Fedora, WSL, etc.)
       # Apply with: home-manager switch --flake ~/code/dotfiles#<hostname>
       homeConfigurations = {
-        # Generic fallbacks — used by install.sh / nix-switch.sh when no hostname match
+        # Generic fallbacks — used by install.sh / bin/nix-switch when no hostname match
         "default"     = mkLinux { system = "x86_64-linux"; };
         "default-arm" = mkLinux { system = "aarch64-linux"; };
 

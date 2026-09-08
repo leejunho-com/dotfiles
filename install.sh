@@ -8,11 +8,7 @@ info()  { echo "[INFO] $*"; }
 warn()  { echo "[WARN] $*"; }
 
 # ── Hostname detection ───────────────────────────────────────────────
-if [[ "$PLATFORM" == "Darwin" ]]; then
-  HOSTNAME="$(scutil --get LocalHostName)"
-else
-  HOSTNAME="$(uname -n)"
-fi
+HOSTNAME="$(uname -n)"
 
 info "Platform: $PLATFORM / Hostname: $HOSTNAME"
 

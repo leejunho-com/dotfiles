@@ -67,7 +67,7 @@ nix-switch   # apply after reviewing diff
 
 ## Adding a New Machine
 
-`install.sh` and `nix-switch.sh` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
+`install.sh` and `bin/nix-switch` auto-detect the hostname and fall back to a generic config if no machine-specific entry exists:
 
 | Platform | Config |
 |----------|--------|
@@ -127,8 +127,6 @@ dotfiles/
 ├── flake.nix                    # Entry point — defines all machines
 ├── flake.lock                   # Pinned dependency versions (commit this)
 ├── install.sh                   # Bootstrap script — first-time setup (auto-detects platform/hostname)
-├── nix-switch.sh                # Rebuild script — day-to-day (auto-detects platform/hostname)
-├── nix-update.sh                # Update packages — nix flake update + build + nvd diff preview
 │
 ├── modules/                     # Reusable config building blocks
 │   ├── darwin/
@@ -184,7 +182,7 @@ dotfiles/
 │   ├── incoming/                # → ~/.config/incoming (HandBrake presets)
 │   └── PureRef/                 # → ~/.config/PureRef
 │
-├── bin/                         # scripts on PATH (home.sessionPath)
+├── bin/                         # scripts on PATH (home.sessionPath) — nix-switch, nix-update, nix-list, rsync wrappers
 ├── secrets/                     # empty
 └── private/                     # Private nested repo (gitignored) → ~/.config/private
 ```

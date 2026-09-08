@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# List packages installed in this machine's nix profiles.
+set -euo pipefail
+
+show_system=0
+case "${1-}" in
+  "") ;;
+  -a | --all) show_system=1 ;;
+  -h | --help)
+    echo "usage: nix-list [-a]"
+    echo "  -a  also list system packages (nixos / darwin only)"
+    exit 0
+    ;;
+  *)
+    echo "nix-list: unknown option: $1" >&2
+    exit 2
+    ;;
+esac
+
+# module installs (darwin, nixos) keep the profile under /etc, standalone
+# home-manager keeps a generation link under XDG state
+hm_state="${XDG_STATE_HOME:-$HOME/.local/state}/nix/profiles/home-manager"
+if [[ -e /etc/profiles/per-user/$USER ]]; then
+  hm_profile="/etc/profiles/per-user/$USER"
+elif [[ -e $hm_state ]]; then
+  hm_profile="$hm_state"
+else
+  hm_profile=""
+fi
+
+names() {
+  sed 's|^/nix/store/[^-]*-||' | sort --ignore-case
+}
+
+# a profile points at one buildEnv holding every package, so open that first
+unwrap() {
+  local inner
+  inner=$(nix-store -q --references "$1" | grep -- '-home-manager-path$' || true)
+  nix-store -q --references "${inner:-$1}"
+}
+
+if [[ -n $hm_profile ]]; then
+  echo "# home-manager  ($hm_profile)"
+  unwrap "$hm_profile" | names
+else
+  echo "nix-list: no home-manager profile found" >&2
+  exit 1
+fi
+
+if ((show_system)) && [[ -e /run/current-system/sw ]]; then
+  echo
+  echo "# system  (/run/current-system/sw)"
+  nix-store -q --references /run/current-system/sw | names
+fi
