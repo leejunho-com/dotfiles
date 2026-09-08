@@ -152,7 +152,7 @@ dotfiles/
 │   │   └── default.nix          # macOS-only packages + symlinks (all Macs)
 │   └── linux/
 │       ├── default.nix          # Standalone Linux HM — CLI base (Fedora, WSL, etc.)
-│       ├── common.nix           # All Linux: fcitx5, private symlink
+│       ├── common.nix           # All Linux: gcc toolchain, kid3-cli, fcitx5, private symlink
 │       ├── gui.nix              # GUI Linux base: firefox, mpv, xremap keymaps
 │       ├── wayland.nix          # Wayland GUI: wl-clipboard, hyprland symlink, xremap(withWlroots)
 │       └── x11.nix              # X11 GUI: xclip, rofi, alttab, picom, urxvt, ueberzugpp, config/i3/xinitrc symlinks, xremap(withX11)
@@ -240,6 +240,9 @@ Homebrew is installed automatically by `install.sh`. Casks are managed declarati
 Nix takes precedence over Homebrew in `PATH`. `zshrc` appends Homebrew at the end so Nix-managed CLI tools are always preferred:
 
 ```
+~/.local/bin                       ← user scripts, venv symlinks
+~/code/dotfiles/bin                ← repo scripts (nix-switch, nix-list, ...)
+~/.nix-profile/bin                 ← user profile
 /etc/profiles/per-user/<user>/bin  ← Home Manager packages (Nix)
 /run/current-system/sw/bin         ← nix-darwin system packages
 /nix/var/nix/profiles/default/bin  ← Nix default profile
@@ -327,7 +330,7 @@ Then restart WSL from PowerShell:
 wsl --shutdown
 ```
 
-`systemd = true` is required for the Nix daemon to run. The hostname here must match the key in `flake.nix` (or leave as-is to fall back to the generic `linux` config).
+`systemd = true` is required for the Nix daemon to run. The hostname here must match the key in `flake.nix` (or leave as-is to fall back to the generic `default` / `default-arm` config).
 
 #### Package Manager Update
 
