@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# preview an rsync run — same args as rcp/rmv/rmir, changes nothing.
+# no log file: this is for reading on screen.
+# usage: rdry <src>... <dst>
+
+set -euo pipefail
+
+exec rsync -ah -v --stats --dry-run \
+	--exclude='._*' --exclude='.DS_Store' "$@"

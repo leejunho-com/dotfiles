@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# copy across volumes with rsync — an interrupted cp leaves a half file,
+# this resumes. logs to ~/log/rsync/.
+# usage: rcp <src>... <dst>
+#   rcp movie.mkv /hdd-32/media/
+#   rcp src  dst/   -> dst/src/
+#   rcp src/ dst/   -> dst/       (trailing slash: see private/doc/design/copy-move-slash.md)
+
+set -euo pipefail
+
+exec rsync -ah --info=progress2 \
+	--exclude='._*' --exclude='.DS_Store' \
+	--log-file="$(logfile rsync)" "$@"

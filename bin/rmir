@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# mirror — makes <dst> match <src>, deleting whatever else is there.
+# a dry run by default: it lists what would change and stops. --go applies it.
+# usage: rmir [--go] <src>/ <dst>/
+#   rmir      src/ dst/   -> list the copies and deletions, touch nothing
+#   rmir --go src/ dst/   -> do it, logging to ~/log/rsync/
+# an unmounted source looks empty, and an empty source empties the destination.
+# that is what the default dry run is for — read it before adding --go.
+
+set -euo pipefail
+
+go=false
+args=()
+for a in "$@"; do
+	if [[ $a == --go ]]; then
+		go=true
+	else
+		args+=("$a")
+	fi
+done
+
+if $go; then
+	exec rsync -ah --info=progress2 --delete \
+		--exclude='._*' --exclude='.DS_Store' \
+		--log-file="$(logfile rsync)" "${args[@]}"
+fi
+
+# -v --stats, not progress2: a dry run is worth reading, not watching
+rsync -ah -v --stats --dry-run --delete \
+	--exclude='._*' --exclude='.DS_Store' "${args[@]}"
+
+echo "rmir: dry run, nothing changed. add --go to apply." >&2

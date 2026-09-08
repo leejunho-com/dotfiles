@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# move across volumes with rsync — an interrupted mv leaves half the data on
+# each side, this resumes. don't use it inside one volume: mv renames, rsync
+# really copies. logs to ~/log/rsync/.
+# usage: rmv <src>... <dst>
+#   rmv src  dst/   -> dst/src/,  source dir removed
+#   rmv src/ dst/   -> dst/,      source dir kept, emptied
+# the trailing slash follows rsync — see private/doc/design/copy-move-slash.md
+
+set -euo pipefail
+
+rsync -ah --info=progress2 \
+	--exclude='._*' --exclude='.DS_Store' \
+	--remove-source-files --log-file="$(logfile rsync)" "$@"
+
+# a dry run moved nothing, so prune nothing
+for a in "$@"; do
+	case $a in
+	--dry-run | -n | -[!-]*n*) exit 0 ;;
+	esac
+done
+
+(($# > 1)) || exit 0
+
+# the last arg is the destination — never touch it
+for a in "${@:1:$#-1}"; do
+	if [[ -d $a ]]; then
+		# excluded sidecars never transferred, so --remove-source-files left
+		# them behind. they also keep dirs non-empty, blocking the prune below.
+		find "$a" \( -name '._*' -o -name '.DS_Store' \) -type f -delete
+		# --remove-source-files skips dirs, so drop the empties it leaves
+		if [[ $a == */ ]]; then
+			find "$a" -mindepth 1 -type d -empty -delete
+		else
+			find "$a" -type d -empty -delete
+		fi
+	else
+		# single file: it moved, but its sidecar was excluded and stayed
+		rm -f -- "$(dirname -- "$a")/._$(basename -- "$a")"
+	fi
+done
