@@ -15,6 +15,9 @@ prepend_keymap = [
   { on = [ "g", "l" ], for = "unix",  run = "cd ~/Downloads",  desc = "Go ~/Downloads" },
   { on = [ "g", "d" ], for = "unix",  run = "cd ~/Desktop",    desc = "Go ~/Desktop"   },
   { on = [ "g", "o" ], for = "unix",  run = "cd ~/Documents",  desc = "Go ~/Documents" },
+  { on = [ "g", "c" ], for = "unix",  run = "cd ~/code",       desc = "Go ~/code"      },
+  { on = [ "g", "." ], for = "unix",  run = "cd ~/code/dotfiles", desc = "Go dotfiles" },
+  { on = [ "g", "C" ], for = "unix",  run = "cd ~/.config",    desc = "Go ~/.config"   },
   { on = [ "g", "w" ], for = "macos", run = '''shell --confirm 'open -a "Parallels Desktop" %d1 && osascript -e "tell application \"Parallels Desktop\" to activate"' ''', desc = "Reveal in Windows" },
 
 # edit
