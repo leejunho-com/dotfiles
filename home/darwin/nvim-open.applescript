@@ -15,6 +15,8 @@ on open theFiles
 end open
 
 on launchNvim(args)
+	-- ghostty 1.3.1 also reports paths after -e to AppKit as documents to open,
+	-- which pops a confirm dialog. sh -c keeps them out of ghostty's argv.
 	-- do shell script waits for the command, so send it to the background
-	do shell script "__GHOSTTY__ -e __NVIM__" & args & " >/dev/null 2>&1 &"
+	do shell script "__GHOSTTY__ -e /bin/sh -c " & quoted form of ("__NVIM__" & args) & " >/dev/null 2>&1 &"
 end launchNvim
