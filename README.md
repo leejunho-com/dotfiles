@@ -427,7 +427,7 @@ Known gaps and planned improvements:
 - **Secret management** — `secrets/` is currently empty. Plan to adopt [agenix](https://github.com/ryantm/agenix) or [sops-nix](https://github.com/Mic92/sops-nix) for encrypted secrets inside the repo.
 - **CI** — No automated validation yet. Plan to add a GitHub Actions workflow that runs `nix flake check` on every push, catching broken configs before they reach machines.
 - **`install.sh` staging scope** — `git add -A` before rebuild is overly broad; will narrow to specific files to avoid accidentally staging sensitive files.
-- **NixOS bare metal** — MacBook Pro 2018 (T2) target: t2linux kernel patches via `nixos-hardware`, to be added under `hosts/macbook-pro-2018-nixos/` when attempted.
+- **NixOS bare metal** — T2 Macs need t2linux kernel patches via `nixos-hardware`; not wired up yet.
 
 ---
 
