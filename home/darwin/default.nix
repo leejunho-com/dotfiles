@@ -33,6 +33,19 @@ let
     # image
     "avif" "bmp" "gif" "jpeg" "jpg" "png" "tif" "tiff" "webp"
   ];
+
+  lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister";
+
+  # macOS prompts the user on every change, so only touch what differs
+  dutiSet = bundleId: exts: ''
+    for _ext in ${pkgs.lib.concatStringsSep " " exts}; do
+      # bundle id is the last line duti -x prints
+      _cur=$(${pkgs.duti}/bin/duti -x "$_ext" 2>/dev/null | tail -1) || true
+      if [[ "$_cur" != "${bundleId}" ]]; then
+        ${pkgs.duti}/bin/duti -s ${bundleId} "$_ext" all || true
+      fi
+    done
+  '';
 in
 {
   home.packages = with pkgs; [ darwin.trash wireguard-go sketchybar-app-font mpv duti ];
@@ -62,25 +75,9 @@ in
     _app="$HOME/Applications/nvim.app"
     _stamp="$HOME/.cache/nvim-open.sha256"
     _src=$(mktemp)
-    cat > "$_src" <<'APPLESCRIPT'
-on run
-launchNvim("")
-end run
-
-on open theFiles
-set args to ""
-repeat with f in theFiles
-set args to args & " " & quoted form of POSIX path of f
-end repeat
-launchNvim(args)
-end open
-
-on launchNvim(args)
-do shell script "__GHOSTTY__ -e __NVIM__" & args & " >/dev/null 2>&1 &"
-end launchNvim
-APPLESCRIPT
-    sed -i "s#__GHOSTTY__#/Applications/Ghostty.app/Contents/MacOS/ghostty#; \
-            s#__NVIM__#/etc/profiles/per-user/${user}/bin/nvim#" "$_src"
+    sed "s#__GHOSTTY__#/Applications/Ghostty.app/Contents/MacOS/ghostty#; \
+         s#__NVIM__#/etc/profiles/per-user/${user}/bin/nvim#" \
+      ${./nvim-open.applescript} > "$_src"
 
     # rebuild only when the script changed, so LaunchServices stays settled
     _want=$(sha256sum "$_src" | cut -d' ' -f1)
@@ -94,31 +91,15 @@ APPLESCRIPT
     fi
     rm -f "$_src"
 
-    _lsreg=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
-    "$_lsreg" -f "$_app" || true
-
-    for _ext in ${pkgs.lib.concatStringsSep " " nvimTypes}; do
-      _cur=$(${pkgs.duti}/bin/duti -x "$_ext" 2>/dev/null | tail -1) || true
-      if [[ "$_cur" != "com.leejunho.nvim" ]]; then
-        ${pkgs.duti}/bin/duti -s com.leejunho.nvim "$_ext" all || true
-      fi
-    done
+    "${lsregister}" -f "$_app" || true
+    ${dutiSet "com.leejunho.nvim" nvimTypes}
   '';
 
   # LaunchServices can pin the handler to an mpv store path that a later GC
-  # deletes, so re-register the stable copy first. Set only what differs --
-  # macOS prompts the user on every change.
+  # deletes, so re-register the stable copy first.
   home.activation.mpvDefaultApps = config.lib.dag.entryAfter ["writeBoundary"] ''
-    _lsreg=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
-    "$_lsreg" -f "$HOME/Applications/Home Manager Apps/mpv.app" || true
-
-    for _ext in ${pkgs.lib.concatStringsSep " " mpvTypes}; do
-      # bundle id is the last line duti -x prints
-      _cur=$(${pkgs.duti}/bin/duti -x "$_ext" 2>/dev/null | tail -1) || true
-      if [[ "$_cur" != "io.mpv" ]]; then
-        ${pkgs.duti}/bin/duti -s io.mpv "$_ext" all || true
-      fi
-    done
+    "${lsregister}" -f "$HOME/Applications/Home Manager Apps/mpv.app" || true
+    ${dutiSet "io.mpv" mpvTypes}
   '';
 
   # darwin-only dotfiles → ~/.config/ symlinks
