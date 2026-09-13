@@ -20,6 +20,9 @@ unar = [
   { run = 'for rar in %s; do unar "$rar"; done', desc = "Extract with unar" },
 ]
 mpv = [{ run = 'mpv %s', desc = "mpv" }]
+quicktime = [
+  { for = "macos", run = 'open -a "QuickTime Player" %s', desc = "QuickTime Player" },
+]
 firefox = [
   { run = 'for f in %s; do firefox --new-tab "file://$(realpath "$f")"; done', desc = "Firefox", orphan = true },
 ]
@@ -40,17 +43,18 @@ prepend_rules = [
     "reveal",
   ] },
   # image
-  { url = "*.{jpg,jpeg,png,bmp,tif,tiff,gif,psd,webp,arw,dng}", use = [
+  { url = "*.{avif,bmp,gif,jpg,jpeg,png,psd,tif,tiff,webp,arw,dng}", use = [
     "mpv",
     "photoshop",
     "firefox",
     "reveal",
     "open",
   ] },
-  # video
-  { url = "*.{3gp,avi,mkv,mp4,webm,mov,ts,m2ts,mp3,flac,opus,m4a,wav,ogg,jpg,jpeg,png,webp,avif}", use = [
+  # video / audio — matches mpvTypes in home/darwin/default.nix
+  { url = "*.{3gp,avi,m2ts,m2v,m4v,mkv,mov,mp4,mpeg,mpg,mts,ts,webm,wmv,aac,ac3,aif,aiff,flac,m4a,mka,mp3,ogg,opus,wav,wma}", use = [
     "mpv",
     "firefox",
+    "quicktime",
     "reveal",
   ] },
   # other
