@@ -13,11 +13,12 @@ in
 
   home.packages = with pkgs; [
     # gnu
-    coreutils findutils util-linux gnused gawk gnugrep gnutar diffutils
+    coreutils findutils util-linux gnused gawk gnugrep gnutar diffutils bc
 
     # essential
     bat eza fd fzf ripgrep tree jq wget zoxide unar p7zip rsync mc yazi w3m htop btop duf
-    iperf3 nmap wireguard-tools convmv magic-wormhole tealdeer poppler fontconfig
+    iperf3 nmap wireguard-tools convmv magic-wormhole tealdeer poppler fontconfig libqalculate
+    proton-pass-cli
 
     # media
     ffmpeg-full ffmpegthumbnailer imagemagick mediainfo yt-dlp viu chafa resvg exiftool
