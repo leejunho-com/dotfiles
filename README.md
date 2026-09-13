@@ -149,7 +149,8 @@ dotfiles/
 ├── home/                        # Home Manager — user-level
 │   ├── common.nix               # Packages + programs.zsh + symlinks (all machines)
 │   ├── darwin/
-│   │   └── default.nix          # macOS-only packages + symlinks (all Macs)
+│   │   ├── default.nix          # macOS-only packages + symlinks (all Macs)
+│   │   └── nvim-open.applescript # Finder handler source: opens files in nvim via ghostty
 │   └── linux/
 │       ├── default.nix          # Standalone Linux HM — CLI base (Fedora, WSL, etc.)
 │       ├── common.nix           # All Linux: gcc toolchain, kid3-cli, fcitx5, private symlink
