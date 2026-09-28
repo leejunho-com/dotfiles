@@ -65,22 +65,39 @@ shorten_name() {
 		work=$stem
 	done
 
-	# lift out every (NNN) in order — product codes and rsync dedup markers alike
-	local codes="" title="" rest=$work
-	local code_re='^([^(]*)\(([0-9]+)\)(.*)$'
-	while [[ $rest =~ $code_re ]]; do
-		title+=${BASH_REMATCH[1]}
-		codes+=" (${BASH_REMATCH[2]})"
-		rest=${BASH_REMATCH[3]}
+	# pull off the run of (...) groups that ends the stem: product codes and
+	# tags like (decensored). num_tags keeps only the numeric ones.
+	local tags="" num_tags="" head group rest=$work
+	local tail_re='^(.*)\(([^()]*)\)[[:space:]]*$'
+	while [[ $rest =~ $tail_re ]]; do
+		head=${BASH_REMATCH[1]} group=${BASH_REMATCH[2]} # a later match clobbers these
+		tags=" ($group)$tags"
+		if [[ $group =~ ^[0-9]+$ ]]; then num_tags=" ($group)$num_tags"; fi
+		rest=$head
 	done
-	title+=$rest
+
+	# lift any (NNN) still inside the title, rightmost first — a leading
+	# non-numeric group like (v2) must not block the scan
+	local codes="" title="" tail=""
+	local code_re='^(.*)\(([0-9]+)\)(.*)$'
+	while [[ $rest =~ $code_re ]]; do
+		codes=" (${BASH_REMATCH[2]})$codes"
+		tail="${BASH_REMATCH[3]}$tail"
+		rest=${BASH_REMATCH[1]}
+	done
+	title=$rest$tail
 
 	while [[ $title == *"  "* ]]; do title=${title//  / }; done
 	while [[ ${title:0:1} == " " ]]; do title=${title:1}; done
 	while [[ ${title: -1} == [\ .,_-] ]]; do title=${title%?}; done
 
-	local suffix="$codes$ext" ellipsis="…"
+	local ellipsis="…"
+	local suffix="$codes$tags$ext"
 	local avail=$((max - ${#suffix}))
+	if ((avail < ${#ellipsis} + 1)); then # tags do not fit: drop all but the codes
+		suffix="$codes$num_tags$ext"
+		avail=$((max - ${#suffix}))
+	fi
 	if ((avail < ${#ellipsis} + 1)); then # suffix alone overflows: plain cut
 		trim_partial "${name:0:max}"
 		return
