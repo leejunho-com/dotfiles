@@ -18,11 +18,27 @@ let
     "diff" "patch"
     # subtitles and media metadata
     "smi" "srt" "ass" "ssa" "vtt" "lrc" "nfo" "plist"
-    # systemd units
-    "service" "timer"
+    # systemd units (.service is taken by com.apple.service-application)
+    "timer"
     # data and playlists
     "csv" "tsv" "m3u" "m3u8"
   ];
+
+  # macOS has no UTI for these, and duti fails on dynamic ones (error -50).
+  # nvim.app declares com.leejunho.<ext> for each so duti can bind them.
+  nvimDeclared = [
+    "conf" "ini" "toml" "nix" "cfg" "properties" "env"
+    "lua" "rs" "go" "lrc" "nfo" "timer"
+  ];
+  nvimUTIs = builtins.toJSON (map (ext: {
+    UTTypeIdentifier = "com.leejunho.${ext}";
+    UTTypeConformsTo = [ "public.plain-text" ];
+    UTTypeTagSpecification."public.filename-extension" = [ ext ];
+  }) nvimDeclared);
+  nvimClaim = builtins.toJSON {
+    CFBundleTypeRole = "Editor";
+    LSItemContentTypes = map (ext: "com.leejunho.${ext}") nvimDeclared;
+  };
 
   # Finder opens these with mpv. Matches config/yazi/yazi.toml.
   mpvTypes = [
@@ -79,13 +95,15 @@ in
          s#__NVIM__#/etc/profiles/per-user/${user}/bin/nvim#" \
       ${./nvim-open.applescript} > "$_src"
 
-    # rebuild only when the script changed, so LaunchServices stays settled
-    _want=$(sha256sum "$_src" | cut -d' ' -f1)
+    # rebuild only when the script or type list changed, so LaunchServices stays settled
+    _want=$( (cat "$_src"; echo '${nvimUTIs}') | sha256sum | cut -d' ' -f1)
     if [[ "$_want" != "$(cat "$_stamp" 2>/dev/null || true)" || ! -d "$_app" ]]; then
       rm -rf "$_app"
       /usr/bin/osacompile -o "$_app" "$_src" || true
-      /usr/libexec/PlistBuddy -c 'Add :CFBundleIdentifier string com.leejunho.nvim' \
-        "$_app/Contents/Info.plist" || true
+      _plist="$_app/Contents/Info.plist"
+      /usr/bin/plutil -insert CFBundleIdentifier -string com.leejunho.nvim "$_plist" || true
+      /usr/bin/plutil -insert UTImportedTypeDeclarations -json '${nvimUTIs}' "$_plist" || true
+      /usr/bin/plutil -insert CFBundleDocumentTypes -json '${nvimClaim}' -append "$_plist" || true
       mkdir -p "$(dirname "$_stamp")"
       echo "$_want" > "$_stamp"
     fi
