@@ -6,7 +6,7 @@
   "logging": {
     "create_log_dst_dir_toggle": true,
     "log_filename": "incoming.log",
-    "custom_log_file_path": ""
+    "custom_log_file_path": "Users/leejunho/log/incoming"
   },
   "output_filename_appending": {
     "prefix_toggle": false,
