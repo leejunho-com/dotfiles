@@ -5,7 +5,7 @@ source "$CONFIG_DIR/theme.sh"
 IOREG=$(ioreg -rn AppleSmartBattery)
 
 BATTERY_INSTALLED=$(echo "$IOREG" | grep '"BatteryInstalled"' | grep -o 'Yes\|No')
-PERCENTAGE=$(echo "$IOREG" | grep '"CurrentCapacity"' | grep -o '[0-9]*')
+PERCENTAGE=$(echo "$IOREG" | grep -oE '"CurrentCapacity" = [0-9]+' | grep -oE '[0-9]+$' | head -1)
 IS_CHARGING=$(echo "$IOREG" | grep '"IsCharging"' | grep -o 'Yes\|No')
 EXTERNAL=$(echo "$IOREG" | grep '"ExternalConnected"' | grep -o 'Yes\|No')
 WATTS=$(echo "$IOREG" | grep -o '"SystemPowerIn"=[0-9]*' | grep -o '[0-9]*')
