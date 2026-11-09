@@ -2,11 +2,10 @@
   "src_dir_path": "/Users/leejunho/mnt/ark/scratch/incoming/in",
   "dst_dir_path": "/Users/leejunho/mnt/ark/scratch/incoming/out",
   "default_preset_path": "/Users/leejunho/.config/incoming/preset/default.json",
-  "open_dst_dir_when_done": false,
-  "logging": {
-    "create_log_dst_dir_toggle": true,
-    "log_filename": "incoming.log",
-    "custom_log_file_path": "Users/leejunho/log/incoming"
+  "logging":{
+  "log_filename": "incoming.log",
+  "custom_log_file_path": "/Users/leejunho/log/incoming/incoming.log",
+  "create_log_dst_dir_toggle": true
   },
   "output_filename_appending": {
     "prefix_toggle": false,
