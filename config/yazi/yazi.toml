@@ -14,7 +14,7 @@ edit = [
   { run = 'bat %s', block = true },
 ]
 photoshop = [
-  { for = "macos", run = 'open -a "Adobe Photoshop 2026" %s', desc = "Adobe Photoshop" },
+  { for = "macos", run = 'open -b com.adobe.Photoshop %s', desc = "Adobe Photoshop" },
 ]
 unar = [
   { run = 'for rar in %s; do unar "$rar"; done', desc = "Extract with unar" },

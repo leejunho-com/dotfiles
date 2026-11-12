@@ -257,13 +257,13 @@ nix-darwin sets Nix paths in `/etc/zshrc` before the user's `~/.zshrc` runs, so 
 
 #### Photoshop
 
-Restore settings:
+Restore settings. The folder name carries the release year, so match it to the installed version:
 
 ```bash
 # backup
-cp -r ~/Library/Preferences/"Adobe Photoshop 2026 Settings" /path/to/backup
+cp -r ~/Library/Preferences/"Adobe Photoshop 2027 Settings" /path/to/backup
 # restore
-sudo mv ./Adobe\ Photoshop\ 2026\ Settings ~/Library/Preferences/
+sudo mv ./Adobe\ Photoshop\ 2027\ Settings ~/Library/Preferences/
 ```
 
 #### Fonts
