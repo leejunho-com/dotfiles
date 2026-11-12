@@ -4,7 +4,7 @@
   "default_preset_path": "/Users/leejunho/.config/incoming/preset/default.json",
   "logging":{
   "log_filename": "incoming.log",
-  "custom_log_file_path": "/Users/leejunho/log/incoming/incoming.log",
+  "custom_log_file_path": "/Users/leejunho/log/incoming",
   "create_log_dst_dir_toggle": true
   },
   "output_filename_appending": {
