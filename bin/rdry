@@ -5,5 +5,5 @@
 
 set -euo pipefail
 
-exec rsync -ah -v --stats --dry-run \
+exec rsync -ah --no-g -v --stats --dry-run \
 	--exclude='._*' --exclude='.DS_Store' "$@"

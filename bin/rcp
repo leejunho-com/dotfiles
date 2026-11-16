@@ -8,6 +8,7 @@
 
 set -euo pipefail
 
-exec rsync -ah --info=progress2 \
+# --no-g: ark's NFS refuses chgrp to the mac's staff group (rc=23)
+exec rsync -ah --no-g --info=progress2 \
 	--exclude='._*' --exclude='.DS_Store' \
 	--log-file="$(logfile rsync)" "$@"

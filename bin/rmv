@@ -9,7 +9,9 @@
 
 set -euo pipefail
 
-rsync -ah --info=progress2 \
+# --no-g: ark's NFS refuses chgrp to the mac's staff group, and the rc=23
+# that follows would skip the cleanup below under set -e
+rsync -ah --no-g --info=progress2 \
 	--exclude='._*' --exclude='.DS_Store' \
 	--remove-source-files --log-file="$(logfile rsync)" "$@"
 
